@@ -98,223 +98,94 @@ export default class Store extends Component{
             
             <div>
                 <Header />
-                
-                {/* <!-- listing --> */}
-                <section className="pt-0">
-                    <div className="container">
 
-                        <div className="row">
-
-                        {/* <!-- content --> */}
-                        <div className="col">
-                            <div className="row gutter-2 gutter-lg-3">
-                            <div className="col-6 col-lg-4">
-                                <div className="product">
-                                <figure className="product-image">
-                                    <a href="#!">
-                                    <img src="assets/images/demo/product-1.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-1-2.jpg" alt="Image" />
-                                    </a>
-                                </figure>
-                                <div className="product-meta">
-                                    <h3 className="product-title"><a href="#!">Fawn Wool / Natural Mammoth Chair </a></h3>
-                                    <div className="product-price">
-                                    <span>$2,268</span>
-                                    <span className="product-action">
-                                        <a href="#!">Add to cart</a>
-                                    </span>
-                                    </div>
-                                    <a href="#!" className="product-like"></a>
-                                </div>
-                                </div>
-                            </div>
-                            <div className="col-6 col-lg-4">
-                                <div className="product">
-                                <figure className="product-image">
-                                    <span className="product-promo">-25%</span>
-                                    <div className="owl-carousel" data-nav="true" data-loop="true">
-                                    <a href="#!">
-                                        <img src="assets/images/demo/product-2.jpg" alt="Image" />
-                                    </a>
-                                    <a href="#!">
-                                        <img src="assets/images/demo/product-2-2.jpg" alt="Image" />
-                                    </a>
-                                    <a href="#!">
-                                        <img src="assets/images/demo/product-2-3.jpg" alt="Image" />
-                                    </a>
-                                    </div>
-                                </figure>
-                                <div className="product-meta">
-                                    <h3 className="product-title"><a href="#!">Dark Stained NY11 Dining Chair</a></h3>
-                                    <div className="product-price">
-                                    <span>$504</span>
-                                    <span className="product-action">
-                                        <a href="#!">Add to cart</a>
-                                    </span>
-                                    </div>
-                                    <a href="#!" className="product-like"></a>
-                                </div>
-                                </div>
-                            </div>
-                            <div className="col-6 col-lg-4">
-                                <div className="product">
-                                <figure className="product-image">
-                                    <a href="#!">
-                                    <img src="assets/images/demo/product-3.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-3-2.jpg" alt="Image" />
-                                    </a>
-                                </figure>
-                                <div className="product-meta">
-                                    <h3 className="product-title"><a href="#!">Black IC Pendant Light</a></h3>
-                                    <div className="product-price">
-                                    <span>$410</span>
-                                    <span className="product-action">
-                                        <a href="#!">Add to cart</a>
-                                    </span>
-                                    </div>
-                                    <a href="#!" className="product-like"></a>
-                                </div>
-                                </div>
-                            </div>
-                            <div className="col-6 col-lg-4">
-                                <div className="product">
-                                <figure className="product-image">
-                                    <a href="#!">
-                                    <img src="assets/images/demo/product-24.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-24-2.jpg" alt="Image" />
-                                    </a>
-                                </figure>
-                                <div className="product-meta">
-                                    <h3 className="product-title"><a href="#!">Black Closca Helmet</a></h3>
-                                    <div className="product-price">
-                                    <span>$132</span>
-                                    <span className="product-action">
-                                        <a href="#!">Add to cart</a>
-                                    </span>
-                                    </div>
-                                    <a href="#!" className="product-like"></a>
-                                </div>
-                                </div>
-                            </div>
-
-
-                            <div className="col-6 col-lg-4">
-                                <div className="product">
-                                <figure className="product-image">
-                                    <a href="#!">
-                                    <img src="assets/images/demo/product-25.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-25-2.jpg" alt="Image" />
-                                    </a>
-                                </figure>
-                                <div className="product-meta">
-                                    <h3 className="product-title"><a href="#!">Gravel Black Sigg Water Bottle</a></h3>
-                                    <div className="product-price">
-                                    <span>$23</span>
-                                    <span className="product-action">
-                                        <a href="#!">Add to cart</a>
-                                    </span>
-                                    </div>
-                                    <a href="#!" className="product-like"></a>
-                                </div>
-                                </div>
-                            </div>
-                            <div className="col-6 col-lg-4">
-                                <div className="product">
-                                <figure className="product-image">
-                                    <a href="#!">
-                                    <img src="assets/images/demo/product-4.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-4-2.jpg" alt="Image" />
-                                    </a>
-                                </figure>
-                                <div className="product-meta">
-                                    <h3 className="product-title"><a href="#!">Red Analog Magazine Rack</a></h3>
-                                    <div className="product-price">
-                                    <span>$120</span>
-                                    <span className="product-action">
-                                        <a href="#!">Add to cart</a>
-                                    </span>
-                                    </div>
-                                    <a href="#!" className="product-like"></a>
-                                </div>
-                                </div>
-                            </div>
-                            <div className="col-6 col-lg-4">
-                                <div className="product">
-                                <figure className="product-image">
-                                    <a href="#!">
-                                    <img src="assets/images/demo/product-5.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-5-2.jpg" alt="Image" />
-                                    </a>
-                                </figure>
-                                <div className="product-meta">
-                                    <h3 className="product-title"><a href="#!">Black Piani Table Lamp</a></h3>
-                                    <div className="product-price">
-                                    <span>$290</span>
-                                    <span className="product-action">
-                                        <a href="#!">Add to cart</a>
-                                    </span>
-                                    </div>
-                                    <a href="#!" className="product-like"></a>
-                                </div>
-                                </div>
-                            </div>
-                            <div className="col-6 col-lg-4">
-                                <div className="product">
-                                <figure className="product-image">
-                                    <a href="#!">
-                                    <img src="assets/images/demo/product-6.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-6-2.jpg" alt="Image" />
-                                    </a>
-                                </figure>
-                                <div className="product-meta">
-                                    <h3 className="product-title"><a href="#!">Grey Pendant Bell Lamp</a></h3>
-                                    <div className="product-price">
-                                    <span>$258</span>
-                                    <span className="product-action">
-                                        <a href="#!">Add to cart</a>
-                                    </span>
-                                    </div>
-                                    <a href="#!" className="product-like"></a>
-                                </div>
-                                </div>
-                            </div>
-                            <div className="col-6 col-lg-4">
-                                <div className="product">
-                                <figure className="product-image">
-                                    <a href="#!">
-                                    <img src="assets/images/demo/product-7.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-7-2.jpg" alt="Image" />
-                                    </a>
-                                </figure>
-                                <div className="product-meta">
-                                    <h3 className="product-title"><a href="#!">Garnet Must Sofa</a></h3>
-                                    <div className="product-price">
-                                    <span>$4,668</span>
-                                    <span className="product-action">
-                                        <a href="#!">Add to cart</a>
-                                    </span>
-                                    </div>
-                                    <a href="#!" className="product-like"></a>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                            <div className="row">
-                            <div className="col">
-                                <nav className="d-inline-block">
-                                <ul className="pagination">
-                                    <li className="page-item active"><a className="page-link" href="#!">1 <span className="sr-only">(current)</span></a></li>
-                                    <li className="page-item" aria-current="page"><a className="page-link" href="#!">2</a></li>
-                                    <li className="page-item"><a className="page-link" href="#!">3</a></li>
-                                    <li className="page-item"><a className="page-link" href="#!">4</a></li>
-                                </ul>
-                                </nav>
-                            </div>
-                            </div>
+                {/* <!-- categories --> */}
+                <section className="pt-1">
+                <div className="container-full">
+                    <div className="row masonry gutter-1">
+                    <div className="col-md-4">
+                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
+                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-1.jpg)'}}></span>
+                        <span className="image image-overlay" ></span>
+                        <div className="card-body text-center text-white">
+                            <h3>Kitchen &amp; Dining</h3>
                         </div>
-
-                        </div>
+                        </Link>
                     </div>
+                    <div className="col-md-4">
+                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
+                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-2.jpg)'}}></span>
+                        <span className="image image-overlay" ></span>
+                        <div className="card-body text-center text-white">
+                            <h3>Living Room</h3>
+                        </div>
+                        </Link>
+                    </div>
+                    <div className="col-md-4">
+                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
+                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
+                        <span className="image image-overlay" ></span>
+                        <div className="card-body text-center text-white">
+                            <h3>Bathroom</h3>
+                        </div>
+                        </Link>
+                    </div>
+                    <div className="col-md-4">
+                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
+                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
+                        <span className="image image-overlay" ></span>
+                        <div className="card-body text-center text-white">
+                            <h3>Bathroom</h3>
+                        </div>
+                        </Link>
+                    </div>
+                    <div className="col-md-4">
+                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
+                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
+                        <span className="image image-overlay" ></span>
+                        <div className="card-body text-center text-white">
+                            <h3>Bathroom</h3>
+                        </div>
+                        </Link>
+                    </div>
+                    <div className="col-md-4">
+                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
+                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
+                        <span className="image image-overlay" ></span>
+                        <div className="card-body text-center text-white">
+                            <h3>Bathroom</h3>
+                        </div>
+                        </Link>
+                    </div>
+                    <div className="col-md-4">
+                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
+                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
+                        <span className="image image-overlay" ></span>
+                        <div className="card-body text-center text-white">
+                            <h3>Bathroom</h3>
+                        </div>
+                        </Link>
+                    </div>
+                    <div className="col-md-4">
+                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
+                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
+                        <span className="image image-overlay" ></span>
+                        <div className="card-body text-center text-white">
+                            <h3>Bathroom</h3>
+                        </div>
+                        </Link>
+                    </div>
+                    <div className="col-md-4">
+                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
+                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
+                        <span className="image image-overlay" ></span>
+                        <div className="card-body text-center text-white">
+                            <h3>Bathroom</h3>
+                        </div>
+                        </Link>
+                    </div>
+                    </div>
+                </div>
                 </section>
 
                 <div>

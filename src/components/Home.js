@@ -131,43 +131,6 @@ export default class Home extends Component{
                 <div className="swiper-button-next"></div>
                 </div>
 
-
-                {/* <!-- categories --> */}
-                <section className="pt-1">
-                <div className="container-full">
-                    <div className="row masonry gutter-1">
-                    <div className="col-md-4">
-                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-1.jpg)'}}></span>
-                        <span className="image image-overlay" ></span>
-                        <div className="card-body text-center text-white">
-                            <h3>Kitchen &amp; Dining</h3>
-                        </div>
-                        </Link>
-                    </div>
-                    <div className="col-md-4">
-                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-2.jpg)'}}></span>
-                        <span className="image image-overlay" ></span>
-                        <div className="card-body text-center text-white">
-                            <h3>Living Room</h3>
-                        </div>
-                        </Link>
-                    </div>
-                    <div className="col-md-4">
-                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
-                        <span className="image image-overlay" ></span>
-                        <div className="card-body text-center text-white">
-                            <h3>Bathroom</h3>
-                        </div>
-                        </Link>
-                    </div>
-                    </div>
-                </div>
-                </section>
-
-
                 {/* <!-- latest products --> */}
                 <section className="pt-0">
                 <div className="container">

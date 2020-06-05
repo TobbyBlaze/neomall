@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export default class Signout extends Component {
 
-    submitHandler = e => {
+    logoutHandler = e => {
         e.preventDefault()
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
@@ -37,7 +37,7 @@ export default class Signout extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.submitHandler}>
+                <form onSubmit={this.logoutHandler}>
                     <button type="submit">Sign out</button>
                 </form>
             </div>

@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Signout from './Signout';
 
-const Header = () => (
+
+const Header = () => {
+
+    return(
     <div>
         {/* <!-- header --> */}
         <header className="header header-dark header-sticky">
@@ -157,6 +160,7 @@ const Header = () => (
         </div>
 
     </div>
-)
+);
+    }
 
-export default Header
+export default Header;

@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 export default class Thanks extends Component {
 
     componentDidMount(){
-        setTimeout(function(){window.location.href = "https://damp-island-72638.herokuapp.com"}, 3000);
+        setTimeout(function(){window.location.href = "https://neomall.herokuapp.com"}, 3000);
     }
 
     render() {

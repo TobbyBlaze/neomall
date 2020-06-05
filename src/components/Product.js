@@ -46,7 +46,7 @@ export default class Product extends Component{
         axios
 
             // .post('http://localhost/yummypizza/public/api/auth/storecart', this.state.good, 
-            .post('https://damp-island-72638.herokuapp.com/api/auth/storecart', this.state.good,
+            .post('https://neomallapi.herokuapp.com/api/auth/storecart', this.state.good,
             {
                 params: {
                     quantity: this.state.quantity,
@@ -75,7 +75,7 @@ export default class Product extends Component{
         axios
 
             // .get('http://localhost/yummypizza/public/api/auth/prdetails/'+this.props.match.params.id, {
-            .get('https://damp-island-72638.herokuapp.com/api/auth/prdetails/'+this.props.match.params.id, {
+            .get('https://neomallapi.herokuapp.com/api/auth/prdetails/'+this.props.match.params.id, {
                 
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

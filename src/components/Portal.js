@@ -28,14 +28,14 @@ export default class Portal extends Component {
         console.log(this.state)
 
         axios
-            .post('http://localhost/yummypizza/public/api/auth/login', this.state)
-            // .post('https://damp-island-72638.herokuapp.com/api/auth/login', this.state)
+            // .post('http://localhost/yummypizza/public/api/auth/login', this.state)
+            .post('https://neomallapi.herokuapp.com/api/auth/login', this.state)
             .then(response => {
                 // console.log(response);
                 var authe = response.data.token;
                 localStorage.setItem("authen",authe);
                 // console.log(authe);
-                // window.location.href = "https://damp-island-72638.herokuapp.com"
+                window.location.href = "https://neomall.herokuapp.com"
                 // var sub = true;
             })
             .catch(error => {
@@ -49,8 +49,8 @@ export default class Portal extends Component {
 
         axios
             // .post('localhost/yummypizza/public/api/auth/signup', this.state)
-            .post('http://localhost/yummypizza/public/api/auth/signup', this.state
-            // .post('https://damp-island-72638.herokuapp.com/api/auth/signup', this.state
+            // .post('http://localhost/yummypizza/public/api/auth/signup', this.state
+            .post('https://neomallapi.herokuapp.com/api/auth/signup', this.state
             , {
                 headers: {
 
@@ -62,6 +62,20 @@ export default class Portal extends Component {
                 // this.loginHandler();
                 // console.log(response)
                 // window.location.href = "https://damp-island-72638.herokuapp.com/login"
+                axios
+                    // .post('http://localhost/yummypizza/public/api/auth/login', this.state)
+                    .post('https://neomallapi.herokuapp.com/api/auth/login', this.state)
+                    .then(response => {
+                        // console.log(response);
+                        var authe = response.data.token;
+                        localStorage.setItem("authen",authe);
+                        // console.log(authe);
+                        window.location.href = "https://neomall.herokuapp.com"
+                        // var sub = true;
+                    })
+                    .catch(error => {
+                        // console.log(error)
+                    })
             })
             .catch(error => {
                 // console.log(error)

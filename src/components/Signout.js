@@ -14,7 +14,7 @@ export default class Signout extends Component {
 
         axios
             // .get('http://localhost/yummypizza/public/api/auth/logout',{
-            .get('https://damp-island-72638.herokuapp.com/api/auth/logout',{
+            .get('https://neomallapi.herokuapp.com/api/auth/logout',{
                 headers: {
 
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -27,7 +27,7 @@ export default class Signout extends Component {
                 // console.log(response);
                 var a=null;
                 // console.log(a);
-                window.location.href = "https://damp-island-72638.herokuapp.com"
+                window.location.href = "https://neomall.herokuapp.com"
             })
             .catch(error => {
                 // console.log(error)

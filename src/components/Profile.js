@@ -30,7 +30,7 @@ export default class Profile extends Component{
         axios
 
             // .post('http://localhost/yummypizza/public/api/auth/storecart', this.state.good, {
-            .post('https://damp-island-72638.herokuapp.com/api/auth/storecart', this.state.good, {
+            .post('https://neomallapi.com/api/auth/storecart', this.state.good, {
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
@@ -51,8 +51,8 @@ export default class Profile extends Component{
         var a=localStorage.getItem("authen");
         axios
 
-            .get('http://localhost/yummypizza/public/api/auth', {
-            // .get('https://damp-island-72638.herokuapp.com/api/auth', {
+            // .get('http://localhost/yummypizza/public/api/auth', {
+            .get('https://neomallapi.herokuapp.com/api/auth', {
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',

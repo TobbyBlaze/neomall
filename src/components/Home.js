@@ -29,8 +29,8 @@ export default class Home extends Component{
         var a=localStorage.getItem("authen");
         axios
 
-            .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
-            // .post('https://damp-island-72638.herokuapp.com/api/auth/storecart', this.state.good, {
+            // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
+            .post('https://neomallapi.herokuapp.com/api/auth/storecart', this.state.good, {
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
@@ -51,8 +51,8 @@ export default class Home extends Component{
         var a=localStorage.getItem("authen");
         axios
 
-            .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-            // .get('https://damp-island-72638.herokuapp.com/api', {
+            // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
+            .get('https://neomallapi.herokuapp.com/api', {
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',

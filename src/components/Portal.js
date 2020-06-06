@@ -61,7 +61,7 @@ export default class Portal extends Component {
             .then(response => {
                 // this.loginHandler();
                 // console.log(response)
-                window.location.href = "https://neomall.herokuapp.com/login"
+                window.location.href = "https://neomall.herokuapp.com/portal"
             })
             .catch(error => {
                 // console.log(error)

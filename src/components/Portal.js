@@ -61,21 +61,7 @@ export default class Portal extends Component {
             .then(response => {
                 // this.loginHandler();
                 // console.log(response)
-                // window.location.href = "https://damp-island-72638.herokuapp.com/login"
-                axios
-                    // .post('http://localhost/yummypizza/public/api/auth/login', this.state)
-                    .post('https://neomallapi.herokuapp.com/api/auth/login', this.state)
-                    .then(response => {
-                        // console.log(response);
-                        var authe = response.data.token;
-                        localStorage.setItem("authen",authe);
-                        // console.log(authe);
-                        window.location.href = "https://neomall.herokuapp.com"
-                        // var sub = true;
-                    })
-                    .catch(error => {
-                        // console.log(error)
-                    })
+                window.location.href = "https://neomall.herokuapp.com/login"
             })
             .catch(error => {
                 // console.log(error)

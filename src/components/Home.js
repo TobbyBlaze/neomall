@@ -69,7 +69,7 @@ export default class Home extends Component{
                 // console.log(response);
                 localStorage.clear("authen");
                 var a=null;
-                // console.log(a);
+                console.log(a);
                 window.location.href = "https://neomall.herokuapp.com"
             })
             .catch(error => {
@@ -152,6 +152,12 @@ export default class Home extends Component{
 
     render(){
         const { goods, errorMsg } = this.state;
+        var a=localStorage.getItem("authen");
+        if(a == null){
+            var auth = false;
+        }else{
+            var auth = true;
+        }
 
         return(
             
@@ -189,14 +195,22 @@ export default class Home extends Component{
 
                             <div className="collapse navbar-collapse order-4 order-lg-3" id="navbarMenu2">
                             <ul className="navbar-nav ml-auto">
-                                <li className="nav-item">
-                                <Link className="nav-link" to="/portal">Log In</Link>
-                                </li>
-                                <li className="nav-item">
-                                <form onSubmit={this.logoutHandler}>
-                                    <button type="submit">Sign out</button>
-                                </form>
-                                </li>
+                                {/* {{if(a = null){
+                                    <li className="nav-item">
+                                    <Link className="nav-link" to="/portal">Log In</Link>
+                                    </li>
+                                }}} */}
+                                {/* {Object.values(auth)} */}
+                                {auth?
+                                    <li className="nav-item">
+                                        <Link className="nav-link" onClick={this.logoutHandler}>Log out</Link>
+                                    </li>
+                                :
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/portal">Log In</Link>
+                                    </li>
+                                }
+                                
                                 <li className="nav-item">
                                 <Link data-toggle="modal" to="" data-target="#search" className="nav-link"><i className="icon-search"></i></Link>
                                 </li>

@@ -67,6 +67,7 @@ export default class Home extends Component{
             })
             .then(response => {
                 // console.log(response);
+                localStorage.clear("authen");
                 var a=null;
                 // console.log(a);
                 window.location.href = "https://neomall.herokuapp.com"

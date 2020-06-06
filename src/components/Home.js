@@ -195,12 +195,7 @@ export default class Home extends Component{
 
                             <div className="collapse navbar-collapse order-4 order-lg-3" id="navbarMenu2">
                             <ul className="navbar-nav ml-auto">
-                                {/* {{if(a = null){
-                                    <li className="nav-item">
-                                    <Link className="nav-link" to="/portal">Log In</Link>
-                                    </li>
-                                }}} */}
-                                {/* {Object.values(auth)} */}
+                            
                                 {auth?
                                     <li className="nav-item">
                                         <Link className="nav-link" onClick={this.logoutHandler}>Log out</Link>

@@ -47,6 +47,36 @@ export default class Shop extends Component{
             })
     }
 
+    logoutHandler = e => {
+        e.preventDefault()
+        // console.log(this.state)
+        // console.log($('meta[name="csrf-token"]').attr('content'))
+        var a=localStorage.getItem("authen");
+        
+
+        axios
+            // .get('http://localhost/yummypizza/public/api/auth/logout',{
+            .get('https://neomallapi.herokuapp.com/api/auth/logout',{
+                headers: {
+
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
+                    // 'withCredentials': true
+                }
+            })
+            .then(response => {
+                // console.log(response);
+                localStorage.clear("authen");
+                var a=null;
+                console.log(a);
+                window.location.href = "https://neomall.herokuapp.com"
+            })
+            .catch(error => {
+                // console.log(error)
+            })
+    }
+
     componentDidMount(){
         var a=localStorage.getItem("authen");
         axios
@@ -94,6 +124,13 @@ export default class Shop extends Component{
     render(){
         const { goods, errorMsg } = this.state;
 
+        var a=localStorage.getItem("authen");
+        if(a == null){
+            var auth = false;
+        }else{
+            var auth = true;
+        }
+
         return(
             
             <div>
@@ -130,9 +167,17 @@ export default class Shop extends Component{
 
                             <div className="collapse navbar-collapse order-4 order-lg-3" id="navbarMenu2">
                             <ul className="navbar-nav ml-auto">
-                                <li className="nav-item">
-                                <Link className="nav-link" to="/portal">Log In</Link>
-                                </li>
+                            
+                                {auth?
+                                    <li className="nav-item">
+                                        <Link className="nav-link" onClick={this.logoutHandler}>Log out</Link>
+                                    </li>
+                                :
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/portal">Log In</Link>
+                                    </li>
+                                }
+                                
                                 <li className="nav-item">
                                 <Link data-toggle="modal" to="" data-target="#search" className="nav-link"><i className="icon-search"></i></Link>
                                 </li>

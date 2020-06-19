@@ -130,18 +130,18 @@ export default class Home extends Component{
 
     }
 
-    getOne(good){
-        this.setState({
-            goods:{
-            id : good.id,
-            file : good.file,
-            name : good.name,
-            description : good.description,
-            price : good.price,
-            category : good.category
-            }
-        })
-    }
+    // getOne(good){
+    //     this.setState({
+    //         goods:{
+    //         id : good.id,
+    //         file : good.file,
+    //         name : good.name,
+    //         description : good.description,
+    //         price : good.price,
+    //         category : good.category
+    //         }
+    //     })
+    // }
 
     componentWillUnmount() {
         // fix Warning: Can't perform a React state update on an unmounted component
@@ -309,7 +309,7 @@ export default class Home extends Component{
                     </div>
 
 
-                    {/* <!-- search --> */}
+                    {/* <!-- search -->  */}
                     <div className="modal fade search" id="search" tabIndex="-1" role="dialog" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">

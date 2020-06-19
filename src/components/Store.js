@@ -101,25 +101,25 @@ export default class Store extends Component{
 
     }
 
-    getOne(good){
-        this.setState({
-            goods:{
-            id : good.id,
-            file : good.file,
-            name : good.name,
-            description : good.description,
-            price : good.price,
-            category : good.category
-            }
-        })
-    }
+    // getOne(good){
+    //     this.setState({
+    //         goods:{
+    //         id : good.id,
+    //         file : good.file,
+    //         name : good.name,
+    //         description : good.description,
+    //         price : good.price,
+    //         category : good.category
+    //         }
+    //     })
+    // }
 
-    componentWillUnmount() {
-        // fix Warning: Can't perform a React state update on an unmounted component
-        this.setState = (state,callback)=>{
-            return;
-        };
-    }
+    // componentWillUnmount() {
+    //     // fix Warning: Can't perform a React state update on an unmounted component
+    //     this.setState = (state,callback)=>{
+    //         return;
+    //     };
+    // }
 
     render(){
         const { goods, errorMsg } = this.state;
@@ -281,7 +281,7 @@ export default class Store extends Component{
                     </div>
 
 
-                    {/* <!-- search --> */}
+                    {/* <!-- search -->  */}
                     <div className="modal fade search" id="search" tabIndex="-1" role="dialog" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -302,7 +302,7 @@ export default class Store extends Component{
                 <section className="pt-1">
                 <div className="container-full">
                     <div className="row masonry gutter-1">
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-1.jpg)'}}></span>
                         <span className="image image-overlay" ></span>
@@ -311,7 +311,7 @@ export default class Store extends Component{
                         </div>
                         </Link>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-2.jpg)'}}></span>
                         <span className="image image-overlay" ></span>
@@ -320,7 +320,7 @@ export default class Store extends Component{
                         </div>
                         </Link>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
                         <span className="image image-overlay" ></span>
@@ -329,7 +329,7 @@ export default class Store extends Component{
                         </div>
                         </Link>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
                         <span className="image image-overlay" ></span>
@@ -338,7 +338,7 @@ export default class Store extends Component{
                         </div>
                         </Link>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
                         <span className="image image-overlay" ></span>
@@ -347,7 +347,7 @@ export default class Store extends Component{
                         </div>
                         </Link>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
                         <span className="image image-overlay" ></span>
@@ -356,7 +356,7 @@ export default class Store extends Component{
                         </div>
                         </Link>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
                         <span className="image image-overlay" ></span>
@@ -365,7 +365,7 @@ export default class Store extends Component{
                         </div>
                         </Link>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
                         <span className="image image-overlay" ></span>
@@ -374,7 +374,7 @@ export default class Store extends Component{
                         </div>
                         </Link>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
                         <span className="image image-overlay" ></span>

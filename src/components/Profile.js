@@ -118,12 +118,12 @@ export default class Profile extends Component{
         })
     }
 
-    // componentWillUnmount() {
-    //     // fix Warning: Can't perform a React state update on an unmounted component
-    //     this.setState = (state,callback)=>{
-    //         return;
-    //     };
-    // }
+    componentWillUnmount() {
+        // fix Warning: Can't perform a React state update on an unmounted component
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
 
     render(){
         const { goods, errorMsg } = this.state;

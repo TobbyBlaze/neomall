@@ -82,7 +82,7 @@ export default class Home extends Component{
         // var len = a.length;
         // localStorage.clear("authen");
         // a = null;
-        console.log(a);
+        // console.log(a);
         // console.log(len);
         if(a){
             axios
@@ -97,12 +97,12 @@ export default class Home extends Component{
                     }
                 })
                 .then(response => {
-                    console.log(response.data.goods.data)
-                    console.log("auth");
+                    // console.log(response.data.goods.data)
+                    // console.log("auth");
                     this.setState({ goods: response.data.goods.data })
                 })
                 .catch(error => {
-                    console.log(error)
+                    // console.log(error)
                     this.setState({errorMsg: 'Error retrieving data'})
                 })
         }else{
@@ -347,7 +347,7 @@ export default class Home extends Component{
                         <div className="row align-items-center justify-content-center vh-80">
                         <div className="col-lg-6 text-white text-center" data-swiper-parallax-y="-100%">
                             <h1 className="display-2 mb-2">Transform your home with us.</h1>
-                            <Link to="/shop" className="btn btn-outline-white">Shop Now</Link>
+                            <Link to="/store" className="btn btn-outline-white">Shop Now</Link>
                         </div>
                         </div>
                     </div>

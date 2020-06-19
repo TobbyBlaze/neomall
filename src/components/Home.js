@@ -175,17 +175,17 @@ export default class Home extends Component{
 
                             <div className="collapse navbar-collapse order-3 order-lg-1" id="navbarMenu">
                             <ul className="navbar-nav mr-auto">
-                                <li className="nav-item dropdown">
+                                <li className="nav-item">
                                 <Link className="nav-link" to="/">
                                     Home
                                 </Link>
                                 </li>
-                                <li className="nav-item dropdown">
+                                <li className="nav-item">
                                 <Link className="nav-link" to="/store">
                                     Stores
                                 </Link>
                                 </li>
-                                <li className="nav-item dropdown">
+                                <li className="nav-item">
                                 <Link className="nav-link" to="/profile">
                                     Profile
                                 </Link>

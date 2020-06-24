@@ -162,7 +162,7 @@ export default class Home extends Component{
         return(
             
             <div>
-                <div>
+                <div className="container">
                     {/* <!-- header --> */}
                     <header className="header header-dark header-sticky">
                     <div className="container">

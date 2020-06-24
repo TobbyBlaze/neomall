@@ -11,6 +11,7 @@ import Cart from './components/Cart';
 import Product from './components/Product';
 import Checkout from './components/Checkout';
 import Portal from './components/Portal';
+import SellerPortal from './components/SellerPortal';
 import Store from './components/Store';
 import Profile from './components/Profile';
 import Shop from './components/Shop';
@@ -35,6 +36,7 @@ export default class App extends Component{
                 <Route exact path='/thanks' component={Thanks} />
                 <Route exact path='/admine' component={Admine} />
                 <Route exact path='/portal' component={Portal} />
+                <Route exact path='/seller-portal' component={SellerPortal} />
                 <Route exact path='/store' component={Store} />
                 <Route exact path='/profile' component={Profile} />
                 <Route exact path='/shop' component={Shop} />

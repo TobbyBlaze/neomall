@@ -67,14 +67,14 @@ export default class Portal extends Component {
             .post('https://neomallapi.herokuapp.com/api/auth/seller-login', this.state)
             .then(response => {
                 // console.log(response);
-                var authe = response.data.token;
-                localStorage.setItem("authen",authe);
-                // console.log(authe);
-                window.location.href = "https://neomall.herokuapp.com"
+                var sauthe = response.data.token;
+                localStorage.setItem("sauthen",sauthe);
+                console.log(sauthe);
+                // window.location.href = "https://neomall.herokuapp.com"
                 // var sub = true;
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
     }
 

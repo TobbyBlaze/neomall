@@ -36,6 +36,7 @@ export default class Portal extends Component {
                 localStorage.setItem("authen",authe);
                 // console.log(authe);
                 window.location.href = "https://neomall.herokuapp.com"
+                // window.history.pushState({}, null, '/shop')
                 // var sub = true;
             })
             .catch(error => {

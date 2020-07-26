@@ -84,8 +84,8 @@ export default class Portal extends Component {
 
         axios
             // .post('localhost/yummypizza/public/api/auth/signup', this.state)
-            // .post('http://localhost/yummypizza/public/api/auth/signup', this.state
-            .post('https://neomallapi.herokuapp.com/api/auth/seller-signup', this.state
+            .post('http://localhost/Neomallapi/public/api/auth/seller-signup', this.state
+            // .post('https://neomallapi.herokuapp.com/api/auth/seller-signup', this.state
             , {
                 headers: {
 

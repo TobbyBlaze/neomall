@@ -70,7 +70,7 @@ export default class Portal extends Component {
                 var sauthe = response.data.token;
                 localStorage.setItem("sauthen",sauthe);
                 console.log(sauthe);
-                // window.location.href = "https://neomall.herokuapp.com"
+                window.location.href = "https://neomall.herokuapp.com"
                 // var sub = true;
             })
             .catch(error => {

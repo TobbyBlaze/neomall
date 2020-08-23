@@ -559,7 +559,7 @@ export default class Checkout extends Component{
                 </section>
 
 
-                <Footer />
+                {/* <Footer /> */}
             </div>
         )
     }

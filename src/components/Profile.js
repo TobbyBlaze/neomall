@@ -866,10 +866,10 @@ export default class Profile extends Component{
                 </section>
                 {/* <!-- listing --> */}
 
-                <div>
+                {/* <div>
                     <Footer />
                 </div>
-                
+                 */}
             </div>
         )
     }

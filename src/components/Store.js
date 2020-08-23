@@ -387,9 +387,9 @@ export default class Store extends Component{
                 </div>
                 </section>
 
-                <div>
+                {/* <div>
                     <Footer />
-                </div>
+                </div> */}
                 
             </div>
         )

@@ -171,7 +171,7 @@ export default class Portal extends Component {
                 </section>
 
                 {/* <!-- footer --> */}
-                <footer className="bg-dark text-white py-0">
+                {/* <footer className="bg-dark text-white py-0">
                 <div className="container">
                     <div className="row separated">
                     <div className="col-lg-6 py-10">
@@ -217,7 +217,7 @@ export default class Portal extends Component {
                     </div>
                     </div>
                 </div>
-                </footer>
+                </footer> */}
                 {/* <!-- / footer --> */}
 
 

@@ -365,12 +365,12 @@ function test(){
   var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
   var itemPosNewAnimTop = activeItemNewAnim.position();
   var itemPosNewAnimLeft = activeItemNewAnim.position();
-  $(".hori-selector").css({
-    "top":itemPosNewAnimTop.top + "px", 
-    "left":itemPosNewAnimLeft.left + "px",
-    "height": activeWidthNewAnimHeight + "px",
-    "width": activeWidthNewAnimWidth + "px"
-  });
+  // $(".hori-selector").css({
+  //   "top":itemPosNewAnimTop.top + "px", 
+  //   "left":itemPosNewAnimLeft.left + "px",
+  //   "height": activeWidthNewAnimHeight + "px",
+  //   "width": activeWidthNewAnimWidth + "px"
+  // });
   $("#navbarSupportedContent").on("click","li",function(e){
     $('#navbarSupportedContent ul li').removeClass("active");
     $(this).addClass('active');
@@ -378,12 +378,12 @@ function test(){
     var activeWidthNewAnimWidth = $(this).innerWidth();
     var itemPosNewAnimTop = $(this).position();
     var itemPosNewAnimLeft = $(this).position();
-    $(".hori-selector").css({
-      "top":itemPosNewAnimTop.top + "px", 
-      "left":itemPosNewAnimLeft.left + "px",
-      "height": activeWidthNewAnimHeight + "px",
-      "width": activeWidthNewAnimWidth + "px"
-    });
+    // $(".hori-selector").css({
+    //   "top":itemPosNewAnimTop.top + "px", 
+    //   "left":itemPosNewAnimLeft.left + "px",
+    //   "height": activeWidthNewAnimHeight + "px",
+    //   "width": activeWidthNewAnimWidth + "px"
+    // });
   });
 }
 $(document).ready(function(){

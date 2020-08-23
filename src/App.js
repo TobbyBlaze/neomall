@@ -16,7 +16,7 @@ import AdminPortal from './components/AdminPortal';
 import Store from './components/Store';
 import Profile from './components/Profile';
 import Shop from './components/Shop';
-// import Footer from './Footer';
+import Footer from './components/Footer';
 // import Error from './Error';
 import Thanks from './components/Thanks';
 import Admine from './components/Admine';
@@ -43,7 +43,7 @@ export default class App extends Component{
                 <Route exact path='/profile' component={Profile} />
                 <Route exact path='/shop' component={Shop} />
             </Switch>
-            {/* <Footer /> */}
+            <Footer />
         </div>
     </BrowserRouter>
     );

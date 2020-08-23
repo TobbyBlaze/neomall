@@ -780,7 +780,7 @@ export default class Product extends Component{
 
 
 
-                <Footer />
+                {/* <Footer /> */}
             </div>
         )
     }

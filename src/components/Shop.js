@@ -424,9 +424,9 @@ export default class Shop extends Component{
                     </div>
                     </section>
 
-                <div>
+                {/* <div>
                     <Footer />
-                </div>
+                </div> */}
                 
             </div>
         )

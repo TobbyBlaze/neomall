@@ -444,7 +444,7 @@ export default class Cart extends Component{
                 </section>
 
 
-                <Footer />
+                {/* <Footer /> */}
             </div>
         )
     }

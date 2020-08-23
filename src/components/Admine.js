@@ -167,7 +167,7 @@ export default class Admine extends Component {
                             <span className="login100-form-title p-b-41">
                                 Add goods here
                             </span>
-                            <form onSubmit={this.submitHandler} className="login100-form validate-form p-b-33 p-t-5">
+                            {/* <form onSubmit={this.submitHandler} className="login100-form validate-form p-b-33 p-t-5">
 
                             <input type="file" name="good_pics" onChange={this.fileHandler} class="btn btn-default text-center active form-control-file" title="Click to upload file"/>
 
@@ -198,7 +198,7 @@ export default class Admine extends Component {
                                     </button>
                                 </div>
                                 
-                            </form>
+                            </form> */}
                         </div>
                     </div>
                 </div>
@@ -265,7 +265,7 @@ export default class Admine extends Component {
 
                                                 <div className="form-group col-12">
                                                     <label htmlFor="good_pics">Good pics</label>
-                                                    <input type="file" name="file[]" className="form-control" id="good_pics" onChange={this.good_picsHandler} multiple />
+                                                    <input type="file" name="good_pics[]" className="form-control" id="good_pics" onChange={this.good_picsHandler} multiple />
                                                 </div>
                                                 <img class="img-responsive" src={this.state.good_pics1} />
                                                 <br />

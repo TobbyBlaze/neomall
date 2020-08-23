@@ -59,10 +59,108 @@ export default class Admine extends Component {
             })
     }
 
+    logoutHandler = e => {
+        e.preventDefault()
+        // console.log(this.state)
+        // console.log($('meta[name="csrf-token"]').attr('content'))
+        var a=localStorage.getItem("sauthen");
+        
+
+        axios
+            // .get('http://localhost/yummypizza/public/api/auth/logout',{
+            .get('https://neomallapi.herokuapp.com/api/auth/s-logout',{
+                headers: {
+
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
+                    // 'withCredentials': true
+                }
+            })
+            .then(response => {
+                // console.log(response);
+                localStorage.clear("sauthen");
+                var a=null;
+                console.log(a);
+                window.location.href = "https://neomall.herokuapp.com"
+            })
+            .catch(error => {
+                // console.log(error)
+            })
+    }
+
     render() {
         const { file, name, description, price, category, quantity } = this.state;
+
+        var a=localStorage.getItem("sauthen");
+        if(a == null){
+            var auth = false;
+        }else{
+            var auth = true;
+        }
         return (
             <div>
+
+                                    {/* <!-- header --> */}
+                                    <header className="header header-dark header-sticky">
+                    <div className="container-fluid">
+                        <div className="row">
+
+
+
+                        <nav className="navbar navbar-expand-lg navbar-dark">
+                            <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="assets/images/logo.svg" alt="Logo" /></Link>
+                            <button className="navbar-toggler order-2" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
+                            </button>
+
+                            <div className="collapse navbar-collapse order-3 order-lg-1" id="navbarMenu">
+                            {/* <div className="" id="navbarMenu"> */}
+                            <ul className="navbar-nav mr-auto">
+                                <li className="nav-item">
+                                <Link className="nav-link" to="/">
+                                    Home
+                                </Link>
+                                </li>
+                                <li className="nav-item">
+                                <Link className="nav-link" to="/store">
+                                    Stores
+                                </Link>
+                                </li>
+                                <li className="nav-item">
+                                <Link className="nav-link" to="/profile">
+                                    Profile
+                                </Link>
+                                </li>
+                            </ul>
+                            </div>
+
+                            <div className="collapse navbar-collapse order-4 order-lg-3" id="navbarMenu2">
+                            <ul className="navbar-nav ml-auto">
+                            
+                                {auth?
+                                    <li className="nav-item">
+                                        <Link className="nav-link" onClick={this.logoutHandler}>Log out</Link>
+                                    </li>
+                                :
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/seller-portal">Log In</Link>
+                                    </li>
+                                }
+                                
+                                <li className="nav-item">
+                                <Link data-toggle="modal" to="" data-target="#search" className="nav-link"><i className="icon-search"></i></Link>
+                                </li>
+                                <li className="nav-item cart">
+                                <Link data-toggle="modal" to="" data-target="#cart" className="nav-link"><span>Cart</span><span>2</span></Link>
+                                </li>
+                            </ul>
+                            </div>
+                        </nav>
+                        </div>
+                    </div>
+                    </header>
+
                 <div className="limiter">
                     <div className="container-login100">
                         <div className="wrap-login100 p-t-30 p-b-50">

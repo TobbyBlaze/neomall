@@ -178,6 +178,7 @@ export default class Home extends Component{
                             </button>
 
                             <div className="collapse navbar-collapse order-3 order-lg-1" id="navbarMenu">
+                            {/* <div className="" id="navbarMenu"> */}
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item">
                                 <Link className="nav-link" to="/">

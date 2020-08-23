@@ -315,11 +315,11 @@
 
 
       // mobile menu open state
-      $(document).ready(function(){
-        $('.navbar-toggler').click(function(){
-          $('body').toggleClass('overlay-active');
-        });
-      });
+      // $(document).ready(function(){
+      //   $('.navbar-toggler').click(function(){
+      //     $('body').toggleClass('overlay-active');
+      //   });
+      // });
 
 
       // zoom

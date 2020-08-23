@@ -91,7 +91,7 @@ export default class Admine extends Component {
     }
 
     render() {
-        const { file, name, description, price, category, quantity } = this.state;
+        const { file, name, description, price, category, quantity, goodPics } = this.state;
 
         var a=localStorage.getItem("sauthen");
         if(a == null){

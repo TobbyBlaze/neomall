@@ -362,6 +362,8 @@ export default class Home extends Component{
                 <div className="swiper-button-next"></div>
                 </div>
 
+
+                
                 {/* <!-- latest products --> */}
                 <section className="pt-0">
                 <div className="container">
@@ -372,7 +374,8 @@ export default class Home extends Component{
                     </div>
                     <div className="row gutter-2 gutter-md-3">
 
-                    <div className="col-6 col-lg-3">
+                    {goods.map((good, i)=>
+                    <div key={good.id} className="col-6 col-lg-3">
                         <div className="product">
                         <figure className="product-image">
                             <Link to="#!">
@@ -381,9 +384,9 @@ export default class Home extends Component{
                             </Link>
                         </figure>
                         <div className="product-meta">
-                            <h3 className="product-title"><Link to="#!">Fawn Wool / Natural Mammoth Chair </Link></h3>
+                            <h3 className="product-title"><Link to="#!">{good.name} </Link></h3>
                             <div className="product-price">
-                            <span>$2,268</span>
+                            <span>${good.price}</span>
                             <span className="product-action">
                                 <Link to="#!">Add to cart</Link>
                             </span>
@@ -392,53 +395,8 @@ export default class Home extends Component{
                         </div>
                         </div>
                     </div>
-                    <div className="col-6 col-lg-3">
-                        <div className="product">
-                        <figure className="product-image">
-                            <div className="owl-carousel" data-nav="true" data-loop="true">
-                            <Link to="#!">
-                                <img src="assets/images/demo/product-2.jpg" alt="Image" />
-                            </Link>
-                            <Link to="#!">
-                                <img src="assets/images/demo/product-2-2.jpg" alt="Image" />
-                            </Link>
-                            <Link to="#!">
-                                <img src="assets/images/demo/product-2-3.jpg" alt="Image" />
-                            </Link>
-                            </div>
-                        </figure>
-                        <div className="product-meta">
-                            <h3 className="product-title"><Link to="#!">Dark Stained NY11 Dining Chair</Link></h3>
-                            <div className="product-price">
-                            <span>$504</span>
-                            <span className="product-action">
-                                <Link to="#!">Add to cart</Link>
-                            </span>
-                            </div>
-                            <Link to="#!" className="product-like"></Link>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="col-6 col-lg-3">
-                        <div className="product">
-                        <figure className="product-image">
-                            <Link to="#!">
-                            <img src="assets/images/demo/product-3.jpg" alt="Image" />
-                            <img src="assets/images/demo/product-3-2.jpg" alt="Image" />
-                            </Link>
-                        </figure>
-                        <div className="product-meta">
-                            <h3 className="product-title"><Link to="#!">Black IC Pendant Light</Link></h3>
-                            <div className="product-price">
-                            <span>$410</span>
-                            <span className="product-action">
-                                <Link to="#!">Add to cart</Link>
-                            </span>
-                            </div>
-                            <Link to="#!" className="product-like"></Link>
-                        </div>
-                        </div>
-                    </div>
+                    )}
+                    
 
                     <div className="col-6 col-lg-3">
                         <div className="product">
@@ -461,87 +419,7 @@ export default class Home extends Component{
                         </div>
                         </div>
                     </div>
-                    <div className="col-6 col-lg-3">
-                        <div className="product">
-                        <figure className="product-image">
-                            <Link to="#!">
-                            <img src="assets/images/demo/product-5.jpg" alt="Image" />
-                            <img src="assets/images/demo/product-5-2.jpg" alt="Image" />
-                            </Link>
-                        </figure>
-                        <div className="product-meta">
-                            <h3 className="product-title"><Link to="#!">Black Piani Table Lamp</Link></h3>
-                            <div className="product-price">
-                            <span>$290</span>
-                            <span className="product-action">
-                                <Link to="#!">Add to cart</Link>
-                            </span>
-                            </div>
-                            <Link to="#!" className="product-like"></Link>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="col-6 col-lg-3">
-                        <div className="product">
-                        <figure className="product-image">
-                            <Link to="#!">
-                            <img src="assets/images/demo/product-6.jpg" alt="Image" />
-                            <img src="assets/images/demo/product-6-2.jpg" alt="Image" />
-                            </Link>
-                        </figure>
-                        <div className="product-meta">
-                            <h3 className="product-title"><Link to="#!">Grey Pendant Bell Lamp</Link></h3>
-                            <div className="product-price">
-                            <span>$258</span>
-                            <span className="product-action">
-                                <Link to="#!">Add to cart</Link>
-                            </span>
-                            </div>
-                            <Link to="#!" className="product-like"></Link>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="col-6 col-lg-3">
-                        <div className="product">
-                        <figure className="product-image">
-                            <Link to="#!">
-                            <img src="assets/images/demo/product-25.jpg" alt="Image" />
-                            <img src="assets/images/demo/product-25-2.jpg" alt="Image" />
-                            </Link>
-                        </figure>
-                        <div className="product-meta">
-                            <h3 className="product-title"><Link to="#!">Gravel Black Sigg Water Bottle</Link></h3>
-                            <div className="product-price">
-                            <span>$23</span>
-                            <span className="product-action">
-                                <Link to="#!">Add to cart</Link>
-                            </span>
-                            </div>
-                            <Link to="#!" className="product-like"></Link>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="col-6 col-lg-3">
-                        <div className="product">
-                        <figure className="product-image">
-                            <Link to="#!">
-                            <img src="assets/images/demo/product-7.jpg" alt="Image" />
-                            <img src="assets/images/demo/product-7-2.jpg" alt="Image" />
-                            </Link>
-                        </figure>
-                        <div className="product-meta">
-                            <h3 className="product-title"><Link to="#!">Garnet Must Sofa</Link></h3>
-                            <div className="product-price">
-                            <span>$4,668</span>
-                            <span className="product-action">
-                                <Link to="#!">Add to cart</Link>
-                            </span>
-                            </div>
-                            <Link to="#!" className="product-like"></Link>
-                        </div>
-                        </div>
-                    </div>
-
+                    
                     </div>
                     <div className="row">
                     <div className="col text-center">

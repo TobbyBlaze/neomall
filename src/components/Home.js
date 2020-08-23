@@ -89,9 +89,11 @@ export default class Home extends Component{
         let two = "https://neomallapi.herokuapp.com/api/auth/shcart"
         let three = "https://neomallapi.herokuapp.com/api/auth"
 
-        const requestOne = axios.get(one);
-        const requestTwo = axios.get(two);
-        const requestThree = axios.get(three);
+        // const requestOne = axios.get(one);
+        // const requestTwo = axios.get(two);
+        // const requestThree = axios.get(three);
+
+        axios.defaults.headers.get['Accept'] = 'application/json'
 
         const options = {
             // headers: {'X-Custom-Header': 'value'}
@@ -103,7 +105,19 @@ export default class Home extends Component{
             }
         };
 
-        axios.all([requestOne, requestTwo, requestThree], options).then(axios.spread((...responses) => {
+        function request1() {
+            return axios.get(one, options);
+        }
+
+        function request2() {
+            return axios.get(two, options);
+        }
+
+        function request3() {
+            return axios.get(three, options);
+        }
+
+        axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
         const responseOne = responses[0]
         const responseTwo = responses[1]
         const responesThree = responses[2]
@@ -163,7 +177,7 @@ export default class Home extends Component{
     }
 
     // getOne(good){
-    //     this.setState({
+    //     this.setState({ 
     //         goods:{
     //         id : good.id,
     //         file : good.file,

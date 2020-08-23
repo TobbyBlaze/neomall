@@ -15,6 +15,7 @@ export default class Admine extends Component {
             price: '',
             category: '',
             quantity: '',
+            goodPics:'',
         }
     }
 

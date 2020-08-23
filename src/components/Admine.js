@@ -169,7 +169,7 @@ export default class Admine extends Component {
                             </span>
                             <form onSubmit={this.submitHandler} className="login100-form validate-form p-b-33 p-t-5">
 
-                            <input type="file" name="file" onChange={this.fileHandler} class="btn btn-default text-center active form-control-file" title="Click to upload file"/>
+                            <input type="file" name="good_pics" onChange={this.fileHandler} class="btn btn-default text-center active form-control-file" title="Click to upload file"/>
 
                                 <div className="wrap-input100 validate-input" data-validate = "Enter email">
                                     

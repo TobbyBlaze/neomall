@@ -84,49 +84,81 @@ export default class Home extends Component{
         // a = null;
         // console.log(a);
         // console.log(len);
-        if(a){
-            axios
 
-                // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-                .get('https://neomallapi.herokuapp.com/api/auth', {
-                    headers: {
-                        // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer '+a,
-                        // 'withCredentials': true
-                    }
-                })
-                .then(response => {
-                    // console.log(response.data.goods.data)
-                    // console.log("auth");
-                    this.setState({ goods: response.data.goods.data })
-                })
-                .catch(error => {
-                    // console.log(error)
-                    this.setState({errorMsg: 'Error retrieving data'})
-                })
-        }else{
-            axios
+        let one = "https://neomallapi.herokuapp.com/api/auth"
+        let two = "https://neomallapi.herokuapp.com/api/auth/shcart"
+        let three = "https://neomallapi.herokuapp.com/api/auth"
 
-                // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-                .get('https://neomallapi.herokuapp.com/api/auth', {
-                    headers: {
-                        // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        'Content-Type': 'application/json',
-                        // 'Authorization': 'Bearer '+a,
-                        // 'withCredentials': true
-                    }
-                })
-                .then(response => {
-                    console.log(response.data.goods.data)
-                    console.log("no auth")
-                    this.setState({ goods: response.data.goods.data })
-                })
-                .catch(error => {
-                    console.log(error)
-                    this.setState({errorMsg: 'Error retrieving data'})
-                })
-        }
+        const requestOne = axios.get(one);
+        const requestTwo = axios.get(two);
+        const requestThree = axios.get(three);
+
+        const options = {
+            // headers: {'X-Custom-Header': 'value'}
+            headers: {
+                // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+a,
+                // 'withCredentials': true
+            }
+        };
+
+        axios.all([requestOne, requestTwo, requestThree], options).then(axios.spread((...responses) => {
+        const responseOne = responses[0]
+        const responseTwo = responses[1]
+        const responesThree = responses[2]
+        console.log(responseOne.data.goods.data)
+        this.setState({ goods: responseOne.data.goods.data })
+        console.log(responseTwo.data.carts.data)
+        this.setState({ carts: responseTwo.data.carts.data })
+        // use/access the results 
+        })).catch(errors => {
+        // react on errors.
+        })
+
+        // if(a){
+        //     axios
+
+        //         // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
+        //         .get('https://neomallapi.herokuapp.com/api/auth', {
+        //             headers: {
+        //                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //                 'Content-Type': 'application/json',
+        //                 'Authorization': 'Bearer '+a,
+        //                 // 'withCredentials': true
+        //             }
+        //         })
+        //         .then(response => {
+        //             // console.log(response.data.goods.data)
+        //             // console.log("auth");
+        //             this.setState({ goods: response.data.goods.data })
+        //         })
+        //         .catch(error => {
+        //             // console.log(error)
+        //             this.setState({errorMsg: 'Error retrieving data'})
+        //         })
+        // }else{
+        //     axios
+
+        //         // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
+        //         .get('https://neomallapi.herokuapp.com/api/auth', {
+        //             headers: {
+        //                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //                 'Content-Type': 'application/json',
+        //                 // 'Authorization': 'Bearer '+a,
+        //                 // 'withCredentials': true
+        //             }
+        //         })
+        //         .then(response => {
+        //             console.log(response.data.goods.data)
+        //             console.log("no auth")
+        //             this.setState({ goods: response.data.goods.data })
+        //         })
+        //         .catch(error => {
+        //             console.log(error)
+        //             this.setState({errorMsg: 'Error retrieving data'})
+        //         })
+        // }
 
     }
 

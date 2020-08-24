@@ -142,7 +142,7 @@ export default class Product extends Component{
         }
 
         function request3() {
-            return axios.get(three+this.props.match.params.id, options);
+            return axios.get('https://damp-island-72638.herokuapp.com/api/auth/prdetails/'+this.props.match.params.id, options);
         }
 
         axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {

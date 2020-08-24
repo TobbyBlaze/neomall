@@ -13,6 +13,7 @@ export default class Store extends Component{
 
         this.state = {
             goods: [],
+            carts: [],
             good: {
                 file : '',
                 name : '',

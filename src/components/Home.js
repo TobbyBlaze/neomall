@@ -13,6 +13,8 @@ export default class Home extends Component{
 
         this.state = {
             goods: [],
+            carts: [],
+            // goods: [],
             good: {
                 file : '',
                 name : '',

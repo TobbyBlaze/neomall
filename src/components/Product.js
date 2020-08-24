@@ -153,8 +153,8 @@ export default class Product extends Component{
         this.setState({ goods: responseOne.data.goods.data })
         console.log(responseTwo.data.carts.data)
         this.setState({ carts: responseTwo.data.carts.data })
-        console.log(responseThree.data.good)
-        this.setState({ good: responseThree.data.good })
+        console.log(responsesThree.data.good)
+        this.setState({ good: responsesThree.data.good })
         // use/access the results 
         })).catch(errors => {
             // console.log(error)

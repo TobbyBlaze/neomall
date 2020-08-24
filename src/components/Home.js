@@ -328,13 +328,13 @@ export default class Home extends Component{
                                     <div className="media media-product">
                                         <Link to="#!"><img src="assets/images/demo/product-3.jpg" alt="Image" /></Link>
                                         <div className="media-body">
-                                        <h5 className="media-title">Black IC Pendant Light</h5>
-                                        <span className="media-subtitle">Black, Steel</span>
+                                        <h5 className="media-title">{cart.name}</h5>
+                                        {/* <span className="media-subtitle">Black, Steel</span> */}
                                         </div>
                                     </div>
                                     </div>
                                     <div className="col-lg-3 text-center text-lg-right">
-                                    <span className="cart-item-price">$90</span>
+                                    <span className="cart-item-price">${cart.price}</span>
                                     </div>
                                     <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link>
                                 </div>

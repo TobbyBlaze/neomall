@@ -13,6 +13,8 @@ export default class Product extends Component{
         this.state = {
             
             goods: [],
+            carts: [],
+            sellers: [],
             good: {
                 file : '',
                 name : '',
@@ -208,64 +210,28 @@ export default class Product extends Component{
                         </div>
                         <div className="modal-body">
 
-                            <div className="row gutter-3">
-                            <div className="col-12">
+                        <div className="row gutter-3">
+                            {carts.map((cart, i)=>
+                            <div key={cart.id} className="col-12">
                                 <div className="cart-item cart-item-sm">
                                 <div className="row align-items-center">
                                     <div className="col-lg-9">
                                     <div className="media media-product">
                                         <Link to="#!"><img src="assets/images/demo/product-3.jpg" alt="Image" /></Link>
                                         <div className="media-body">
-                                        <h5 className="media-title">Black IC Pendant Light</h5>
-                                        <span className="media-subtitle">Black, Steel</span>
+                                        <h5 className="media-title">{cart.name}</h5>
+                                        {/* <span className="media-subtitle">Black, Steel</span> */}
                                         </div>
                                     </div>
                                     </div>
                                     <div className="col-lg-3 text-center text-lg-right">
-                                    <span className="cart-item-price">$90</span>
+                                    <span className="cart-item-price">${cart.price}</span>
                                     </div>
                                     <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link>
                                 </div>
                                 </div>
                             </div>
-                            <div className="col-12">
-                                <div className="cart-item cart-item-sm">
-                                <div className="row align-items-center">
-                                    <div className="col-lg-9">
-                                    <div className="media media-product">
-                                        <Link to="#!"><img src="assets/images/demo/product-4.jpg" alt="Image" /></Link>
-                                        <div className="media-body">
-                                        <h5 className="media-title">Red Analog Magazine Rack</h5>
-                                        <span className="media-subtitle">Red</span>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div className="col-lg-3 text-center text-lg-right">
-                                    <span className="cart-item-price">$120</span>
-                                    </div>
-                                    <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link>
-                                </div>
-                                </div>
-                            </div>
-                            <div className="col-12">
-                                <div className="cart-item cart-item-sm">
-                                <div className="row align-items-center">
-                                    <div className="col-lg-9">
-                                    <div className="media media-product">
-                                        <Link to="#!"><img src="assets/images/demo/product-24.jpg" alt="Image" /></Link>
-                                        <div className="media-body">
-                                        <h5 className="media-title">Closca Helmet</h5>
-                                        <span className="media-subtitle">Black</span>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div className="col-lg-3 text-center text-lg-right">
-                                    <span className="cart-item-price">$132</span>
-                                    </div>
-                                    <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link>
-                                </div>
-                                </div>
-                            </div>
+                            )}
                             </div>
                             
                         </div>
@@ -332,14 +298,14 @@ export default class Product extends Component{
                         <div className="row">
                             <div className="col-12">
                             <span className="item-brand">Neutrale</span>
-                            <h1 className="item-title">Washed Rose Hoodie</h1>
-                            <span className="item-price">$82</span>
+                            <h1 className="item-title">{good.name}</h1>
+                            <span className="item-price">${good.price}</span>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-12">
-                            <p>Washed hoodie on a mid-weight French Terry that has been fleeced for a soft, vintage feel and added comfort.</p>
+                            <p>{good.description}.</p>
                             </div>
                         </div>
 
@@ -426,7 +392,7 @@ export default class Product extends Component{
                         <div className="col-md-8">
                             <div className="tab-content" id="component-2-content">
                             <div className="tab-pane fade show active" id="component-2-1" role="tabpanel" aria-labelledby="component-2-1">
-                                <p>Washed hoodie on a mid-weight French Terry that has been fleeced for a soft, vintage feel and added comfort. This hoodie features a kangaroo pocket, ribbed waist and ribbed cuffs.</p>
+                                <p>{good.description}.</p>
                             </div>
                             <div className="tab-pane fade" id="component-2-2" role="tabpanel" aria-labelledby="component-2-2">
                                 <ul className="list-group list-group-line">

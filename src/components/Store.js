@@ -79,25 +79,84 @@ export default class Store extends Component{
 
     componentDidMount(){
         var a=localStorage.getItem("authen");
-        axios
 
-            // .get('http://localhost/yummypizza/public/api/auth', {
-            .get('https://neomallapi.herokuapp.com/api/auth', {
-                headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
-                }
-            })
-            .then(response => {
-                // console.log(response.data.goods.data)
-                this.setState({ goods: response.data.goods.data })
-            })
-            .catch(error => {
-                // console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-            })
+        var one = "https://neomallapi.herokuapp.com/api/auth"
+        var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
+        var three = "https://neomallapi.herokuapp.com/api/auth"
+
+        // const requestOne = axios.get(one);
+        // const requestTwo = axios.get(two);
+        // const requestThree = axios.get(three);
+
+        axios.defaults.headers.get['Accept'] = 'application/json'
+
+        // if(a){
+        const options = {
+            // headers: {'X-Custom-Header': 'value'}
+            headers: {
+                // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+a,
+                // 'withCredentials': true
+            }
+        };
+        // }else{
+        //     const options = {
+        //         // headers: {'X-Custom-Header': 'value'}
+        //         headers: {
+        //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //             'Content-Type': 'application/json',
+        //             // 'Authorization': 'Bearer '+a,
+        //             // 'withCredentials': true
+        //         }
+        //     };
+        // }
+
+        function request1() {
+            return axios.get(one, options);
+        }
+
+        function request2() {
+            return axios.get(two, options);
+        }
+
+        function request3() {
+            return axios.get(three, options);
+        }
+
+        axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
+        const responseOne = responses[0]
+        const responseTwo = responses[1]
+        const responsesThree = responses[2]
+        console.log(responseOne.data.sellers.data)
+        this.setState({ sellers: responseOne.data.sellers.data })
+        console.log(responseTwo.data.carts.data)
+        this.setState({ carts: responseTwo.data.carts.data })
+        // use/access the results 
+        })).catch(errors => {
+            // console.log(error)
+            this.setState({errorMsg: 'Error retrieving data'})
+        })
+
+        // axios
+
+        //     // .get('http://localhost/yummypizza/public/api/auth', {
+        //     .get('https://neomallapi.herokuapp.com/api/auth', {
+        //         headers: {
+        //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //             'Content-Type': 'application/json',
+        //             'Authorization': 'Bearer '+a,
+        //             // 'withCredentials': true
+        //         }
+        //     })
+        //     .then(response => {
+        //         // console.log(response.data.goods.data)
+        //         this.setState({ goods: response.data.goods.data })
+        //     })
+        //     .catch(error => {
+        //         // console.log(error)
+        //         this.setState({errorMsg: 'Error retrieving data'})
+        //     })
 
     }
 
@@ -122,7 +181,7 @@ export default class Store extends Component{
     }
 
     render(){
-        const { goods, errorMsg } = this.state;
+        const { goods, sellers, errorMsg } = this.state;
 
         var a=localStorage.getItem("authen");
         if(a == null){
@@ -302,87 +361,17 @@ export default class Store extends Component{
                 <section className="pt-1">
                 <div className="container-full">
                     <div className="row masonry gutter-1">
-                    <div className="col-md-3">
+                    {sellers.map((seller, i)=>
+                    <div key={seller.id} className="col-md-3">
                         <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-1.jpg)'}}></span>
                         <span className="image image-overlay" ></span>
                         <div className="card-body text-center text-white">
-                            <h3>Kitchen &amp; Dining</h3>
+                            <h3>{seller.name}</h3>
                         </div>
                         </Link>
                     </div>
-                    <div className="col-md-3">
-                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-2.jpg)'}}></span>
-                        <span className="image image-overlay" ></span>
-                        <div className="card-body text-center text-white">
-                            <h3>Living Room</h3>
-                        </div>
-                        </Link>
-                    </div>
-                    <div className="col-md-3">
-                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
-                        <span className="image image-overlay" ></span>
-                        <div className="card-body text-center text-white">
-                            <h3>Bathroom</h3>
-                        </div>
-                        </Link>
-                    </div>
-                    <div className="col-md-3">
-                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
-                        <span className="image image-overlay" ></span>
-                        <div className="card-body text-center text-white">
-                            <h3>Bathroom</h3>
-                        </div>
-                        </Link>
-                    </div>
-                    <div className="col-md-3">
-                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
-                        <span className="image image-overlay" ></span>
-                        <div className="card-body text-center text-white">
-                            <h3>Bathroom</h3>
-                        </div>
-                        </Link>
-                    </div>
-                    <div className="col-md-3">
-                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
-                        <span className="image image-overlay" ></span>
-                        <div className="card-body text-center text-white">
-                            <h3>Bathroom</h3>
-                        </div>
-                        </Link>
-                    </div>
-                    <div className="col-md-3">
-                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
-                        <span className="image image-overlay" ></span>
-                        <div className="card-body text-center text-white">
-                            <h3>Bathroom</h3>
-                        </div>
-                        </Link>
-                    </div>
-                    <div className="col-md-3">
-                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
-                        <span className="image image-overlay" ></span>
-                        <div className="card-body text-center text-white">
-                            <h3>Bathroom</h3>
-                        </div>
-                        </Link>
-                    </div>
-                    <div className="col-md-3">
-                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-3.jpg)'}}></span>
-                        <span className="image image-overlay" ></span>
-                        <div className="card-body text-center text-white">
-                            <h3>Bathroom</h3>
-                        </div>
-                        </Link>
-                    </div>
+                    )}
                     </div>
                 </div>
                 </section>

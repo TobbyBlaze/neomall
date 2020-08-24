@@ -47,6 +47,28 @@ export default class Home extends Component{
             })
     }
 
+    addWishlist = () => {
+        var a=localStorage.getItem("authen");
+        axios
+
+            // .post('http://localhost/yummypizza/public/api/auth/storecart', this.state.good, {
+            .post('https://damp-island-72638.herokuapp.com/api/auth/storewish', this.state.good, {
+                headers: {
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
+                    // 'withCredentials': true
+                }
+            })
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+            })
+    }
+
     logoutHandler = e => {
         e.preventDefault()
         // console.log(this.state)
@@ -85,9 +107,9 @@ export default class Home extends Component{
         // console.log(a);
         // console.log(len);
 
-        let one = "https://neomallapi.herokuapp.com/api/auth"
-        let two = "https://neomallapi.herokuapp.com/api/auth/shcart"
-        let three = "https://neomallapi.herokuapp.com/api/auth"
+        var one = "https://neomallapi.herokuapp.com/api/auth"
+        var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
+        var three = "https://neomallapi.herokuapp.com/api/auth"
 
         // const requestOne = axios.get(one);
         // const requestTwo = axios.get(two);
@@ -95,6 +117,7 @@ export default class Home extends Component{
 
         axios.defaults.headers.get['Accept'] = 'application/json'
 
+        // if(a){
         const options = {
             // headers: {'X-Custom-Header': 'value'}
             headers: {
@@ -104,6 +127,17 @@ export default class Home extends Component{
                 // 'withCredentials': true
             }
         };
+        // }else{
+        //     const options = {
+        //         // headers: {'X-Custom-Header': 'value'}
+        //         headers: {
+        //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //             'Content-Type': 'application/json',
+        //             // 'Authorization': 'Bearer '+a,
+        //             // 'withCredentials': true
+        //         }
+        //     };
+        // }
 
         function request1() {
             return axios.get(one, options);
@@ -120,14 +154,15 @@ export default class Home extends Component{
         axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
         const responseOne = responses[0]
         const responseTwo = responses[1]
-        const responesThree = responses[2]
+        const responsesThree = responses[2]
         console.log(responseOne.data.goods.data)
         this.setState({ goods: responseOne.data.goods.data })
         console.log(responseTwo.data.carts.data)
         this.setState({ carts: responseTwo.data.carts.data })
         // use/access the results 
         })).catch(errors => {
-        // react on errors.
+            // console.log(error)
+            this.setState({errorMsg: 'Error retrieving data'})
         })
 
         // if(a){
@@ -197,7 +232,7 @@ export default class Home extends Component{
     }
 
     render(){
-        const { goods, errorMsg } = this.state;
+        const { goods, carts, errorMsg } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -283,7 +318,8 @@ export default class Home extends Component{
                         <div className="modal-body">
 
                             <div className="row gutter-3">
-                            <div className="col-12">
+                            {carts.map((cart, i)=>
+                            <div key={cart.id} className="col-12">
                                 <div className="cart-item cart-item-sm">
                                 <div className="row align-items-center">
                                     <div className="col-lg-9">
@@ -302,60 +338,10 @@ export default class Home extends Component{
                                 </div>
                                 </div>
                             </div>
-                            <div className="col-12">
-                                <div className="cart-item cart-item-sm">
-                                <div className="row align-items-center">
-                                    <div className="col-lg-9">
-                                    <div className="media media-product">
-                                        <Link to="#!"><img src="assets/images/demo/product-4.jpg" alt="Image" /></Link>
-                                        <div className="media-body">
-                                        <h5 className="media-title">Red Analog Magazine Rack</h5>
-                                        <span className="media-subtitle">Red</span>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div className="col-lg-3 text-center text-lg-right">
-                                    <span className="cart-item-price">$120</span>
-                                    </div>
-                                    <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link>
-                                </div>
-                                </div>
-                            </div>
-                            <div className="col-12">
-                                <div className="cart-item cart-item-sm">
-                                <div className="row align-items-center">
-                                    <div className="col-lg-9">
-                                    <div className="media media-product">
-                                        <Link to="#!"><img src="assets/images/demo/product-24.jpg" alt="Image" /></Link>
-                                        <div className="media-body">
-                                        <h5 className="media-title">Closca Helmet</h5>
-                                        <span className="media-subtitle">Black</span>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div className="col-lg-3 text-center text-lg-right">
-                                    <span className="cart-item-price">$132</span>
-                                    </div>
-                                    <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                            
-                        </div>
-                        <div className="modal-footer">
-                            <div className="container-fluid">
-                            <div className="row gutter-0">
-                                <div className="col d-none d-md-block">
-                                <Link to="cart.html" className="btn btn-lg btn-block btn-secondary">View Cart</Link>
-                                </div>
-                                <div className="col">
-                                <Link to="checkout.html" className="btn btn-lg btn-block btn-primary">Checkout</Link>
-                                </div>
-                            </div>
+                            )}
                             </div>
                         </div>
-                        </div>
+                    </div>
                     </div>
                     </div>
 
@@ -424,20 +410,20 @@ export default class Home extends Component{
                     <div key={good.id} className="col-6 col-lg-3">
                         <div className="product">
                         <figure className="product-image">
-                            <Link to="#!">
+                            <Link to={"product/"+good.id}>
                             <img src="assets/images/demo/product-1.jpg" alt="Image" />
                             <img src="assets/images/demo/product-1-2.jpg" alt="Image" />
                             </Link>
                         </figure>
                         <div className="product-meta">
-                            <h3 className="product-title"><Link to="#!">{good.name} </Link></h3>
+                            <h3 className="product-title"><Link to={"product/"+good.id}>{good.name} </Link></h3>
                             <div className="product-price">
                             <span>${good.price}</span>
                             <span className="product-action">
-                                <Link to="#!">Add to cart</Link>
+                                <a href="api/storecart/{good.id.toString()}">Add to cart</a>
                             </span>
                             </div>
-                            <Link to="#!" className="product-like"></Link>
+                            <a href="api/storewish/{good.id.toString()}" className="product-like"></a>
                         </div>
                         </div>
                     </div>

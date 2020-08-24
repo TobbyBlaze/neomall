@@ -104,32 +104,89 @@ export default class Product extends Component{
     componentDidMount(){
         var a=localStorage.getItem("authen");
         const { match: { params } } = this.props;
-        axios
 
-            // .get('http://localhost/yummypizza/public/api/auth/prdetails/'+this.props.match.params.id, {
-            .get('https://neomallapi.herokuapp.com/api/auth/prdetails/'+this.props.match.params.id, {
+        var one = "https://neomallapi.herokuapp.com/api/auth"
+        var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
+        var three = "https://neomallapi.herokuapp.com/api/auth/prdetails/"
+
+        axios.defaults.headers.get['Accept'] = 'application/json'
+
+        // if(a){
+        const options = {
+            // headers: {'X-Custom-Header': 'value'}
+            headers: {
+                // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+a,
+                // 'withCredentials': true
+            }
+        };
+        // }else{
+        //     const options = {
+        //         // headers: {'X-Custom-Header': 'value'}
+        //         headers: {
+        //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //             'Content-Type': 'application/json',
+        //             // 'Authorization': 'Bearer '+a,
+        //             // 'withCredentials': true
+        //         }
+        //     };
+        // }
+
+        function request1() {
+            return axios.get(one, options);
+        }
+
+        function request2() {
+            return axios.get(two, options);
+        }
+
+        function request3() {
+            return axios.get(three+this.props.match.params.id, options);
+        }
+
+        axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
+        const responseOne = responses[0]
+        const responseTwo = responses[1]
+        const responsesThree = responses[2]
+        console.log(responseOne.data.goods.data)
+        this.setState({ goods: responseOne.data.goods.data })
+        console.log(responseTwo.data.carts.data)
+        this.setState({ carts: responseTwo.data.carts.data })
+        console.log(responseThree.data.good)
+        this.setState({ good: responseThree.data.good })
+        // use/access the results 
+        })).catch(errors => {
+            // console.log(error)
+            this.setState({errorMsg: 'Error retrieving data'})
+        })
+
+        // axios
+
+        //     // .get('http://localhost/yummypizza/public/api/auth/prdetails/'+this.props.match.params.id, {
+        //     .get('https://neomallapi.herokuapp.com/api/auth/prdetails/'+this.props.match.params.id, {
                 
-                headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
-                }
-            })
-            .then(response => {
-                // console.log(response.data.good)
-                this.setState({ good: response.data.good })
+        //         headers: {
+        //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //             'Content-Type': 'application/json',
+        //             'Authorization': 'Bearer '+a,
+        //             // 'withCredentials': true
+        //         }
+        //     })
+        //     .then(response => {
+        //         // console.log(response.data.good)
+        //         this.setState({ good: response.data.good })
                 
-            })
-            .catch(error => {
-                // console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-            })
+        //     })
+        //     .catch(error => {
+        //         // console.log(error)
+        //         this.setState({errorMsg: 'Error retrieving data'})
+        //     })
 
     }
 
     render(){
-        const { good, errorMsg } = this.state;
+        const { good, carts, errorMsg } = this.state;
         const { quantity } = this.state.good;
 
         var a=localStorage.getItem("authen");

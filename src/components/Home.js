@@ -103,19 +103,10 @@ export default class Home extends Component{
 
     componentDidMount(){
         var a=localStorage.getItem("authen");
-        // var len = a.length;
-        // localStorage.clear("authen");
-        // a = null;
-        // console.log(a);
-        // console.log(len);
-
+       
         var one = "https://neomallapi.herokuapp.com/api/auth"
         var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
         var three = "https://neomallapi.herokuapp.com/api/auth"
-
-        // const requestOne = axios.get(one);
-        // const requestTwo = axios.get(two);
-        // const requestThree = axios.get(three);
 
         axios.defaults.headers.get['Accept'] = 'application/json'
 

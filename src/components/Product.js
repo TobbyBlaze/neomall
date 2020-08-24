@@ -107,7 +107,7 @@ export default class Product extends Component{
 
         var one = "https://neomallapi.herokuapp.com/api/auth"
         var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
-        var three = "https://neomallapi.herokuapp.com/api/auth/prdetails/"
+        var three = "https://neomallapi.herokuapp.com/api/auth"
 
         axios.defaults.headers.get['Accept'] = 'application/json'
 
@@ -142,7 +142,7 @@ export default class Product extends Component{
         }
 
         function request3() {
-            return axios.get('https://neomallapi.herokuapp.com/api/auth/prdetails/'+this.props.match.params.id, options);
+            return axios.get(three, options);
         }
 
         axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
@@ -153,35 +153,35 @@ export default class Product extends Component{
         this.setState({ goods: responseOne.data.goods.data })
         console.log(responseTwo.data.carts.data)
         this.setState({ carts: responseTwo.data.carts.data })
-        console.log(responsesThree.data.good)
-        this.setState({ good: responsesThree.data.good })
+        // console.log(responsesThree.data.good)
+        // this.setState({ good: responsesThree.data.good })
         // use/access the results 
         })).catch(errors => {
             // console.log(error)
             this.setState({errorMsg: 'Error retrieving data'})
         })
 
-        // axios
+        axios
 
-        //     // .get('http://localhost/yummypizza/public/api/auth/prdetails/'+this.props.match.params.id, {
-        //     .get('https://neomallapi.herokuapp.com/api/auth/prdetails/'+this.props.match.params.id, {
+            // .get('http://localhost/yummypizza/public/api/auth/prdetails/'+this.props.match.params.id, {
+            .get('https://neomallapi.herokuapp.com/api/auth/prdetails/'+this.props.match.params.id, {
                 
-        //         headers: {
-        //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        //             'Content-Type': 'application/json',
-        //             'Authorization': 'Bearer '+a,
-        //             // 'withCredentials': true
-        //         }
-        //     })
-        //     .then(response => {
-        //         // console.log(response.data.good)
-        //         this.setState({ good: response.data.good })
+                headers: {
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
+                    // 'withCredentials': true
+                }
+            })
+            .then(response => {
+                // console.log(response.data.good)
+                this.setState({ good: response.data.good })
                 
-        //     })
-        //     .catch(error => {
-        //         // console.log(error)
-        //         this.setState({errorMsg: 'Error retrieving data'})
-        //     })
+            })
+            .catch(error => {
+                // console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+            })
 
     }
 

@@ -130,6 +130,7 @@ export default class Store extends Component{
         const responseOne = responses[0]
         const responseTwo = responses[1]
         const responsesThree = responses[2]
+        console.log(responseOne)
         console.log(responseOne.data.sellers.data)
         this.setState({ sellers: responseOne.data.sellers.data })
         console.log(responseTwo.data.carts.data)

@@ -387,7 +387,21 @@ export default class Product extends Component{
 
                         <div className="row">
                             <div className="col">
-                            <a href="#!" className="btn btn-block btn-lg btn-primary">Add to Cart</a>
+
+                            <form onSubmit={this.addCart} >
+                                        {/* <div className="product__details__quantity">
+                                            <div className="quantity">
+                                                <div className="pro-qty">
+                                                <input type="number" name="quantity" value={quantity} placeholder="Qty" onChange={this.changeHandler} />
+                                                </div>
+                                            </div>
+                                        </div> */}
+                                    
+                                        
+                                        <button type="submit" className="btn btn-block btn-lg btn-primary">ADD TO CART</button>
+                                    </form>
+
+                            {/* <a href="#!" className="btn btn-block btn-lg btn-primary">Add to Cart</a> */}
                             </div>
                             <div className="col-12 mt-1">
                             <p className="small">Free Shipping worldwide available for this item.</p>
@@ -743,18 +757,7 @@ export default class Product extends Component{
                                     <span>$50</span>
                                     <span className="product-action">
 
-                                    <form onSubmit={this.addCart} >
-                                        {/* <div className="product__details__quantity">
-                                            <div className="quantity">
-                                                <div className="pro-qty">
-                                                <input type="number" name="quantity" value={quantity} placeholder="Qty" onChange={this.changeHandler} />
-                                                </div>
-                                            </div>
-                                        </div> */}
                                     
-                                        
-                                        <button type="submit" className="">ADD TO CART</button>
-                                    </form>
 
                                     <a href="#!">Add to cart</a>
                                     </span>

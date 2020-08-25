@@ -423,7 +423,7 @@ export default class Home extends Component{
                     )}
                     
 
-                    <div className="col-6 col-lg-3">
+                    {/* <div className="col-6 col-lg-3">
                         <div className="product">
                         <figure className="product-image">
                             <span className="product-promo">-25%</span>
@@ -443,7 +443,7 @@ export default class Home extends Component{
                             <Link to="#!" className="product-like"></Link>
                         </div>
                         </div>
-                    </div>
+                    </div> */}
                     
                     </div>
                     <div className="row">

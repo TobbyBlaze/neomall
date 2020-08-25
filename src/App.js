@@ -30,8 +30,8 @@ export default class App extends Component{
             <Switch>
                 
                 <Route exact path='/' component={Home} />
-                <Route exact path='/product/:id' component={Product} />
-                {/* <Route exact path='/product' component={Product} /> */}
+                <Route path='/product/:id' component={Product} />
+                <Route exact path='/product' component={Product} />
                 <Route exact path='/cart' component={Cart} />
                 <Route exact path='/checkout' component={Checkout} />
                 <Route exact path='/thanks' component={Thanks} />

@@ -131,8 +131,8 @@ export default class Store extends Component{
         const responseTwo = responses[1]
         const responsesThree = responses[2]
         console.log(responseOne)
-        console.log(responseOne.data.sellers.data)
-        this.setState({ sellers: responseOne.data.sellers.data })
+        console.log(responseOne.data.sellers)
+        this.setState({ sellers: responseOne.data.sellers })
         console.log(responseTwo.data.carts.data)
         this.setState({ carts: responseTwo.data.carts.data })
         // use/access the results 

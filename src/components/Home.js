@@ -14,6 +14,7 @@ export default class Home extends Component{
         this.state = {
             goods: [],
             carts: [],
+            cartsNum: '',
             // goods: [],
             good: {
                 file : '',
@@ -152,6 +153,8 @@ export default class Home extends Component{
         this.setState({ goods: responseOne.data.goods.data })
         console.log(responseTwo.data.carts.data)
         this.setState({ carts: responseTwo.data.carts.data })
+        console.log(responseTwo.data.cartsNum)
+        this.setState({ carts: responseTwo.data.cartsNum })
         // use/access the results 
         })).catch(errors => {
             // console.log(error)
@@ -225,7 +228,7 @@ export default class Home extends Component{
     }
 
     render(){
-        const { goods, carts, errorMsg } = this.state;
+        const { goods, carts, cartsNum, errorMsg } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -289,7 +292,7 @@ export default class Home extends Component{
                                 <Link data-toggle="modal" to="" data-target="#search" className="nav-link"><i className="icon-search"></i></Link>
                                 </li>
                                 <li className="nav-item cart">
-                                <Link data-toggle="modal" to="" data-target="#cart" className="nav-link"><span>Cart</span><span>{carts.count()}</span></Link>
+                                <Link data-toggle="modal" to="" data-target="#cart" className="nav-link"><span>Cart</span><span>{cartsNum}</span></Link>
                                 </li>
                             </ul>
                             </div>

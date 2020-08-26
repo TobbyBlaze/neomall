@@ -154,7 +154,7 @@ export default class Home extends Component{
         console.log(responseTwo.data.carts.data)
         this.setState({ carts: responseTwo.data.carts.data })
         console.log(responseTwo.data.cartsNum)
-        this.setState({ carts: responseTwo.data.cartsNum })
+        this.setState({ cartsNum: responseTwo.data.cartsNum })
         // use/access the results 
         })).catch(errors => {
             // console.log(error)
@@ -292,8 +292,8 @@ export default class Home extends Component{
                                 <Link data-toggle="modal" to="" data-target="#search" className="nav-link"><i className="icon-search"></i></Link>
                                 </li>
                                 <li className="nav-item cart">
-                                {/* {cartsNum} */}
-                                <Link data-toggle="modal" to="" data-target="#cart" className="nav-link"><span>Cart</span><span></span></Link>
+                                
+                                <Link data-toggle="modal" to="" data-target="#cart" className="nav-link"><span>Cart</span><span>{cartsNum}</span></Link>
                                 </li>
                             </ul>
                             </div>

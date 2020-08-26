@@ -338,7 +338,20 @@ export default class Home extends Component{
                             )}
                             </div>
                         </div>
-                    </div>
+
+                        <div className="modal-footer">
+                            <div className="container-fluid">
+                            <div className="row gutter-0">
+                                <div className="col d-none d-md-block">
+                                <Link to="cart.html" className="btn btn-lg btn-block btn-secondary">View Cart</Link>
+                                </div>
+                                <div className="col">
+                                <Link to="checkout" className="btn btn-lg btn-block btn-primary">Checkout</Link>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                     </div>
                     </div>
 

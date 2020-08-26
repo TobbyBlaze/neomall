@@ -187,7 +187,8 @@ export default class Product extends Component{
 
     render(){
         const { good, carts, errorMsg } = this.state;
-        const { quantity } = this.state.good;
+        // const { quantity } = this.state.good;
+        const { quantity } = this.state.cart;
 
         var a=localStorage.getItem("authen");
         if(a == null){

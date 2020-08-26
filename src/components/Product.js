@@ -51,7 +51,7 @@ export default class Product extends Component{
             .post('https://neomallapi.herokuapp.com/api/auth/storecart', this.state.good,
             {
                 params: {
-                    quantity: this.state.quantity,
+                    quantity: this.state.cart.quantity,
                 },
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

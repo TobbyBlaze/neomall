@@ -371,7 +371,7 @@ export default class Products extends Component{
                 <div className="swiper-container swiper-container-alt">
                 <div className="swiper-wrapper">
                     <div className="swiper-slide">
-                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(assets/images/background-4.jpg)'}}></div>
+                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-4.jpg)'}}></div>
                     {/* <div className="image image-overlay image-zoom image-back" ></div> */}
                     <div className="container">
                         <div className="row align-items-center justify-content-center vh-80">
@@ -383,7 +383,7 @@ export default class Products extends Component{
                     </div>
                     </div>
                     <div className="swiper-slide">
-                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(assets/images/background-5.jpg)'}}></div>
+                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-5.jpg)'}}></div>
                     <div className="container">
                         <div className="row align-items-center justify-content-center vh-80">
                         <div className="col-lg-6 text-white text-center" data-swiper-parallax-y="-100%">

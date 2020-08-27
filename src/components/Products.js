@@ -408,24 +408,24 @@ export default class Products extends Component{
                     </div>
                     <div className="row gutter-2 gutter-md-3">
 
-                    {products.map((good, i)=>
-                    <div key={good.id} className="col-6 col-lg-3">
+                    {products.map((product, i)=>
+                    <div key={product.id} className="col-6 col-lg-3">
                         <div className="product">
                         <figure className="product-image">
-                            <Link to={"product/"+good.id}>
+                            <Link to={"product/"+product.id}>
                             <img src="assets/images/demo/product-1.jpg" alt="Image" />
                             <img src="assets/images/demo/product-1-2.jpg" alt="Image" />
                             </Link>
                         </figure>
                         <div className="product-meta">
-                            <h3 className="product-title"><Link to={"product/"+good.id}>{good.name} </Link></h3>
+                            <h3 className="product-title"><Link to={"product/"+product.id}>{product.name} </Link></h3>
                             <div className="product-price">
-                            <span>${good.price}</span>
+                            <span>${product.price}</span>
                             <span className="product-action">
-                                <a href="api/storecart/{good.id.toString()}">Add to cart</a>
+                                <a href="api/storecart/{product.id.toString()}">Add to cart</a>
                             </span>
                             </div>
-                            <a href="api/storewish/{good.id.toString()}" className="product-like"></a>
+                            <a href="api/storewish/{product.id.toString()}" className="product-like"></a>
                         </div>
                         </div>
                     </div>

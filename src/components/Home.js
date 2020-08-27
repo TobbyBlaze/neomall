@@ -50,6 +50,28 @@ export default class Home extends Component{
             })
     }
 
+    deleteCart = () => {
+        var a=localStorage.getItem("authen");
+        axios
+
+            // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
+            .delete('https://neomallapi.herokuapp.com/api/auth/storecart', this.state.good, {
+                headers: {
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
+                    // 'withCredentials': true
+                }
+            })
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+            })
+    }
+
     addWishlist = () => {
         var a=localStorage.getItem("authen");
         axios
@@ -228,7 +250,7 @@ export default class Home extends Component{
     }
 
     render(){
-        const { goods, carts, cartsNum, errorMsg } = this.state;
+        const { goods, carts, cartsNum, errorMsg, id } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -331,7 +353,11 @@ export default class Home extends Component{
                                     <div className="col-lg-3 text-center text-lg-right">
                                     <span className="cart-item-price">${cart.price}</span>
                                     </div>
-                                    <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link>
+                                    <form onSubmit={this.deleteCart} >
+                                        <input type="hidden" name="id" value={cart.id} onChange={this.changeHandler} />
+                                        <button type="submit" className="cart-item-close"><i className="icon-x"></i></button>
+                                    </form>
+                                    {/* <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link> */}
                                 </div>
                                 </div>
                             </div>

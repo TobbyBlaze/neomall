@@ -15,6 +15,7 @@ export default class Home extends Component{
             goods: [],
             carts: [],
             cartsNum: '',
+            delcart: '',
             // goods: [],
             good: {
                 file : '',
@@ -55,7 +56,7 @@ export default class Home extends Component{
         axios
 
             // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
-            .post('https://neomallapi.herokuapp.com/api/auth/deletecart', {
+            .post('https://neomallapi.herokuapp.com/api/auth/deletecart', this.state.delcart, {
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
@@ -250,7 +251,7 @@ export default class Home extends Component{
     }
 
     render(){
-        const { goods, carts, cartsNum, errorMsg, id } = this.state;
+        const { goods, carts, cartsNum, errorMsg, delcart } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -354,7 +355,7 @@ export default class Home extends Component{
                                     <span className="cart-item-price">${cart.price}</span>
                                     </div>
                                     <form onSubmit={this.deleteCart} >
-                                        <input type="hidden" name="id" value={cart.id} onChange={this.changeHandler} />
+                                        <input type="hidden" name="delcart" value={cart.id} onChange={this.changeHandler} />
                                         <button type="submit" className="cart-item-close"><i className="icon-x"></i></button>
                                     </form>
                                     {/* <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link> */}

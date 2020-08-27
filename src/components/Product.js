@@ -205,7 +205,7 @@ export default class Product extends Component{
                     <div className="container">
                         <div className="row">
                         <nav className="navbar navbar-expand-lg navbar-dark">
-                            <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="neomall.herokuapp.com/assets/images/logo.svg" alt="Logo" /></Link>
+                            <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="https://neomall.herokuapp.com/assets/images/logo.svg" alt="Logo" /></Link>
                             <button className="navbar-toggler order-2" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                             </button>
@@ -418,22 +418,22 @@ export default class Product extends Component{
                         <div className="row gutter-1">
                         <div className="col-12">
                             <figure className="equal zoom">
-                            <img className="zoom-img" src="neomall.herokuapp.com/assets/images/demo/product-35.jpg" alt="Product" />
+                            <img className="zoom-img" src="https://neomall.herokuapp.com/assets/images/demo/product-35.jpg" alt="Product" />
                             </figure>
                         </div>
                         <div className="col-6">
                             <figure className="equal zoom">
-                            <img className="zoom-img" src="neomall.herokuapp.com/assets/images/demo/product-35-2.jpg" alt="Product" />
+                            <img className="zoom-img" src="https://neomall.herokuapp.com/assets/images/demo/product-35-2.jpg" alt="Product" />
                             </figure>
                         </div>
                         <div className="col-6">
                             <figure className="equal zoom">
-                            <img className="zoom-img" src="neomall.herokuapp.com/assets/images/demo/product-35-3.jpg" alt="Product" />
+                            <img className="zoom-img" src="https://neomall.herokuapp.com/assets/images/demo/product-35-3.jpg" alt="Product" />
                             </figure>
                         </div>
                         <div className="col-12">
                             <figure className="equal equal-50 zoom">
-                            <img className="zoom-img" src="neomall.herokuapp.com/assets/images/demo/product-35-4.jpg" alt="Product" />
+                            <img className="zoom-img" src="https://neomall.herokuapp.com/assets/images/demo/product-35-4.jpg" alt="Product" />
                             </figure>
                         </div>
                         </div>

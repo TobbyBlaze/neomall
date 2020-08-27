@@ -204,7 +204,7 @@ export default class Products extends Component{
             })
             .then(response => {
                 console.log(response)
-                console.log(response.data.atoreGoods.data)
+                console.log(response.data.storeGoods.data)
                 this.setState({ products: response.data.storeGoods.data })
                 
             })

@@ -359,6 +359,9 @@ export default class Store extends Component{
 
                 </div>
 
+                <br />
+                <br />
+
 
                 {/* <!-- categories --> */}
                 <section className="pt-1">
@@ -366,7 +369,7 @@ export default class Store extends Component{
                     <div className="row masonry gutter-1">
                     {sellers.map((seller, i)=>
                     <div key={seller.id} className="col-md-3">
-                        <Link to="#" className="card card-equal equal-50 equal-md-100 card-scale">
+                        <Link to={"products/"+seller.id} className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-1.jpg)'}}></span>
                         <span className="image image-overlay" ></span>
                         <div className="card-body text-center text-white">

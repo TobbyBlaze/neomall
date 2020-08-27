@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import Cart from './components/Cart';
 import Product from './components/Product';
+import Products from './components/Products';
 import Checkout from './components/Checkout';
 import Portal from './components/Portal';
 import SellerPortal from './components/SellerPortal';
@@ -31,7 +32,7 @@ export default class App extends Component{
                 
                 <Route exact path='/' component={Home} />
                 <Route exact path='/product/:id' component={Product} />
-                <Route exact path='/product' component={Product} />
+                <Route exact path='/products' component={Products} />
                 <Route exact path='/cart' component={Cart} />
                 <Route exact path='/checkout' component={Checkout} />
                 <Route exact path='/thanks' component={Thanks} />

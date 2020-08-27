@@ -6,7 +6,7 @@ import { Link, useParams } from 'react-router-dom'
 import Header from './Header';
 import Footer from './Footer';
 
-export default class Home extends Component{
+export default class Products extends Component{
     // _isMounted = false;
     constructor(props){
         super(props);
@@ -24,6 +24,7 @@ export default class Home extends Component{
                 price : '',
                 category : '',
             },
+            products: {},
             errorMsg: ''
             
         }
@@ -131,6 +132,7 @@ export default class Home extends Component{
 
     componentDidMount(){
         var a=localStorage.getItem("authen");
+        const { match: { params } } = this.props;
        
         var one = "https://neomallapi.herokuapp.com/api/auth"
         var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
@@ -188,70 +190,28 @@ export default class Home extends Component{
             this.setState({errorMsg: 'Error retrieving data'})
         })
 
-        // if(a){
-        //     axios
+        axios
 
-        //         // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-        //         .get('https://neomallapi.herokuapp.com/api/auth', {
-        //             headers: {
-        //                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        //                 'Content-Type': 'application/json',
-        //                 'Authorization': 'Bearer '+a,
-        //                 // 'withCredentials': true
-        //             }
-        //         })
-        //         .then(response => {
-        //             // console.log(response.data.goods.data)
-        //             // console.log("auth");
-        //             this.setState({ goods: response.data.goods.data })
-        //         })
-        //         .catch(error => {
-        //             // console.log(error)
-        //             this.setState({errorMsg: 'Error retrieving data'})
-        //         })
-        // }else{
-        //     axios
-
-        //         // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-        //         .get('https://neomallapi.herokuapp.com/api/auth', {
-        //             headers: {
-        //                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        //                 'Content-Type': 'application/json',
-        //                 // 'Authorization': 'Bearer '+a,
-        //                 // 'withCredentials': true
-        //             }
-        //         })
-        //         .then(response => {
-        //             console.log(response.data.goods.data)
-        //             console.log("no auth")
-        //             this.setState({ goods: response.data.goods.data })
-        //         })
-        //         .catch(error => {
-        //             console.log(error)
-        //             this.setState({errorMsg: 'Error retrieving data'})
-        //         })
-        // }
-
-    }
-
-    // getOne(good){
-    //     this.setState({ 
-    //         goods:{
-    //         id : good.id,
-    //         file : good.file,
-    //         name : good.name,
-    //         description : good.description,
-    //         price : good.price,
-    //         category : good.category
-    //         }
-    //     })
-    // }
-
-    componentWillUnmount() {
-        // fix Warning: Can't perform a React state update on an unmounted component
-        this.setState = (state,callback)=>{
-            return;
-        };
+            // .get('http://localhost/yummypizza/public/api/auth/prdetails/'+this.props.match.params.id, {
+            .get('https://neomallapi.herokuapp.com/api/auth/products/'+this.props.match.params.id, {
+                
+                headers: {
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
+                    // 'withCredentials': true
+                }
+            })
+            .then(response => {
+                console.log(response)
+                this.setState({ products: response.data.products })
+                
+            })
+            .catch(error => {
+                // console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+            })
+       
     }
 
     render(){
@@ -510,6 +470,6 @@ export default class Home extends Component{
     }
 }
 
-// if (document.getElementById('home')) {
-//     ReactDOM.render(<Home />, document.getElementById('home'));
+// if (document.getElementById('products')) {
+//     ReactDOM.render(<Products />, document.getElementById('products'));
 // }

@@ -56,7 +56,7 @@ export default class Home extends Component{
         axios
 
             // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
-            .post('https://neomallapi.herokuapp.com/api/auth/deletecart', this.state.delcart, {
+            .get('https://neomallapi.herokuapp.com/api/auth/deletecart', this.state.delcart, {
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',

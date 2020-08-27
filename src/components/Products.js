@@ -204,6 +204,7 @@ export default class Products extends Component{
             })
             .then(response => {
                 console.log(response)
+                console.log(response.data.products)
                 this.setState({ products: response.data.products })
                 
             })
@@ -215,7 +216,7 @@ export default class Products extends Component{
     }
 
     render(){
-        const { goods, carts, cartsNum, errorMsg, delcart } = this.state;
+        const { goods, carts, cartsNum, errorMsg, delcart, products } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -407,7 +408,7 @@ export default class Products extends Component{
                     </div>
                     <div className="row gutter-2 gutter-md-3">
 
-                    {goods.map((good, i)=>
+                    {products.map((good, i)=>
                     <div key={good.id} className="col-6 col-lg-3">
                         <div className="product">
                         <figure className="product-image">

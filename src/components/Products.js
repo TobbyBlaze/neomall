@@ -25,6 +25,7 @@ export default class Products extends Component{
                 category : '',
             },
             products: [],
+            seller: '',
             errorMsg: ''
             
         }
@@ -206,6 +207,7 @@ export default class Products extends Component{
                 console.log(response)
                 console.log(response.data.storeGoods.data)
                 this.setState({ products: response.data.storeGoods.data })
+                this.setState({ seller: response.data.seller })
                 
             })
             .catch(error => {
@@ -216,7 +218,7 @@ export default class Products extends Component{
     }
 
     render(){
-        const { goods, carts, cartsNum, errorMsg, delcart, products } = this.state;
+        const { goods, carts, cartsNum, errorMsg, delcart, products,seller } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -374,7 +376,7 @@ export default class Products extends Component{
                     <div className="container">
                         <div className="row align-items-center justify-content-center vh-80">
                         <div className="col-lg-8 text-white text-center" data-swiper-parallax-y="-100%">
-                            <h1 className="display-2 mb-2">Your <b>perfect workspace</b> is waiting for you.</h1>
+                            <h1 className="display-2 mb-2">Welcome to {seller.name} store.</h1>
                             <Link to="/shop" className="btn btn-white">Shop Now</Link>
                         </div>
                         </div>
@@ -403,7 +405,7 @@ export default class Products extends Component{
                 <div className="container">
                     <div className="row">
                     <div className="col text-center">
-                        <h2>Latest Products</h2>
+                            <h2>Latest Products from {seller.name} store</h2>
                     </div>
                     </div>
                     <div className="row gutter-2 gutter-md-3">

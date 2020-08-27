@@ -24,7 +24,7 @@ export default class Products extends Component{
                 price : '',
                 category : '',
             },
-            products: {},
+            products: [],
             errorMsg: ''
             
         }

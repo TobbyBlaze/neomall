@@ -325,6 +325,8 @@ export default class Product extends Component{
                     </div>
 
                 </div>
+                <br />
+                <br />
 
 
                 {/* <!-- breadcrumbs --> */}
@@ -416,22 +418,22 @@ export default class Product extends Component{
                         <div className="row gutter-1">
                         <div className="col-12">
                             <figure className="equal zoom">
-                            <img className="zoom-img" src="assets/images/demo/product-35.jpg" alt="Product" />
+                            <img className="zoom-img" src="neomall.herokuapp.com/assets/images/demo/product-35.jpg" alt="Product" />
                             </figure>
                         </div>
                         <div className="col-6">
                             <figure className="equal zoom">
-                            <img className="zoom-img" src="assets/images/demo/product-35-2.jpg" alt="Product" />
+                            <img className="zoom-img" src="neomall.herokuapp.com/assets/images/demo/product-35-2.jpg" alt="Product" />
                             </figure>
                         </div>
                         <div className="col-6">
                             <figure className="equal zoom">
-                            <img className="zoom-img" src="assets/images/demo/product-35-3.jpg" alt="Product" />
+                            <img className="zoom-img" src="neomall.herokuapp.com/assets/images/demo/product-35-3.jpg" alt="Product" />
                             </figure>
                         </div>
                         <div className="col-12">
                             <figure className="equal equal-50 zoom">
-                            <img className="zoom-img" src="assets/images/demo/product-35-4.jpg" alt="Product" />
+                            <img className="zoom-img" src="neomall.herokuapp.com/assets/images/demo/product-35-4.jpg" alt="Product" />
                             </figure>
                         </div>
                         </div>

@@ -57,6 +57,10 @@ export default class Home extends Component{
 
             // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
             .get('https://neomallapi.herokuapp.com/api/auth/deletecart', this.state.delcart, {
+                
+                params: {
+                    delcart: this.state.delcart,
+                },
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',

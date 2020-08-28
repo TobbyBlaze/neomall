@@ -14,6 +14,7 @@ export default class Product extends Component{
             
             goods: [],
             carts: [],
+            cartsNum: '',
             sellers: [],
             good: {
                 file : '',
@@ -153,6 +154,8 @@ export default class Product extends Component{
         this.setState({ goods: responseOne.data.goods.data })
         console.log(responseTwo.data.carts.data)
         this.setState({ carts: responseTwo.data.carts.data })
+        console.log(responseTwo.data.cartsNum)
+        this.setState({ cartsNum: responseTwo.data.cartsNum })
         // console.log(responsesThree.data.good)
         // this.setState({ good: responsesThree.data.good })
         // use/access the results 
@@ -186,7 +189,7 @@ export default class Product extends Component{
     }
 
     render(){
-        const { good, carts, errorMsg } = this.state;
+        const { good, carts, cartsNum, errorMsg } = this.state;
         // const { quantity } = this.state.good;
         const { quantity } = this.state.cart;
 
@@ -247,7 +250,7 @@ export default class Product extends Component{
                                 <Link data-toggle="modal" to="" data-target="#search" className="nav-link"><i className="icon-search"></i></Link>
                                 </li>
                                 <li className="nav-item cart">
-                                <Link data-toggle="modal" to="" data-target="#cart" className="nav-link"><span>Cart</span><span>2</span></Link>
+                                <Link data-toggle="modal" to="" data-target="#cart" className="nav-link"><span>Cart</span><span>{cartsNum}</span></Link>
                                 </li>
                             </ul>
                             </div>

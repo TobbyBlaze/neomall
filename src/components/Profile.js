@@ -225,7 +225,7 @@ export default class Profile extends Component{
                                 <Link data-toggle="modal" to="" data-target="#search" className="nav-link"><i className="icon-search"></i></Link>
                                 </li>
                                 <li className="nav-item cart">
-                                <Link data-toggle="modal" to="" data-target="#cart" className="nav-link"><span>Cart</span><span>2</span></Link>
+                                <Link data-toggle="modal" to="" data-target="#cart" className="nav-link"><span>Cart</span><span>{cartsNum}</span></Link>
                                 </li>
                             </ul>
                             </div>

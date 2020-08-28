@@ -148,7 +148,7 @@ export default class Cart extends Component{
                     <div className="container">
                         <div className="row">
                         <nav className="navbar navbar-expand-lg navbar-dark">
-                            <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="assets/images/logo.svg" alt="Logo" /></Link>
+                            <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="https://neomall.herokuapp.com/assets/images/logo.svg" alt="Logo" /></Link>
                             <button className="navbar-toggler order-2" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                             </button>
@@ -217,7 +217,7 @@ export default class Cart extends Component{
                                 <div className="row align-items-center">
                                     <div className="col-lg-9">
                                     <div className="media media-product">
-                                        <Link to="#!"><img src="assets/images/demo/product-3.jpg" alt="Image" /></Link>
+                                        <Link to="#!"><img src="https://neomall.herokuapp.com/assets/images/demo/product-3.jpg" alt="Image" /></Link>
                                         <div className="media-body">
                                         <h5 className="media-title">Black IC Pendant Light</h5>
                                         <span className="media-subtitle">Black, Steel</span>
@@ -236,7 +236,7 @@ export default class Cart extends Component{
                                 <div className="row align-items-center">
                                     <div className="col-lg-9">
                                     <div className="media media-product">
-                                        <Link to="#!"><img src="assets/images/demo/product-4.jpg" alt="Image" /></Link>
+                                        <Link to="#!"><img src="https://neomall.herokuapp.com/assets/images/demo/product-4.jpg" alt="Image" /></Link>
                                         <div className="media-body">
                                         <h5 className="media-title">Red Analog Magazine Rack</h5>
                                         <span className="media-subtitle">Red</span>
@@ -255,7 +255,7 @@ export default class Cart extends Component{
                                 <div className="row align-items-center">
                                     <div className="col-lg-9">
                                     <div className="media media-product">
-                                        <Link to="#!"><img src="assets/images/demo/product-24.jpg" alt="Image" /></Link>
+                                        <Link to="#!"><img src="https://neomall.herokuapp.com/assets/images/demo/product-24.jpg" alt="Image" /></Link>
                                         <div className="media-body">
                                         <h5 className="media-title">Closca Helmet</h5>
                                         <span className="media-subtitle">Black</span>
@@ -338,7 +338,7 @@ export default class Cart extends Component{
                         <div className="row align-items-center">
                             <div className="col-12 col-lg-6">
                             <div className="media media-product">
-                                <a href="#!"><img src="assets/images/demo/product-4.jpg" alt="Image" /></a>
+                                <a href="#!"><img src="https://neomall.herokuapp.com/assets/images/demo/product-4.jpg" alt="Image" /></a>
                                 <div className="media-body">
                                 <h5 className="media-title">Analog Magazine Rack</h5>
                                 <span className="small">Red</span>
@@ -367,7 +367,7 @@ export default class Cart extends Component{
                         <div className="row align-items-center">
                             <div className="col-12 col-lg-6">
                             <div className="media media-product">
-                                <a href="#!"><img src="assets/images/demo/product-24.jpg" alt="Image" /></a>
+                                <a href="#!"><img src="https://neomall.herokuapp.com/assets/images/demo/product-24.jpg" alt="Image" /></a>
                                 <div className="media-body">
                                 <h5 className="media-title">Closca helmet</h5>
                                 <span className="small">Black</span>
@@ -396,7 +396,7 @@ export default class Cart extends Component{
                         <div className="row align-items-center">
                             <div className="col-12 col-lg-6">
                             <div className="media media-product">
-                                <a href="#!"><img src="assets/images/demo/product-25.jpg" alt="Image" /></a>
+                                <a href="#!"><img src="https://neomall.herokuapp.com/assets/images/demo/product-25.jpg" alt="Image" /></a>
                                 <div className="media-body">
                                 <h5 className="media-title">Sigg Water Bottle</h5>
                                 <span className="small">Gravel Black</span>

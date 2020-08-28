@@ -202,7 +202,7 @@ export default class Store extends Component{
                     <div className="container">
                         <div className="row">
                         <nav className="navbar navbar-expand-lg navbar-dark">
-                            <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="assets/images/logo.svg" alt="Logo" /></Link>
+                            <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="https://neomall.herokuapp.com/assets/images/logo.svg" alt="Logo" /></Link>
                             <button className="navbar-toggler order-2" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                             </button>
@@ -266,74 +266,42 @@ export default class Store extends Component{
                         <div className="modal-body">
 
                             <div className="row gutter-3">
-                            <div className="col-12">
+                            {carts.map((cart, i)=>
+                            <div key={cart.id} className="col-12">
                                 <div className="cart-item cart-item-sm">
                                 <div className="row align-items-center">
                                     <div className="col-lg-9">
                                     <div className="media media-product">
-                                        <Link to="#!"><img src="assets/images/demo/product-3.jpg" alt="Image" /></Link>
+                                        <Link to="#!"><img src="https://neomall.herokuapp.com/assets/images/demo/product-3.jpg" alt="Image" /></Link>
                                         <div className="media-body">
-                                        <h5 className="media-title">Black IC Pendant Light</h5>
-                                        <span className="media-subtitle">Black, Steel</span>
+                                        <h5 className="media-title">{cart.name}</h5>
+                                        {/* <span className="media-subtitle">Black, Steel</span> */}
                                         </div>
                                     </div>
                                     </div>
                                     <div className="col-lg-3 text-center text-lg-right">
-                                    <span className="cart-item-price">$90</span>
+                                    <span className="cart-item-price">${cart.price}</span>
                                     </div>
-                                    <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link>
+                                    <form onSubmit={this.deleteCart} >
+                                        <input type="hidden" name="delcart" value={cart.id} onChange={this.changeHandler} />
+                                        <button type="submit" className="cart-item-close"><i className="icon-x"></i></button>
+                                    </form>
+                                    {/* <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link> */}
                                 </div>
                                 </div>
                             </div>
-                            <div className="col-12">
-                                <div className="cart-item cart-item-sm">
-                                <div className="row align-items-center">
-                                    <div className="col-lg-9">
-                                    <div className="media media-product">
-                                        <Link to="#!"><img src="assets/images/demo/product-4.jpg" alt="Image" /></Link>
-                                        <div className="media-body">
-                                        <h5 className="media-title">Red Analog Magazine Rack</h5>
-                                        <span className="media-subtitle">Red</span>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div className="col-lg-3 text-center text-lg-right">
-                                    <span className="cart-item-price">$120</span>
-                                    </div>
-                                    <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link>
-                                </div>
-                                </div>
+                            )}
                             </div>
-                            <div className="col-12">
-                                <div className="cart-item cart-item-sm">
-                                <div className="row align-items-center">
-                                    <div className="col-lg-9">
-                                    <div className="media media-product">
-                                        <Link to="#!"><img src="assets/images/demo/product-24.jpg" alt="Image" /></Link>
-                                        <div className="media-body">
-                                        <h5 className="media-title">Closca Helmet</h5>
-                                        <span className="media-subtitle">Black</span>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div className="col-lg-3 text-center text-lg-right">
-                                    <span className="cart-item-price">$132</span>
-                                    </div>
-                                    <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                            
                         </div>
+
                         <div className="modal-footer">
                             <div className="container-fluid">
                             <div className="row gutter-0">
-                                <div className="col d-none d-md-block">
-                                <Link to="cart.html" className="btn btn-lg btn-block btn-secondary">View Cart</Link>
-                                </div>
+                                {/* <div className="col d-none d-md-block">
+                                <a href="cart.html" className="btn btn-lg btn-block btn-secondary">View Cart</a>
+                                </div> */}
                                 <div className="col">
-                                <Link to="checkout.html" className="btn btn-lg btn-block btn-primary">Checkout</Link>
+                                <a href="checkout" className="btn btn-lg btn-block btn-primary">Checkout</a>
                                 </div>
                             </div>
                             </div>
@@ -341,7 +309,6 @@ export default class Store extends Component{
                         </div>
                     </div>
                     </div>
-
 
                     {/* <!-- search -->  */}
                     <div className="modal fade search" id="search" tabIndex="-1" role="dialog" aria-hidden="true">
@@ -371,7 +338,7 @@ export default class Store extends Component{
                     {sellers.map((seller, i)=>
                     <div key={seller.id} className="col-md-3">
                         <Link to={"products/"+seller.id} className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(assets/images/card-1.jpg)'}}></span>
+                        <span className="image image-overlay" style={{backgroundImage: 'url(https://neomall.herokuapp.com/assets/images/card-1.jpg)'}}></span>
                         <span className="image image-overlay" ></span>
                         <div className="card-body text-center text-white">
                             <h3>{seller.name}</h3>

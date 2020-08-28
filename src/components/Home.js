@@ -276,7 +276,7 @@ export default class Home extends Component{
 
 
                         <nav className="navbar navbar-expand-lg navbar-dark">
-                            <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="assets/images/logo.svg" alt="Logo" /></Link>
+                            <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="https://neomall.herokuapp.com/assets/images/logo.svg" alt="Logo" /></Link>
                             <button className="navbar-toggler order-2" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                             </button>
@@ -348,7 +348,7 @@ export default class Home extends Component{
                                 <div className="row align-items-center">
                                     <div className="col-lg-9">
                                     <div className="media media-product">
-                                        <Link to="#!"><img src="assets/images/demo/product-3.jpg" alt="Image" /></Link>
+                                        <Link to="#!"><img src="https://neomall.herokuapp.com/assets/images/demo/product-3.jpg" alt="Image" /></Link>
                                         <div className="media-body">
                                         <h5 className="media-title">{cart.name}</h5>
                                         {/* <span className="media-subtitle">Black, Steel</span> */}
@@ -411,7 +411,7 @@ export default class Home extends Component{
                 <div className="swiper-container swiper-container-alt">
                 <div className="swiper-wrapper">
                     <div className="swiper-slide">
-                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(assets/images/background-4.jpg)'}}></div>
+                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-4.jpg)'}}></div>
                     {/* <div className="image image-overlay image-zoom image-back" ></div> */}
                     <div className="container">
                         <div className="row align-items-center justify-content-center vh-80">
@@ -423,7 +423,7 @@ export default class Home extends Component{
                     </div>
                     </div>
                     <div className="swiper-slide">
-                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(assets/images/background-5.jpg)'}}></div>
+                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-5.jpg)'}}></div>
                     <div className="container">
                         <div className="row align-items-center justify-content-center vh-80">
                         <div className="col-lg-6 text-white text-center" data-swiper-parallax-y="-100%">
@@ -455,8 +455,8 @@ export default class Home extends Component{
                         <div className="product">
                         <figure className="product-image">
                             <Link to={"product/"+good.id}>
-                            <img src="assets/images/demo/product-1.jpg" alt="Image" />
-                            <img src="assets/images/demo/product-1-2.jpg" alt="Image" />
+                            <img src="https://neomall.herokuapp.com/assets/images/demo/product-1.jpg" alt="Image" />
+                            <img src="https://neomall.herokuapp.com/assets/images/demo/product-1-2.jpg" alt="Image" />
                             </Link>
                         </figure>
                         <div className="product-meta">
@@ -476,8 +476,8 @@ export default class Home extends Component{
                         <figure className="product-image">
                             <span className="product-promo">-25%</span>
                             <Link to="#!">
-                            <img src="assets/images/demo/product-4.jpg" alt="Image" />
-                            <img src="assets/images/demo/product-4-2.jpg" alt="Image" />
+                            <img src="https://neomall.herokuapp.com/assets/images/demo/product-4.jpg" alt="Image" />
+                            <img src="https://neomall.herokuapp.com/assets/images/demo/product-4-2.jpg" alt="Image" />
                             </Link>
                         </figure>
                         <div className="product-meta">

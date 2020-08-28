@@ -268,14 +268,14 @@ export default class Product extends Component{
                         </div>
                         <div className="modal-body">
 
-                        <div className="row gutter-3">
+                            <div className="row gutter-3">
                             {carts.map((cart, i)=>
                             <div key={cart.id} className="col-12">
                                 <div className="cart-item cart-item-sm">
                                 <div className="row align-items-center">
                                     <div className="col-lg-9">
                                     <div className="media media-product">
-                                        <Link to="#!"><img src="assets/images/demo/product-3.jpg" alt="Image" /></Link>
+                                        <Link to="#!"><img src="https://neomall.herokuapp.com/assets/images/demo/product-3.jpg" alt="Image" /></Link>
                                         <div className="media-body">
                                         <h5 className="media-title">{cart.name}</h5>
                                         {/* <span className="media-subtitle">Black, Steel</span> */}
@@ -285,22 +285,26 @@ export default class Product extends Component{
                                     <div className="col-lg-3 text-center text-lg-right">
                                     <span className="cart-item-price">${cart.price}</span>
                                     </div>
-                                    <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link>
+                                    <form onSubmit={this.deleteCart} >
+                                        <input type="hidden" name="delcart" value={cart.id} onChange={this.changeHandler} />
+                                        <button type="submit" className="cart-item-close"><i className="icon-x"></i></button>
+                                    </form>
+                                    {/* <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link> */}
                                 </div>
                                 </div>
                             </div>
                             )}
                             </div>
-                            
                         </div>
+
                         <div className="modal-footer">
                             <div className="container-fluid">
                             <div className="row gutter-0">
-                                <div className="col d-none d-md-block">
-                                <Link to="cart.html" className="btn btn-lg btn-block btn-secondary">View Cart</Link>
-                                </div>
+                                {/* <div className="col d-none d-md-block">
+                                <a href="cart.html" className="btn btn-lg btn-block btn-secondary">View Cart</a>
+                                </div> */}
                                 <div className="col">
-                                <Link to="checkout.html" className="btn btn-lg btn-block btn-primary">Checkout</Link>
+                                <a href="checkout" className="btn btn-lg btn-block btn-primary">Checkout</a>
                                 </div>
                             </div>
                             </div>
@@ -308,7 +312,6 @@ export default class Product extends Component{
                         </div>
                     </div>
                     </div>
-
 
                     {/* <!-- search --> */}
                     <div className="modal fade search" id="search" tabIndex="-1" role="dialog" aria-hidden="true">
@@ -325,6 +328,7 @@ export default class Product extends Component{
                     </div>
 
                 </div>
+                <br />
                 <br />
                 <br />
 
@@ -514,7 +518,7 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-23.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-23.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -531,8 +535,8 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-24.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-24-2.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-24.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-24-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -549,8 +553,8 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-25.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-25-2.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-25.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-25-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -567,8 +571,8 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-11.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-11-2.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-11.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-11-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -585,8 +589,8 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-26.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-26-2.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-26.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-26-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -603,8 +607,8 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-27.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-27-2.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-27.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-27-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -621,8 +625,8 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-9.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-9-2.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-9.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-9-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -643,8 +647,8 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-9.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-9-2.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-9.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-9-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -661,8 +665,8 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-25.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-25-2.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-25.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-25-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -679,8 +683,8 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-24.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-24-2.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-24.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-24-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -697,8 +701,8 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-27.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-27-2.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-27.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-27-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -715,8 +719,8 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-11.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-11-2.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-11.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-11-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -733,8 +737,8 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-26.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-26-2.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-26.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-26-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">
@@ -751,7 +755,7 @@ export default class Product extends Component{
                             <div className="product">
                                 <figure className="product-image">
                                 <a href="#!">
-                                    <img src="assets/images/demo/product-23.jpg" alt="Image" />
+                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-23.jpg" alt="Image" />
                                 </a>
                                 </figure>
                                 <div className="product-meta">

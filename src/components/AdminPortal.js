@@ -54,7 +54,7 @@ export default class AdminPortal extends Component {
                 <div className="container">
                     <div className="row">
                     <nav className="navbar navbar-expand-lg navbar-dark">
-                        <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="assets/images/logo.svg" alt="Neomall" /></Link>
+                        <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="https://neomall.herokuapp.com/assets/images/logo.svg" alt="Neomall" /></Link>
                     </nav>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ export default class AdminPortal extends Component {
 
 
                 <section className="py-md-0">
-                <div className="image image-overlay" style={{backgroundImage:'url(assets/images/background-2.jpg)'}}></div>
+                <div className="image image-overlay" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-2.jpg)'}}></div>
                 <div className="container">
                     <div className="row justify-content-center align-items-center vh-md-100">
                     <div className="col-md-10 col-lg-5">

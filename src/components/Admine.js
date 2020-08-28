@@ -110,7 +110,7 @@ export default class Admine extends Component {
 
 
                         <nav className="navbar navbar-expand-lg navbar-dark">
-                            <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="assets/images/logo.svg" alt="Logo" /></Link>
+                            <Link to="/" className="navbar-brand order-1 order-lg-2"><img src="https://neomall.herokuapp.com/assets/images/logo.svg" alt="Logo" /></Link>
                             <button className="navbar-toggler order-2" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                             </button>
@@ -168,7 +168,7 @@ export default class Admine extends Component {
 
 
                 <section className="py-md-0">
-                <div className="image image-overlay" style={{backgroundImage:'url(assets/images/background-2.jpg)'}}></div>
+                <div className="image image-overlay" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-2.jpg)'}}></div>
                 <div className="container">
                     <div className="row justify-content-center align-items-center vh-md-100">
                     <div className="col-md-10 col-lg-5">

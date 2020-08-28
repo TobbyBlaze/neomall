@@ -14,6 +14,8 @@ export default class Store extends Component{
         this.state = {
             goods: [],
             carts: [],
+            cartsNum: '',
+            delcart: '',
             sellers: [],
             good: {
                 file : '',
@@ -135,6 +137,8 @@ export default class Store extends Component{
         this.setState({ sellers: responseOne.data.sellers })
         console.log(responseTwo.data.carts.data)
         this.setState({ carts: responseTwo.data.carts.data })
+        console.log(responseTwo.data.cartsNum)
+        this.setState({ cartsNum: responseTwo.data.cartsNum })
         // use/access the results 
         })).catch(errors => {
             // console.log(error)
@@ -184,7 +188,7 @@ export default class Store extends Component{
     }
 
     render(){
-        const { goods, sellers, errorMsg } = this.state;
+        const { goods, sellers, carts, cartsNum, errorMsg } = this.state;
 
         var a=localStorage.getItem("authen");
         if(a == null){

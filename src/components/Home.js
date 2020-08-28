@@ -402,6 +402,9 @@ export default class Home extends Component{
                     </div>
 
                 </div>
+                <br />
+                <br />
+                <br />
                 
                 
                 {/* <!-- slider --> */}
@@ -442,7 +445,7 @@ export default class Home extends Component{
                 <div className="container">
                     <div className="row">
                     <div className="col text-center">
-                        <h2>Latest Products</h2>
+                        <h4>Latest Products</h4>
                     </div>
                     </div>
                     <div className="row gutter-2 gutter-md-3">

@@ -11838,7 +11838,7 @@ ul, ol {
   position: static;
   width: 100%;
   z-index: 1050;
-  background: transparent; }
+  background: black; }
   .header nav {
     width: 100%; }
 

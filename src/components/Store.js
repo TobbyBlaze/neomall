@@ -361,6 +361,7 @@ export default class Store extends Component{
 
                 <br />
                 <br />
+                <br />
 
 
                 {/* <!-- categories --> */}
@@ -381,6 +382,7 @@ export default class Store extends Component{
                     </div>
                 </div>
                 </section>
+                <br />
 
                 {/* <div>
                     <Footer />

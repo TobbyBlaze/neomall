@@ -373,11 +373,11 @@ export default class Home extends Component{
                         <div className="modal-footer">
                             <div className="container-fluid">
                             <div className="row gutter-0">
-                                <div className="col d-none d-md-block">
-                                <Link to="cart.html" className="btn btn-lg btn-block btn-secondary">View Cart</Link>
-                                </div>
+                                {/* <div className="col d-none d-md-block">
+                                <a href="cart.html" className="btn btn-lg btn-block btn-secondary">View Cart</a>
+                                </div> */}
                                 <div className="col">
-                                <Link to="checkout" className="btn btn-lg btn-block btn-primary">Checkout</Link>
+                                <a href="checkout" className="btn btn-lg btn-block btn-primary">Checkout</a>
                                 </div>
                             </div>
                             </div>
@@ -464,7 +464,7 @@ export default class Home extends Component{
                             <div className="product-price">
                             <span>${good.price}</span>
                             </div>
-                            <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a>
+                            {/* <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a> */}
                         </div>
                         </div>
                     </div>

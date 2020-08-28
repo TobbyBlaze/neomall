@@ -404,7 +404,7 @@ export default class Products extends Component{
                 <div className="container">
                     <div className="row">
                     <div className="col text-center">
-                            <h2>Latest Products from {seller.name} store</h2>
+                            <h4>Latest Products from {seller.name} store</h4>
                     </div>
                     </div>
                     <div className="row gutter-2 gutter-md-3">

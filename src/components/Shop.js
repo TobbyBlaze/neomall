@@ -204,31 +204,31 @@ export default class Shop extends Component{
                         <div className="modal-body">
 
                             <div className="row gutter-3">
-                            {carts.map((cart, i)=>
-                            <div key={cart.id} className="col-12">
+                            {/* {carts.map((cart, i)=> */}
+                            {/* <div key={cart.id} className="col-12"> */}
                                 <div className="cart-item cart-item-sm">
                                 <div className="row align-items-center">
                                     <div className="col-lg-9">
                                     <div className="media media-product">
                                         <Link to="#!"><img src="https://neomall.herokuapp.com/assets/images/demo/product-3.jpg" alt="Image" /></Link>
                                         <div className="media-body">
-                                        <h5 className="media-title">{cart.name}</h5>
+                                        {/* <h5 className="media-title">{cart.name}</h5> */}
                                         {/* <span className="media-subtitle">Black, Steel</span> */}
                                         </div>
                                     </div>
                                     </div>
                                     <div className="col-lg-3 text-center text-lg-right">
-                                    <span className="cart-item-price">${cart.price}</span>
+                                    {/* <span className="cart-item-price">${cart.price}</span> */}
                                     </div>
-                                    <form onSubmit={this.deleteCart} >
+                                    {/* <form onSubmit={this.deleteCart} >
                                         <input type="hidden" name="delcart" value={cart.id} onChange={this.changeHandler} />
                                         <button type="submit" className="cart-item-close"><i className="icon-x"></i></button>
-                                    </form>
+                                    </form> */}
                                     {/* <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link> */}
                                 </div>
                                 </div>
-                            </div>
-                            )}
+                            {/* </div> */}
+                            {/* )} */}
                             </div>
                         </div>
 

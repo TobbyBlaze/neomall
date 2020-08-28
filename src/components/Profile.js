@@ -165,7 +165,7 @@ export default class Profile extends Component{
     }
 
     render(){
-        const { goods, errorMsg } = this.state;
+        const { goods, carts, cartsNum, delcart, errorMsg } = this.state;
 
         var a=localStorage.getItem("authen");
         if(a == null){

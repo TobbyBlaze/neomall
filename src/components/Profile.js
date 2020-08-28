@@ -13,6 +13,9 @@ export default class Profile extends Component{
 
         this.state = {
             goods: [],
+            carts: [],
+            cartsNum: '',
+            delcart: '',
             good: {
                 file : '',
                 name : '',
@@ -80,22 +83,58 @@ export default class Profile extends Component{
     componentDidMount(){
         var a=localStorage.getItem("authen");
         if(a){
-        axios
-
-            // .get('http://localhost/yummypizza/public/api/auth', {
-            .get('https://neomallapi.herokuapp.com/api/auth', {
+            var one = "https://neomallapi.herokuapp.com/api/auth"
+            var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
+            var three = "https://neomallapi.herokuapp.com/api/auth"
+    
+            axios.defaults.headers.get['Accept'] = 'application/json'
+    
+            // if(a){
+            const options = {
+                // headers: {'X-Custom-Header': 'value'}
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+a,
                     // 'withCredentials': true
                 }
-            })
-            .then(response => {
-                // console.log(response.data.goods.data)
-                this.setState({ goods: response.data.goods.data })
-            })
-            .catch(error => {
+            };
+            // }else{
+            //     const options = {
+            //         // headers: {'X-Custom-Header': 'value'}
+            //         headers: {
+            //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            //             'Content-Type': 'application/json',
+            //             // 'Authorization': 'Bearer '+a,
+            //             // 'withCredentials': true
+            //         }
+            //     };
+            // }
+    
+            function request1() {
+                return axios.get(one, options);
+            }
+    
+            function request2() {
+                return axios.get(two, options);
+            }
+    
+            function request3() {
+                return axios.get(three, options);
+            }
+    
+            axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
+            const responseOne = responses[0]
+            const responseTwo = responses[1]
+            const responsesThree = responses[2]
+            console.log(responseOne.data.goods.data)
+            this.setState({ goods: responseOne.data.goods.data })
+            console.log(responseTwo.data.carts.data)
+            this.setState({ carts: responseTwo.data.carts.data })
+            console.log(responseTwo.data.cartsNum)
+            this.setState({ cartsNum: responseTwo.data.cartsNum })
+            // use/access the results 
+            })).catch(errors => {
                 // console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
             })

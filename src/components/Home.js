@@ -463,11 +463,8 @@ export default class Home extends Component{
                             <h3 className="product-title"><Link to={"product/"+good.id}>{good.name} </Link></h3>
                             <div className="product-price">
                             <span>${good.price}</span>
-                            <span className="product-action">
-                                <a href="api/storecart/{good.id.toString()}">Add to cart</a>
-                            </span>
                             </div>
-                            <a href="api/storewish/{good.id.toString()}" className="product-like"></a>
+                            <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star" aria-hidden="true"></i></a>
                         </div>
                         </div>
                     </div>

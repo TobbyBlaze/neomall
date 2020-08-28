@@ -464,7 +464,7 @@ export default class Home extends Component{
                             <div className="product-price">
                             <span>${good.price}</span>
                             </div>
-                            <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star" aria-hidden="true"></i></a>
+                            <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a>
                         </div>
                         </div>
                     </div>

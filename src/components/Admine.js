@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import { Lines } from 'react-preloaders'
 
 export default class Admine extends Component {
 
@@ -16,6 +17,7 @@ export default class Admine extends Component {
             category: '',
             quantity: '',
             goodPics:'',
+            loading: false
         }
     }
 
@@ -36,6 +38,7 @@ export default class Admine extends Component {
         var a=localStorage.getItem("sauthen");
         e.preventDefault()
         console.log(this.state)
+        this.setState({ loading: true })
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)
@@ -49,6 +52,7 @@ export default class Admine extends Component {
             })
             .then(response => {
                 console.log(response);
+                // this.setState({ loading: true })
                 // var sauthe = response.data.token;
                 // localStorage.setItem("sauthen",sauthe);
                 // console.log(authe);
@@ -57,6 +61,7 @@ export default class Admine extends Component {
             })
             .catch(error => {
                 console.log(error)
+                this.setState({ loading: false })
             })
     }
 
@@ -65,6 +70,7 @@ export default class Admine extends Component {
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("sauthen");
+        this.setState({ loading: true })
         
 
         axios
@@ -87,6 +93,7 @@ export default class Admine extends Component {
             })
             .catch(error => {
                 // console.log(error)
+                this.setState({ loading: false })
             })
     }
 

@@ -33,6 +33,7 @@ export default class Home extends Component{
 
     addCart = () => {
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         axios
 
             // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
@@ -50,11 +51,13 @@ export default class Home extends Component{
             .catch(error => {
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
             })
     }
 
     deleteCart = () => {
         var a=localStorage.getItem("authen");
+
         axios
 
             // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
@@ -81,6 +84,7 @@ export default class Home extends Component{
 
     addWishlist = () => {
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         axios
 
             // .post('http://localhost/yummypizza/public/api/auth/storecart', this.state.good, {
@@ -98,6 +102,7 @@ export default class Home extends Component{
             .catch(error => {
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
             })
     }
 
@@ -106,6 +111,7 @@ export default class Home extends Component{
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         
 
         axios
@@ -128,6 +134,7 @@ export default class Home extends Component{
             })
             .catch(error => {
                 // console.log(error)
+                this.setState({ loading: false })
             })
     }
 
@@ -190,6 +197,7 @@ export default class Home extends Component{
         })).catch(errors => {
             // console.log(error)
             this.setState({errorMsg: 'Error retrieving data'})
+            this.setState({ loading: false })
         })
 
         // if(a){

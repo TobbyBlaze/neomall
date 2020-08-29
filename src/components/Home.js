@@ -51,7 +51,7 @@ export default class Home extends Component{
             .catch(error => {
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
-                this.setState({ loading: false })
+                // this.setState({ loading: false })
             })
     }
 
@@ -102,7 +102,7 @@ export default class Home extends Component{
             .catch(error => {
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
-                this.setState({ loading: false })
+                // this.setState({ loading: false })
             })
     }
 
@@ -111,7 +111,7 @@ export default class Home extends Component{
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("authen");
-        this.setState({ loading: true })
+        // this.setState({ loading: true })
         
 
         axios
@@ -134,7 +134,7 @@ export default class Home extends Component{
             })
             .catch(error => {
                 // console.log(error)
-                this.setState({ loading: false })
+                // this.setState({ loading: false })
             })
     }
 
@@ -517,7 +517,7 @@ export default class Home extends Component{
                 <div>
                     {/* <Footer /> */}
                 </div>
-                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
+                <Lines customLoading={loading} color={'#ffffff'} background="#000000" />
                 
             </div>
             </React.Fragment>

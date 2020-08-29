@@ -108,7 +108,7 @@ export default class Admine extends Component {
         }
         return (
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
+                <Lines customLoading={loading} color={'#ffffff'} background="#000000" />
 
                                     {/* <!-- header --> */}
                                     <header className="header header-dark header-sticky">

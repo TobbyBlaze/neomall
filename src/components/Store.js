@@ -206,7 +206,7 @@ export default class Store extends Component{
         return(
             
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
+                <Lines customLoading={loading} color={'#ffffff'} background="#000000" />
                 <div className="container">
                     {/* <!-- header --> */}
                     <header className="header header-dark header-sticky">

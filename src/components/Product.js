@@ -210,7 +210,7 @@ export default class Product extends Component{
         
         return(
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
+                <Lines customLoading={loading} color={'#ffffff'} background="#000000" />
                 <div>
                     {/* <!-- header --> */}
                     <header className="header header-dark header-sticky">

@@ -241,7 +241,7 @@ export default class Products extends Component{
         return(
             
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
+                <Lines customLoading={loading} color={'#ffffff'} background="#000000" />
                 
                 <div className="container-fluid">
                     {/* <!-- header --> */}

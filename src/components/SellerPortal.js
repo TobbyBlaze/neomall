@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { Lines } from 'react-preloaders'
 
-export default class Portal extends Component {
+export default class SellerPortal extends Component {
 
     constructor(props) {
         super(props)

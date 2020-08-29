@@ -38,7 +38,7 @@ export default class Admine extends Component {
         var a=localStorage.getItem("sauthen");
         e.preventDefault()
         console.log(this.state)
-        this.setState({ loading: true })
+        // this.setState({ loading: true })
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)
@@ -70,7 +70,7 @@ export default class Admine extends Component {
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("sauthen");
-        this.setState({ loading: true })
+        // this.setState({ loading: true })
         
 
         axios

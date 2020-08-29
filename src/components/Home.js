@@ -33,7 +33,7 @@ export default class Home extends Component{
 
     addCart = () => {
         var a=localStorage.getItem("authen");
-        this.setState({ loading: true })
+        // this.setState({ loading: true })
         axios
 
             // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
@@ -84,7 +84,7 @@ export default class Home extends Component{
 
     addWishlist = () => {
         var a=localStorage.getItem("authen");
-        this.setState({ loading: true })
+        // this.setState({ loading: true })
         axios
 
             // .post('http://localhost/yummypizza/public/api/auth/storecart', this.state.good, {
@@ -278,7 +278,6 @@ export default class Home extends Component{
         return(
             
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                 
                 <div className="container-fluid">
                     {/* <!-- header --> */}
@@ -517,6 +516,7 @@ export default class Home extends Component{
                 <div>
                     {/* <Footer /> */}
                 </div>
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                 
             </div>
         )

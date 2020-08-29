@@ -66,7 +66,7 @@ export default class Cart extends Component{
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("authen");
-        this.setState({ loading: true })
+        // this.setState({ loading: true })
         
 
         axios

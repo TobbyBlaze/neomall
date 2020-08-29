@@ -28,7 +28,7 @@ export default class AdminPortal extends Component {
     loginHandler = e => {
         e.preventDefault()
         console.log(this.state)
-        this.setState({ loading: true })
+        // this.setState({ loading: true })
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)

@@ -249,36 +249,36 @@ export default class Portal extends Component {
                                                     <label htmlFor="city">City</label>
                                                     <input type="text" name="city" className="form-control" id="city"  value={city} onChange={this.changeHandler}  />
                                                 </div>
-                                                <div className="form-group col-12">
+                                                {/* <div className="form-group col-12">
                                                     <label htmlFor="country">Country</label>
                                                     <input type="text" name="country" className="form-control" id="country"  value={country} onChange={this.changeHandler}  />
-                                                </div>
+                                                </div> */}
                                                 <div className="form-group col-12">
                                                     <label htmlFor="zip">Postal/ZIP code</label>
                                                     <input type="text" name="zip" className="form-control" id="zip"  value={zip} onChange={this.changeHandler}  />
                                                 </div>
-                                                <div className="form-group col-12">
+                                                {/* <div className="form-group col-12">
                                                     <label htmlFor="business_reg_no">Business registration number</label>
                                                     <input type="text" name="business_reg_no" className="form-control" id="business_reg_no"  value={business_reg_no} onChange={this.changeHandler}  />
-                                                </div>
-                                                <div className="form-group col-12">
+                                                </div> */}
+                                                {/* <div className="form-group col-12">
                                                     <label htmlFor="business_reg_doc">Business registration document</label>
                                                     <input type="file" name="business_reg_doc[]" className="form-control" id="business_reg_doc" onChange={this.business_regHandler} multiple />
-                                                </div>
-                                                <img class="img-responsive" src={this.state.business_reg_doc} />
-                                                <div className="form-group col-12">
+                                                </div> */}
+                                                {/* <img class="img-responsive" src={this.state.business_reg_doc} /> */}
+                                                {/* <div className="form-group col-12">
                                                     <label htmlFor="tin">Tax Identification Number(tin)</label>
                                                     <input type="text" name="tin" className="form-control" id="tin"  value={tin} onChange={this.changeHandler}  />
-                                                </div>
-                                                <div className="form-group col-12">
+                                                </div> */}
+                                                {/* <div className="form-group col-12">
                                                     <label htmlFor="vat">VAT Registered?</label>
                                                     <input type="text" name="vat" className="form-control" id="vat"  value={vat} onChange={this.changeHandler}  />
-                                                </div>
-                                                <div className="form-group col-12">
+                                                </div> */}
+                                                {/* <div className="form-group col-12">
                                                     <label htmlFor="vat_info_doc">vat information document</label>
                                                     <input type="file" name="vat_info_doc[]" className="form-control" id="vat_info_doc" onChange={this.vatHandler} multiple />
                                                 </div>
-                                                <img class="img-responsive" src={this.state.vat_info_doc} />
+                                                <img class="img-responsive" src={this.state.vat_info_doc} /> */}
                                                 <div className="form-group col-12">
                                                     <label htmlFor="company_name">Company name</label>
                                                     <input type="text" name="company_name" className="form-control" id="company_name"  value={company_name} onChange={this.changeHandler}  />
@@ -308,14 +308,14 @@ export default class Portal extends Component {
                                                     <label htmlFor="bank_code">Bank code</label>
                                                     <input type="text" name="bank_code" className="form-control" id="bank_code"  value={bank_code} onChange={this.changeHandler}  />
                                                 </div>
-                                                <div className="form-group col-12">
+                                                {/* <div className="form-group col-12">
                                                     <label htmlFor="iban">IBAN</label>
                                                     <input type="text" name="iban" className="form-control" id="iban"  value={iban} onChange={this.changeHandler}  />
-                                                </div>
-                                                <div className="form-group col-12">
+                                                </div> */}
+                                                {/* <div className="form-group col-12">
                                                     <label htmlFor="swift">SWIFT</label>
                                                     <input type="text" name="swift" className="form-control" id="swift"  value={swift} onChange={this.changeHandler}  />
-                                                </div>
+                                                </div> */}
                                                 <div className="form-group col-12">
                                                     <label htmlFor="bank_info">Bank information</label>
                                                     <input type="text" name="bank_info" className="form-control" id="bank_info"  value={bank_info} onChange={this.changeHandler}  />

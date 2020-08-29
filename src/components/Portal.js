@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import { Lines } from 'react-preloaders'
 
 export default class Portal extends Component {
 

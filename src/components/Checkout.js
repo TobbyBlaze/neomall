@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
+import { Lines } from 'react-preloaders'
 
 import Header from './Header';
 import Footer from './Footer';

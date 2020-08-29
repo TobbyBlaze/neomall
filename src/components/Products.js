@@ -26,13 +26,15 @@ export default class Products extends Component{
             },
             products: [],
             seller: '',
-            errorMsg: ''
+            errorMsg: '',
+            loading: true
             
         }
     }
 
     addCart = () => {
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         axios
 
             // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
@@ -50,11 +52,13 @@ export default class Products extends Component{
             .catch(error => {
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
             })
     }
 
     deleteCart = () => {
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         axios
 
             // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
@@ -76,11 +80,13 @@ export default class Products extends Component{
             .catch(error => {
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
             })
     }
 
     addWishlist = () => {
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         axios
 
             // .post('http://localhost/yummypizza/public/api/auth/storecart', this.state.good, {
@@ -98,6 +104,7 @@ export default class Products extends Component{
             .catch(error => {
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
             })
     }
 
@@ -106,6 +113,7 @@ export default class Products extends Component{
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         
 
         axios
@@ -128,6 +136,7 @@ export default class Products extends Component{
             })
             .catch(error => {
                 // console.log(error)
+                this.setState({ loading: false })
             })
     }
 
@@ -185,10 +194,12 @@ export default class Products extends Component{
         this.setState({ carts: responseTwo.data.carts.data })
         console.log(responseTwo.data.cartsNum)
         this.setState({ cartsNum: responseTwo.data.cartsNum })
+        this.setState({ loading: false })
         // use/access the results 
         })).catch(errors => {
             // console.log(error)
             this.setState({errorMsg: 'Error retrieving data'})
+            this.setState({ loading: false })
         })
 
         axios
@@ -218,7 +229,7 @@ export default class Products extends Component{
     }
 
     render(){
-        const { goods, carts, cartsNum, errorMsg, delcart, products,seller } = this.state;
+        const { goods, carts, cartsNum, errorMsg, delcart, products, seller, loading } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -229,6 +240,7 @@ export default class Products extends Component{
         return(
             
             <div>
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                 
                 <div className="container-fluid">
                     {/* <!-- header --> */}

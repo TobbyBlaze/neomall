@@ -33,6 +33,7 @@ export default class Product extends Component{
                 quantity : '',
             },
             errorMsg: '',
+            loading: true
             
         }
     }
@@ -44,6 +45,7 @@ export default class Product extends Component{
     addCart = (e) => {
         e.preventDefault()
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         // console.log("All states");
         // console.log(this.state);
         axios
@@ -69,6 +71,7 @@ export default class Product extends Component{
             .catch(error => {
                 // console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
             })
     }
 
@@ -77,6 +80,7 @@ export default class Product extends Component{
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         
 
         axios
@@ -99,6 +103,7 @@ export default class Product extends Component{
             })
             .catch(error => {
                 // console.log(error)
+                this.setState({ loading: false })
             })
     }
 
@@ -179,17 +184,19 @@ export default class Product extends Component{
             .then(response => {
                 // console.log(response.data.good)
                 this.setState({ good: response.data.good })
+                this.setState({ loading: false })
                 
             })
             .catch(error => {
                 // console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
             })
 
     }
 
     render(){
-        const { good, carts, cartsNum, errorMsg } = this.state;
+        const { good, carts, cartsNum, errorMsg, loading } = this.state;
         // const { quantity } = this.state.good;
         const { quantity } = this.state.cart;
 
@@ -202,6 +209,7 @@ export default class Product extends Component{
         
         return(
             <div>
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                 <div>
                     {/* <!-- header --> */}
                     <header className="header header-dark header-sticky">

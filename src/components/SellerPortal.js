@@ -37,6 +37,7 @@ export default class Portal extends Component {
             iban: '',
             swift: '',
             bank_info: '',
+            loading: false
         }
     }
 
@@ -61,6 +62,7 @@ export default class Portal extends Component {
     loginHandler = e => {
         e.preventDefault()
         console.log(this.state)
+        this.setState({ loading: true })
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)
@@ -75,12 +77,14 @@ export default class Portal extends Component {
             })
             .catch(error => {
                 console.log(error)
+                this.setState({ loading: false })
             })
     }
 
     signupHandler = e => {
         e.preventDefault()
         console.log(this.state)
+        this.setState({ loading: true })
 
         axios
             // .post('localhost/yummypizza/public/api/auth/signup', this.state)
@@ -100,15 +104,17 @@ export default class Portal extends Component {
             })
             .catch(error => {
                 // console.log(error)
+                this.setState({ loading: false })
             })
     }
 
     render() {
         // const { id, name, last_name, email, password, confirm_password } = this.state
-        const { id, name, last_name, email, password, confirm_password, phone_number_1, phone_number_2, store_name, store_pics, address_1, address_2, city, country, zip, business_reg_no, business_reg_doc, tin, vat, vat_info_doc, company_name, bank_name, acct_holder_name, bank_acct_number, bank_code, iban, swift, bank_info } = this.state
+        const { id, name, last_name, email, password, confirm_password, phone_number_1, phone_number_2, store_name, store_pics, address_1, address_2, city, country, zip, business_reg_no, business_reg_doc, tin, vat, vat_info_doc, company_name, bank_name, acct_holder_name, bank_acct_number, bank_code, iban, swift, bank_info, loading } = this.state
 
         return (
             <div>
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                             
                 {/* <!-- header --> */}
                 <header className="header header-dark header-sticky separator-bottom">

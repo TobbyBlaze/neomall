@@ -25,7 +25,8 @@ export default class Checkout extends Component{
             state: '', 
             zip: '', 
             phone: '', 
-            email: ''
+            email: '',
+            loading: true
         }
     }
 
@@ -127,7 +128,7 @@ export default class Checkout extends Component{
     }
 
     render(){
-        const { subtotal, total, carts, first_name, last_name, country, address1, address2, city, state, zip, phone, email } = this.state
+        const { subtotal, total, carts, first_name, last_name, country, address1, address2, city, state, zip, phone, email, loading } = this.state
         
         var a=localStorage.getItem("authen");
         if(a == null){
@@ -138,6 +139,7 @@ export default class Checkout extends Component{
 
         return(
             <div>
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                 <div>
                     {/* <!-- header --> */}
                     <header className="header header-dark header-sticky">

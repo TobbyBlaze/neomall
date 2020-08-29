@@ -98,7 +98,7 @@ export default class Admine extends Component {
     }
 
     render() {
-        const { file, name, description, price, category, quantity, goodPics } = this.state;
+        const { file, name, description, price, category, quantity, goodPics, loading } = this.state;
 
         var a=localStorage.getItem("sauthen");
         if(a == null){
@@ -108,6 +108,7 @@ export default class Admine extends Component {
         }
         return (
             <div>
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
 
                                     {/* <!-- header --> */}
                                     <header className="header header-dark header-sticky">

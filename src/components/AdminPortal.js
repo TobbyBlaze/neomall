@@ -14,7 +14,8 @@ export default class AdminPortal extends Component {
             last_name: '',
             email: '',
             password: '',
-            confirm_password: ''
+            confirm_password: '',
+            loading: false
         }
     }
 
@@ -26,6 +27,7 @@ export default class AdminPortal extends Component {
     loginHandler = e => {
         e.preventDefault()
         console.log(this.state)
+        this.setState({ loading: true })
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)
@@ -41,13 +43,15 @@ export default class AdminPortal extends Component {
             })
             .catch(error => {
                 // console.log(error)
+                this.setState({ loading: false })
             })
     }
 
     render() {
-        const { id, name, last_name, email, password, confirm_password } = this.state
+        const { id, name, last_name, email, password, confirm_password, loading } = this.state
         return (
             <div>
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                             
                 {/* <!-- header --> */}
                 <header className="header header-dark header-sticky separator-bottom">

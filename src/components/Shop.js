@@ -20,13 +20,15 @@ export default class Shop extends Component{
                 price : '',
                 category : '',
             },
-            errorMsg: ''
+            errorMsg: '',
+            loading: true
             
         }
     }
 
     addCart = () => {
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         axios
 
             // .post('http://localhost/yummypizza/public/api/auth/storecart', this.state.good, {
@@ -52,6 +54,7 @@ export default class Shop extends Component{
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         
 
         axios
@@ -74,6 +77,7 @@ export default class Shop extends Component{
             })
             .catch(error => {
                 // console.log(error)
+                this.setState({ loading: false })
             })
     }
 
@@ -93,10 +97,12 @@ export default class Shop extends Component{
             .then(response => {
                 // console.log(response.data.goods.data)
                 this.setState({ goods: response.data.goods.data })
+                this.setState({ loading: false })
             })
             .catch(error => {
                 // console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
             })
 
     }
@@ -122,7 +128,7 @@ export default class Shop extends Component{
     }
 
     render(){
-        const { goods, errorMsg } = this.state;
+        const { goods, errorMsg, loading } = this.state;
 
         var a=localStorage.getItem("authen");
         if(a == null){
@@ -134,6 +140,7 @@ export default class Shop extends Component{
         return(
             
             <div>
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                 <div>
                     {/* <!-- header --> */}
                     <header className="header header-dark header-sticky">

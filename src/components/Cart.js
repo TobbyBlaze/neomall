@@ -29,7 +29,8 @@ export default class Cart extends Component{
                 category : '',
                 quantity : '',
             },
-            errorMsg: ''
+            errorMsg: '',
+            loading: true
             
         }
     }
@@ -64,6 +65,7 @@ export default class Cart extends Component{
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         
 
         axios
@@ -86,6 +88,7 @@ export default class Cart extends Component{
             })
             .catch(error => {
                 // console.log(error)
+                this.setState({ loading: false })
             })
     }
 
@@ -110,6 +113,7 @@ export default class Cart extends Component{
                 var c = this.state.carts.map((cart, i)=> cart.price);
                 var q = this.state.carts.map((cart, i)=> cart.quantity);
                 var sum = parseInt(c) * parseInt(q);
+                this.setState({ loading: false })
                 // var subprice = cart.subprice;
                 // var price = cart.price;
                 // this.setState({ subprice: c });
@@ -122,6 +126,7 @@ export default class Cart extends Component{
             .catch(error => {
                 // console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
             })
         }else{
             window.location.href = "https://neomall.herokuapp.com/portal";
@@ -130,7 +135,7 @@ export default class Cart extends Component{
     }
 
     render(){
-        const { carts, errorMsg, subtotal, total } = this.state;
+        const { carts, errorMsg, subtotal, total, loading } = this.state;
         const { id, subprice, cart_id, name, description, price, category, quantity } = this.state;
 
         var a=localStorage.getItem("authen");
@@ -142,6 +147,7 @@ export default class Cart extends Component{
         
         return(
             <div>
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                 <div>
                     {/* <!-- header --> */}
                     <header className="header header-dark header-sticky">

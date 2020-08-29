@@ -278,7 +278,7 @@ export default class Home extends Component{
         return(
             
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="blur" time={1800} />
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                 
                 <div className="container-fluid">
                     {/* <!-- header --> */}

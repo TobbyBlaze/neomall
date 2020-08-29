@@ -24,7 +24,8 @@ export default class Store extends Component{
                 price : '',
                 category : '',
             },
-            errorMsg: ''
+            errorMsg: '',
+            loading: true
             
         }
     }
@@ -56,6 +57,7 @@ export default class Store extends Component{
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         
 
         axios
@@ -78,6 +80,7 @@ export default class Store extends Component{
             })
             .catch(error => {
                 // console.log(error)
+                this.setState({ loading: false })
             })
     }
 
@@ -139,10 +142,12 @@ export default class Store extends Component{
         this.setState({ carts: responseTwo.data.carts.data })
         console.log(responseTwo.data.cartsNum)
         this.setState({ cartsNum: responseTwo.data.cartsNum })
+        this.setState({ loading: false })
         // use/access the results 
         })).catch(errors => {
             // console.log(error)
             this.setState({errorMsg: 'Error retrieving data'})
+            this.setState({ loading: false })
         })
 
         // axios
@@ -188,7 +193,7 @@ export default class Store extends Component{
     }
 
     render(){
-        const { goods, sellers, carts, cartsNum, errorMsg } = this.state;
+        const { goods, sellers, carts, cartsNum, errorMsg, loading } = this.state;
 
         var a=localStorage.getItem("authen");
         if(a == null){
@@ -200,6 +205,7 @@ export default class Store extends Component{
         return(
             
             <div>
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                 <div className="container">
                     {/* <!-- header --> */}
                     <header className="header header-dark header-sticky">

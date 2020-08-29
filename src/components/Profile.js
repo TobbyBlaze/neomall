@@ -23,13 +23,15 @@ export default class Profile extends Component{
                 price : '',
                 category : '',
             },
-            errorMsg: ''
+            errorMsg: '',
+            loading: true
             
         }
     }
 
     addCart = () => {
         var a=localStorage.getItem("authen");
+
         axios
 
             // .post('http://localhost/yummypizza/public/api/auth/storecart', this.state.good, {
@@ -55,6 +57,7 @@ export default class Profile extends Component{
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
         
 
         axios
@@ -74,9 +77,11 @@ export default class Profile extends Component{
                 var a=null;
                 console.log(a);
                 window.location.href = "https://neomall.herokuapp.com"
+
             })
             .catch(error => {
                 // console.log(error)
+                this.setState({ loading: false })
             })
     }
 
@@ -133,10 +138,12 @@ export default class Profile extends Component{
             this.setState({ carts: responseTwo.data.carts.data })
             console.log(responseTwo.data.cartsNum)
             this.setState({ cartsNum: responseTwo.data.cartsNum })
+            this.setState({ loading: false })
             // use/access the results 
             })).catch(errors => {
                 // console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
             })
         }else{
             window.location.href = "https://neomall.herokuapp.com/portal";
@@ -165,7 +172,7 @@ export default class Profile extends Component{
     }
 
     render(){
-        const { goods, carts, cartsNum, delcart, errorMsg } = this.state;
+        const { goods, carts, cartsNum, delcart, errorMsg, loading } = this.state;
 
         var a=localStorage.getItem("authen");
         if(a == null){
@@ -177,6 +184,7 @@ export default class Profile extends Component{
         return(
             
             <div>
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                 <div>
                     {/* <!-- header --> */}
                     <header className="header header-dark header-sticky">

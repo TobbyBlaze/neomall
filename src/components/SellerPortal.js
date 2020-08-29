@@ -344,21 +344,6 @@ export default class Portal extends Component {
                 </section>
                 
                 <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
 
                 {/* <!-- footer --> */}
                 {/* <footer className="bg-dark text-white py-0">
@@ -416,6 +401,6 @@ export default class Portal extends Component {
     }
 }
 
-if (document.getElementById('portal')) {
-    ReactDOM.render(<Portal />, document.getElementById('portal'));
+if (document.getElementById('seller-portal')) {
+    ReactDOM.render(<SellerPortal />, document.getElementById('portal'));
 }

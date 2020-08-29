@@ -276,6 +276,7 @@ export default class Home extends Component{
         }
 
         return(
+            <React.Fragment>
             
             <div>
                 
@@ -519,6 +520,7 @@ export default class Home extends Component{
                 <Lines customLoading={loading} color={'#ffffff'} background="blur" />
                 
             </div>
+            </React.Fragment>
         )
     }
 }

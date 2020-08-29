@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Link, useParams } from 'react-router-dom'
+import { Lines } from 'react-preloaders'
 
 import Header from './Header';
 import Footer from './Footer';
@@ -24,7 +25,8 @@ export default class Home extends Component{
                 price : '',
                 category : '',
             },
-            errorMsg: ''
+            errorMsg: '',
+            loading: true
             
         }
     }
@@ -182,6 +184,8 @@ export default class Home extends Component{
         this.setState({ carts: responseTwo.data.carts.data })
         console.log(responseTwo.data.cartsNum)
         this.setState({ cartsNum: responseTwo.data.cartsNum })
+        this.setState({ loading: false })
+        
         // use/access the results 
         })).catch(errors => {
             // console.log(error)
@@ -255,7 +259,7 @@ export default class Home extends Component{
     }
 
     render(){
-        const { goods, carts, cartsNum, errorMsg, delcart } = this.state;
+        const { goods, carts, cartsNum, errorMsg, delcart, loading } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -266,6 +270,7 @@ export default class Home extends Component{
         return(
             
             <div>
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" time={1800} />
                 
                 <div className="container-fluid">
                     {/* <!-- header --> */}

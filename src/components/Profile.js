@@ -91,7 +91,7 @@ export default class Profile extends Component{
         if(a){
             var one = "https://neomallapi.herokuapp.com/api/auth"
             var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
-            var three = "https://neomallapi.herokuapp.com/api/auth"
+            var three = "https://neomallapi.herokuapp.com/api/auth/getuser"
     
             axios.defaults.headers.get['Accept'] = 'application/json'
     
@@ -139,6 +139,7 @@ export default class Profile extends Component{
             this.setState({ carts: responseTwo.data.carts.data })
             console.log(responseTwo.data.cartsNum)
             this.setState({ cartsNum: responseTwo.data.cartsNum })
+            console.log(responseThree)
             this.setState({ loading: false })
             // use/access the results 
             })).catch(errors => {

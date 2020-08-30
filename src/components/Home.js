@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Link, useParams } from 'react-router-dom'
-import { Lines } from 'react-preloaders'
+import { Lines, Circle2 } from 'react-preloaders'
 
 import Header from './Header';
 import Footer from './Footer';
@@ -147,103 +147,71 @@ export default class Home extends Component{
 
         axios.defaults.headers.get['Accept'] = 'application/json'
 
-        // if(a){
-        const options = {
-            // headers: {'X-Custom-Header': 'value'}
-            headers: {
-                // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer '+a,
-                // 'withCredentials': true
-            }
-        };
-        // }else{
-        //     const options = {
-        //         // headers: {'X-Custom-Header': 'value'}
-        //         headers: {
-        //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        //             'Content-Type': 'application/json',
-        //             // 'Authorization': 'Bearer '+a,
-        //             // 'withCredentials': true
-        //         }
-        //     };
-        // }
-
-        function request1() {
-            return axios.get(one, options);
-        }
-
-        function request2() {
-            return axios.get(two, options);
-        }
-
-        function request3() {
-            return axios.get(three, options);
-        }
-
-        axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
-        const responseOne = responses[0]
-        const responseTwo = responses[1]
-        const responsesThree = responses[2]
-        console.log(responseOne)
-        console.log(responseOne.data.goods.data)
-        this.setState({ goods: responseOne.data.goods.data })
-        console.log(responseTwo.data.carts.data)
-        this.setState({ carts: responseTwo.data.carts.data })
-        console.log(responseTwo.data.cartsNum)
-        this.setState({ cartsNum: responseTwo.data.cartsNum })
-        this.setState({ loading: false })
         
-        // use/access the results 
-        })).catch(errors => {
-            // console.log(error)
-            this.setState({errorMsg: 'Error retrieving data'})
+
+        if(a){
+            var options = {
+                headers: {
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
+                    // 'withCredentials': true
+                }
+            };
+    
+            function request1() {
+                return axios.get(one, options);
+            }
+    
+            function request2() {
+                return axios.get(two, options);
+            }
+    
+            function request3() {
+                return axios.get(three, options);
+            }
+    
+            axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
+            const responseOne = responses[0]
+            const responseTwo = responses[1]
+            const responsesThree = responses[2]
+            console.log(responseOne)
+            console.log(responseOne.data.goods.data)
+            this.setState({ goods: responseOne.data.goods.data })
+            console.log(responseTwo.data.carts.data)
+            this.setState({ carts: responseTwo.data.carts.data })
+            console.log(responseTwo.data.cartsNum)
+            this.setState({ cartsNum: responseTwo.data.cartsNum })
             this.setState({ loading: false })
-        })
+            
+            // use/access the results 
+            })).catch(errors => {
+                // console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
+            })
+        }else{
+            axios
 
-        // if(a){
-        //     axios
-
-        //         // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-        //         .get('https://neomallapi.herokuapp.com/api/auth', {
-        //             headers: {
-        //                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        //                 'Content-Type': 'application/json',
-        //                 'Authorization': 'Bearer '+a,
-        //                 // 'withCredentials': true
-        //             }
-        //         })
-        //         .then(response => {
-        //             // console.log(response.data.goods.data)
-        //             // console.log("auth");
-        //             this.setState({ goods: response.data.goods.data })
-        //         })
-        //         .catch(error => {
-        //             // console.log(error)
-        //             this.setState({errorMsg: 'Error retrieving data'})
-        //         })
-        // }else{
-        //     axios
-
-        //         // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-        //         .get('https://neomallapi.herokuapp.com/api/auth', {
-        //             headers: {
-        //                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        //                 'Content-Type': 'application/json',
-        //                 // 'Authorization': 'Bearer '+a,
-        //                 // 'withCredentials': true
-        //             }
-        //         })
-        //         .then(response => {
-        //             console.log(response.data.goods.data)
-        //             console.log("no auth")
-        //             this.setState({ goods: response.data.goods.data })
-        //         })
-        //         .catch(error => {
-        //             console.log(error)
-        //             this.setState({errorMsg: 'Error retrieving data'})
-        //         })
-        // }
+                // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
+                .get('https://neomallapi.herokuapp.com/api', {
+                    headers: {
+                        // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        'Content-Type': 'application/json',
+                        // 'Authorization': 'Bearer '+a,
+                        // 'withCredentials': true
+                    }
+                })
+                .then(response => {
+                    console.log(response.data.goods.data)
+                    console.log("no auth")
+                    this.setState({ goods: response.data.goods.data })
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.setState({errorMsg: 'Error retrieving data'})
+                })
+        }
 
     }
 
@@ -518,7 +486,7 @@ export default class Home extends Component{
                 <div>
                     {/* <Footer /> */}
                 </div>
-                <Lines customLoading={loading} color={'#ffffff'} background="#000000" />
+                <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" />
                 
             </div>
             </React.Fragment>

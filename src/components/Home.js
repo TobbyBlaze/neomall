@@ -141,7 +141,7 @@ export default class Home extends Component{
     componentDidMount(){
         var a=localStorage.getItem("authen");
        
-        var one = "https://neomallapi.herokuapp.com/api/auth"
+        var one = "https://neomallapi.herokuapp.com/api"
         var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
         var three = "https://neomallapi.herokuapp.com/api/auth"
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
-import { Lines } from 'react-preloaders'
+import { Lines, Circle2 } from 'react-preloaders'
 
 export default class AdminPortal extends Component {
 
@@ -52,7 +52,7 @@ export default class AdminPortal extends Component {
         const { id, name, last_name, email, password, confirm_password, loading } = this.state
         return (
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" animation="slide-down" />
                             
                 {/* <!-- header --> */}
                 <header className="header header-dark header-sticky separator-bottom">

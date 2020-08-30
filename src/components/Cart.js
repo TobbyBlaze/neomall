@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
-import { Lines } from 'react-preloaders'
+import { Lines, Circle2 } from 'react-preloaders'
 
 import Header from './Header';
 import Footer from './Footer';
@@ -148,7 +148,7 @@ export default class Cart extends Component{
         
         return(
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="#000000" />
+                <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" />
                 <div>
                     {/* <!-- header --> */}
                     <header className="header header-dark header-sticky">

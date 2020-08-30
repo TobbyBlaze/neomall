@@ -115,7 +115,7 @@ export default class SellerPortal extends Component {
 
         return (
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="blur" />
+                <Lines customLoading={loading} color={'#ffffff'} background="blur" animation="slide-down" />
                             
                 {/* <!-- header --> */}
                 <header className="header header-dark header-sticky separator-bottom">

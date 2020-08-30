@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Link, useParams } from 'react-router-dom'
-import { Lines } from 'react-preloaders'
+import { Lines, Circle2 } from 'react-preloaders'
 
 import Header from './Header';
 import Footer from './Footer';
@@ -98,8 +98,8 @@ export default class Store extends Component{
 
         axios.defaults.headers.get['Accept'] = 'application/json'
 
-        // if(a){
-        const options = {
+        if(a){
+        var options = {
             // headers: {'X-Custom-Header': 'value'}
             headers: {
                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -119,6 +119,7 @@ export default class Store extends Component{
         //         }
         //     };
         // }
+
 
         function request1() {
             return axios.get(one, options);
@@ -150,26 +151,28 @@ export default class Store extends Component{
             this.setState({errorMsg: 'Error retrieving data'})
             this.setState({ loading: false })
         })
+    }else{
 
-        // axios
+        axios
 
-        //     // .get('http://localhost/yummypizza/public/api/auth', {
-        //     .get('https://neomallapi.herokuapp.com/api/auth', {
-        //         headers: {
-        //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        //             'Content-Type': 'application/json',
-        //             'Authorization': 'Bearer '+a,
-        //             // 'withCredentials': true
-        //         }
-        //     })
-        //     .then(response => {
-        //         // console.log(response.data.goods.data)
-        //         this.setState({ goods: response.data.goods.data })
-        //     })
-        //     .catch(error => {
-        //         // console.log(error)
-        //         this.setState({errorMsg: 'Error retrieving data'})
-        //     })
+            // .get('http://localhost/yummypizza/public/api/auth', {
+            .get('https://neomallapi.herokuapp.com/api', {
+                headers: {
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    // 'Authorization': 'Bearer '+a,
+                    // 'withCredentials': true
+                }
+            })
+            .then(response => {
+                console.log(response.data.sellers)
+                this.setState({ sellers: response.data.sellers })
+            })
+            .catch(error => {
+                // console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+            })
+    }
 
     }
 
@@ -206,7 +209,7 @@ export default class Store extends Component{
         return(
             
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="#000000" />
+                <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" />
                 <div className="container">
                     {/* <!-- header --> */}
                     <header className="header header-dark header-sticky">

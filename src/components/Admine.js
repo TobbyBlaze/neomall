@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
-import { Lines } from 'react-preloaders'
+import { Lines, Circle2 } from 'react-preloaders'
 
 export default class Admine extends Component {
 
@@ -108,7 +108,7 @@ export default class Admine extends Component {
         }
         return (
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="#000000" />
+                <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" />
 
                                     {/* <!-- header --> */}
                                     <header className="header header-dark header-sticky">

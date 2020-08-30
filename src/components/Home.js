@@ -206,10 +206,12 @@ export default class Home extends Component{
                     console.log(response.data.goods.data)
                     console.log("no auth")
                     this.setState({ goods: response.data.goods.data })
+                    this.setState({ loading: false })
                 })
                 .catch(error => {
                     console.log(error)
                     this.setState({errorMsg: 'Error retrieving data'})
+                    this.setState({ loading: false })
                 })
         }
 

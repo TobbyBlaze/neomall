@@ -132,7 +132,7 @@ export default class Profile extends Component{
             axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
             const responseOne = responses[0]
             const responseTwo = responses[1]
-            const responsesThree = responses[2]
+            const responseThree = responses[2]
             console.log(responseOne.data.goods.data)
             this.setState({ goods: responseOne.data.goods.data })
             console.log(responseTwo.data.carts.data)

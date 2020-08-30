@@ -13,6 +13,7 @@ export default class Profile extends Component{
         super(props);
 
         this.state = {
+            user: '',
             goods: [],
             carts: [],
             cartsNum: '',
@@ -139,7 +140,8 @@ export default class Profile extends Component{
             this.setState({ carts: responseTwo.data.carts.data })
             console.log(responseTwo.data.cartsNum)
             this.setState({ cartsNum: responseTwo.data.cartsNum })
-            console.log(responseThree)
+            console.log(responseThree.data)
+            this.setState({ user: responseThree.data })
             this.setState({ loading: false })
             // use/access the results 
             })).catch(errors => {
@@ -174,7 +176,7 @@ export default class Profile extends Component{
     }
 
     render(){
-        const { goods, carts, cartsNum, delcart, errorMsg, loading } = this.state;
+        const { user, goods, carts, cartsNum, delcart, errorMsg, loading } = this.state;
 
         var a=localStorage.getItem("authen");
         if(a == null){
@@ -323,11 +325,11 @@ export default class Profile extends Component{
                     <div className="container">
                         <div className="row gutter-2 gutter-md-4 align-items-end">
                         <div className="col-md-6 text-center text-md-left">
-                            <h1 className="mb-0">Michael Campbell</h1>
+                            <h1 className="mb-0">User {user.name} {user.last_name}</h1>
                             <span className="text-muted">New York, USA</span>
                         </div>
                         <div className="col-md-6 text-center text-md-right">
-                            <a href="#!" className="btn btn-sm btn-outline-white">Sign out</a>
+                            <Link className="btn btn-sm btn-outline-white" onClick={this.logoutHandler}>Sign out</Link>
                         </div>
                         </div>
                     </div>

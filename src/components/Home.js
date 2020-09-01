@@ -432,6 +432,7 @@ export default class Home extends Component{
                         <h4>Latest Products</h4>
                     </div>
                     </div>
+
                     <div className="row gutter-2 gutter-md-3">
 
                     {goods.map((good, i)=>
@@ -453,6 +454,65 @@ export default class Home extends Component{
                         </div>
                     </div>
                     )}
+                    </div>
+
+                    <div className="row">
+                    <div className="col text-center">
+                        <h4>Popular Products</h4>
+                    </div>
+                    </div>
+
+                    <div className="row gutter-2 gutter-md-3">
+
+                    {goods.map((good, i)=>
+                    <div key={good.id} className="col-3 col-lg-2">
+                        <div className="product">
+                        <figure className="product-image">
+                            <Link to={"product/"+good.id}>
+                            <img src="https://neomall.herokuapp.com/assets/images/demo/product-1.jpg" alt="Image" />
+                            <img src="https://neomall.herokuapp.com/assets/images/demo/product-1-2.jpg" alt="Image" />
+                            </Link>
+                        </figure>
+                        <div className="product-meta">
+                            <h3 className="product-title"><Link to={"product/"+good.id}>{good.name} </Link></h3>
+                            <div className="product-price">
+                            <span>${good.price}</span>
+                            </div>
+                            {/* <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a> */}
+                        </div>
+                        </div>
+                    </div>
+                    )}
+                    </div>
+
+                    <div className="row">
+                    <div className="col text-center">
+                        <h4>Suggested Products</h4>
+                    </div>
+                    </div>
+
+                    <div className="row gutter-2 gutter-md-3">
+
+                    {goods.map((good, i)=>
+                    <div key={good.id} className="col-3 col-lg-2">
+                        <div className="product">
+                        <figure className="product-image">
+                            <Link to={"product/"+good.id}>
+                            <img src="https://neomall.herokuapp.com/assets/images/demo/product-1.jpg" alt="Image" />
+                            <img src="https://neomall.herokuapp.com/assets/images/demo/product-1-2.jpg" alt="Image" />
+                            </Link>
+                        </figure>
+                        <div className="product-meta">
+                            <h3 className="product-title"><Link to={"product/"+good.id}>{good.name} </Link></h3>
+                            <div className="product-price">
+                            <span>${good.price}</span>
+                            </div>
+                            {/* <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a> */}
+                        </div>
+                        </div>
+                    </div>
+                    )}
+                    </div>
                     
 
                     {/* <div className="col-6 col-lg-3">
@@ -477,7 +537,7 @@ export default class Home extends Component{
                         </div>
                     </div> */}
                     
-                    </div>
+                    {/* </div> */}
                     <div className="row">
                     <div className="col text-center">
                         {/* <Link to="#!" className="btn btn-outline-secondary">Load More</Link> */}

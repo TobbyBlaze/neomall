@@ -209,8 +209,8 @@ export default class Home extends Component{
                     console.log(response.data.goods.data)
                     console.log("no auth")
                     this.setState({ goods: response.data.goods.data })
-                    console.log(responseOne.data.popGoods.data)
-                    this.setState({ popGoods: responseOne.data.popGoods.data })
+                    console.log(response.data.popGoods.data)
+                    this.setState({ popGoods: response.data.popGoods.data })
                     this.setState({ loading: false })
                 })
                 .catch(error => {

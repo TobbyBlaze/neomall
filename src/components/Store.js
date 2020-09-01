@@ -352,7 +352,7 @@ export default class Store extends Component{
                 <div className="container-full">
                     <div className="row masonry gutter-1">
                     {sellers.map((seller, i)=>
-                    <div key={seller.id} className="col-md-3">
+                    <div key={seller.id} className="col-md-2">
                         <Link to={"products/"+seller.id} className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(https://neomall.herokuapp.com/assets/images/card-1.jpg)'}}></span>
                         <span className="image image-overlay" ></span>

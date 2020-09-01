@@ -14,6 +14,7 @@ export default class Home extends Component{
 
         this.state = {
             goods: [],
+            popGoods: [],
             carts: [],
             cartsNum: '',
             delcart: '',
@@ -178,6 +179,8 @@ export default class Home extends Component{
             console.log(responseOne)
             console.log(responseOne.data.goods.data)
             this.setState({ goods: responseOne.data.goods.data })
+            console.log(responseOne.data.popGoods.data)
+            this.setState({ popGoods: responseOne.data.popGoods.data })
             console.log(responseTwo.data.carts.data)
             this.setState({ carts: responseTwo.data.carts.data })
             console.log(responseTwo.data.cartsNum)
@@ -206,6 +209,8 @@ export default class Home extends Component{
                     console.log(response.data.goods.data)
                     console.log("no auth")
                     this.setState({ goods: response.data.goods.data })
+                    console.log(responseOne.data.popGoods.data)
+                    this.setState({ popGoods: responseOne.data.popGoods.data })
                     this.setState({ loading: false })
                 })
                 .catch(error => {
@@ -238,7 +243,7 @@ export default class Home extends Component{
     }
 
     render(){
-        const { goods, carts, cartsNum, errorMsg, delcart, loading } = this.state;
+        const { goods, popGoods, carts, cartsNum, errorMsg, delcart, loading } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -424,7 +429,7 @@ export default class Home extends Component{
 
 
                 
-                {/* <!-- latest products --> */}
+                {/* <!-- products --> */}
                 <section className="pt-0">
                 <div className="container">
                     <div className="row">
@@ -464,7 +469,7 @@ export default class Home extends Component{
 
                     <div className="row gutter-2 gutter-md-3">
 
-                    {goods.map((good, i)=>
+                    {popGoods.map((good, i)=>
                     <div key={good.id} className="col-3 col-lg-2">
                         <div className="product">
                         <figure className="product-image">

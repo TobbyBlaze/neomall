@@ -435,7 +435,7 @@ export default class Home extends Component{
                     <div className="row gutter-2 gutter-md-3">
 
                     {goods.map((good, i)=>
-                    <div key={good.id} className="col-6 col-lg-3">
+                    <div key={good.id} className="col-4 col-lg-2">
                         <div className="product">
                         <figure className="product-image">
                             <Link to={"product/"+good.id}>

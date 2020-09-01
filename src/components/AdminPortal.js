@@ -52,7 +52,7 @@ export default class AdminPortal extends Component {
         const { id, name, last_name, email, password, confirm_password, loading } = this.state
         return (
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="blur" animation="slide-down" />
+                {/* <Lines customLoading={loading} color={'#ffffff'} background="blur" animation="slide-down" /> */}
                             
                 {/* <!-- header --> */}
                 <header className="header header-dark header-sticky separator-bottom">

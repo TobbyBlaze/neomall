@@ -115,7 +115,7 @@ export default class SellerPortal extends Component {
 
         return (
             <div>
-                <Lines customLoading={loading} color={'#ffffff'} background="blur" animation="slide-down" />
+                {/* <Lines customLoading={loading} color={'#ffffff'} background="blur" animation="slide-down" /> */}
                             
                 {/* <!-- header --> */}
                 <header className="header header-dark header-sticky separator-bottom">
@@ -343,7 +343,7 @@ export default class SellerPortal extends Component {
                     </div>
                 </section>
                 
-                <br />
+                {/* <br /> */}
 
                 {/* <!-- footer --> */}
                 {/* <footer className="bg-dark text-white py-0">

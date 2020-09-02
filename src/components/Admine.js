@@ -10,10 +10,7 @@ export default class Admine extends Component {
         super(props)
 
         this.state = {
-            
-            file1: '',
-            file2: '',
-            file: [file1, file2],
+            file: [],
             name: '',
             description: '',
             price: '',
@@ -35,6 +32,10 @@ export default class Admine extends Component {
     goodPicsHandler = (event) => {
         this.setState({file1: URL.createObjectURL(event.target.files[0])});
         this.setState({file2: URL.createObjectURL(event.target.files[1])});
+
+        const file = [...this.state.file]; // Spread syntax creates a shallow copy
+        file.push(...event.target.file); // Spread again to push each selected file individually
+        this.setState({ file });
 
 
 

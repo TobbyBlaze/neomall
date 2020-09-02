@@ -10,7 +10,7 @@ export default class Admine extends Component {
         super(props)
 
         this.state = {
-            file: [],
+            file: [null],
             name: '',
             description: '',
             price: '',
@@ -32,6 +32,13 @@ export default class Admine extends Component {
     goodPicsHandler = (event) => {
         this.setState({file1: URL.createObjectURL(event.target.files[0])});
         this.setState({file2: URL.createObjectURL(event.target.files[1])});
+
+        this.fileObj.push(e.target.files)
+        for (let i = 0; i < this.fileObj[0].length; i++) {
+            this.fileArray.push(URL.createObjectURL(this.fileObj[0][i]))
+        }
+        this.setState({ file: this.fileArray })
+
     }
 
     submitHandler = e => {

@@ -235,7 +235,7 @@ export default class Admine extends Component {
 
                                                 <div className="form-group col-12">
                                                     <label htmlFor="goodPics">Good pics</label>
-                                                    <input type="file" name="file[]" className="form-control" id="goodPics" onChange={this.goodPicsHandler} multiple />
+                                                    <input type="file" name="file[]" className="form-control" id="goodPics" onChange={this.goodPicsHandler} multiple required />
                                                 </div>
                                                 <img class="img-responsive" src={this.state.file1} />
                                                 <br />

@@ -11,6 +11,8 @@ export default class Admine extends Component {
 
         this.state = {
             file: [file1, file2],
+            file1: '',
+            file2: '',
             name: '',
             description: '',
             price: '',

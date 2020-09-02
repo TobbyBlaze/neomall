@@ -119,7 +119,8 @@ export default class Product extends Component{
 
         axios.defaults.headers.get['Accept'] = 'application/json'
 
-        // if(a){
+        if(a){
+
         const options = {
             // headers: {'X-Custom-Header': 'value'}
             headers: {
@@ -129,18 +130,7 @@ export default class Product extends Component{
                 // 'withCredentials': true
             }
         };
-        // }else{
-        //     const options = {
-        //         // headers: {'X-Custom-Header': 'value'}
-        //         headers: {
-        //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        //             'Content-Type': 'application/json',
-        //             // 'Authorization': 'Bearer '+a,
-        //             // 'withCredentials': true
-        //         }
-        //     };
-        // }
-
+       
         function request1() {
             return axios.get(one, options);
         }
@@ -194,6 +184,31 @@ export default class Product extends Component{
                 this.setState({errorMsg: 'Error retrieving data'})
                 this.setState({ loading: false })
             })
+        }else{
+            axios
+
+            // .get('http://localhost/yummypizza/public/api/auth/prdetails/'+this.props.match.params.id, {
+            .get('https://neomallapi.herokuapp.com/api/prdetails/'+this.props.match.params.id, {
+                
+                headers: {
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    // 'Authorization': 'Bearer '+a,
+                    // 'withCredentials': true
+                }
+            })
+            .then(response => {
+                // console.log(response.data.good)
+                this.setState({ good: response.data.good })
+                this.setState({ loading: false })
+                
+            })
+            .catch(error => {
+                // console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
+            })
+        }
 
     }
 

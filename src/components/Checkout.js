@@ -120,10 +120,12 @@ export default class Checkout extends Component{
                 this.setState({ subtotal: sum });
                 this.setState({ total: sum });
                 console.log(sum);
+                this.setState({ loading: false })
             })
             .catch(error => {
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
             })
 
     }

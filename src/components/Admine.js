@@ -16,7 +16,7 @@ export default class Admine extends Component {
             price: '',
             category: '',
             quantity: '',
-            goodPics:'',
+            // goodPics: null,
             loading: false
         }
     }
@@ -30,8 +30,8 @@ export default class Admine extends Component {
     // }
 
     goodPicsHandler = (event) => {
-        this.setState({goodPics1: URL.createObjectURL(event.target.files[0])});
-        this.setState({goodPics2: URL.createObjectURL(event.target.files[1])});
+        this.setState({file1: URL.createObjectURL(event.target.files[0])});
+        this.setState({file2: URL.createObjectURL(event.target.files[1])});
     }
 
     submitHandler = e => {
@@ -235,12 +235,12 @@ export default class Admine extends Component {
 
                                                 <div className="form-group col-12">
                                                     <label htmlFor="goodPics">Good pics</label>
-                                                    <input type="file" name="goodPics[]" className="form-control" id="goodPics" onChange={this.goodPicsHandler} multiple />
+                                                    <input type="file" name="file[]" className="form-control" id="goodPics" onChange={this.goodPicsHandler} multiple />
                                                 </div>
-                                                <img class="img-responsive" src={this.state.goodPics1} />
+                                                <img class="img-responsive" src={this.state.file1} />
                                                 <br />
                                                 <br />
-                                                <img class="img-responsive" src={this.state.goodPics2} />
+                                                <img class="img-responsive" src={this.state.file2} />
 
                                                 <div className="col-12 mt-2">
                                                     <button type="submit" className="btn btn-block btn-primary">Add good</button>

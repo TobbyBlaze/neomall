@@ -39,7 +39,7 @@ export default class Admine extends Component {
         // for (let i = 0; i < this.fileObj[0].length; i++) {
         //     this.fileArray.push(URL.createObjectURL(this.fileObj[0][i]))
         // }
-        this.setState({ file: [file1, file2] })
+        this.setState({ file: [this.state.file1, this.state.file2] })
 
     }
 

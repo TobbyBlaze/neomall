@@ -33,7 +33,7 @@ export default class Admine extends Component {
         this.setState({file1: URL.createObjectURL(event.target.files[0])});
         this.setState({file2: URL.createObjectURL(event.target.files[1])});
 
-        this.setState({file: [this.state.file1, this.state.file2]});
+        this.setState({file: [URL.createObjectURL(event.target.files[0]), URL.createObjectURL(event.target.files[1])]});
 
         // const file = [...this.state.file];  Spread syntax creates a shallow copy
         // file.push(...event.target.file);  Spread again to push each selected file individually

@@ -41,7 +41,7 @@ export default class Admine extends Component {
         // this.setState({ file: event.target.files[0] })
 
         this.setState({
-            file: e.target.files
+            file: event.target.files
         });
 
         

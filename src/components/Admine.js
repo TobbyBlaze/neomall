@@ -19,6 +19,9 @@ export default class Admine extends Component {
             // goodPics: null,
             loading: false
         }
+
+        // this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleBodyChange = this.handleBodyChange.bind(this);
     }
 
     changeHandler = e => {
@@ -34,8 +37,12 @@ export default class Admine extends Component {
         this.setState({file2: URL.createObjectURL(event.target.files[1])});
 
         // this.setState({file: [event.target.files[0].name, event.target.files[1].name]});
-        this.setState({ file: [...this.state.file, ...event.target.files] })
+        // this.setState({ file: [...this.state.file, ...event.target.files] })
         // this.setState({ file: event.target.files[0] })
+
+        this.setState({
+            file: e.target.files
+        });
 
         
      
@@ -61,14 +68,21 @@ export default class Admine extends Component {
         // this.setState({ loading: true })
 
         // Create an object of formData 
-        const formData = new FormData(); 
+        // const formData = new FormData(); 
         
-        for (let i = 0; i < 2; i++) {
-        // Update the formData object 
-        formData.append( 
-            "file", 
-            this.state.file[i]
-        ); 
+        // for (let i = 0; i < 2; i++) {
+        // // Update the formData object 
+        // formData.append( 
+        //     "file", 
+        //     this.state.file[i]
+        // ); 
+        // }
+
+        const formData = new FormData();
+        if (this.state.file) {
+            for (const file of this.state.file) {
+                formData.append("file", file);
+            }
         }
         
         // Details of the uploaded file 

@@ -36,18 +36,7 @@ export default class Admine extends Component {
         // this.setState({file: [event.target.files[0].name, event.target.files[1].name]});
         this.setState({ file: [...this.state.file, ...event.target.files] })
 
-        // Create an object of formData 
-        const formData = new FormData(); 
         
-        // Update the formData object 
-        formData.append( 
-            "file", 
-            this.state.file, 
-            this.state.file.name 
-        ); 
-        
-        // Details of the uploaded file 
-        console.log(this.state.file); 
      
 
         // const file = [...this.state.file];  Spread syntax creates a shallow copy
@@ -69,6 +58,19 @@ export default class Admine extends Component {
         e.preventDefault()
         console.log(this.state)
         // this.setState({ loading: true })
+
+        // Create an object of formData 
+        const formData = new FormData(); 
+        
+        // Update the formData object 
+        formData.append( 
+            "file", 
+            this.state.file, 
+            this.state.file.name 
+        ); 
+        
+        // Details of the uploaded file 
+        console.log(this.state.file); 
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)

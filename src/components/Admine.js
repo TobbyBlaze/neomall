@@ -63,12 +63,14 @@ export default class Admine extends Component {
         // Create an object of formData 
         const formData = new FormData(); 
         
+        for (let i = 0; i < 2; i++) {
         // Update the formData object 
         formData.append( 
             "file", 
-            this.state.file, 
-            this.state.file.name 
+            this.state.file[i], 
+            this.state.file[i].name 
         ); 
+        }
         
         // Details of the uploaded file 
         console.log(this.state.file); 

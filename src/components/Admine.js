@@ -34,8 +34,8 @@ export default class Admine extends Component {
         this.setState({file2: URL.createObjectURL(event.target.files[1])});
 
         // this.setState({file: [event.target.files[0].name, event.target.files[1].name]});
-        // this.setState({ file: [...this.state.file, ...event.target.files] })
-        this.setState({ file: event.target.files[0] })
+        this.setState({ file: [...this.state.file, ...event.target.files] })
+        // this.setState({ file: event.target.files[0] })
 
         
      

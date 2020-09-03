@@ -67,8 +67,7 @@ export default class Admine extends Component {
         // Update the formData object 
         formData.append( 
             "file", 
-            this.state.file[i], 
-            this.state.file[i].name 
+            this.state.file[i]
         ); 
         }
         
@@ -78,7 +77,8 @@ export default class Admine extends Component {
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)
-            .post('https://neomallapi.herokuapp.com/api/auth/storegood', this.state, formData, {
+            .post('https://neomallapi.herokuapp.com/api/auth/storegood', this.state, {
+                body: formData,
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',

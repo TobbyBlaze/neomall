@@ -74,6 +74,7 @@ export default class Admine extends Component {
         
         // Details of the uploaded file 
         console.log(this.state.file); 
+        console.log(formData)
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)

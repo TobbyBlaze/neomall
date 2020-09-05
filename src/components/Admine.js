@@ -104,6 +104,8 @@ export default class Admine extends Component {
 
         const formData = new FormData();
         formData.append('file', this.state.file);
+        console.log(this.state.file); 
+        console.log(formData)
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)

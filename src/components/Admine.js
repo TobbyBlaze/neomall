@@ -108,10 +108,10 @@ export default class Admine extends Component {
         // console.log(formData)
 
         const formData = new FormData();
-        // for(let i = 0; i< e.target.files.length; i++) {
-        //     formData.append('file', e.target.files[i]);
-        // }
-        formData.append('file', this.state.file, this.state.file.name);
+        for(let i = 0; i< 2; i++) {
+            formData.append('file', this.state.file[i], this.state.file[i].name);
+        }
+        // formData.append('file', this.state.file, this.state.file.name);
         console.log(this.state.file); 
         console.log(formData)
         this.setState({ form: formData })

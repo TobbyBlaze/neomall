@@ -43,13 +43,9 @@ export default class Admine extends Component {
 
         this.setState({ file: [...this.state.file, ...event.target.files] })
 
-        const formData = new FormData();
-        for(let i = 0; i< event.target.files.length; i++) {
-            formData.append('file', event.target.files[i]);
-        }
-        console.log(this.state.file); 
-        console.log(formData)
-        this.setState({ form: formData })
+        // for(let i = 0; i< e.target.files.length; i++) {
+        //     formData.append('file', e.target.files[i]);
+        // }
 
         // this.setState({
         //     file: event.target.files
@@ -111,12 +107,14 @@ export default class Admine extends Component {
         // console.log(this.state.file); 
         // console.log(formData)
 
-        // const formData = new FormData();
+        const formData = new FormData();
         // for(let i = 0; i< e.target.files.length; i++) {
-        //     formData.append('file', this.state.file);
+        //     formData.append('file', e.target.files[i]);
         // }
-        // console.log(this.state.file); 
-        // console.log(formData)
+        formData.append('file', this.state.file, this.state.file.name);
+        console.log(this.state.file); 
+        console.log(formData)
+        this.setState({ form: formData })
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)

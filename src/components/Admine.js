@@ -102,9 +102,12 @@ export default class Admine extends Component {
         // console.log(this.state.file); 
         // console.log(formData)
 
+        const formData = new FormData();
+        formData.append('file', this.state.file);
+
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)
-            .post('https://neomallapi.herokuapp.com/api/auth/storegood', this.state, {
+            .post('https://neomallapi.herokuapp.com/api/auth/storegood', formData, {
                 // body: formData,
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

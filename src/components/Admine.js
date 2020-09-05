@@ -17,7 +17,8 @@ export default class Admine extends Component {
             category: '',
             quantity: '',
             // goodPics: null,
-            loading: false
+            loading: false,
+            form: ''
         }
 
         // this.handleSubmit = this.handleSubmit.bind(this);
@@ -48,6 +49,7 @@ export default class Admine extends Component {
         }
         console.log(this.state.file); 
         console.log(formData)
+        this.setState({ form: formData })
 
         // this.setState({
         //     file: event.target.files
@@ -118,7 +120,7 @@ export default class Admine extends Component {
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)
-            .post('https://neomallapi.herokuapp.com/api/auth/storegood', formData, {
+            .post('https://neomallapi.herokuapp.com/api/auth/storegood', this.state, {
                 // body: formData,
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

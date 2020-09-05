@@ -109,7 +109,7 @@ export default class Admine extends Component {
 
         const formData = new FormData();
         // for(let i = 0; i< 2; i++) {
-            formData.append('image', this.state.file[1]);
+            formData.append('image', this.state.files[1]);
         // }
         // formData.append('file', this.state.file, this.state.file.name);
         console.log(this.state.file[0]); 

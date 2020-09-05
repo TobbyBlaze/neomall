@@ -49,11 +49,13 @@ export default class Admine extends Component {
             for (const sfile of this.state.file) {
                 formData.append("file", sfile);
             }
+            console.log(this.state.file); 
+            console.log(formData)
         }
         
         // Details of the uploaded file 
-        console.log(this.state.file); 
-        console.log(formData)
+        // console.log(this.state.file); 
+        // console.log(formData)
      
 
         // const file = [...this.state.file];  Spread syntax creates a shallow copy

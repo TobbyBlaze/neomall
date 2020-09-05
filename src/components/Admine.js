@@ -119,6 +119,7 @@ export default class Admine extends Component {
         for(var pair of formData.entries()) {
             console.log(pair[0]+', '+pair[1]);
         }
+        console.log(formData.get("name"))
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)

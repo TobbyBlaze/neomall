@@ -40,18 +40,20 @@ export default class Admine extends Component {
         // this.setState({ file: [...this.state.file, ...event.target.files] })
         // this.setState({ file: event.target.files[0] })
 
-        this.setState({
-            file: event.target.files
-        });
+        this.setState({ file: [...this.state.file, ...event.target.files] })
 
-        const formData = new FormData();
-        if (this.state.file) {
-            for (const sfile of this.state.file) {
-                formData.append("file", sfile);
-            }
-            console.log(this.state.file); 
-            console.log(formData)
-        }
+        // this.setState({
+        //     file: event.target.files
+        // });
+
+        // const formData = new FormData();
+        // if (this.state.file) {
+        //     for (const sfile of this.state.file) {
+        //         formData.append("file", sfile);
+        //     }
+        //     console.log(this.state.file); 
+        //     console.log(formData)
+        // }
         
         // Details of the uploaded file 
         // console.log(this.state.file); 

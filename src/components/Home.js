@@ -554,13 +554,13 @@ export default class Home extends Component{
                     </div>
 
                     <div
-          ref={loadingRef => (this.loadingRef = loadingRef)}
-          style={loadingCSS}
-        >
-          <span style={loadingTextCSS}>Loading...</span>
-        </div>
+                    ref={loadingRef => (this.loadingRef = loadingRef)}
+                    style={loadingCSS}
+                    >
+                    <span style={loadingTextCSS}>Loading...</span>
+                    </div>
 
-                    <div className="row">
+                    {/* <div className="row">
                     <div className="col text-center">
                         <h4>Popular Products</h4>
                     </div>
@@ -582,7 +582,7 @@ export default class Home extends Component{
                             <div className="product-price">
                             <span>${good.price}</span>
                             </div>
-                            {/* <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a> */}
+                            {/* <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a> 
                         </div>
                         </div>
                     </div>
@@ -611,12 +611,12 @@ export default class Home extends Component{
                             <div className="product-price">
                             <span>${good.price}</span>
                             </div>
-                            {/* <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a> */}
+                            {/* <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a> 
                         </div>
                         </div>
                     </div>
                     )}
-                    </div>
+                    </div> */}
                     
 
                     {/* <div className="col-6 col-lg-3">

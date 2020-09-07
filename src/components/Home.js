@@ -287,7 +287,7 @@ export default class Home extends Component{
             <div>
                 <InfiniteScroll
                     dataLength={goods.length} //This is important field to render the next data
-                    next={fetchData}
+                    next={goods}
                     hasMore={true}
                     loader={<h4>Loading...</h4>}
                     endMessage={
@@ -304,7 +304,7 @@ export default class Home extends Component{
                     releaseToRefreshContent={
                         <h3 style={{textAlign: 'center'}}>&#8593; Release to refresh</h3>
                     }>
-                    {items}
+                    {goods}
                 </InfiniteScroll>
                 
                 <div className="container-fluid">

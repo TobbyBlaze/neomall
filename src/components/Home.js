@@ -521,7 +521,7 @@ export default class Home extends Component{
                         <div className="product">
                         <figure className="product-image">
                             <Link to={"product/"+good.id}>
-                            <img src="https://neomall.herokuapp.com/file/Screenshot (9).png" alt="Image" />
+                            <img src="https://neomall.herokuapp.com/file/neoconn.png\" alt="Image" />
                             <img src="https://neomall.herokuapp.com/assets/images/demo/product-1-2.jpg" alt="Image" />
                             </Link>
                         </figure>

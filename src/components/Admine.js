@@ -110,7 +110,7 @@ export default class Admine extends Component {
 
         const formData = new FormData();
         for(let i = 0; i< 2; i++) {
-            formData.append('file', this.state.file[i]);
+            formData.append('image', this.state.file[i]);
         }
         formData.append('name', this.state.name);
         formData.append('description', this.state.description);
@@ -118,8 +118,8 @@ export default class Admine extends Component {
         formData.append('category', this.state.category);
         formData.append('quantity', this.state.quantity);
         // formData.append('file', this.state.file, this.state.file.name);
-        // console.log(this.state.file[0]); 
-        // console.log(this.state.file[1]); 
+        console.log(this.state.file[0]); 
+        console.log(this.state.file[1]); 
         console.log(formData)
         this.setState({ form: formData })
         for(var pair of formData.entries()) {

@@ -135,8 +135,8 @@ export default class Admine extends Component {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     // 'Content-Type': 'application/json',
                     'Content-Type': 'multipart/form-data',
-                    "Accept": "application/json",
-                    "type": "formData",
+                    // "Accept": "application/json",
+                    // "type": "formData",
                     'Authorization': 'Bearer '+a,
                     // 'withCredentials': true
                 }

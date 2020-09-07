@@ -108,34 +108,34 @@ export default class Home extends Component{
             })
     }
 
-    fetchData = () => {
-        var a=localStorage.getItem("authen");
-        // this.setState({ loading: true })
-        axios
+    // fetchData = () => {
+    //     var a=localStorage.getItem("authen");
+    //     // this.setState({ loading: true })
+    //     axios
 
-                // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-                .get('https://neomallapi.herokuapp.com/api', {
-                    headers: {
-                        // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        'Content-Type': 'application/json',
-                        // 'Authorization': 'Bearer '+a,
-                        // 'withCredentials': true
-                    }
-                })
-                .then(response => {
-                    console.log(response.data.goods.data)
-                    console.log("no auth")
-                    this.setState({ goods: response.data.goods.data })
-                    console.log(response.data.popGoods.data)
-                    this.setState({ popGoods: response.data.popGoods.data })
-                    this.setState({ loading: false })
-                })
-                .catch(error => {
-                    console.log(error)
-                    this.setState({errorMsg: 'Error retrieving data'})
-                    this.setState({ loading: false })
-                })
-    }
+    //             // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
+    //             .get('https://neomallapi.herokuapp.com/api', {
+    //                 headers: {
+    //                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    //                     'Content-Type': 'application/json',
+    //                     // 'Authorization': 'Bearer '+a,
+    //                     // 'withCredentials': true
+    //                 }
+    //             })
+    //             .then(response => {
+    //                 console.log(response.data.goods.data)
+    //                 console.log("no auth")
+    //                 this.setState({ goods: response.data.goods.data })
+    //                 console.log(response.data.popGoods.data)
+    //                 this.setState({ popGoods: response.data.popGoods.data })
+    //                 this.setState({ loading: false })
+    //             })
+    //             .catch(error => {
+    //                 console.log(error)
+    //                 this.setState({errorMsg: 'Error retrieving data'})
+    //                 this.setState({ loading: false })
+    //             })
+    // }
 
     logoutHandler = e => {
         e.preventDefault()
@@ -285,7 +285,7 @@ export default class Home extends Component{
             
             
             <div>
-                <InfiniteScroll
+                {/* <InfiniteScroll
                     dataLength={goods.length} //This is important field to render the next data
                     next={goods}
                     hasMore={true}
@@ -305,7 +305,7 @@ export default class Home extends Component{
                         <h3 style={{textAlign: 'center'}}>&#8593; Release to refresh</h3>
                     }>
                     {goods}
-                </InfiniteScroll>
+                </InfiniteScroll> */}
                 
                 <div className="container-fluid">
                     {/* <!-- header --> */}

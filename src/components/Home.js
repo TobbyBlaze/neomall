@@ -15,7 +15,7 @@ export default class Home extends Component{
 
         this.state = {
             goods: [],
-            goodsPage: '',
+            goodsPage: null,
             popGoods: [],
             carts: [],
             cartsNum: '',
@@ -119,7 +119,7 @@ export default class Home extends Component{
         axios
 
                 // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-                .get('https://neomallapi.herokuapp.com/api?page={page}', {
+                .get('https://neomallapi.herokuapp.com/api?page='+page, {
                     headers: {
                         // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                         'Content-Type': 'application/json',

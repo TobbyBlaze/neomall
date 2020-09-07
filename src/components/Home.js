@@ -178,8 +178,8 @@ export default class Home extends Component{
     handleObserver(entities, observer) {
         const y = entities[0].boundingClientRect.y;
         if (this.state.prevY > y) {
-          const lastPhoto = this.state.photos[this.state.photos.length - 1];
-          const curPage = lastPhoto.albumId;
+          const lastgood = this.state.goods[this.state.goods.length - 1];
+          const curPage = lastgood.id;
           this.getPhotos(curPage);
           this.setState({ page: curPage });
         }

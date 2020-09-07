@@ -10,7 +10,7 @@ export default class Admine extends Component {
         super(props)
 
         this.state = {
-            file: [],
+            file: null,
             name: '',
             description: '',
             price: '',

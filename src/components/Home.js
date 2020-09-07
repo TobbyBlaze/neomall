@@ -133,7 +133,7 @@ export default class Home extends Component{
                     console.log(response.data.goods.data)
                     console.log("no auth")
                     this.setState({ goods: response.data.goods.data })
-                    this.setState({ goodsPage: response.data.goods.currentPage })
+                    this.setState({ goodsPage: response.data.goods.current_page })
                     // console.log(response.data.popGoods.data)
                     this.setState({ popGoods: response.data.popGoods.data })
                     this.setState({ loading: false })

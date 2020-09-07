@@ -111,34 +111,37 @@ export default class Home extends Component{
             })
     }
 
-    // fetchData = () => {
-    //     var a=localStorage.getItem("authen");
-    //     // this.setState({ loading: true })
-    //     axios
+    fetchData = (page) => {
+        var a=localStorage.getItem("authen");
+        this.setState({ load: true });
+        // this.setState({ loading: true })
+        axios
 
-    //             // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-    //             .get('https://neomallapi.herokuapp.com/api', {
-    //                 headers: {
-    //                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-    //                     'Content-Type': 'application/json',
-    //                     // 'Authorization': 'Bearer '+a,
-    //                     // 'withCredentials': true
-    //                 }
-    //             })
-    //             .then(response => {
-    //                 console.log(response.data.goods.data)
-    //                 console.log("no auth")
-    //                 this.setState({ goods: response.data.goods.data })
-    //                 console.log(response.data.popGoods.data)
-    //                 this.setState({ popGoods: response.data.popGoods.data })
-    //                 this.setState({ loading: false })
-    //             })
-    //             .catch(error => {
-    //                 console.log(error)
-    //                 this.setState({errorMsg: 'Error retrieving data'})
-    //                 this.setState({ loading: false })
-    //             })
-    // }
+                // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
+                .get('https://neomallapi.herokuapp.com/api?page=${page}&_limit=5', {
+                    headers: {
+                        // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        'Content-Type': 'application/json',
+                        // 'Authorization': 'Bearer '+a,
+                        // 'withCredentials': true
+                    }
+                })
+                .then(response => {
+                    console.log(response.data.goods.data)
+                    console.log("no auth")
+                    this.setState({ goods: response.data.goods.data })
+                    console.log(response.data.popGoods.data)
+                    this.setState({ popGoods: response.data.popGoods.data })
+                    this.setState({ loading: false })
+                    this.setState({ load: false });
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.setState({errorMsg: 'Error retrieving data'})
+                    this.setState({ loading: false })
+                    this.setState({ load: false });
+                })
+    }
 
     logoutHandler = e => {
         e.preventDefault()
@@ -172,86 +175,111 @@ export default class Home extends Component{
             })
     }
 
-    componentDidMount(){
-        var a=localStorage.getItem("authen");
-       
-        var one = "https://neomallapi.herokuapp.com/api?current_page=${page}&_limit=10"
-        var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
-        var three = "https://neomallapi.herokuapp.com/api/auth"
+    handleObserver(entities, observer) {
+        const y = entities[0].boundingClientRect.y;
+        if (this.state.prevY > y) {
+          const lastPhoto = this.state.photos[this.state.photos.length - 1];
+          const curPage = lastPhoto.albumId;
+          this.getPhotos(curPage);
+          this.setState({ page: curPage });
+        }
+        this.setState({ prevY: y });
+      }
 
-        axios.defaults.headers.get['Accept'] = 'application/json'
+    componentDidMount(){
+        this.fetchData(this.state.page);
+
+        var options = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 1.0
+        };
+            
+        this.observer = new IntersectionObserver(
+            this.handleObserver.bind(this),
+            options
+        );
+        this.observer.observe(this.loadingRef);
+
+        // var a=localStorage.getItem("authen");
+       
+        // var one = "https://neomallapi.herokuapp.com/api?current_page=${page}&_limit=10"
+        // var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
+        // var three = "https://neomallapi.herokuapp.com/api/auth"
+
+        // axios.defaults.headers.get['Accept'] = 'application/json'
 
         
 
-        if(a){
-            var options = {
-                headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
-                }
-            };
+        // if(a){
+        //     var options = {
+        //         headers: {
+        //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //             'Content-Type': 'application/json',
+        //             'Authorization': 'Bearer '+a,
+        //             // 'withCredentials': true
+        //         }
+        //     };
     
-            function request1() {
-                return axios.get(one, options);
-            }
+        //     function request1() {
+        //         return axios.get(one, options);
+        //     }
     
-            function request2() {
-                return axios.get(two, options);
-            }
+        //     function request2() {
+        //         return axios.get(two, options);
+        //     }
     
-            function request3() {
-                return axios.get(three, options);
-            }
+        //     function request3() {
+        //         return axios.get(three, options);
+        //     }
     
-            axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
-            const responseOne = responses[0]
-            const responseTwo = responses[1]
-            const responsesThree = responses[2]
-            console.log(responseOne)
-            console.log(responseOne.data.goods.data)
-            this.setState({ goods: responseOne.data.goods.data })
-            console.log(responseOne.data.popGoods.data)
-            this.setState({ popGoods: responseOne.data.popGoods.data })
-            console.log(responseTwo.data.carts.data)
-            this.setState({ carts: responseTwo.data.carts.data })
-            console.log(responseTwo.data.cartsNum)
-            this.setState({ cartsNum: responseTwo.data.cartsNum })
-            this.setState({ loading: false })
+        //     axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
+        //     const responseOne = responses[0]
+        //     const responseTwo = responses[1]
+        //     const responsesThree = responses[2]
+        //     console.log(responseOne)
+        //     console.log(responseOne.data.goods.data)
+        //     this.setState({ goods: responseOne.data.goods.data })
+        //     console.log(responseOne.data.popGoods.data)
+        //     this.setState({ popGoods: responseOne.data.popGoods.data })
+        //     console.log(responseTwo.data.carts.data)
+        //     this.setState({ carts: responseTwo.data.carts.data })
+        //     console.log(responseTwo.data.cartsNum)
+        //     this.setState({ cartsNum: responseTwo.data.cartsNum })
+        //     this.setState({ loading: false })
             
-            // use/access the results 
-            })).catch(errors => {
-                // console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-                this.setState({ loading: false })
-            })
-        }else{
-            axios
+        //     // use/access the results 
+        //     })).catch(errors => {
+        //         // console.log(error)
+        //         this.setState({errorMsg: 'Error retrieving data'})
+        //         this.setState({ loading: false })
+        //     })
+        // }else{
+        //     axios
 
-                // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-                .get('https://neomallapi.herokuapp.com/api', {
-                    headers: {
-                        // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        'Content-Type': 'application/json',
-                        // 'Authorization': 'Bearer '+a,
-                        // 'withCredentials': true
-                    }
-                })
-                .then(response => {
-                    console.log(response.data.goods.data)
-                    console.log("no auth")
-                    this.setState({ goods: response.data.goods.data })
-                    console.log(response.data.popGoods.data)
-                    this.setState({ popGoods: response.data.popGoods.data })
-                    this.setState({ loading: false })
-                })
-                .catch(error => {
-                    console.log(error)
-                    this.setState({errorMsg: 'Error retrieving data'})
-                    this.setState({ loading: false })
-                })
-        }
+        //         // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
+        //         .get('https://neomallapi.herokuapp.com/api', {
+        //             headers: {
+        //                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //                 'Content-Type': 'application/json',
+        //                 // 'Authorization': 'Bearer '+a,
+        //                 // 'withCredentials': true
+        //             }
+        //         })
+        //         .then(response => {
+        //             console.log(response.data.goods.data)
+        //             console.log("no auth")
+        //             this.setState({ goods: response.data.goods.data })
+        //             console.log(response.data.popGoods.data)
+        //             this.setState({ popGoods: response.data.popGoods.data })
+        //             this.setState({ loading: false })
+        //         })
+        //         .catch(error => {
+        //             console.log(error)
+        //             this.setState({errorMsg: 'Error retrieving data'})
+        //             this.setState({ loading: false })
+        //         })
+        // }
 
     }
 
@@ -283,6 +311,16 @@ export default class Home extends Component{
         }else{
             var auth = true;
         }
+
+        // Additional css
+    const loadingCSS = {
+        height: "100px",
+        margin: "30px"
+      };
+  
+      // To change the loading icon behavior
+      const loadingTextCSS = { display: this.state.loading ? "block" : "none" };
+  
 
         return(
             
@@ -514,6 +552,13 @@ export default class Home extends Component{
                     </div>
                     )}
                     </div>
+
+                    <div
+          ref={loadingRef => (this.loadingRef = loadingRef)}
+          style={loadingCSS}
+        >
+          <span style={loadingTextCSS}>Loading...</span>
+        </div>
 
                     <div className="row">
                     <div className="col text-center">

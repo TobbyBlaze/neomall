@@ -15,6 +15,7 @@ export default class Home extends Component{
 
         this.state = {
             goods: [],
+            goodsPage: '',
             popGoods: [],
             carts: [],
             cartsNum: '',
@@ -118,7 +119,7 @@ export default class Home extends Component{
         axios
 
                 // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-                .get('https://neomallapi.herokuapp.com/api?_page=${page}&_limit=5', {
+                .get('https://neomallapi.herokuapp.com/api?page=${page}', {
                     headers: {
                         // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                         'Content-Type': 'application/json',
@@ -130,6 +131,7 @@ export default class Home extends Component{
                     console.log(response.data.goods.data)
                     console.log("no auth")
                     this.setState({ goods: response.data.goods.data })
+                    this.setState({ goodsPage: response.data.goods.currentPage })
                     console.log(response.data.popGoods.data)
                     this.setState({ popGoods: response.data.popGoods.data })
                     this.setState({ loading: false })
@@ -179,7 +181,8 @@ export default class Home extends Component{
         const y = entities[0].boundingClientRect.y;
         if (this.state.prevY > y) {
           const lastgood = this.state.goods[this.state.goods.length - 1];
-          const curPage = lastgood.id;
+        //   const curPage = lastgood.id;
+        var curPage = this.state.goodsPage;
           this.fetchData(curPage);
           this.setState({ page: curPage });
         }

@@ -28,7 +28,10 @@ export default class Home extends Component{
                 category : '',
             },
             errorMsg: '',
-            loading: true
+            loading: true,
+            load: false,
+            page: 1,
+            prevY: 0
             
         }
     }
@@ -172,7 +175,7 @@ export default class Home extends Component{
     componentDidMount(){
         var a=localStorage.getItem("authen");
        
-        var one = "https://neomallapi.herokuapp.com/api"
+        var one = "https://neomallapi.herokuapp.com/api?current_page=${page}&_limit=10"
         var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
         var three = "https://neomallapi.herokuapp.com/api/auth"
 

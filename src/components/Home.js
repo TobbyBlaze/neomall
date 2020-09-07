@@ -129,6 +129,7 @@ export default class Home extends Component{
                 })
                 .then(response => {
                     console.log(response)
+                    console.log(this.state)
                     console.log(response.data.goods.data)
                     console.log("no auth")
                     this.setState({ goods: response.data.goods.data })

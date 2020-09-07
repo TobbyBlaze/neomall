@@ -280,7 +280,7 @@ export default class Admine extends Component {
                             </div>
                             <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                 <div className="card-body">
-                                    <form onSubmit={this.submitHandler} enctype="multipart/form-data">
+                                    <form onSubmit={this.submitHandler} enctype="multipart/form-data" files="true">
                                         <div className="accordion accordion-portal" id="accordionExample2">
                                             <div className="card-header" id="seller-signup-1">
                                                 <h2 className="mb-0">

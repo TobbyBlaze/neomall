@@ -318,13 +318,13 @@ export default class Home extends Component{
 
         // Additional css
     const loadingCSS = {
-        height: "100px",
-        margin: "30px",
+        height: "30px",
+        margin: "10px",
         color: "black"
       };
   
       // To change the loading icon behavior
-      const loadingTextCSS = { display: this.state.loading ? "block" : "none" };
+      const loadingTextCSS = { display: this.state.load ? "block" : "none" };
   
 
         return(

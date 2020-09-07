@@ -118,7 +118,7 @@ export default class Home extends Component{
         axios
 
                 // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-                .get('https://neomallapi.herokuapp.com/api?page=${page}&_limit=5', {
+                .get('https://neomallapi.herokuapp.com/api?_page=${page}&_limit=5', {
                     headers: {
                         // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                         'Content-Type': 'application/json',

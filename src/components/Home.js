@@ -119,7 +119,7 @@ export default class Home extends Component{
         axios
 
                 // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-                .get('https://neomallapi.herokuapp.com/api?page=${page}', {
+                .get('https://neomallapi.herokuapp.com/api?page={page}', {
                     headers: {
                         // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                         'Content-Type': 'application/json',
@@ -128,11 +128,12 @@ export default class Home extends Component{
                     }
                 })
                 .then(response => {
+                    console.log(response)
                     console.log(response.data.goods.data)
                     console.log("no auth")
                     this.setState({ goods: response.data.goods.data })
                     this.setState({ goodsPage: response.data.goods.currentPage })
-                    console.log(response.data.popGoods.data)
+                    // console.log(response.data.popGoods.data)
                     this.setState({ popGoods: response.data.popGoods.data })
                     this.setState({ loading: false })
                     this.setState({ load: false });

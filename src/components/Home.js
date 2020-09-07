@@ -180,7 +180,7 @@ export default class Home extends Component{
         if (this.state.prevY > y) {
           const lastgood = this.state.goods[this.state.goods.length - 1];
           const curPage = lastgood.id;
-          this.getPhotos(curPage);
+          this.fetchData(curPage);
           this.setState({ page: curPage });
         }
         this.setState({ prevY: y });

@@ -132,7 +132,7 @@ export default class Home extends Component{
                     console.log(this.state)
                     console.log(response.data.goods.data)
                     console.log("no auth")
-                    this.setState({ goods: response.data.goods.data })
+                    this.setState({ goods: [...this.state.goods, ...response.data.goods.data] })
                     this.setState({ goodsPage: response.data.goods.current_page })
                     // console.log(response.data.popGoods.data)
                     this.setState({ popGoods: response.data.popGoods.data })
@@ -182,7 +182,7 @@ export default class Home extends Component{
     handleObserver(entities, observer) {
         const y = entities[0].boundingClientRect.y;
         if (this.state.prevY > y) {
-          const lastgood = this.state.goods[this.state.goods.length - 1];
+        //   const lastgood = this.state.goods[this.state.goods.length - 1];
         //   const curPage = lastgood.id;
         var curPage = this.state.goodsPage + 1;
           this.fetchData(curPage);

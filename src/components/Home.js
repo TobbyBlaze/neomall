@@ -522,8 +522,8 @@ export default class Home extends Component{
                         <div className="product">
                         <figure className="product-image">
                             <Link to={"product/"+good.id}>
-                            <img src={"https://neomallapi.herokuapp.com/file/"+JSON.decode(good.image[0])} alt="Image" />
-                            <img src={"https://neomallapi.herokuapp.com/file/"+JSON.decode(good.image[1])} alt="Image" />
+                            <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image[0])} alt="Image" />
+                            <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image[1])} alt="Image" />
                             </Link>
                         </figure>
                         <div className="product-meta">

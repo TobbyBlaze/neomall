@@ -517,12 +517,13 @@ export default class Home extends Component{
                     <div className="row gutter-2 gutter-md-3">
 
                     {goods.map((good, i)=>
+                    
                     <div key={good.id} className="col-3 col-lg-2">
                         <div className="product">
                         <figure className="product-image">
                             <Link to={"product/"+good.id}>
-                            <img src={"https://neomallapi.herokuapp.com/file/"+good.image.substr(2, 11)} alt="Image" />
-                            <img src={"https://neomallapi.herokuapp.com/file/"+good.image.substr(0, 5)} alt="Image" />
+                            <img src={"https://neomallapi.herokuapp.com/file/"+JSON.decode(good.image[0])} alt="Image" />
+                            <img src={"https://neomallapi.herokuapp.com/file/"+JSON.decode(good.image[1])} alt="Image" />
                             </Link>
                         </figure>
                         <div className="product-meta">

@@ -539,18 +539,11 @@ export default class Home extends Component{
                     )}
                     </div>
 
-                    {/* <div
-                    ref={loadingRef => (this.loadingRef = loadingRef)}
-                    style={loadingCSS}
-                    >
-                    <span style={loadingTextCSS}>Loading...</span>
-                    </div> */}
-
                     <div
                     ref={loadingRef => (this.loadingRef = loadingRef)}
                     style={loadingCSS}
                     >
-                    <Skeleton width={100}/>
+                    <span style={loadingTextCSS}>Loading... <Skeleton width={100}/></span>
                     </div>
 
                     {/* <div className="row">

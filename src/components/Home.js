@@ -3,7 +3,7 @@ import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Link, useParams } from 'react-router-dom'
 import { Lines, Circle2 } from 'react-preloaders'
-import Skeleton from '@yisheng90/react-loading'
+import Skeleton from 'react-loading-skeleton';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -550,7 +550,7 @@ export default class Home extends Component{
                     ref={loadingRef => (this.loadingRef = loadingRef)}
                     style={loadingCSS}
                     >
-                    <Skeleton width="250px"/>
+                    <Skeleton width={100}/>
                     </div>
 
                     {/* <div className="row">

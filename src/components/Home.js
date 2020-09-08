@@ -3,6 +3,7 @@ import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Link, useParams } from 'react-router-dom'
 import { Lines, Circle2 } from 'react-preloaders'
+import Skeleton from '@yisheng90/react-loading'
 
 import Header from './Header';
 import Footer from './Footer';
@@ -538,11 +539,18 @@ export default class Home extends Component{
                     )}
                     </div>
 
-                    <div
+                    {/* <div
                     ref={loadingRef => (this.loadingRef = loadingRef)}
                     style={loadingCSS}
                     >
                     <span style={loadingTextCSS}>Loading...</span>
+                    </div> */}
+
+                    <div
+                    ref={loadingRef => (this.loadingRef = loadingRef)}
+                    style={loadingCSS}
+                    >
+                    <Skeleton width="250px"/>
                     </div>
 
                     {/* <div className="row">

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Link, useParams } from 'react-router-dom'
-import { Lines, Circle2 } from 'react-preloaders'
+// import { Lines, Circle2 } from 'react-preloaders'
+import Skeleton from 'react-loading-skeleton';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -211,7 +212,7 @@ export default class Store extends Component{
         return(
             
             <div>
-                <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" />
+                {/* <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" /> */}
                 <div className="container">
                     {/* <!-- header --> */}
                     <header className="header header-dark header-sticky">
@@ -351,7 +352,8 @@ export default class Store extends Component{
                 <section className="pt-1">
                 <div className="container-full">
                     <div className="row masonry gutter-1">
-                    {sellers.map((seller, i)=>
+                    {sellers?
+                    sellers.map((seller, i)=>
                     <div key={seller.id} className="col-md-3">
                         <Link to={"products/"+seller.id} className="card card-equal equal-50 equal-md-100 card-scale">
                         <span className="image image-overlay" style={{backgroundImage: 'url(https://neomall.herokuapp.com/assets/images/card-1.jpg)'}}></span>
@@ -361,7 +363,20 @@ export default class Store extends Component{
                         </div>
                         </Link>
                     </div>
-                    )}
+                    )
+                    :
+                    <div>
+                        <Skeleton width={300} height={100}/>
+                        <br />
+                        <Skeleton width={300} height={100}/>
+                        <br />
+                        <Skeleton width={300} height={100}/>
+                        <br />
+                        <Skeleton width={300} height={100}/>
+                        <br />
+                        <Skeleton width={300} height={100}/>
+                    </div>
+                    }
                     </div>
                 </div>
                 </section>

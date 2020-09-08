@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Link, useParams } from 'react-router-dom'
-import { Lines, Circle2 } from 'react-preloaders'
+// import { Lines, Circle2 } from 'react-preloaders'
 import Skeleton from 'react-loading-skeleton';
 
 import Header from './Header';
@@ -518,9 +518,7 @@ export default class Home extends Component{
                     <div className="row gutter-2 gutter-md-3">
 
                     
-                    {loading?
-                    <Skeleton count={10} width={100} height={100}/>
-                    :
+                    {goods?
                     goods.map((good, i)=>
                     
                         <div key={good.id} className="col-3 col-lg-2">
@@ -541,6 +539,18 @@ export default class Home extends Component{
                             </div>
                         </div>
                     )
+                    :
+                    <div>
+                    <Skeleton width={300} height={100}/>
+                    <br />
+                    <Skeleton width={300} height={100}/>
+                    <br />
+                    <Skeleton width={300} height={100}/>
+                    <br />
+                    <Skeleton width={300} height={100}/>
+                    <br />
+                    <Skeleton width={300} height={100}/>
+                    </div>
                     }
                     </div>
 
@@ -548,7 +558,7 @@ export default class Home extends Component{
                     ref={loadingRef => (this.loadingRef = loadingRef)}
                     style={loadingCSS}
                     >
-                    <span style={loadingTextCSS}>Loading... <Skeleton width={100}/></span>
+                    <span style={loadingTextCSS}>Loading... <Skeleton width={300}/></span>
                     </div>
 
                     {/* <div className="row">

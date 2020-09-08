@@ -354,15 +354,15 @@ export default class Store extends Component{
                     <div className="row masonry gutter-1">
                     {loading?
                     <div>
-                        <Skeleton width={300} height={100}/>
+                        <Skeleton width="100%" height={100}/>
                         <br />
-                        <Skeleton width={300} height={100}/>
+                        <Skeleton width="100%" height={100}/>
                         <br />
-                        <Skeleton width={300} height={100}/>
+                        <Skeleton width="100%" height={100}/>
                         <br />
-                        <Skeleton width={300} height={100}/>
+                        <Skeleton width="100%" height={100}/>
                         <br />
-                        <Skeleton width={300} height={100}/>
+                        <Skeleton width="100%" height={100}/>
                     </div>
                     :
                     sellers.map((seller, i)=>

@@ -352,19 +352,7 @@ export default class Store extends Component{
                 <section className="pt-1">
                 <div className="container-full">
                     <div className="row masonry gutter-1">
-                    {sellers?
-                    sellers.map((seller, i)=>
-                    <div key={seller.id} className="col-md-3">
-                        <Link to={"products/"+seller.id} className="card card-equal equal-50 equal-md-100 card-scale">
-                        <span className="image image-overlay" style={{backgroundImage: 'url(https://neomall.herokuapp.com/assets/images/card-1.jpg)'}}></span>
-                        <span className="image image-overlay" ></span>
-                        <div className="card-body text-center text-white">
-                            <h3>{seller.name}</h3>
-                        </div>
-                        </Link>
-                    </div>
-                    )
-                    :
+                    {loading?
                     <div>
                         <Skeleton width={300} height={100}/>
                         <br />
@@ -376,6 +364,19 @@ export default class Store extends Component{
                         <br />
                         <Skeleton width={300} height={100}/>
                     </div>
+                    :
+                    sellers.map((seller, i)=>
+                    <div key={seller.id} className="col-md-3">
+                        <Link to={"products/"+seller.id} className="card card-equal equal-50 equal-md-100 card-scale">
+                        <span className="image image-overlay" style={{backgroundImage: 'url(https://neomall.herokuapp.com/assets/images/card-1.jpg)'}}></span>
+                        <span className="image image-overlay" ></span>
+                        <div className="card-body text-center text-white">
+                            <h3>{seller.name}</h3>
+                        </div>
+                        </Link>
+                    </div>
+                    )
+                    
                     }
                     </div>
                 </div>

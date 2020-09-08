@@ -518,7 +518,19 @@ export default class Home extends Component{
                     <div className="row gutter-2 gutter-md-3">
 
                     
-                    {goods?
+                    {loading?
+                        <div>
+                            <Skeleton width={300} height={100}/>
+                            <br />
+                            <Skeleton width={300} height={100}/>
+                            <br />
+                            <Skeleton width={300} height={100}/>
+                            <br />
+                            <Skeleton width={300} height={100}/>
+                            <br />
+                            <Skeleton width={300} height={100}/>
+                        </div>
+                    :
                     goods.map((good, i)=>
                     
                         <div key={good.id} className="col-3 col-lg-2">
@@ -539,18 +551,7 @@ export default class Home extends Component{
                             </div>
                         </div>
                     )
-                    :
-                    <div>
-                    <Skeleton width={300} height={100}/>
-                    <br />
-                    <Skeleton width={300} height={100}/>
-                    <br />
-                    <Skeleton width={300} height={100}/>
-                    <br />
-                    <Skeleton width={300} height={100}/>
-                    <br />
-                    <Skeleton width={300} height={100}/>
-                    </div>
+                    
                     }
                     </div>
 

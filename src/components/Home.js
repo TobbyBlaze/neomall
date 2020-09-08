@@ -517,29 +517,30 @@ export default class Home extends Component{
 
                     <div className="row gutter-2 gutter-md-3">
 
-                    {goods?
+                    
+                    {loading?
+                    <Skeleton count={10} width={100} height={100}/>
+                    :
                     goods.map((good, i)=>
                     
-                    <div key={good.id} className="col-3 col-lg-2">
-                        <div className="product">
-                        <figure className="product-image">
-                            <Link to={"product/"+good.id}>
-                            <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image.split(','))} alt="Image" />
-                            <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image.split(','))} alt="Image" />
-                            </Link>
-                        </figure>
-                        <div className="product-meta">
-                            <h3 className="product-title"><Link to={"product/"+good.id}>{good.name} </Link></h3>
-                            <div className="product-price">
-                            <span>${good.price}</span>
+                        <div key={good.id} className="col-3 col-lg-2">
+                            <div className="product">
+                            <figure className="product-image">
+                                <Link to={"product/"+good.id}>
+                                <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image.split(','))} alt="Image" />
+                                <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image.split(','))} alt="Image" />
+                                </Link>
+                            </figure>
+                            <div className="product-meta">
+                                <h3 className="product-title"><Link to={"product/"+good.id}>{good.name} </Link></h3>
+                                <div className="product-price">
+                                <span>${good.price}</span>
+                                </div>
+                                {/* <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a> */}
                             </div>
-                            {/* <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a> */}
+                            </div>
                         </div>
-                        </div>
-                    </div>
                     )
-                    :
-                    <Skeleton count={10} width={100} height={100}/>
                     }
                     </div>
 
@@ -642,7 +643,7 @@ export default class Home extends Component{
                 <div>
                     {/* <Footer /> */}
                 </div>
-                {/* // <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" /> */}
+                <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" />
                 
             </div>
         )

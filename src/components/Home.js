@@ -642,7 +642,7 @@ export default class Home extends Component{
                 <div>
                     {/* <Footer /> */}
                 </div>
-                // <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" />
+                {/* // <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" /> */}
                 
             </div>
         )

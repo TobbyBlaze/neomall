@@ -517,6 +517,7 @@ export default class Home extends Component{
 
                     <div className="row gutter-2 gutter-md-3">
 
+                    {goods?
                     {goods.map((good, i)=>
                     
                     <div key={good.id} className="col-3 col-lg-2">
@@ -537,6 +538,9 @@ export default class Home extends Component{
                         </div>
                     </div>
                     )}
+                    :
+                    <Skeleton count={10} width={100} height={100}/>
+                    }
                     </div>
 
                     <div
@@ -638,7 +642,7 @@ export default class Home extends Component{
                 <div>
                     {/* <Footer /> */}
                 </div>
-                <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" />
+                // <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" />
                 
             </div>
         )

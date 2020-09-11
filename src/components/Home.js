@@ -38,6 +38,11 @@ export default class Home extends Component{
         }
     }
 
+    changeHandler = e => {
+        // this.setState({[e.target.name]: e.target.value})
+        this.setState({ [e.target.name]: e.target.value })
+    }
+
     addCart = () => {
         var a=localStorage.getItem("authen");
         // this.setState({ loading: true })
@@ -436,7 +441,7 @@ export default class Home extends Component{
                         <div className="modal-content">
                         <div className="modal-header">
                             <form onSubmit={this.searchHandler}>
-                            <input type="text" className="form-control" name="q" placeholder="Type your search here" aria-label="Type your search here" aria-describedby="button-addon2" />
+                            <input type="text" className="form-control" name="q" placeholder="Type your search here" aria-label="Type your search here" aria-describedby="button-addon2" onChange={this.changeHandler}/>
                             <button type="submit">Search</button>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

@@ -19,7 +19,7 @@ export default class Home extends Component{
             popGoods: [],
             carts: [],
             cartsNum: '',
-            delcart: '',
+            delcart: null,
             q: '',
             // goods: [],
             good: {
@@ -199,7 +199,7 @@ export default class Home extends Component{
     searchHandler = e => {
         e.preventDefault()
         axios
-            .post('https://neomallapi.herokuapp.com/api/searchGoods', this.state.q,{
+            .get('https://neomallapi.herokuapp.com/api/searchGoods', this.state.q,{
                 headers: {
 
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

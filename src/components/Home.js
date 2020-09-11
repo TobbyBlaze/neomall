@@ -73,7 +73,7 @@ export default class Home extends Component{
         axios
 
             // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
-            .post('https://neomallapi.herokuapp.com/api/auth/deletecart/'+this.state.delcart, {
+            .get('https://neomallapi.herokuapp.com/api/auth/deletecart/'+this.state.delcart, {
                 
                 // params: {
                 //     delcart: this.state.delcart,
@@ -196,7 +196,7 @@ export default class Home extends Component{
         }
     }
 
-    searchHandler = e => {
+    searchGoodsHandler = e => {
         e.preventDefault()
         axios
             .get('https://neomallapi.herokuapp.com/api/searchGoods', {
@@ -215,11 +215,8 @@ export default class Home extends Component{
             })
             .then(response => {
                 console.log(response);
-                // this.setState({ goods: response.find_data.goods.data })
-                // localStorage.clear("authen");
-                // var a=null;
-                // console.log(a);
-                // window.location.href = "https://neomall.herokuapp.com"
+                this.setState({ goods: response.data.goods.data })
+                
             })
             .catch(error => {
                 console.log(error)
@@ -445,7 +442,7 @@ export default class Home extends Component{
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                         <div className="modal-header">
-                            <form onSubmit={this.searchHandler}>
+                            <form onSubmit={this.searchGoodsHandler}>
                             <input type="text" className="form-control" name="q" placeholder="Type your search here" aria-label="Type your search here" aria-describedby="button-addon2" onChange={this.changeHandler}/>
                             <button type="submit">Search</button>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">

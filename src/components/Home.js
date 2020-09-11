@@ -199,7 +199,12 @@ export default class Home extends Component{
     searchHandler = e => {
         e.preventDefault()
         axios
-            .get('https://neomallapi.herokuapp.com/api/searchGoods', this.state.q,{
+            .get('https://neomallapi.herokuapp.com/api/searchGoods', {
+                params: {
+                    q: this.state.q,
+                },
+            },
+            {
                 headers: {
 
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

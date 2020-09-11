@@ -19,6 +19,7 @@ export default class Store extends Component{
             cartsNum: '',
             delcart: '',
             sellers: [],
+            storesPage: null,
             good: {
                 file : '',
                 name : '',
@@ -27,7 +28,10 @@ export default class Store extends Component{
                 category : '',
             },
             errorMsg: '',
-            loading: true
+            loading: true,
+            load: false,
+            page: 1,
+            prevY: 0
             
         }
     }
@@ -52,6 +56,41 @@ export default class Store extends Component{
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
             })
+    }
+
+    fetchData = (page) => {
+        var a=localStorage.getItem("authen");
+        this.setState({ load: true });
+        // this.setState({ loading: true })
+        axios
+
+                // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
+                .get('https://neomallapi.herokuapp.com/api?page='+page, {
+                    headers: {
+                        // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        'Content-Type': 'application/json',
+                        // 'Authorization': 'Bearer '+a,
+                        // 'withCredentials': true
+                    }
+                })
+                .then(response => {
+                    console.log(response)
+                    console.log(this.state)
+                    console.log(response.data.goods.data)
+                    console.log("no auth")
+                    this.setState({ goods: [...this.state.goods, ...response.data.goods.data] })
+                    this.setState({ goodsPage: response.data.goods.current_page })
+                    // console.log(response.data.popGoods.data)
+                    this.setState({ popGoods: response.data.popGoods.data })
+                    this.setState({ loading: false })
+                    this.setState({ load: false });
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.setState({errorMsg: 'Error retrieving data'})
+                    this.setState({ loading: false })
+                    this.setState({ load: false });
+                })
     }
 
     logoutHandler = e => {
@@ -354,15 +393,7 @@ export default class Store extends Component{
                     <div className="row masonry gutter-1">
                     {loading?
                     <div>
-                        <Skeleton width="100%" height={100}/>
-                        <br />
-                        <Skeleton width="100%" height={100}/>
-                        <br />
-                        <Skeleton width="100%" height={100}/>
-                        <br />
-                        <Skeleton width="100%" height={100}/>
-                        <br />
-                        <Skeleton width="100%" height={100}/>
+                        <Skeleton width={1000} height={1000}/>
                     </div>
                     :
                     sellers.map((seller, i)=>

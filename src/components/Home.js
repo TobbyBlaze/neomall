@@ -20,6 +20,7 @@ export default class Home extends Component{
             carts: [],
             cartsNum: '',
             delcart: '',
+            q: '',
             // goods: [],
             good: {
                 file : '',
@@ -193,7 +194,7 @@ export default class Home extends Component{
     searchHandler = e => {
         e.preventDefault()
         axios
-            .post('https://neomallapi.herokuapp.com/api/searchGoods',{
+            .post('https://neomallapi.herokuapp.com/api/searchGoods', this.state.q,{
                 headers: {
 
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -285,7 +286,7 @@ export default class Home extends Component{
     }
 
     render(){
-        const { goods, popGoods, carts, cartsNum, errorMsg, delcart, loading } = this.state;
+        const { goods, popGoods, carts, cartsNum, errorMsg, delcart, loading, q } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;

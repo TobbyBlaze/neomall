@@ -193,7 +193,7 @@ export default class Home extends Component{
     searchHandler = e => {
         e.preventDefault()
         axios
-            .get('https://neomallapi.herokuapp.com/api/searchGoods',{
+            .post('https://neomallapi.herokuapp.com/api/searchGoods',{
                 headers: {
 
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -204,7 +204,7 @@ export default class Home extends Component{
             })
             .then(response => {
                 console.log(response);
-                this.setState({ goods: response.find_data.goods.data })
+                // this.setState({ goods: response.find_data.goods.data })
                 // localStorage.clear("authen");
                 // var a=null;
                 // console.log(a);

@@ -436,7 +436,8 @@ export default class Home extends Component{
                         <div className="modal-header">
                             <form onSubmit={this.searchHandler}>
                             <input type="text" className="form-control" name="q" placeholder="Type your search here" aria-label="Type your search here" aria-describedby="button-addon2" />
-                            <button type="submit" className="close" data-dismiss="modal" aria-label="Close">
+                            <button type="submit">Search</button>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                             </form>

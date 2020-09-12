@@ -22,16 +22,17 @@ export default class Home extends Component{
             delcart: 0,
             q: '',
             // goods: [],
-            good: {
-                file : '',
-                name : '',
-                description : '',
-                price : '',
-                category : '',
-            },
+            // good: {
+            //     file : '',
+            //     name : '',
+            //     description : '',
+            //     price : '',
+            //     category : '',
+            // },
             errorMsg: '',
             loading: true,
             load: false,
+            searchLoading: false,
             page: 1,
             prevY: 0
             
@@ -214,6 +215,7 @@ export default class Home extends Component{
             .then(response => {
                 console.log(response);
                 this.setState({ goods: response.data.goods.data })
+                this.setState({ searchLoading: true })
                 
             })
             .catch(error => {
@@ -308,6 +310,7 @@ export default class Home extends Component{
   
       // To change the loading icon behavior
       const loadingTextCSS = { display: this.state.load ? "block" : "none" };
+      const searchLoadingCSS = { display: this.state.searchLoading ? "none" : "block" };
   
 
         return(
@@ -459,7 +462,7 @@ export default class Home extends Component{
                 
                 
                 {/* <!-- slider --> */}
-                <div className="swiper-container swiper-container-alt">
+                <div className="swiper-container swiper-container-alt" style={searchLoadingCSS}>
                 <div className="swiper-wrapper">
                     <div className="swiper-slide">
                     <div className="image image-overlay image-zoom" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-4.jpg)'}}></div>

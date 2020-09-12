@@ -19,7 +19,7 @@ export default class Home extends Component{
             popGoods: [],
             carts: [],
             cartsNum: '',
-            delcart: null,
+            delcart: 0,
             q: '',
             // goods: [],
             good: {

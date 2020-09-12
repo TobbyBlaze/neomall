@@ -113,9 +113,9 @@ export default class Product extends Component{
         var a=localStorage.getItem("authen");
         const { match: { params } } = this.props;
 
-        var one = "https://neomallapi.herokuapp.com/api/auth"
+        var one = "https://neomallapi.herokuapp.com/api"
         var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
-        var three = "https://neomallapi.herokuapp.com/api/auth"
+        var three = "https://neomallapi.herokuapp.com/api"
 
         axios.defaults.headers.get['Accept'] = 'application/json'
 
@@ -198,7 +198,7 @@ export default class Product extends Component{
                 }
             })
             .then(response => {
-                // console.log(response.data.good)
+                console.log(response)
                 this.setState({ good: response.data.good })
                 this.setState({ loading: false })
                 

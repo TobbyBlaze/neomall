@@ -48,8 +48,6 @@ export default class Home extends Component{
         var a=localStorage.getItem("authen");
         // this.setState({ loading: true })
         axios
-
-            // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
             .post('https://neomallapi.herokuapp.com/api/auth/storecart', this.state.good, {
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

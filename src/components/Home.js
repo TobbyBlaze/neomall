@@ -123,8 +123,6 @@ export default class Home extends Component{
         this.setState({ load: true });
         // this.setState({ loading: true })
         axios
-
-            // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
             .get('https://neomallapi.herokuapp.com/api?page='+page, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -168,11 +166,11 @@ export default class Home extends Component{
                 return axios.get(shcart, options);
             }
     
-            function requestShwish() {
-                return axios.get(shwish, options);
-            }
+            // function requestShwish() {
+            //     return axios.get(shwish, options);
+            // }
     
-            axios.all([requestShcart(), requestShwish()]).then(axios.spread((...responses) => {
+            axios.all([requestShcart()]).then(axios.spread((...responses) => {
             const responseOne = responses[0]
             const responseTwo = responses[1]
             // const responsesThree = responses[2]

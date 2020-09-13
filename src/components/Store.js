@@ -185,7 +185,7 @@ export default class Store extends Component{
          
             })).catch(errors => {
                 console.log("Error on mount with auth")
-                console.log(error)
+                console.log(errors)
                 this.setState({errorMsg: 'Error retrieving data'})
                 this.setState({ loading: false })
             })

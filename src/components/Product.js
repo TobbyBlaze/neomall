@@ -46,54 +46,117 @@ export default class Product extends Component{
 
     addCart = (e) => {
         e.preventDefault()
+        const { match: { params } } = this.props;
         var a=localStorage.getItem("authen");
         this.setState({ loading: true })
-        // console.log("All states");
-        // console.log(this.state);
+        console.log("All states");
+        console.log(this.state);
+        if(a){
         axios
-
-            // .post('http://localhost/yummypizza/public/api/auth/storecart', this.state.good, 
             .post('https://neomallapi.herokuapp.com/api/auth/storecart', this.state.good,
             {
                 params: {
                     quantity: this.state.cart.quantity,
                 },
                 headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
                 }
             })
             .then(response => {
-                // console.log("Cart data");
-                // console.log(response.data);
+                console.log("All responses from add cart")
+                console.log(response)
+                console.log("Cart data");
+                console.log(response.data);
                 this.setState({ cart: response.data })
             })
             .catch(error => {
-                // console.log(error)
+                console.log("Error from add cart")
+                console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
                 this.setState({ loading: false })
             })
+        }else{
+            window.location.href = 'https://neomall.herokuapp.com'+this.props.match.params.id
+        }
+    }
+
+    deleteCart = () => {
+        var a=localStorage.getItem("authen");
+        const { match: { params } } = this.props;
+        console.log("All states");
+        console.log(this.state);
+        if(a){
+        axios
+            .get('https://neomallapi.herokuapp.com/api/auth/deletecart/'+this.state.delcart, {
+                
+                // params: {
+                //     delcart: this.state.delcart,
+                // },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
+                }
+            })
+            .then(response => {
+                console.log("All resonses from deletecart")
+                console.log(response)
+            })
+            .catch(error => {
+                console.log("Error from deletecart")
+                console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+            })
+        }else{
+            window.location.href = 'https://neomall.herokuapp.com'+this.props.match.params.id
+        }
+    }
+
+    addWish = (e) => {
+        e.preventDefault()
+        const { match: { params } } = this.props;
+        var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
+        console.log("All states");
+        console.log(this.state);
+        if(a){
+        axios
+            .post('https://neomallapi.herokuapp.com/api/auth/storewish', this.state.good,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
+                }
+            })
+            .then(response => {
+                console.log("All responses from add wish")
+                console.log(response)
+                console.log("Cart data");
+                console.log(response.data);
+                this.setState({ wish: response.data })
+            })
+            .catch(error => {
+                console.log("Error from add wish")
+                console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
+            })
+        }else{
+            window.location.href = 'https://neomall.herokuapp.com'+this.props.match.params.id
+        }
     }
 
     logoutHandler = e => {
         e.preventDefault()
-        // console.log(this.state)
-        // console.log($('meta[name="csrf-token"]').attr('content'))
+        const { match: { params } } = this.props;
         var a=localStorage.getItem("authen");
         this.setState({ loading: true })
-        
-
+      
         axios
-            // .get('http://localhost/yummypizza/public/api/auth/logout',{
             .get('https://neomallapi.herokuapp.com/api/auth/logout',{
                 headers: {
-
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
                 }
             })
             .then(response => {
@@ -101,7 +164,7 @@ export default class Product extends Component{
                 localStorage.clear("authen");
                 var a=null;
                 console.log(a);
-                window.location.href = "https://neomall.herokuapp.com"
+                window.location.href = 'https://neomall.herokuapp.com'+this.props.match.params.id
             })
             .catch(error => {
                 // console.log(error)

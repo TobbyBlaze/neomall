@@ -9,7 +9,6 @@ import Header from './Header';
 import Footer from './Footer';
 
 export default class Home extends Component{
-    // _isMounted = false;
     constructor(props){
         super(props);
 
@@ -21,132 +20,234 @@ export default class Home extends Component{
             cartsNum: '',
             delcart: 0,
             q: '',
-            // goods: [],
-            // good: {
-            //     file : '',
-            //     name : '',
-            //     description : '',
-            //     price : '',
-            //     category : '',
-            // },
             errorMsg: '',
             loading: true,
             load: false,
             searchLoading: false,
             page: 1,
             prevY: 0
-            
         }
     }
 
     changeHandler = e => {
-        // this.setState({[e.target.name]: e.target.value})
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    addCart = () => {
+    addCart = (e) => {
+        e.preventDefault()
         var a=localStorage.getItem("authen");
-        // this.setState({ loading: true })
+        this.setState({ loading: true })
+        console.log("All states");
+        console.log(this.state);
         axios
-            .post('https://neomallapi.herokuapp.com/api/auth/storecart', this.state.good, {
+            .post('https://neomallapi.herokuapp.com/api/auth/storecart', this.state.good,
+            {
+                params: {
+                    quantity: this.state.cart.quantity,
+                },
                 headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
                 }
             })
             .then(response => {
+                console.log("All responses from add cart")
                 console.log(response)
+                console.log("Cart data");
+                console.log(response.data);
+                this.setState({ cart: response.data })
             })
             .catch(error => {
+                console.log("Error from add cart")
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
-                // this.setState({ loading: false })
+                this.setState({ loading: false })
             })
     }
 
     deleteCart = () => {
         var a=localStorage.getItem("authen");
-
+        console.log("All states");
+        console.log(this.state);
+        if(a){
         axios
-
-            // .post('http://localhost/Neomallapi/public/api/auth/storecart', this.state.good, {
             .get('https://neomallapi.herokuapp.com/api/auth/deletecart/'+this.state.delcart, {
                 
                 // params: {
                 //     delcart: this.state.delcart,
                 // },
                 headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
                 }
             })
             .then(response => {
+                console.log("All resonses from deletecart")
                 console.log(response)
             })
             .catch(error => {
+                console.log("Error from deletecart")
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
             })
+        }else{
+            window.location.href = "https://neomall.herokuapp.com/portal"
+        }
     }
 
-    addWishlist = () => {
+    addWish = (e) => {
+        e.preventDefault()
         var a=localStorage.getItem("authen");
-        // this.setState({ loading: true })
+        this.setState({ loading: true })
+        console.log("All states");
+        console.log(this.state);
+        if(a){
         axios
-
-            // .post('http://localhost/yummypizza/public/api/auth/storecart', this.state.good, {
-            .post('https://damp-island-72638.herokuapp.com/api/auth/storewish', this.state.good, {
+            .post('https://neomallapi.herokuapp.com/api/auth/storewish', this.state.good,
+            {
                 headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
                 }
             })
             .then(response => {
+                console.log("All responses from add wish")
                 console.log(response)
+                console.log("Cart data");
+                console.log(response.data);
+                this.setState({ wish: response.data })
             })
             .catch(error => {
+                console.log("Error from add wish")
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
-                // this.setState({ loading: false })
+                this.setState({ loading: false })
             })
+        }else{
+            window.location.href = "https://neomall.herokuapp.com/portal"
+        }
     }
 
     fetchData = (page) => {
-        var a=localStorage.getItem("authen");
         this.setState({ load: true });
         // this.setState({ loading: true })
+        console.log("All states")
+        console.log(this.state)
         axios
             .get('https://neomallapi.herokuapp.com/api?page='+page, {
                 headers: {
                     'Content-Type': 'application/json',
-                    // 'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
                 }
             })
             .then(response => {
+                console.log("All responses from fetch data")
                 console.log(response)
-                console.log(this.state)
+                console.log("All goods")
                 console.log(response.data.goods.data)
-                console.log("no auth")
                 this.setState({ goods: [...this.state.goods, ...response.data.goods.data] })
                 this.setState({ goodsPage: response.data.goods.current_page })
-                // console.log(response.data.popGoods.data)
+                console.log("All pop goods")
+                console.log(response.data.popGoods.data)
                 this.setState({ popGoods: response.data.popGoods.data })
                 this.setState({ loading: false })
                 this.setState({ load: false });
             })
             .catch(error => {
+                console.log("Error from fetch data")
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
                 this.setState({ loading: false })
                 this.setState({ load: false });
             })
+    }
+
+    searchGoodsHandler = e => {
+        e.preventDefault()
+        console.log("All states")
+        console.log(this.state)
+        axios
+            .get('https://neomallapi.herokuapp.com/api/searchGoods', {
+                params: {
+                    q: this.state.q,
+                },
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                console.log("All responses from search")
+                console.log(response);
+                console.log("All searched goods")
+                console.log(response.data.goods.data)
+                this.setState({ goods: response.data.goods.data })
+                this.setState({ searchLoading: true })
+                
+            })
+            .catch(error => {
+                console.log("Error from search")
+                console.log(error)
+                // this.setState({ loading: false })
+            })
+    }
+
+    logoutHandler = e => {
+        e.preventDefault()
+        console.log("All states")
+        console.log(this.state)
+        var a=localStorage.getItem("authen");
+        // this.setState({ loading: true })
+
+        axios
+            .get('https://neomallapi.herokuapp.com/api/auth/logout',{
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
+                }
+            })
+            .then(response => {
+                console.log("All responses from logout")
+                console.log(response);
+                localStorage.clear("authen");
+                var a=null;
+                console.log(a);
+                window.location.href = "https://neomall.herokuapp.com"
+            })
+            .catch(error => {
+                console.log("Error from logout")
+                console.log(error)
+                // this.setState({ loading: false })
+            })
+    }
+
+    handleObserver(entities, observer) {
+        const y = entities[0].boundingClientRect.y;
+        if (this.state.prevY > y) {
+        //   const lastgood = this.state.goods[this.state.goods.length - 1];
+        //   const curPage = lastgood.id;
+        var curPage = this.state.goodsPage + 1;
+          this.fetchData(curPage);
+          this.setState({ page: curPage });
+        }
+        this.setState({ prevY: y });
+      }
+
+    componentDidMount(){
+        var a=localStorage.getItem("authen");
+        this.fetchData(this.state.page);
+
+        var options = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 1.0
+        };
+            
+        this.observer = new IntersectionObserver(
+            this.handleObserver.bind(this),
+            options
+        );
+        this.observer.observe(this.loadingRef);
 
         if(a){
             var shcart = "https://neomallapi.herokuapp.com/api/auth/shcart"
@@ -154,10 +255,8 @@ export default class Home extends Component{
 
             var options = {
                 headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
                 }
             };
     
@@ -183,103 +282,14 @@ export default class Home extends Component{
             console.log(responseOne.data.cartsNum)
             this.setState({ cartsNum: responseOne.data.cartsNum })
             this.setState({ loading: false })
-            
-            // use/access the results 
+         
             })).catch(errors => {
-                // console.log(error)
+                console.log("Error on mount with auth")
+                console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
                 this.setState({ loading: false })
             })
         }
-    }
-
-    searchGoodsHandler = e => {
-        e.preventDefault()
-        axios
-            .get('https://neomallapi.herokuapp.com/api/searchGoods', {
-                params: {
-                    q: this.state.q,
-                },
-            },
-            {
-                headers: {
-
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Content-Type': 'application/json',
-                    // 'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
-                }
-            })
-            .then(response => {
-                console.log(response);
-                this.setState({ goods: response.data.goods.data })
-                this.setState({ searchLoading: true })
-                
-            })
-            .catch(error => {
-                console.log(error)
-                // this.setState({ loading: false })
-            })
-    }
-
-    logoutHandler = e => {
-        e.preventDefault()
-        // console.log(this.state)
-        // console.log($('meta[name="csrf-token"]').attr('content'))
-        var a=localStorage.getItem("authen");
-        // this.setState({ loading: true })
-        
-
-        axios
-            // .get('http://localhost/yummypizza/public/api/auth/logout',{
-            .get('https://neomallapi.herokuapp.com/api/auth/logout',{
-                headers: {
-
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
-                }
-            })
-            .then(response => {
-                // console.log(response);
-                localStorage.clear("authen");
-                var a=null;
-                console.log(a);
-                window.location.href = "https://neomall.herokuapp.com"
-            })
-            .catch(error => {
-                // console.log(error)
-                // this.setState({ loading: false })
-            })
-    }
-
-    handleObserver(entities, observer) {
-        const y = entities[0].boundingClientRect.y;
-        if (this.state.prevY > y) {
-        //   const lastgood = this.state.goods[this.state.goods.length - 1];
-        //   const curPage = lastgood.id;
-        var curPage = this.state.goodsPage + 1;
-          this.fetchData(curPage);
-          this.setState({ page: curPage });
-        }
-        this.setState({ prevY: y });
-      }
-
-    componentDidMount(){
-        this.fetchData(this.state.page);
-
-        var options = {
-            root: null,
-            rootMargin: "0px",
-            threshold: 1.0
-        };
-            
-        this.observer = new IntersectionObserver(
-            this.handleObserver.bind(this),
-            options
-        );
-        this.observer.observe(this.loadingRef);
 
     }
 

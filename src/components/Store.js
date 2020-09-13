@@ -9,7 +9,6 @@ import Header from './Header';
 import Footer from './Footer';
 
 export default class Store extends Component{
-    // _isMounted = false;
     constructor(props){
         super(props);
 
@@ -20,96 +19,93 @@ export default class Store extends Component{
             delcart: '',
             sellers: [],
             storesPage: null,
-            good: {
-                file : '',
-                name : '',
-                description : '',
-                price : '',
-                category : '',
-            },
             errorMsg: '',
+            q: '',
             loading: true,
             load: false,
+            searchLoading: false,
             page: 1,
             prevY: 0
             
         }
     }
 
-    addCart = () => {
-        var a=localStorage.getItem("authen");
-        axios
-
-            // .post('http://localhost/yummypizza/public/api/auth/storecart', this.state.good, {
-            .post('https:neomallapi.herokuapp.com/api/auth/storecart', this.state.good, {
-                headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
-                }
-            })
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-            })
+    changeHandler = e => {
+        this.setState({ [e.target.name]: e.target.value })
     }
 
     fetchData = (page) => {
-        var a=localStorage.getItem("authen");
         this.setState({ load: true });
         // this.setState({ loading: true })
+        console.log("All states")
+        console.log(this.state)
         axios
+            .get('https://neomallapi.herokuapp.com/api/stores?page='+page, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                console.log("All responses from fetch data")
+                console.log(response)
+                console.log("All stores")
+                console.log(response.data.sellers.data)
+                this.setState({ sellers: [...this.state.sellers, ...response.data.sellers.data] })
+                this.setState({ storesPage: response.data.stores.current_page })
+                this.setState({ loading: false })
+                this.setState({ load: false });
+            })
+            .catch(error => {
+                console.log("Error from fetch data")
+                console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
+                this.setState({ load: false });
+            })
+    }
 
-                // .get('https://cors-anywhere.herokuapp.com/http://localhost/Neomallapi/public/api/', {
-                .get('https://neomallapi.herokuapp.com/api?page='+page, {
-                    headers: {
-                        // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        'Content-Type': 'application/json',
-                        // 'Authorization': 'Bearer '+a,
-                        // 'withCredentials': true
-                    }
-                })
-                .then(response => {
-                    console.log(response)
-                    console.log(this.state)
-                    console.log(response.data.goods.data)
-                    console.log("no auth")
-                    this.setState({ goods: [...this.state.goods, ...response.data.goods.data] })
-                    this.setState({ goodsPage: response.data.goods.current_page })
-                    // console.log(response.data.popGoods.data)
-                    this.setState({ popGoods: response.data.popGoods.data })
-                    this.setState({ loading: false })
-                    this.setState({ load: false });
-                })
-                .catch(error => {
-                    console.log(error)
-                    this.setState({errorMsg: 'Error retrieving data'})
-                    this.setState({ loading: false })
-                    this.setState({ load: false });
-                })
+    searchStoresHandler = e => {
+        e.preventDefault()
+        console.log("All states")
+        console.log(this.state)
+        axios
+            .get('https://neomallapi.herokuapp.com/api/searchStores', {
+                params: {
+                    q: this.state.q,
+                },
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                console.log("All responses from search")
+                console.log(response);
+                console.log("All searched stores")
+                console.log(response.data.sellers.data)
+                this.setState({ sellers: response.data.sellers.data })
+                this.setState({ searchLoading: true })
+                
+            })
+            .catch(error => {
+                console.log("Error from search")
+                console.log(error)
+                // this.setState({ loading: false })
+            })
     }
 
     logoutHandler = e => {
         e.preventDefault()
         // console.log(this.state)
-        // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("authen");
         this.setState({ loading: true })
-        
-
+      
         axios
-            // .get('http://localhost/yummypizza/public/api/auth/logout',{
             .get('https://neomallapi.herokuapp.com/api/auth/logout',{
                 headers: {
-
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
                 }
             })
             .then(response => {
@@ -117,7 +113,7 @@ export default class Store extends Component{
                 localStorage.clear("authen");
                 var a=null;
                 console.log(a);
-                window.location.href = "https://neomall.herokuapp.com"
+                window.location.href = "https://neomall.herokuapp.com/store"
             })
             .catch(error => {
                 // console.log(error)
@@ -125,111 +121,77 @@ export default class Store extends Component{
             })
     }
 
-    componentDidMount(){
+    handleObserver(entities, observer) {
+        const y = entities[0].boundingClientRect.y;
+        if (this.state.prevY > y) {
+        //   const lastgood = this.state.goods[this.state.goods.length - 1];
+        //   const curPage = lastgood.id;
+        var curPage = this.state.storesPage + 1;
+          this.fetchData(curPage);
+          this.setState({ page: curPage });
+        }
+        this.setState({ prevY: y });
+      }
+
+      componentDidMount(){
         var a=localStorage.getItem("authen");
+        this.fetchData(this.state.page);
 
-        var one = "https://neomallapi.herokuapp.com/api/auth"
-        var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
-        var three = "https://neomallapi.herokuapp.com/api/auth"
-
-        // const requestOne = axios.get(one);
-        // const requestTwo = axios.get(two);
-        // const requestThree = axios.get(three);
-
-        axios.defaults.headers.get['Accept'] = 'application/json'
+        var options = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 1.0
+        };
+            
+        this.observer = new IntersectionObserver(
+            this.handleObserver.bind(this),
+            options
+        );
+        this.observer.observe(this.loadingRef);
 
         if(a){
-        var options = {
-            // headers: {'X-Custom-Header': 'value'}
-            headers: {
-                // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer '+a,
-                // 'withCredentials': true
-            }
-        };
-        // }else{
-        //     const options = {
-        //         // headers: {'X-Custom-Header': 'value'}
-        //         headers: {
-        //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        //             'Content-Type': 'application/json',
-        //             // 'Authorization': 'Bearer '+a,
-        //             // 'withCredentials': true
-        //         }
-        //     };
-        // }
+            var shcart = "https://neomallapi.herokuapp.com/api/auth/shcart"
+            var shwish = "https://neomallapi.herokuapp.com/api/auth/shwish"
 
-
-        function request1() {
-            return axios.get(one, options);
-        }
-
-        function request2() {
-            return axios.get(two, options);
-        }
-
-        function request3() {
-            return axios.get(three, options);
-        }
-
-        axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
-        const responseOne = responses[0]
-        const responseTwo = responses[1]
-        const responsesThree = responses[2]
-        console.log(responseOne)
-        console.log(responseOne.data.sellers)
-        this.setState({ sellers: responseOne.data.sellers })
-        console.log(responseTwo.data.carts.data)
-        this.setState({ carts: responseTwo.data.carts.data })
-        console.log(responseTwo.data.cartsNum)
-        this.setState({ cartsNum: responseTwo.data.cartsNum })
-        this.setState({ loading: false })
-        // use/access the results 
-        })).catch(errors => {
-            // console.log(error)
-            this.setState({errorMsg: 'Error retrieving data'})
-            this.setState({ loading: false })
-        })
-    }else{
-
-        axios
-
-            // .get('http://localhost/yummypizza/public/api/auth', {
-            .get('https://neomallapi.herokuapp.com/api', {
+            var options = {
                 headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
-                    // 'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
+                    'Authorization': 'Bearer '+a,
                 }
-            })
-            .then(response => {
-                console.log(response.data.sellers)
-                this.setState({ sellers: response.data.sellers })
-                this.setState({ loading: false })
-            })
-            .catch(error => {
-                // console.log(error)
+            };
+    
+            function requestShcart() {
+                return axios.get(shcart, options);
+            }
+    
+            // function requestShwish() {
+            //     return axios.get(shwish, options);
+            // }
+    
+            axios.all([requestShcart()]).then(axios.spread((...responses) => {
+            const responseOne = responses[0]
+            const responseTwo = responses[1]
+            // const responsesThree = responses[2]
+            console.log(responseOne)
+            // console.log(responseOne.data.goods.data)
+            // this.setState({ goods: responseOne.data.goods.data })
+            // console.log(responseOne.data.popGoods.data)
+            // this.setState({ popGoods: responseOne.data.popGoods.data })
+            console.log(responseOne.data.carts.data)
+            this.setState({ carts: responseOne.data.carts.data })
+            console.log(responseOne.data.cartsNum)
+            this.setState({ cartsNum: responseOne.data.cartsNum })
+            this.setState({ loading: false })
+         
+            })).catch(errors => {
+                console.log("Error on mount with auth")
+                console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
                 this.setState({ loading: false })
             })
-    }
+        }
 
     }
-
-    // getOne(good){
-    //     this.setState({
-    //         goods:{
-    //         id : good.id,
-    //         file : good.file,
-    //         name : good.name,
-    //         description : good.description,
-    //         price : good.price,
-    //         category : good.category
-    //         }
-    //     })
-    // }
 
     componentWillUnmount() {
         // fix Warning: Can't perform a React state update on an unmounted component

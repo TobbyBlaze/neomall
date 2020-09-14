@@ -51,7 +51,7 @@ export default class Store extends Component{
                 console.log("All stores")
                 console.log(response.data.sellers.data)
                 this.setState({ sellers: [...this.state.sellers, ...response.data.sellers.data] })
-                this.setState({ storesPage: response.data.stores.current_page })
+                this.setState({ storesPage: response.data.sellers.current_page })
                 this.setState({ loading: false })
                 this.setState({ load: false });
             })

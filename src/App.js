@@ -21,6 +21,7 @@ import Footer from './components/Footer';
 // import Error from './Error';
 import Thanks from './components/Thanks';
 import Admine from './components/Admine';
+import Check from './components/Check';
 
 export default class App extends Component{
   render(){
@@ -44,6 +45,7 @@ export default class App extends Component{
                 <Route exact path='/store' component={Store} />
                 <Route exact path='/profile' component={Profile} />
                 <Route exact path='/shop' component={Shop} />
+                <Route exact path='/check' component={Check} />
             </Switch>
             <Footer />
         </div>

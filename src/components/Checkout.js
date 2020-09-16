@@ -531,7 +531,7 @@ export default class Checkout extends Component{
 
                 </section>
 
-                <form action="/your-server-side-code" method="POST">
+                <form action="/charge" method="POST">
                     <script
                             src="https://checkout.stripe.com/checkout.js" className="stripe-button"
                             // data-key="{{ env('STRIPE_PUB_KEY') }}"

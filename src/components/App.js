@@ -6,7 +6,7 @@ import CheckoutForm from "./CheckoutForm";
 
 const stripePromise = loadStripe("pk_test_35p114pH8oNuHX72SmrvsFqh00Azv3ZaIA");
 
-const Check = () => {
+const App = () => {
   return (
     <div className="App">
       <div className="product">
@@ -25,4 +25,4 @@ const Check = () => {
   );
 };
 
-export default Check;
+export default App;

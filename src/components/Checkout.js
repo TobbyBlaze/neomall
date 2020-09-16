@@ -528,7 +528,22 @@ export default class Checkout extends Component{
 
                     </div>
                 </div>
+
                 </section>
+
+                <form action="/your-server-side-code" method="POST">
+                    <script
+                            src="https://checkout.stripe.com/checkout.js" className="stripe-button"
+                            // data-key="{{ env('STRIPE_PUB_KEY') }}"
+                            data-key="pk_test_cQpWfd9LiCh47WuMzQNssAlU00JASuUqEy"
+                            data-amount="1999"
+                            data-name="Stripe Demo"
+                            data-description="Online course about integrating Stripe"
+                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="auto"
+                            data-currency="usd">
+                    </script>
+                </form>
 
 
                 {/* <Footer /> */}

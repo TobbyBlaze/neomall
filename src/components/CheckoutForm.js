@@ -1,9 +1,19 @@
 import React from "react";
+import axios from 'axios';
 import { ElementsConsumer, CardElement } from "@stripe/react-stripe-js";
 
 import CardSection from "./CardSection";
 
 class CheckoutForm extends React.Component {
+
+    constructor(props){
+        super(props);
+
+        this.state = {
+            token: []
+        }
+    }
+
   handleSubmit = async event => {
     event.preventDefault();
 
@@ -17,7 +27,26 @@ class CheckoutForm extends React.Component {
     if (result.error) {
       console.log(result.error.message);
     } else {
-      console.log(result.token);
+      console.log(result);
+      axios
+            .post('https://neomallapi.herokuapp.com/api/charge', result.token,
+            {
+                headers: {
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    // 'Authorization': 'Bearer '+a,
+                    // 'withCredentials': true
+                }
+            })
+            .then(response => {
+                console.log("response");
+                console.log(response)
+                // this.setState({ order: response.data.cart.data })
+                // window.location.href = "https://damp-island-72638.herokuapp.com/thanks"
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
   };
 

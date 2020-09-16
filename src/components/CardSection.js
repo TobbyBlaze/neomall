@@ -5,7 +5,7 @@ const CARD_ELEMENT_OPTIONS = {
   style: {
     base: {
       color: "#303238",
-      fontSize: "16px",
+      fontSize: "36px",
       fontFamily: "sans-serif",
       fontSmoothing: "antialiased",
       "::placeholder": {
@@ -23,10 +23,27 @@ const CARD_ELEMENT_OPTIONS = {
 
 function CardSection() {
   return (
-    <label>
-      Card details
-      <CardElement options={CARD_ELEMENT_OPTIONS} />
-    </label>
+    // <label>
+    //   Card details
+    //   <CardElement options={CARD_ELEMENT_OPTIONS} />
+    // </label>
+
+<CardElement
+options={{
+  style: {
+    base: {
+      fontSize: '16px',
+      color: '#424770',
+      '::placeholder': {
+        color: '#aab7c4',
+      },
+    },
+    invalid: {
+      color: '#9e2146',
+    },
+  },
+}}
+/>
   );
 }
 

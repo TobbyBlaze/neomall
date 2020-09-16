@@ -1,28 +1,58 @@
-import React from "react";
-import "./styles.css";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import CheckoutForm from "./CheckoutForm";
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-const stripePromise = loadStripe("pk_test_35p114pH8oNuHX72SmrvsFqh00Azv3ZaIA");
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-const App = () => {
-  return (
-    <div className="App">
-      <div className="product">
-        <img
-          src="https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress"
-          alt="laptop"
-          style={{ width: "100%", height: "auto" }}
-        />
+// import Header from './Header';
+import Home from './components/Home';
+import Cart from './components/Cart';
+import Product from './components/Product';
+import Products from './components/Products';
+import Checkout from './components/Checkout';
+import Portal from './components/Portal';
+import SellerPortal from './components/SellerPortal';
+import AdminPortal from './components/AdminPortal';
+import Store from './components/Store';
+import Profile from './components/Profile';
+import Shop from './components/Shop';
+import Footer from './components/Footer';
+// import Error from './Error';
+import Thanks from './components/Thanks';
+import Admine from './components/Admine';
+import Checks from './components/Checks';
+import CheckoutForm from './components/CheckoutForm';
+
+export default class App extends Component{
+  render(){
+    return (
+      <BrowserRouter>
         <div>
-          <Elements stripe={stripePromise}>
-            <CheckoutForm />
-          </Elements>
+            {/* <Header /> */}
+            <Switch>
+                
+                <Route exact path='/' component={Home} />
+                <Route exact path='/product/:id' component={Product} />
+                <Route exact path='/products/product/:id' component={Product} />
+                <Route exact path='/products/:id' component={Products} />
+                <Route exact path='/cart' component={Cart} />
+                <Route exact path='/checkout' component={Checkout} />
+                <Route exact path='/thanks' component={Thanks} />
+                <Route exact path='/admine' component={Admine} />
+                <Route exact path='/portal' component={Portal} />
+                <Route exact path='/seller-portal' component={SellerPortal} />
+                <Route exact path='/admin-portal' component={AdminPortal} />
+                <Route exact path='/store' component={Store} />
+                <Route exact path='/profile' component={Profile} />
+                <Route exact path='/shop' component={Shop} />
+                <Route exact path='/checks' component={Checks} />
+            </Switch>
+            <Footer />
         </div>
-      </div>
-    </div>
-  );
-};
+    </BrowserRouter>
+    );
+  }
+}
 
-export default App;
+// export default App;

@@ -32,10 +32,10 @@ function CardSection() {
 options={{
   style: {
     base: {
-      fontSize: '16px',
+      fontSize: '14px',
       color: '#424770',
       '::placeholder': {
-        color: '#aab7c4',
+        color: '#000000',
       },
     },
     invalid: {

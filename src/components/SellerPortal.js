@@ -25,6 +25,7 @@ export default class SellerPortal extends Component {
             city: '',
             country: '',
             zip: '',
+            file: [],
             business_reg_no: '',
             business_reg_doc: '',
             tin: '',
@@ -48,17 +49,22 @@ export default class SellerPortal extends Component {
     }
 
     store_picsHandler = (event) => {
-        this.setState({store_pics1: URL.createObjectURL(event.target.files[0])});
-        this.setState({store_pics2: URL.createObjectURL(event.target.files[1])});
+        // this.setState({store_pics1: URL.createObjectURL(event.target.files[0])});
+        // this.setState({store_pics2: URL.createObjectURL(event.target.files[1])});
+
+        this.setState({file1: URL.createObjectURL(event.target.files[0])});
+        this.setState({file2: URL.createObjectURL(event.target.files[1])});
+
+        this.setState({ file: [...this.state.file, ...event.target.files] })
     }
 
-    business_regHandler = (event) => {
-        this.setState({business_reg_doc: URL.createObjectURL(event.target.files[0])});
-    }
+    // business_regHandler = (event) => {
+    //     this.setState({business_reg_doc: URL.createObjectURL(event.target.files[0])});
+    // }
 
-    vatHandler = (event) => {
-        this.setState({vat_info_doc: URL.createObjectURL(event.target.files[0])});
-    }
+    // vatHandler = (event) => {
+    //     this.setState({vat_info_doc: URL.createObjectURL(event.target.files[0])});
+    // }
 
     loginHandler = e => {
         e.preventDefault()
@@ -87,15 +93,50 @@ export default class SellerPortal extends Component {
         console.log(this.state)
         this.setState({ loading: true })
 
+        const formData = new FormData();
+        for(let i = 0; i< 2; i++) {
+            formData.append('image[]', this.state.file[i]);
+        }
+        formData.append('name', this.state.name);
+        formData.append('last_name', this.state.last_name);
+        formData.append('email', this.state.email);
+        formData.append('password', this.state.password);
+        formData.append('confirm_password', this.state.confirm_password);
+        formData.append('phone_number_1', this.state.phone_number_1);
+        formData.append('phone_number_2', this.state.phone_number_2);
+        formData.append('store_name', this.state.store_name);
+        formData.append('store_pics', this.state.store_pics);
+        formData.append('address_1', this.state.address_1);
+        formData.append('address_2', this.state.address_2);
+        formData.append('city', this.state.city);
+        formData.append('country', this.state.country);
+        formData.append('zip', this.state.zip);
+        formData.append('file', this.state.file);
+        formData.append('company_name', this.state.company_name);
+        formData.append('bank_name', this.state.bank_name);
+        formData.append('acct_holder_name', this.state.acct_holder_name);
+        formData.append('bank_acct_number', this.state.bank_acct_number);
+        // formData.append('bank_info', this.state.bank_info);
+        // formData.append('file', this.state.file, this.state.file.name);
+        console.log(this.state.file[0]); 
+        console.log(this.state.file[1]); 
+        console.log(formData)
+        this.setState({ form: formData })
+        for(var pair of formData.entries()) {
+            console.log(pair[0]+', '+pair[1]);
+        }
+        console.log(formData.get("name"))
+
         axios
             // .post('localhost/yummypizza/public/api/auth/signup', this.state)
             // .post('http://localhost/Neomallapi/public/api/auth/seller-signup', this.state
-            .post('https://neomallapi.herokuapp.com/api/auth/seller-signup', this.state
+            .post('https://neomallapi.herokuapp.com/api/auth/seller-signup', formData
             , {
                 headers: {
 
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Content-Type': 'application/json',
+                    // 'Content-Type': 'application/json',
+                    'Content-Type': 'multipart/form-data',
                 }
             })
             .then(response => {
@@ -229,12 +270,12 @@ export default class SellerPortal extends Component {
                                                 </div>
                                                 <div className="form-group col-12">
                                                     <label htmlFor="store_pics">Store pics</label>
-                                                    <input type="file" name="store_pics[]" className="form-control" id="store_pics" onChange={this.store_picsHandler} multiple />
+                                                    <input type="file" name="file[]" className="form-control" id="store_pics" onChange={this.store_picsHandler} multiple />
                                                 </div>
-                                                <img class="img-responsive" src={this.state.store_pics1} />
+                                                <img class="img-responsive" src={this.state.file1} />
                                                 <br />
                                                 <br />
-                                                <img class="img-responsive" src={this.state.store_pics2} />
+                                                <img class="img-responsive" src={this.state.file2} />
                                             </div>
                                             <div className="card-header" id="seller-signup-2">
                                                 <h2 className="mb-0">

@@ -43,6 +43,9 @@ class Checks extends React.Component{
 
     handleSubmit = async event => {
         event.preventDefault();
+        var a=localStorage.getItem("authen");
+        console.log("All states");
+        console.log(this.state);
     
         const { stripe, elements } = this.props;
         if (!stripe || !elements) {

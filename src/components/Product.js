@@ -227,7 +227,7 @@ export default class Product extends Component{
         axios
 
             // .get('http://localhost/yummypizza/public/api/auth/prdetails/'+this.props.match.params.id, {
-            .post('https://neomallapi.herokuapp.com/api/auth/prdetails/'+this.props.match.params.id, {
+            .get('https://neomallapi.herokuapp.com/api/auth/prdetails/'+this.props.match.params.id, {
                 
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -237,13 +237,13 @@ export default class Product extends Component{
                 }
             })
             .then(response => {
-                // console.log(response.data.good)
+                console.log(response)
                 this.setState({ good: response.data.good })
                 this.setState({ loading: false })
                 
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
                 this.setState({ loading: false })
             })
@@ -267,7 +267,7 @@ export default class Product extends Component{
                 
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
                 this.setState({ loading: false })
             })

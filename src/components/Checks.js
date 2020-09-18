@@ -56,12 +56,12 @@ class Checks extends React.Component{
         } else {
           console.log(result);
           axios
-                .post('https://neomallapi.herokuapp.com/api/charge', result.token,
+                .post('https://neomallapi.herokuapp.com/api/auth/charge', result.token,
                 {
                     headers: {
                         // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                         'Content-Type': 'application/json',
-                        // 'Authorization': 'Bearer '+a,
+                        'Authorization': 'Bearer '+a,
                         // 'withCredentials': true
                     }
                 })

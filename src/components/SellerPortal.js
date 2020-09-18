@@ -256,10 +256,10 @@ export default class SellerPortal extends Component {
                                                     <label htmlFor="city">City</label>
                                                     <input type="text" name="city" className="form-control" id="city"  value={city} onChange={this.changeHandler}  />
                                                 </div>
-                                                {/* <div className="form-group col-12">
+                                                <div className="form-group col-12">
                                                     <label htmlFor="country">Country</label>
                                                     <input type="text" name="country" className="form-control" id="country"  value={country} onChange={this.changeHandler}  />
-                                                </div> */}
+                                                </div>
                                                 <div className="form-group col-12">
                                                     <label htmlFor="zip">Postal/ZIP code</label>
                                                     <input type="text" name="zip" className="form-control" id="zip"  value={zip} onChange={this.changeHandler}  />

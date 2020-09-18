@@ -227,7 +227,7 @@ export default class Product extends Component{
         axios
 
             // .get('http://localhost/yummypizza/public/api/auth/prdetails/'+this.props.match.params.id, {
-            .get('https://neomallapi.herokuapp.com/api/auth/prdetails/'+this.props.match.params.id, {
+            .post('https://neomallapi.herokuapp.com/api/auth/prdetails/'+this.props.match.params.id, {
                 
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

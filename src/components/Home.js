@@ -145,6 +145,12 @@ export default class Home extends Component{
                 console.log("All goods")
                 console.log(response.data.goods.data)
                 this.setState({ goods: [...this.state.goods, ...response.data.goods.data] })
+                var goodsPics = this.state.goods.map((good, i)=> good.image);
+                console.log(goodsPics)
+                var goodsPicsJ = JSON.parse(goodsPics)
+                console.log(goodsPicsJ)
+                var goodsPicsJS = goodsPicsJ.split(",")
+                console.log(goodsPicsJS)
                 this.setState({ goodsPage: response.data.goods.current_page })
                 console.log("All pop goods")
                 console.log(response.data.popGoods.data)

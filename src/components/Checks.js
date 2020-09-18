@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
@@ -11,7 +11,7 @@ import CardSection from "./CardSection";
 import Header from './Header';
 import Footer from './Footer';
 
-class Checks extends React.Component{
+class Checks extends Component{
     constructor(props){
         super(props);
 

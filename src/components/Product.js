@@ -176,6 +176,28 @@ export default class Product extends Component{
         var a=localStorage.getItem("authen");
         const { match: { params } } = this.props;
 
+        axios
+            .get('https://neomallapi.herokuapp.com/api/prdetails/'+this.props.match.params.id, {
+                
+                headers: {
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    // 'Authorization': 'Bearer '+a,
+                    // 'withCredentials': true
+                }
+            })
+            .then(response => {
+                console.log(response)
+                this.setState({ good: response.data.good })
+                this.setState({ loading: false })
+                
+            })
+            .catch(error => {
+                console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
+            })
+
         var one = "https://neomallapi.herokuapp.com/api"
         var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
         var three = "https://neomallapi.herokuapp.com/api"
@@ -224,51 +246,6 @@ export default class Product extends Component{
             this.setState({errorMsg: 'Error retrieving data'})
         })
 
-        axios
-            .get('https://neomallapi.herokuapp.com/api/prdetails/'+this.props.match.params.id, {
-                
-                headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
-                }
-            })
-            .then(response => {
-                console.log(response)
-                this.setState({ good: response.data.good })
-                this.setState({ loading: false })
-                
-            })
-            .catch(error => {
-                console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-                this.setState({ loading: false })
-            })
-        }else{
-            axios
-
-            // .get('http://localhost/yummypizza/public/api/auth/prdetails/'+this.props.match.params.id, {
-            .get('https://neomallapi.herokuapp.com/api/prdetails/'+this.props.match.params.id, {
-                
-                headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Content-Type': 'application/json',
-                    // 'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
-                }
-            })
-            .then(response => {
-                console.log(response)
-                this.setState({ good: response.data.good })
-                this.setState({ loading: false })
-                
-            })
-            .catch(error => {
-                console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-                this.setState({ loading: false })
-            })
         }
 
     }

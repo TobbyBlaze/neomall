@@ -172,7 +172,8 @@ export default class Product extends Component{
             })
     }
 
-    componentDidMount(){
+    componentDidMount(e){
+        e.preventDefault()
         var a=localStorage.getItem("authen");
         const { match: { params } } = this.props;
 

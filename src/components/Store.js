@@ -210,6 +210,18 @@ export default class Store extends Component{
             var auth = true;
         }
 
+        // Additional css
+    const loadingCSS = {
+        height: "30px",
+        margin: "10px",
+        color: "black"
+      };
+  
+      // To change the loading icon behavior
+      const loadingTextCSS = { display: this.state.load ? "block" : "none" };
+      const searchLoadingCSS = { display: this.state.searchLoading ? "none" : "block" };
+  
+
         return(
             
             <div>
@@ -372,6 +384,14 @@ export default class Store extends Component{
                     
                     }
                     </div>
+
+                    <div
+                    ref={loadingRef => (this.loadingRef = loadingRef)}
+                    style={loadingCSS}
+                    >
+                    <span style={loadingTextCSS}>Loading... <Skeleton width={300}/></span>
+                    </div>
+                    
                 </div>
                 </section>
                 <br />

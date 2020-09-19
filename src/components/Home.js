@@ -147,8 +147,11 @@ export default class Home extends Component{
                 this.setState({ goods: [...this.state.goods, ...response.data.goods.data] })
                 var goodsPics = this.state.goods.map((good, i)=> good.image);
                 console.log(goodsPics)
-                // var goodsPicsJ = JSON.parse(goodsPics)
+                // var goodsPicsJ = JQuery.parseJSON(goodsPics)
                 // console.log(goodsPicsJ)
+                var goodsPicsJp = JSON.parse(goodsPics)
+                console.log(JSON.parse(goodsPics)[0])
+
                 // var goodsPicsJS = goodsPics.split(",")
                 // console.log(goodsPicsJS)
                 this.setState({ goodsPage: response.data.goods.current_page })
@@ -532,8 +535,8 @@ export default class Home extends Component{
                             <div className="product">
                             <figure className="product-image">
                                 <Link to={"product/"+good.id}>
-                                <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)} alt="Image" />
-                                {/* <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image.split(',', 1))} alt="Image" /> */}
+                                <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[0]} alt="Image" />
+                                <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[1]} alt="Image" />
                                 </Link>
                             </figure>
                             <div className="product-meta">

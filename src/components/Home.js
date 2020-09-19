@@ -149,8 +149,8 @@ export default class Home extends Component{
                 console.log(goodsPics)
                 // var goodsPicsJ = JQuery.parseJSON(goodsPics)
                 // console.log(goodsPicsJ)
-                var goodsPicsJp = JSON.parse(goodsPics)
-                console.log(JSON.parse(goodsPics)[0])
+                // var goodsPicsJp = JSON.parse(goodsPics)
+                // console.log(JSON.parse(goodsPics)[0])
 
                 // var goodsPicsJS = goodsPics.split(",")
                 // console.log(goodsPicsJS)
@@ -540,7 +540,7 @@ export default class Home extends Component{
                                 </Link>
                             </figure>
                             <div className="product-meta">
-                                <h3 className="product-title"><Link to={"product/"+good.id}>{good.name} </Link></h3>
+                                <p className="product-title"><Link to={"product/"+good.id}>{good.name} </Link></p>
                                 <div className="product-price">
                                 <span>${good.price}</span>
                                 </div>

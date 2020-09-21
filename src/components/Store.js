@@ -133,7 +133,7 @@ export default class Store extends Component{
         this.setState({ prevY: y });
       }
 
-      componentDidMount(){
+    componentDidMount(){
         var a=localStorage.getItem("authen");
         this.fetchData(this.state.page);
 
@@ -391,7 +391,7 @@ export default class Store extends Component{
                     >
                     <span style={loadingTextCSS}>Loading... <Skeleton width={300}/></span>
                     </div>
-                    
+
                 </div>
                 </section>
                 <br />

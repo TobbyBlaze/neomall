@@ -2,26 +2,25 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Link, useParams } from 'react-router-dom'
-import { Lines, Circle2 } from 'react-preloaders'
+// import { Lines, Circle2 } from 'react-preloaders'
 import Skeleton from 'react-loading-skeleton';
 
 import Header from './Header';
 import Footer from './Footer';
 
-export default class Products extends Component{
+export default class Home extends Component{
     constructor(props){
         super(props);
 
         this.state = {
             goods: [],
             goodsPage: null,
+            popGoods: [],
             carts: [],
             cartsNum: '',
-            delcart: '',
-            products: [],
-            seller: '',
-            errorMsg: '',
+            delcart: 0,
             q: '',
+            errorMsg: '',
             loading: true,
             load: false,
             searchLoading: false,
@@ -70,6 +69,7 @@ export default class Products extends Component{
         var a=localStorage.getItem("authen");
         console.log("All states");
         console.log(this.state);
+        if(a){
         axios
             .get('https://neomallapi.herokuapp.com/api/auth/deletecart/'+this.state.delcart, {
                 
@@ -90,6 +90,9 @@ export default class Products extends Component{
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
             })
+        }else{
+            window.location.href = "https://neomall.herokuapp.com/portal"
+        }
     }
 
     addWish = (e) => {
@@ -98,7 +101,7 @@ export default class Products extends Component{
         this.setState({ loading: true })
         console.log("All states");
         console.log(this.state);
-
+        if(a){
         axios
             .post('https://neomallapi.herokuapp.com/api/auth/storewish', this.state.good,
             {
@@ -120,16 +123,18 @@ export default class Products extends Component{
                 this.setState({errorMsg: 'Error retrieving data'})
                 this.setState({ loading: false })
             })
+        }else{
+            window.location.href = "https://neomall.herokuapp.com/portal"
+        }
     }
 
     fetchData = (page) => {
         this.setState({ load: true });
-        const { match: { params } } = this.props;
         // this.setState({ loading: true })
         console.log("All states")
         console.log(this.state)
         axios
-            .get('https://neomallapi.herokuapp.com/api/products/'+this.props.match.params.id+'?page='+page, {
+            .get('https://neomallapi.herokuapp.com/api?page='+page, {
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -138,12 +143,21 @@ export default class Products extends Component{
                 console.log("All responses from fetch data")
                 console.log(response)
                 console.log("All goods")
-                console.log(response.data.storeGoods.data)
-                this.setState({ goods: [...this.state.storeGoods, ...response.data.goods.data] })
-                this.setState({ goodsPage: response.data.storeGoods.current_page })
-                // console.log("All pop goods")
-                // console.log(response.data.popGoods.data)
-                // this.setState({ popGoods: response.data.popGoods.data })
+                console.log(response.data.goods.data)
+                this.setState({ goods: [...this.state.goods, ...response.data.goods.data] })
+                var goodsPics = this.state.goods.map((good, i)=> good.image);
+                console.log(goodsPics)
+                // var goodsPicsJ = JQuery.parseJSON(goodsPics)
+                // console.log(goodsPicsJ)
+                // var goodsPicsJp = JSON.parse(goodsPics)
+                // console.log(JSON.parse(goodsPics)[0])
+
+                // var goodsPicsJS = goodsPics.split(",")
+                // console.log(goodsPicsJS)
+                this.setState({ goodsPage: response.data.goods.current_page })
+                console.log("All pop goods")
+                console.log(response.data.popGoods.data)
+                this.setState({ popGoods: response.data.popGoods.data })
                 this.setState({ loading: false })
                 this.setState({ load: false });
             })
@@ -189,11 +203,11 @@ export default class Products extends Component{
 
     logoutHandler = e => {
         e.preventDefault()
-        const { match: { params } } = this.props;
-        // console.log(this.state)
+        console.log("All states")
+        console.log(this.state)
         var a=localStorage.getItem("authen");
-        this.setState({ loading: true })
-      
+        // this.setState({ loading: true })
+
         axios
             .get('https://neomallapi.herokuapp.com/api/auth/logout',{
                 headers: {
@@ -202,15 +216,17 @@ export default class Products extends Component{
                 }
             })
             .then(response => {
-                // console.log(response);
+                console.log("All responses from logout")
+                console.log(response);
                 localStorage.clear("authen");
                 var a=null;
                 console.log(a);
-                window.location.href = 'https://neomall.herokuapp.com/products/'+this.props.match.params.id
+                window.location.href = "https://neomall.herokuapp.com"
             })
             .catch(error => {
-                // console.log(error)
-                this.setState({ loading: false })
+                console.log("Error from logout")
+                console.log(error)
+                // this.setState({ loading: false })
             })
     }
 
@@ -226,9 +242,8 @@ export default class Products extends Component{
         this.setState({ prevY: y });
       }
 
-      componentDidMount(){
+    componentDidMount(){
         var a=localStorage.getItem("authen");
-        const { match: { params } } = this.props;
         this.fetchData(this.state.page);
 
         var options = {
@@ -287,8 +302,15 @@ export default class Products extends Component{
 
     }
 
+    componentWillUnmount() {
+        // fix Warning: Can't perform a React state update on an unmounted component
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
     render(){
-        const { goods, carts, cartsNum, errorMsg, delcart, products, seller, loading } = this.state;
+        const { goods, popGoods, carts, cartsNum, errorMsg, delcart, loading, q } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -296,7 +318,7 @@ export default class Products extends Component{
             var auth = true;
         }
 
-         // Additional css
+        // Additional css
     const loadingCSS = {
         height: "30px",
         margin: "10px",
@@ -310,8 +332,8 @@ export default class Products extends Component{
 
         return(
             
+            
             <div>
-                {/* <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" /> */}
                 
                 <div className="container-fluid">
                     {/* <!-- header --> */}
@@ -432,33 +454,40 @@ export default class Products extends Component{
                     </div>
                     </div>
 
+
                     {/* <!-- search -->  */}
                     <div className="modal fade search" id="search" tabIndex="-1" role="dialog" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                         <div className="modal-header">
-                            <input type="text" className="form-control" placeholder="Type your search here" aria-label="Type your search here" aria-describedby="button-addon2" />
+                            <form onSubmit={this.searchGoodsHandler}>
+                            <input type="text" className="form-control" name="q" placeholder="Type your search here" aria-label="Type your search here" aria-describedby="button-addon2" onChange={this.changeHandler}/>
+                            <button type="submit">Search</button>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
+                            </form>
                         </div>
                         </div>
                     </div>
                     </div>
 
                 </div>
+                <br />
+                <br />
+                <br />
                 
                 
                 {/* <!-- slider --> */}
-                <div className="swiper-container swiper-container-alt">
+                <div className="swiper-container swiper-container-alt" style={searchLoadingCSS}>
                 <div className="swiper-wrapper">
                     <div className="swiper-slide">
-                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-4.jpg)'}}></div>
+                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-4.jpg)', height:"20"}}></div>
                     {/* <div className="image image-overlay image-zoom image-back" ></div> */}
                     <div className="container">
                         <div className="row align-items-center justify-content-center vh-80">
                         <div className="col-lg-8 text-white text-center" data-swiper-parallax-y="-100%">
-                            <h1 className="display-2 mb-2">Welcome to {seller.name} store.</h1>
+                            <h1 className="display-2 mb-2">Your <b>perfect workspace</b> is waiting for you.</h1>
                             <Link to="/shop" className="btn btn-white">Shop Now</Link>
                         </div>
                         </div>
@@ -476,44 +505,118 @@ export default class Products extends Component{
                     </div>
                     </div>
                 </div>
-                <div className="swiper-button-prev"></div>
-                <div className="swiper-button-next"></div>
+                {/* <div className="swiper-button-prev"></div>
+                <div className="swiper-button-next"></div> */}
                 </div>
 
 
                 
-                {/* <!-- latest products --> */}
+                {/* <!-- products --> */}
                 <section className="pt-0">
                 <div className="container">
                     <div className="row">
                     <div className="col text-center">
-                            <h4>Latest Products from {seller.name} store</h4>
+                        <h4>Latest Products</h4>
                     </div>
                     </div>
+
                     <div className="row gutter-2 gutter-md-3">
 
-                    {products.map((product, i)=>
-                    <div key={product.id} className="col-3 col-lg-2">
+                    
+                    {loading?
+                        <div>
+                            <Skeleton width={300}/>
+                            
+                        </div>
+                    :
+                    goods.map((good, i)=>
+                    
+                        <div key={good.id} className="col-3 col-lg-2">
+                            <div className="product">
+                            <figure className="product-image">
+                                <Link to={"product/"+good.id}>
+                                <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[0]} alt="Image" height="50" />
+                                <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[1]} alt="Image" height="50" />
+                                </Link>
+                            </figure>
+                            <div className="product-meta">
+                                <p className="product-title"><Link to={"product/"+good.id}>{good.name} </Link></p>
+                                <div className="product-price">
+                                <span>${good.price}</span>
+                                </div>
+                                {/* <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a> */}
+                            </div>
+                            </div>
+                        </div>
+                    )
+                    
+                    }
+                    </div>
+
+                    <div
+                    ref={loadingRef => (this.loadingRef = loadingRef)}
+                    style={loadingCSS}
+                    >
+                    <span style={loadingTextCSS}>Loading... <Skeleton width={300}/></span>
+                    </div>
+
+                    {/* <div className="row">
+                    <div className="col text-center">
+                        <h4>Popular Products</h4>
+                    </div>
+                    </div>
+
+                    <div className="row gutter-2 gutter-md-3">
+
+                    {popGoods.map((good, i)=>
+                    <div key={good.id} className="col-3 col-lg-2">
                         <div className="product">
                         <figure className="product-image">
-                            <Link to={"product/"+product.id}>
+                            <Link to={"product/"+good.id}>
                             <img src="https://neomall.herokuapp.com/assets/images/demo/product-1.jpg" alt="Image" />
                             <img src="https://neomall.herokuapp.com/assets/images/demo/product-1-2.jpg" alt="Image" />
                             </Link>
                         </figure>
                         <div className="product-meta">
-                            <h3 className="product-title"><Link to={"product/"+product.id}>{product.name} </Link></h3>
+                            <h3 className="product-title"><Link to={"product/"+good.id}>{good.name} </Link></h3>
                             <div className="product-price">
-                            <span>${product.price}</span>
-                            <span className="product-action">
-                                <a href="api/storecart/{product.id.toString()}">Add to cart</a>
-                            </span>
+                            <span>${good.price}</span>
                             </div>
-                            <a href="api/storewish/{product.id.toString()}" className="product-like"></a>
+                            {/* <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a> 
                         </div>
                         </div>
                     </div>
                     )}
+                    </div>
+
+                    <div className="row">
+                    <div className="col text-center">
+                        <h4>Suggested Products</h4>
+                    </div>
+                    </div>
+
+                    <div className="row gutter-2 gutter-md-3">
+
+                    {goods.map((good, i)=>
+                    <div key={good.id} className="col-3 col-lg-2">
+                        <div className="product">
+                        <figure className="product-image">
+                            <Link to={"product/"+good.id}>
+                            <img src="https://neomall.herokuapp.com/assets/images/demo/product-1.jpg" alt="Image" />
+                            <img src="https://neomall.herokuapp.com/assets/images/demo/product-1-2.jpg" alt="Image" />
+                            </Link>
+                        </figure>
+                        <div className="product-meta">
+                            <h3 className="product-title"><Link to={"product/"+good.id}>{good.name} </Link></h3>
+                            <div className="product-price">
+                            <span>${good.price}</span>
+                            </div>
+                            {/* <a href="api/storewish/{good.id.toString()}"><i class="fa fa-star"></i></a> 
+                        </div>
+                        </div>
+                    </div>
+                    )}
+                    </div> */}
                     
 
                     {/* <div className="col-6 col-lg-3">
@@ -538,15 +641,7 @@ export default class Products extends Component{
                         </div>
                     </div> */}
                     
-                    </div>
-
-                    <div
-                    ref={loadingRef => (this.loadingRef = loadingRef)}
-                    style={loadingCSS}
-                    >
-                    <span style={loadingTextCSS}>Loading... <Skeleton width={300}/></span>
-                    </div>
-
+                    {/* </div> */}
                     <div className="row">
                     <div className="col text-center">
                         {/* <Link to="#!" className="btn btn-outline-secondary">Load More</Link> */}
@@ -557,12 +652,13 @@ export default class Products extends Component{
                 <div>
                     {/* <Footer /> */}
                 </div>
+                {/* <Circle2 customLoading={loading} color={'#ffffff'} background="#000000" animation="slide-right" /> */}
                 
             </div>
         )
     }
 }
 
-// if (document.getElementById('products')) {
-//     ReactDOM.render(<Products />, document.getElementById('products'));
+// if (document.getElementById('home')) {
+//     ReactDOM.render(<Home />, document.getElementById('home'));
 // }

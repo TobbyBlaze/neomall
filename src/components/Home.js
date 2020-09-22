@@ -399,11 +399,11 @@ export default class Home extends Component{
                             <div className="collapse navbar-collapse order-3 order-lg-1" id="navbarMenu">
                             {/* <div className="" id="navbarMenu"> */}
                             <ul className="navbar-nav mr-auto">
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                 <Link className="nav-link" to="/">
                                     Home
                                 </Link>
-                                </li>
+                                </li> */}
                                 <li class="nav-item dropdown megamenu">
                                     <Link class="nav-link dropdown-toggle" to="#!" id="navbarDropdown-4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Categories
@@ -461,6 +461,18 @@ export default class Home extends Component{
                                             <li><Link class="dropdown-item" to="documentation/index.html">Documentation</Link></li>
                                             <li><Link class="dropdown-item" to="documentation/changelog.html">Changelog</Link></li>
                                         </ul>
+                                        <ul class="col-6 col-md-3 col-lg-2">
+                                            <li><span class="megamenu-title">Pages</span></li>
+                                            <li><Link class="dropdown-item" to="about.html">About</Link></li>
+                                            <li><Link class="dropdown-item" to="contact.html">Contact</Link></li>
+                                            <li><Link class="dropdown-item" to="faq.html">FAQ</Link></li>
+                                            <li><Link class="dropdown-item" to="text.html">Text Page</Link></li>
+                                            <li><Link class="dropdown-item" to="404.html">404</Link></li>
+                                            <li><Link class="dropdown-item" to="coming-soon.html">Coming Soon</Link></li>
+                                            <li><span class="megamenu-title">Docs</span></li>
+                                            <li><Link class="dropdown-item" to="documentation/index.html">Documentation</Link></li>
+                                            <li><Link class="dropdown-item" to="documentation/changelog.html">Changelog</Link></li>
+                                        </ul>
                                         {/* <div class="col-lg-4">
                                             <div class="promo">
                                             <span class="image image-overlay" style={{backgroundImage: 'url(assets/images/background-3.jpg)'}}></span>
@@ -481,7 +493,7 @@ export default class Home extends Component{
                                 {auth?
                                     <li className="nav-item">
                                     <Link className="nav-link" to="/profile">
-                                        Profile
+                                        Your Account
                                     </Link>
                                     </li>
                                 :
@@ -591,10 +603,10 @@ export default class Home extends Component{
                         <div className="modal-header">
                             <form onSubmit={this.searchGoodsHandler}>
                             <input type="text" className="form-control" name="q" placeholder="Type your search here" aria-label="Type your search here" aria-describedby="button-addon2" onChange={this.changeHandler}/>
-                            <button type="submit">Search</button>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
+                            <button type="submit" className="close" data-dismiss="modal">Search</button>
+                            {/* <button type="button" className="close" data-dismiss="modal" aria-label="Close"> */}
+                            {/* <span aria-hidden="true">&times;</span> */}
+                            {/* </button> */}
                             </form>
                         </div>
                         </div>

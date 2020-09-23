@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+import Search from 'react-search'
+
 import OwlCarousel from 'react-owl-carousel2';
 // import 'react-owl-carousel2/style.css'; //Allows for server-side rendering.
 
@@ -17,9 +19,11 @@ export default class Home extends Component{
         super(props);
 
         this.state = {
+            repos: [],
             goods: [],
             goodsPage: null,
             sellers: [],
+            newGoods: [],
             popGoods: [],
             carts: [],
             cartsNum: '',
@@ -38,37 +42,61 @@ export default class Home extends Component{
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    addCart = (e) => {
-        e.preventDefault()
-        var a=localStorage.getItem("authen");
-        this.setState({ loading: true })
-        console.log("All states");
-        console.log(this.state);
-        axios
-            .post('https://neomallapi.herokuapp.com/api/auth/storecart', this.state.good,
-            {
-                params: {
-                    quantity: this.state.cart.quantity,
-                },
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                }
-            })
-            .then(response => {
-                console.log("All responses from add cart")
-                console.log(response)
-                console.log("Cart data");
-                console.log(response.data);
-                this.setState({ cart: response.data })
-            })
-            .catch(error => {
-                console.log("Error from add cart")
-                console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-                this.setState({ loading: false })
-            })
-    }
+    HiItems(items) {
+        console.log(items)
+        // this.setState({ q: items })
+      }
+
+    getItemsAsync(searchValue, cb) {
+        let url = 'https://neomallapi.herokuapp.com/api/searchGoods?q='+searchValue
+        fetch(url).then( (response) => {
+          return response.json();
+        }).then((response) => {
+            console.log(response)
+        //   if(results.items != undefined){
+            console.log(response.goods.data)
+            let items = response.goods.data.map( (res, i) => { return { id: i, value: res.name, name: res.name, price: res.price } })
+            this.setState({ repos: items })
+            this.setState({ goods: items })
+            this.setState({ searchLoading: true })
+            cb(searchValue)
+        //   }
+        });
+
+        // axios
+        //     .get('https://neomallapi.herokuapp.com/api/searchGoods', {
+        //         params: {
+        //             q: this.state.q,
+        //         },
+        //     },
+        //     {
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         }
+        //     })
+        //     .then(response => {
+        //         console.log("All responses from search")
+        //         console.log(response);
+        //         console.log("All searched goods")
+        //         console.log(response.data.goods.data)
+        //         console.log(this.state.goods)
+        //         // this.setState({ goods: [] })
+        //         this.setState({ goods: response.data.goods.data })
+        //         this.setState({ searchLoading: true })
+
+        //         let items = response.data.goods.data.map( (res, i) => { return { id: res.id, value: res.name } })
+        //         this.setState({ repos: items })
+        //         console.log(this.state.repos)
+        //         // cb(searchValue)
+        //         cb(q)
+                
+        //     })
+        //     .catch(error => {
+        //         console.log("Error from search")
+        //         console.log(error)
+        //         // this.setState({ loading: false })
+        //     })
+      }
 
     deleteCart = () => {
         var a=localStorage.getItem("authen");
@@ -147,9 +175,9 @@ export default class Home extends Component{
             .then(response => {
                 console.log("All responses from fetch data")
                 console.log(response)
-                console.log("All goods")
-                console.log(response.data.goods.data)
-                this.setState({ goods: [...this.state.goods, ...response.data.goods.data] })
+                console.log("All new goods")
+                console.log(response.data.newGoods.data)
+                this.setState({ newGoods: [...this.state.newGoods, ...response.data.goods.data] })
                 console.log("All popular goods")
                 console.log(response.data.popGoods.data)
                 this.setState({ popGoods: [...this.state.popGoods, ...response.data.popGoods.data] })
@@ -162,7 +190,7 @@ export default class Home extends Component{
 
                 // var goodsPicsJS = goodsPics.split(",")
                 // console.log(goodsPicsJS)
-                this.setState({ goodsPage: response.data.goods.current_page })
+                this.setState({ goodsPage: response.data.newGoods.current_page })
                 this.setState({ loading: false })
                 this.setState({ load: false });
             })
@@ -249,6 +277,9 @@ export default class Home extends Component{
 
     componentDidMount(){
         var a=localStorage.getItem("authen");
+
+        this.setState({ searchLoading: false })
+
         this.fetchData(this.state.page);
 
         var options = {
@@ -262,6 +293,7 @@ export default class Home extends Component{
             options
         );
         this.observer.observe(this.loadingRef);
+
 
         axios
             .get('https://neomallapi.herokuapp.com/api/stores', {
@@ -334,7 +366,7 @@ export default class Home extends Component{
     }
 
     render(){
-        const { goods, sellers, popGoods, carts, cartsNum, errorMsg, delcart, loading, q } = this.state;
+        const { goods, newGoods, sellers, popGoods, carts, cartsNum, errorMsg, delcart, loading, q, searchLoading } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -490,6 +522,7 @@ export default class Home extends Component{
                                     Stores
                                 </Link>
                                 </li>
+                                
                                 {auth?
                                     <li className="nav-item">
                                     <Link className="nav-link" to="/profile">
@@ -601,13 +634,23 @@ export default class Home extends Component{
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                         <div className="modal-header">
-                            <form onSubmit={this.searchGoodsHandler}>
+                            {/* <form onSubmit={this.searchGoodsHandler}>
                             <input type="text" className="form-control" name="q" placeholder="Type your search here" aria-label="Type your search here" aria-describedby="button-addon2" onChange={this.changeHandler}/>
-                            <button type="submit" className="close" data-dismiss="modal">Search</button>
+                            <button type="submit" className="close" data-dismiss="modal">Search</button> */}
                             {/* <button type="button" className="close" data-dismiss="modal" aria-label="Close"> */}
                             {/* <span aria-hidden="true">&times;</span> */}
                             {/* </button> */}
-                            </form>
+                            {/* </form> */}
+                            <Search items={this.state.repos}
+                            multiple={true}
+                            getItemsAsync={this.getItemsAsync.bind(this)}
+                            onItemsChanged={this.HiItems.bind(this)}
+                            maxSelected={3}
+                            placeholder='Search here'
+                            NotFoundPlaceholder='No results found' />
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         </div>
                     </div>
@@ -653,7 +696,7 @@ export default class Home extends Component{
                 <br />
 
                 {/* <!-- banner --> */}
-                <section class="py-0 relative">
+                <section class="py-0 relative" style={searchLoadingCSS}>
                 <div class="container">
                     <div class="row">
                     <div class="col">
@@ -677,7 +720,7 @@ export default class Home extends Component{
                 <br />
 
                 {/* <!-- hero --> */}
-                <section class="hero bg-purple text-white no-overflow">
+                <section class="hero bg-purple text-white no-overflow" style={searchLoadingCSS}>
                 <div class="decoration" style={{backgroundImage: 'url(assets/images/decoration-1.png)'}}></div>
                 <div class="container">
                     <div class="row">
@@ -731,7 +774,7 @@ export default class Home extends Component{
                 <br />
 
                 {/* <!-- partners --> */}
-                <section>
+                <section style={searchLoadingCSS}>
                 <div class="container">
                     <div class="row">
                     <div class="col">
@@ -778,7 +821,7 @@ export default class Home extends Component{
 
                 {/* <!-- latest products --> */}
                 <section>
-                <div class="container">
+                <div class="container" style={searchLoadingCSS}>
                     <div class="row gutter-1 align-items-end">
                     <div class="col-md-6">
                         <h2>Featured Products</h2>
@@ -807,7 +850,7 @@ export default class Home extends Component{
                                     
                                 </div>
                             :
-                            goods.map((good, i)=>
+                            newGoods.map((good, i)=>
                             <div key={good.id} class="col-6 col-lg-3">
                                 <div class="product">
                                 <figure class="product-image">
@@ -885,6 +928,48 @@ export default class Home extends Component{
                     </div>
                     </div> */}
                 </div>
+                
+                <div className="container">
+                <div class="row">
+                <div class="col">
+                <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel">
+                    <div class="row gutter-2 gutter-md-3">
+                {searchLoading?
+                    goods.map((good, i)=>
+                    <div key={good.id} class="col-6 col-lg-3">
+                        <div class="product">
+                        <figure class="product-image">
+                            <Link to={"product/"+good.id}>
+                            <img src="assets/images/demo/product-18.jpg" alt="Image" />
+                            <img src="assets/images/demo/product-18-2.jpg" alt="Image" />
+                            {/* <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[0]} alt="Image" />
+                            <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[1]} alt="Image" /> */}
+                            </Link>
+                        </figure>
+                        <div class="product-meta">
+                            <p class="product-title"><Link to={"product/"+good.id}>{good.name}</Link></p>
+                            <div class="product-price">
+                            <span>${good.price}</span>
+                            </div>
+                            <a href="#!" class="product-like"></a>
+                        </div>
+                        </div>
+                    </div>
+                    )
+                    :
+                        <div>
+                            
+                        </div>
+                
+                    }
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+
                 </section>
 
                 <br />

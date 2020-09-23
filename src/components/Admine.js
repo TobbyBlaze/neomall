@@ -298,7 +298,15 @@ export default class Admine extends Component {
                                                 </div>
                                                 <div className="form-group col-12">
                                                     <label htmlFor="category">Category</label>
-                                                    <input type="text" name="category" className="form-control" id="category"  value={category} onChange={this.changeHandler}  />
+                                                    {/* <input type="text" name="category" className="form-control" id="category"  value={category} onChange={this.changeHandler}  /> */}
+                                                    <select name="category" id="category" className="form-control" value={category} onChange={this.changeHandler} >
+                                                        <option value="" disabled selected >Category</option>
+                                                        <option value="None">Not at all -- 0</option>
+                                                        <option value="Barely">Barely -- 1</option>
+                                                        <option value="Mild">Mildly -- 2</option>
+                                                        <option value="Moderate">More often -- 3</option>
+                                                        <option value="Severe">Severely -- 4</option>
+                                                    </select>
                                                 </div>
                                                 <div className="form-group col-12">
                                                     <label htmlFor="description">Description</label>

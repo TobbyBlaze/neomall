@@ -177,7 +177,7 @@ export default class Home extends Component{
                 console.log(response)
                 console.log("All new goods")
                 console.log(response.data.newGoods.data)
-                this.setState({ newGoods: [...this.state.newGoods, ...response.data.goods.data] })
+                this.setState({ newGoods: [...this.state.newGoods, ...response.data.newGoods.data] })
                 console.log("All popular goods")
                 console.log(response.data.popGoods.data)
                 this.setState({ popGoods: [...this.state.popGoods, ...response.data.popGoods.data] })

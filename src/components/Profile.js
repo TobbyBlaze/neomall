@@ -13,19 +13,24 @@ export default class Profile extends Component{
         super(props);
 
         this.state = {
-            user: '',
+            user: {
+                name: '',
+                last_name: '',
+                email: '',
+                old_password: '',
+                password: '',
+                confirm_password: '',
+                city: '',
+                country: '',
+                street: '',
+                zip: '',
+                phone: ''
+            },
             goods: [],
             carts: [],
             cartsNum: '',
             delcart: '',
             location: '',
-            good: {
-                file : '',
-                name : '',
-                description : '',
-                price : '',
-                category : '',
-            },
             errorMsg: '',
             loading: true
             
@@ -101,7 +106,7 @@ export default class Profile extends Component{
         axios
             // .post('localhost/yummypizza/public/api/auth/signup', this.state)
             // .post('http://localhost/yummypizza/public/api/auth/signup', this.state
-            .post('https://neomallapi.herokuapp.com/api/auth/updateUser', this.state
+            .post('https://neomallapi.herokuapp.com/api/auth/updateUser', this.state.user
             , {
                 headers: {
 
@@ -130,7 +135,7 @@ export default class Profile extends Component{
         axios
             // .post('localhost/yummypizza/public/api/auth/signup', this.state)
             // .post('http://localhost/yummypizza/public/api/auth/signup', this.state
-            .post('https://neomallapi.herokuapp.com/api/auth/updateUserPassword', this.state
+            .post('https://neomallapi.herokuapp.com/api/auth/updateUserPassword', this.state.user
             , {
                 headers: {
 

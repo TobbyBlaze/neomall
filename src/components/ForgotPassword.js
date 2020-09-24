@@ -26,7 +26,7 @@ export default class ForgotPassword extends Component {
         this.setState({ loading: true })
 
         axios
-            .post('https://neomallapi.herokuapp.com/api/password/create', this.state.email)
+            .post('https://neomallapi.herokuapp.com/api/password/create', this.state)
             .then(response => {
                 console.log("All responses from email handler")
                 console.log(response);
@@ -85,7 +85,7 @@ export default class ForgotPassword extends Component {
                                 </div>
                                 
                                 <div className="col-12 mt-2">
-                                    <button type="submit" className="btn btn-block btn-primary">Log In</button>
+                                    <button type="submit" className="btn btn-block btn-primary">Get reset link</button>
                                 </div>
                                 </div>
                                 </form>

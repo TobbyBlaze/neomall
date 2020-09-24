@@ -149,7 +149,7 @@ export default class Profile extends Component{
             console.log(responseThree)
             // use/access the results 
             })).catch(errors => {
-                console.log(error)
+                console.log(errors)
                 this.setState({errorMsg: 'Error retrieving data'})
                 this.setState({ loading: false })
             })

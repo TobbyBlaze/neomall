@@ -94,6 +94,7 @@ export default class Profile extends Component{
 
     profileHandler = e => {
         e.preventDefault()
+        var a=localStorage.getItem("authen");
         console.log(this.state)
         this.setState({ loading: true })
 
@@ -106,6 +107,7 @@ export default class Profile extends Component{
 
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
                 }
             })
             .then(response => {
@@ -121,6 +123,7 @@ export default class Profile extends Component{
 
     passwordHandler = e => {
         e.preventDefault()
+        var a=localStorage.getItem("authen");
         console.log(this.state)
         this.setState({ loading: true })
 
@@ -133,6 +136,7 @@ export default class Profile extends Component{
 
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
                 }
             })
             .then(response => {

@@ -207,7 +207,7 @@ export default class Profile extends Component{
             this.setState({ cartsNum: responseTwo.data.cartsNum })
             console.log(responseThree.data)
             this.setState({ user: responseThree.data })
-            this.setState({ location: responseTwo.data })
+            this.setState({ location: responseFour.data })
             this.setState({ loading: false })
             console.log("All responses")
             console.log(responseOne)

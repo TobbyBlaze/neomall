@@ -105,7 +105,7 @@ export default class Profile extends Component{
         axios
             // .post('localhost/yummypizza/public/api/auth/signup', this.state)
             // .post('http://localhost/yummypizza/public/api/auth/signup', this.state
-            .post('https://neomallapi.herokuapp.com/api/auth/updateUser', this.state.user
+            .post('https://neomallapi.herokuapp.com/api/auth/updateUser', this.state
             , {
                 headers: {
 
@@ -134,7 +134,7 @@ export default class Profile extends Component{
         axios
             // .post('localhost/yummypizza/public/api/auth/signup', this.state)
             // .post('http://localhost/yummypizza/public/api/auth/signup', this.state
-            .post('https://neomallapi.herokuapp.com/api/auth/updateUserPassword', this.state.user
+            .post('https://neomallapi.herokuapp.com/api/auth/updateUserPassword', this.state
             , {
                 headers: {
 
@@ -482,7 +482,7 @@ export default class Profile extends Component{
                                     <div className="col-md-6">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput7">Email</label>
-                                        <input id="exampleInput7" type="text" className="form-control" placeholder="Email" name="email"  value={user.email} onChange={this.changeHandler} />
+                                        <input id="exampleInput7" type="text" className="form-control" placeholder="Email" name="email"  value={user.email} onChange={this.changeHandler} disabled />
                                         </div>
                                     </div>
                                     </div>

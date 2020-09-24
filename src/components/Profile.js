@@ -38,7 +38,7 @@ export default class Profile extends Component{
     }
 
     changeHandler = e => {
-        this.setState({ [e.target.name]: e.target.value })
+        this.setState({ [e.target.user.name]: e.target.user.value })
     }
 
     addCart = () => {

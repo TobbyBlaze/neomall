@@ -452,13 +452,13 @@ export default class Profile extends Component{
                                     <div className="col-md-3">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput3">City</label>
-                                        <input id="exampleInput3" type="text" className="form-control" placeholder="City" name="city"  value={location.cityName} />
+                                        <input id="exampleInput3" type="text" className="form-control" placeholder={location.cityName} name="city"  value={user.city} onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-3">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput33">Country</label>
-                                        <input id="exampleInput33" type="text" className="form-control" placeholder="Country" name="country"  value={location.countryName} />
+                                        <input id="exampleInput33" type="text" className="form-control" placeholder={location.countryName} name="country"  value={user.country} onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-3">
@@ -504,19 +504,19 @@ export default class Profile extends Component{
                                     <div className="col-12">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput8">Old Password</label>
-                                        <input id="exampleInput8" type="password" className="form-control" placeholder="Old Password" name="old_password" onChange={this.changeHandler} />
+                                        <input id="exampleInput8" type="password" className="form-control" placeholder="Old Password" name="old_password" value={old_password}  onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput9">New Password</label>
-                                        <input id="exampleInput9" type="password" className="form-control" placeholder="New Password" name="password" onChange={this.changeHandler} />
+                                        <input id="exampleInput9" type="password" className="form-control" placeholder="New Password" name="password" value={password}  onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput10">Retype New Password</label>
-                                        <input id="exampleInput10" type="password" className="form-control" placeholder="New Password" name="confirm_password" onChange={this.changeHandler} />
+                                        <input id="exampleInput10" type="password" className="form-control" placeholder="Confirm Password" name="confirm_password" value={confirm_password}  onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     </div>

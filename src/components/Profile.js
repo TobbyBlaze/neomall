@@ -244,6 +244,7 @@ export default class Profile extends Component{
 
     render(){
         const { user, location, goods, carts, cartsNum, delcart, errorMsg, loading } = this.state;
+        const { name, last_name, email, old_password, password, confirm_password, city, country, street, zip, phone } = this.state.user;
 
         var a=localStorage.getItem("authen");
         if(a == null){

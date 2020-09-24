@@ -452,13 +452,13 @@ export default class Profile extends Component{
                                     <div className="col-md-3">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput3">City</label>
-                                        <input id="exampleInput3" type="text" className="form-control" placeholder="City" name="city"  value={location.cityName} onChange={this.changeHandler} />
+                                        <input id="exampleInput3" type="text" className="form-control" placeholder="City" name="city"  value={location.cityName} />
                                         </div>
                                     </div>
                                     <div className="col-md-3">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput33">Country</label>
-                                        <input id="exampleInput33" type="text" className="form-control" placeholder="Country" name="country"  value={location.countryName} onChange={this.changeHandler} />
+                                        <input id="exampleInput33" type="text" className="form-control" placeholder="Country" name="country"  value={location.countryName} />
                                         </div>
                                     </div>
                                     <div className="col-md-3">
@@ -482,7 +482,7 @@ export default class Profile extends Component{
                                     <div className="col-md-6">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput7">Email</label>
-                                        <input id="exampleInput7" type="text" className="form-control" placeholder="Email" name="email"  value={user.email} onChange={this.changeHandler} disabled />
+                                        <input id="exampleInput7" type="text" className="form-control" placeholder="Email" name="email"  value={user.email}/>
                                         </div>
                                     </div>
                                     </div>

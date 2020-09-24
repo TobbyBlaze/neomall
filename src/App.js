@@ -23,6 +23,9 @@ import Thanks from './components/Thanks';
 import Admine from './components/Admine';
 import Checks from './components/Checks';
 import CheckoutForm from './components/CheckoutForm';
+import ActivateUser from './components/ActivateUser';
+import ActivateSeller from './components/ActivateSeller';
+import ActivateAdmin from './components/ActivateAdmin';
 
 export default class App extends Component{
   render(){
@@ -46,6 +49,9 @@ export default class App extends Component{
                 <Route exact path='/store' component={Store} />
                 <Route exact path='/profile' component={Profile} />
                 <Route exact path='/shop' component={Shop} />
+                <Route exact path='/activateUser/:id' component={ActivateUser} />
+                <Route exact path='/activateSeller/:id' component={ActivateSeller} />
+                <Route exact path='/activateAdmin/:id' component={ActivateAdmin} />
                 {/* <Route exact path='/checkout' component={Checks} /> */}
             </Switch>
             <Footer />

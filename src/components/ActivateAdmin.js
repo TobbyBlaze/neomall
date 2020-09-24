@@ -14,7 +14,7 @@ import Skeleton from 'react-loading-skeleton';
 import Header from './Header';
 import Footer from './Footer';
 
-export default class Home extends Component{
+export default class ActivateAdmin extends Component{
     constructor(props){
         super(props);
 
@@ -63,39 +63,7 @@ export default class Home extends Component{
         //   }
         });
 
-        // axios
-        //     .get('https://neomallapi.herokuapp.com/api/searchGoods', {
-        //         params: {
-        //             q: this.state.q,
-        //         },
-        //     },
-        //     {
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         }
-        //     })
-        //     .then(response => {
-        //         console.log("All responses from search")
-        //         console.log(response);
-        //         console.log("All searched goods")
-        //         console.log(response.data.goods.data)
-        //         console.log(this.state.goods)
-        //         // this.setState({ goods: [] })
-        //         this.setState({ goods: response.data.goods.data })
-        //         this.setState({ searchLoading: true })
-
-        //         let items = response.data.goods.data.map( (res, i) => { return { id: res.id, value: res.name } })
-        //         this.setState({ repos: items })
-        //         console.log(this.state.repos)
-        //         // cb(searchValue)
-        //         cb(q)
-                
-        //     })
-        //     .catch(error => {
-        //         console.log("Error from search")
-        //         console.log(error)
-        //         // this.setState({ loading: false })
-        //     })
+        
       }
 
     deleteCart = () => {
@@ -128,111 +96,7 @@ export default class Home extends Component{
         }
     }
 
-    addWish = (e) => {
-        e.preventDefault()
-        var a=localStorage.getItem("authen");
-        this.setState({ loading: true })
-        console.log("All states");
-        console.log(this.state);
-        if(a){
-        axios
-            .post('https://neomallapi.herokuapp.com/api/auth/storewish', this.state.good,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                }
-            })
-            .then(response => {
-                console.log("All responses from add wish")
-                console.log(response)
-                console.log("Cart data");
-                console.log(response.data);
-                this.setState({ wish: response.data })
-            })
-            .catch(error => {
-                console.log("Error from add wish")
-                console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-                this.setState({ loading: false })
-            })
-        }else{
-            window.location.href = "https://neomall.herokuapp.com/portal"
-        }
-    }
-
-    fetchData = (page) => {
-        this.setState({ load: true });
-        // this.setState({ loading: true })
-        console.log("All states")
-        console.log(this.state)
-        axios
-            .get('https://neomallapi.herokuapp.com/api?page='+page, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => {
-                console.log("All responses from fetch data")
-                console.log(response)
-                console.log("All new goods")
-                console.log(response.data.newGoods.data)
-                this.setState({ newGoods: [...this.state.newGoods, ...response.data.newGoods.data] })
-                console.log("All popular goods")
-                console.log(response.data.popGoods.data)
-                this.setState({ popGoods: [...this.state.popGoods, ...response.data.popGoods.data] })
-                // var goodsPics = this.state.goods.map((good, i)=> good.image);
-                // console.log(goodsPics)
-                // var goodsPicsJ = JQuery.parseJSON(goodsPics)
-                // console.log(goodsPicsJ)
-                // var goodsPicsJp = JSON.parse(goodsPics)
-                // console.log(JSON.parse(goodsPics)[0])
-
-                // var goodsPicsJS = goodsPics.split(",")
-                // console.log(goodsPicsJS)
-                this.setState({ goodsPage: response.data.newGoods.current_page })
-                this.setState({ loading: false })
-                this.setState({ load: false });
-            })
-            .catch(error => {
-                console.log("Error from fetch data")
-                console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-                this.setState({ loading: false })
-                this.setState({ load: false });
-            })
-    }
-
-    searchGoodsHandler = e => {
-        e.preventDefault()
-        console.log("All states")
-        console.log(this.state)
-        axios
-            .get('https://neomallapi.herokuapp.com/api/searchGoods', {
-                params: {
-                    q: this.state.q,
-                },
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => {
-                console.log("All responses from search")
-                console.log(response);
-                console.log("All searched goods")
-                console.log(response.data.goods.data)
-                this.setState({ goods: response.data.goods.data })
-                this.setState({ searchLoading: true })
-                
-            })
-            .catch(error => {
-                console.log("Error from search")
-                console.log(error)
-                // this.setState({ loading: false })
-            })
-    }
+   
 
     logoutHandler = e => {
         e.preventDefault()
@@ -263,53 +127,27 @@ export default class Home extends Component{
             })
     }
 
-    handleObserver(entities, observer) {
-        const y = entities[0].boundingClientRect.y;
-        if (this.state.prevY > y) {
-        //   const lastgood = this.state.goods[this.state.goods.length - 1];
-        //   const curPage = lastgood.id;
-        var curPage = this.state.goodsPage + 1;
-          this.fetchData(curPage);
-          this.setState({ page: curPage });
-        }
-        this.setState({ prevY: y });
-      }
-
     componentDidMount(){
         var a=localStorage.getItem("authen");
+        const { match: { params } } = this.props;
 
         this.setState({ searchLoading: false })
 
-        this.fetchData(this.state.page);
-
-        var options = {
-            root: null,
-            rootMargin: "0px",
-            threshold: 1.0
-        };
-            
-        this.observer = new IntersectionObserver(
-            this.handleObserver.bind(this),
-            options
-        );
-        this.observer.observe(this.loadingRef);
-
-
         axios
-            .get('https://neomallapi.herokuapp.com/api/stores', {
+            .get('https://neomallapi.herokuapp.com/api/auth/adminSignup/activate/'+this.props.match.params.id, {
                 headers: {
                     'Content-Type': 'application/json',
                 }
             })
             .then(response => {
-                console.log("All responses from stores data")
+                console.log("All responses from activate user")
                 console.log(response)
-                console.log("All stores")
-                console.log(response.data.sellers.data)
-                this.setState({ sellers: response.data.sellers.data })
+                // console.log("All stores")
+                // console.log(response.data.sellers.data)
+                // this.setState({ sellers: response.data.sellers.data })
             })
             .catch(error => {
-                console.log("Error from stores data")
+                console.log("Error from activate user")
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
             })
@@ -628,75 +466,14 @@ export default class Home extends Component{
                     </div>
                     </div>
 
-
-                    {/* <!-- search -->  */}
-                    <div className="modal fade search" id="search" tabIndex="-1" role="dialog" aria-hidden="true">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                        <div className="modal-header">
-                            {/* <form onSubmit={this.searchGoodsHandler}>
-                            <input type="text" className="form-control" name="q" placeholder="Type your search here" aria-label="Type your search here" aria-describedby="button-addon2" onChange={this.changeHandler}/>
-                            <button type="submit" className="close" data-dismiss="modal">Search</button> */}
-                            {/* <button type="button" className="close" data-dismiss="modal" aria-label="Close"> */}
-                            {/* <span aria-hidden="true">&times;</span> */}
-                            {/* </button> */}
-                            {/* </form> */}
-                            <Search items={this.state.repos}
-                            multiple={true}
-                            getItemsAsync={this.getItemsAsync.bind(this)}
-                            onItemsChanged={this.HiItems.bind(this)}
-                            maxSelected={3}
-                            placeholder='Search here'
-                            NotFoundPlaceholder='No results found' />
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-
                 </div>
                 <br />
                 <br />
                 <br />
                 
-                
-                {/* <!-- slider --> */}
-                <div className="swiper-container swiper-container-alt" style={searchLoadingCSS}>
-                <div className="swiper-wrapper">
-                    <div className="swiper-slide">
-                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-4.jpg)', height:"20"}}></div>
-                    {/* <div className="image image-overlay image-zoom image-back" ></div> */}
-                    <div className="container">
-                        <div className="row align-items-center justify-content-center vh-80">
-                        <div className="col-lg-8 text-white text-center" data-swiper-parallax-y="-100%">
-                            <h1 className="display-2 mb-2"><b>Neomall,</b> your perfect mall.</h1>
-                            <Link to="/shop" className="btn btn-white">Shop Now</Link>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div className="swiper-slide">
-                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-5.jpg)'}}></div>
-                    <div className="container">
-                        <div className="row align-items-center justify-content-center vh-80">
-                        <div className="col-lg-6 text-white text-center" data-swiper-parallax-y="-100%">
-                            <h1 className="display-2 mb-2">Transform your home with us.</h1>
-                            <Link to="/store" className="btn btn-outline-white">See stores</Link>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                {/* <div className="swiper-button-prev"></div>
-                <div className="swiper-button-next"></div> */}
-                </div>
-
-                <br />
-
+               
                 {/* <!-- banner --> */}
-                <section class="py-0 relative" style={searchLoadingCSS}>
+                <section class="py-0 relative">
                 <div class="container">
                     <div class="row">
                     <div class="col">
@@ -704,12 +481,10 @@ export default class Home extends Component{
                         <div class="decoration decoration-top" style={{backgroundImage: 'url(assets/images/decoration-2.png)'}}></div>
                         <div class="row align-items-center gutter-1 gutter-md-4 text-center text-md-left">
                             <div class="col-md-6">
-                            <h3 class="text-uppercase mb-0"><b>Sale</b> up to <b>50% Off</b></h3>
-                            <p class="small">Terms & Conditions Apply</p>
+                            <h3 class="text-uppercase mb-0"><b>Your account has been activated successfully</b></h3>
+                            
                             </div>
-                            <div class="col-md-6 text-md-right">
-                            <a href="#!" class="btn btn-outline-white">View all products</a>
-                            </div>
+                           
                         </div>
                         </div>
                     </div>
@@ -717,264 +492,7 @@ export default class Home extends Component{
                 </div>
                 </section>
 
-                <br />
-
-                {/* <!-- hero --> */}
-                <section class="hero bg-purple text-white no-overflow" style={searchLoadingCSS}>
-                <div class="decoration" style={{backgroundImage: 'url(assets/images/decoration-1.png)'}}></div>
-                <div class="container">
-                    <div class="row">
-                    <div class="col-md-10 col-lg-8">
-                        <h1 class="font-weight-light">Discover our brand new <b class="d-block font-weight-bold">summer collection.</b></h1>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col">
-                        {/* <div class="owl-carousel owl-carousel-arrows visible" data-items="[3,4,2,1]" data-margin="30" data-loop="true" data-dots="true" data-nav="true"> */}
-
-                        <OwlCarousel ref="car" options={newGoodsCarousel} >
-                        {loading?
-                                <div>
-                                    <Skeleton width={500} height={400} />
-                                    
-                                </div>
-                            :
-                            
-                            newGoods.map((good, i)=>
-                        
-                        <div key={good.id} class="product">
-                            <figure class="product-image">
-                            <a href="#!">
-                                <img src="assets/images/demo/product-8.jpg" alt="Image" />
-                                <img src="assets/images/demo/product-8-2.jpg" alt="Image" />
-                            </a>
-                            </figure>
-                            <div class="product-meta">
-                            <p class="product-title"><a href="#!">Hajo Backpack</a></p>
-                            <div class="product-price">
-                                <span>$113</span>
-                                <span class="product-action">
-                                <a href="#!">Add to cart</a>
-                                </span>
-                            </div>
-                            <a href="#!" class="product-like"></a>
-                            </div>
-                        </div>
-                        )
-                        
-                        }
-                        </OwlCarousel>
-                      
-                        {/* </div> */}
-                    </div>
-                    </div>
-                </div>
-                </section>
-
-                <br />
-
-                {/* <!-- partners --> */}
-                <section style={searchLoadingCSS}>
-                <div class="container">
-                    <div class="row">
-                    <div class="col">
-                        <div class="partners">
-                        <h2 class="eyebrow">Your favorite stores</h2>
-                        {/* <div class="owl-carousel owl-carousel-alt">
-                            <img src="assets/images/demo/logo.png" alt="Logo" />
-                            <img src="assets/images/demo/logo-2.png" alt="Logo" />
-                            <img src="assets/images/demo/logo-3.png" alt="Logo" />
-                            <img src="assets/images/demo/logo.png" alt="Logo" />
-                            <img src="assets/images/demo/logo-2.png" alt="Logo" />
-                            <img src="assets/images/demo/logo-3.png" alt="Logo" />
-                            <img src="assets/images/demo/logo.png" alt="Logo" />
-                            <img src="assets/images/demo/logo-2.png" alt="Logo" />
-                        </div>
-                        <div class="my-slider">
-                            <div><img src="assets/images/demo/logo.png" alt="Logo" /></div>
-                            <div><img src="assets/images/demo/logo-2.png" alt="Logo" /></div>
-                            <div><img src="assets/images/demo/logo-3.png" alt="Logo" /></div>
-                        </div> */}
-                            {/* <!-- or ul.my-slider > li --> */}
-
-                            <OwlCarousel ref="car" options={storesCarousel} >
-                            {loading?
-                                <div>
-                                    <Skeleton width={500} height={400} />
-                                    
-                                </div>
-                            :
-                            
-                            sellers.map((seller, i)=>
-                                <div key={seller.id}><img src="assets/images/demo/logo.png" alt="Logo" /></div>
-                                )
-                        
-                            }
-                            </OwlCarousel>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </section>
-
-                <br />
-
-                {/* <!-- latest products --> */}
-                <section>
-                <div class="container" style={searchLoadingCSS}>
-                    <div class="row gutter-1 align-items-end">
-                    <div class="col-md-6">
-                        <h2>Featured Products</h2>
-                    </div>
-                    <div class="col-md-6 text-md-right">
-                        <ul class="nav nav-tabs lavalamp" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">New Arrivals</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Most Popular</a>
-                        </li>
-                        </ul>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col">
-                        <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel">
-                            <div class="row gutter-2 gutter-md-3">
-
-                            
-                            {loading?
-                                <div>
-                                    <Skeleton width={500} height={400} />
-                                    
-                                </div>
-                            :
-                            newGoods.map((good, i)=>
-                            <div key={good.id} class="col-6 col-lg-3">
-                                <div class="product">
-                                <figure class="product-image">
-                                    <Link to={"product/"+good.id}>
-                                    <img src="assets/images/demo/product-18.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-18-2.jpg" alt="Image" />
-                                    {/* <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[0]} alt="Image" />
-                                    <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[1]} alt="Image" /> */}
-                                    </Link>
-                                </figure>
-                                <div class="product-meta">
-                                    <p class="product-title"><Link to={"product/"+good.id}>{good.name}</Link></p>
-                                    <div class="product-price">
-                                    <span>${good.price}</span>
-                                    </div>
-                                    <a href="#!" class="product-like"></a>
-                                </div>
-                                </div>
-                            </div>
-                            )
-                        
-                            }
-
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel">
-                            <div class="row gutter-2 gutter-md-3">
-
-                            {loading?
-                                <div>
-                                    <Skeleton width={500} height={400} />
-                                    
-                                </div>
-                            :
-                            popGoods.map((good, i)=>
-                            <div key={good.id} class="col-6 col-lg-3">
-                                <div class="product">
-                                <figure class="product-image">
-                                    <Link to={"product/"+good.id}>
-                                    <img src="assets/images/demo/product-6.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-6-2.jpg" alt="Image" />
-                                    {/* <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[0]} alt="Image" />
-                                    <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[1]} alt="Image" /> */}
-                                    </Link>
-                                </figure>
-                                <div class="product-meta">
-                                    <p class="product-title"><Link to={"product/"+good.id}>{good.name}</Link></p>
-                                    <div class="product-price">
-                                    <span>${good.price}</span>
-                                    </div>
-                                    <a href="#!" class="product-like"></a>
-                                </div>
-                                </div>
-                            </div>
-                            )
-                        
-                            }
-
-                            </div>
-                        </div>
-                        </div>
-
-                        <div
-                            ref={loadingRef => (this.loadingRef = loadingRef)}
-                            style={loadingCSS}
-                            >
-                            <span style={loadingTextCSS}>Loading... <Skeleton width={300}/></span>
-                        </div>
-
-                    </div>
-                    </div>
-                    {/* <div class="row">
-                    <div class="col text-center">
-                        <a href="#!" class="btn btn-outline-secondary">Load More</a>
-                    </div>
-                    </div> */}
-                </div>
-                
-                <div className="container">
-                <div class="row">
-                <div class="col">
-                <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel">
-                    <div class="row gutter-2 gutter-md-3">
-                {searchLoading?
-                    goods.map((good, i)=>
-                    <div key={good.id} class="col-6 col-lg-3">
-                        <div class="product">
-                        <figure class="product-image">
-                            <Link to={"product/"+good.id}>
-                            <img src="assets/images/demo/product-18.jpg" alt="Image" />
-                            <img src="assets/images/demo/product-18-2.jpg" alt="Image" />
-                            {/* <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[0]} alt="Image" />
-                            <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[1]} alt="Image" /> */}
-                            </Link>
-                        </figure>
-                        <div class="product-meta">
-                            <p class="product-title"><Link to={"product/"+good.id}>{good.name}</Link></p>
-                            <div class="product-price">
-                            <span>${good.price}</span>
-                            </div>
-                            <a href="#!" class="product-like"></a>
-                        </div>
-                        </div>
-                    </div>
-                    )
-                    :
-                        <div>
-                            
-                        </div>
-                
-                    }
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-
-                </section>
-
-                <br />
-
-                
+               
                 <div>
                     {/* <Footer /> */}
                 </div>

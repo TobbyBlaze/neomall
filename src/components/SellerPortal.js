@@ -22,8 +22,8 @@ export default class SellerPortal extends Component {
             store_pics: '',
             address_1: '',
             address_2: '',
-            city: '',
-            country: '',
+            // city: '',
+            // country: '',
             zip: '',
             file: [],
             business_reg_no: '',
@@ -108,8 +108,8 @@ export default class SellerPortal extends Component {
         formData.append('store_pics', this.state.store_pics);
         formData.append('address_1', this.state.address_1);
         formData.append('address_2', this.state.address_2);
-        formData.append('city', this.state.city);
-        formData.append('country', this.state.country);
+        // formData.append('city', this.state.city);
+        // formData.append('country', this.state.country);
         formData.append('zip', this.state.zip);
         formData.append('file', this.state.file);
         formData.append('company_name', this.state.company_name);
@@ -152,7 +152,7 @@ export default class SellerPortal extends Component {
 
     render() {
         // const { id, name, last_name, email, password, confirm_password } = this.state
-        const { id, name, last_name, email, password, confirm_password, phone_number_1, phone_number_2, store_name, store_pics, address_1, address_2, city, country, zip, business_reg_no, business_reg_doc, tin, vat, vat_info_doc, company_name, bank_name, acct_holder_name, bank_acct_number, bank_code, iban, swift, bank_info, loading } = this.state
+        const { id, name, last_name, email, password, confirm_password, phone_number_1, phone_number_2, store_name, store_pics, address_1, address_2, zip, business_reg_no, business_reg_doc, tin, vat, vat_info_doc, company_name, bank_name, acct_holder_name, bank_acct_number, bank_code, iban, swift, bank_info, loading } = this.state
 
         return (
             <div>
@@ -293,14 +293,14 @@ export default class SellerPortal extends Component {
                                                     <label htmlFor="address_2">Alternate Address</label>
                                                     <input type="text" name="address_2" className="form-control" id="address_2"  value={address_2} onChange={this.changeHandler}  />
                                                 </div>
-                                                <div className="form-group col-12">
+                                                {/* <div className="form-group col-12">
                                                     <label htmlFor="city">City</label>
                                                     <input type="text" name="city" className="form-control" id="city"  value={city} onChange={this.changeHandler}  />
                                                 </div>
                                                 <div className="form-group col-12">
                                                     <label htmlFor="country">Country</label>
                                                     <input type="text" name="country" className="form-control" id="country"  value={country} onChange={this.changeHandler}  />
-                                                </div>
+                                                </div> */}
                                                 <div className="form-group col-12">
                                                     <label htmlFor="zip">Postal/ZIP code</label>
                                                     <input type="text" name="zip" className="form-control" id="zip"  value={zip} onChange={this.changeHandler}  />

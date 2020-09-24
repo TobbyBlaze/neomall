@@ -186,7 +186,3 @@ export default class ResetPassword extends Component {
         );
     }
 }
-
-if (document.getElementById('forgot-password')) {
-    ReactDOM.render(<ForgotPassword />, document.getElementById('forgot-password'));
-}

@@ -26,7 +26,11 @@ export default class ForgotPassword extends Component {
         this.setState({ loading: true })
 
         axios
-            .post('https://neomallapi.herokuapp.com/api/password/create', this.state)
+            .post('https://neomallapi.herokuapp.com/api/password/create', this.state,{
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization': 'Bearer '+a,
+            }})
             .then(response => {
                 console.log("All responses from email handler")
                 console.log(response);

@@ -26,14 +26,16 @@ export default class ForgotPassword extends Component {
         this.setState({ loading: true })
 
         axios
-            .post('https://neomallapi.herokuapp.com/api/password/create', this.state)
+            .post('https://neomallapi.herokuapp.com/api/password/create', this.state.email)
             .then(response => {
+                console.log("All responses from email handler")
                 console.log(response);
                 // this.setState({ msg: false })
                 this.setState({ loading: false })
                 // window.location.href = "https://neomall.herokuapp.com"
             })
             .catch(error => {
+                console.log("All errors from email handler")
                 console.log(error)
                 // this.setState({ msg: false })
                 this.setState({ loading: false })

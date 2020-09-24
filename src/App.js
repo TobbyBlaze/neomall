@@ -26,6 +26,8 @@ import CheckoutForm from './components/CheckoutForm';
 import ActivateUser from './components/ActivateUser';
 import ActivateSeller from './components/ActivateSeller';
 import ActivateAdmin from './components/ActivateAdmin';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
 
 export default class App extends Component{
   render(){
@@ -52,6 +54,8 @@ export default class App extends Component{
                 <Route exact path='/activateUser/:id' component={ActivateUser} />
                 <Route exact path='/activateSeller/:id' component={ActivateSeller} />
                 <Route exact path='/activateAdmin/:id' component={ActivateAdmin} />
+                <Route exact path='/forgotPassword' component={ForgotPassword} />
+                <Route exact path='/resetPassword' component={ResetPassword} />
                 {/* <Route exact path='/checkout' component={Checks} /> */}
             </Switch>
             <Footer />

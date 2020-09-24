@@ -492,6 +492,16 @@ export default class ActivateAdmin extends Component{
                 </div>
                 </section>
 
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
                
                 <div>
                     {/* <Footer /> */}

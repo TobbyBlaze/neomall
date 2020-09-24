@@ -498,6 +498,10 @@ export default class ActivateSeller extends Component{
                 <br />
                 <br />
                 <br />
+                <br />
+                <br />
+                <br />
+                <br />
                 <div>
                     {/* <Footer /> */}
                 </div>

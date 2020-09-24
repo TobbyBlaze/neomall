@@ -132,7 +132,7 @@ export default class Portal extends Component {
                                     <button type="submit" className="btn btn-block btn-primary">Log In</button>
                                 </div>
                                     <div>
-                                        <Link to="">Forgot password</Link>
+                                        <Link to="forgotPassword">Forgot password</Link>
                                     </div>
                                 </div>
                                 </form>

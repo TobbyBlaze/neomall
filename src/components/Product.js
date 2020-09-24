@@ -175,7 +175,7 @@ export default class Product extends Component{
     componentDidMount(){
         var a=localStorage.getItem("authen");
         const { match: { params } } = this.props;
-        console.log(this.props.match.params.id)
+        // console.log(this.props.match.params.id)
 
         axios
             .get('https://neomallapi.herokuapp.com/api/prdetails/'+this.props.match.params.id, {

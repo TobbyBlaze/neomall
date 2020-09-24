@@ -140,14 +140,14 @@ export default class ActivateAdmin extends Component{
                 }
             })
             .then(response => {
-                console.log("All responses from activate user")
+                console.log("All responses from activate admin")
                 console.log(response)
                 // console.log("All stores")
                 // console.log(response.data.sellers.data)
                 // this.setState({ sellers: response.data.sellers.data })
             })
             .catch(error => {
-                console.log("Error from activate user")
+                console.log("Error from activate admin")
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
             })

@@ -207,6 +207,7 @@ export default class Profile extends Component{
             this.setState({ cartsNum: responseTwo.data.cartsNum })
             console.log(responseThree.data)
             this.setState({ user: responseThree.data })
+            this.setState({ location: responseTwo.data })
             this.setState({ loading: false })
             console.log("All responses")
             console.log(responseOne)
@@ -405,8 +406,8 @@ export default class Profile extends Component{
                             <div className="nav nav-pills flex-column lavalamp" id="sidebar-1" role="tablist">
                             <a className="nav-link active" data-toggle="tab" href="#sidebar-1-1" role="tab"  aria-controls="sidebar-1" aria-selected="true">Profile</a>
                             <a className="nav-link" data-toggle="tab" href="#sidebar-1-2" role="tab" aria-controls="sidebar-1-2" aria-selected="false">Orders</a>
-                            <a className="nav-link" data-toggle="tab" href="#sidebar-1-3" role="tab" aria-controls="sidebar-1-3" aria-selected="false">Addresses</a>
-                            <a className="nav-link" data-toggle="tab" href="#sidebar-1-4" role="tab" aria-controls="sidebar-1-4" aria-selected="false">Payments</a>
+                            {/* <a className="nav-link" data-toggle="tab" href="#sidebar-1-3" role="tab" aria-controls="sidebar-1-3" aria-selected="false">Addresses</a> */}
+                            {/* <a className="nav-link" data-toggle="tab" href="#sidebar-1-4" role="tab" aria-controls="sidebar-1-4" aria-selected="false">Payments</a> */}
                             <a className="nav-link" data-toggle="tab" href="#sidebar-1-5" role="tab" aria-controls="sidebar-1-5" aria-selected="false">Wishlist</a>
                             </div>
                         </aside>
@@ -439,10 +440,16 @@ export default class Profile extends Component{
                                         <input id="exampleInput2" type="text" className="form-control" placeholder="Last name" name="last_name"  value={user.last_name} onChange={this.changeHandler} />
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-3">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput3">City</label>
                                         <input id="exampleInput3" type="text" className="form-control" placeholder="City" name="city"  value={location.cityName} onChange={this.changeHandler} />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-3">
+                                        <div className="form-group">
+                                        <label htmlFor="exampleInput33">Country</label>
+                                        <input id="exampleInput33" type="text" className="form-control" placeholder="Country" name="country"  value={location.countryName} onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-3">
@@ -591,235 +598,6 @@ export default class Profile extends Component{
                                     </div>
                                     </div>
                                 </div>
-
-                                {/* <!-- addresses --> */}
-                                <div className="tab-pane fade" id="sidebar-1-3" role="tabpanel" aria-labelledby="sidebar-1-3">
-                                    <div className="row">
-                                    <div className="col">
-                                        <h3 className="mb-0">Addresses</h3>
-                                        <span className="eyebrow">2 Entry</span>
-                                    </div>
-                                    </div>
-                                    <div className="row gutter-2">
-                                    <div className="col-md-6">
-                                        <div className="card card-data">
-                                        <div className="card-header card-header-options">
-                                            <div className="row align-items-center">
-                                            <div className="col">
-                                                <h3 className="card-title">Address 1</h3>
-                                            </div>
-                                            <div className="col text-right">
-                                                <div className="dropdown">
-                                                <button id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button" className="btn btn-lg btn-secondary btn-ico"><i className="icon-more-vertical"></i></button>
-                                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <li>
-                                                    <a className="dropdown-item" href="#!">Edit</a>
-                                                    </li>
-                                                    <li>
-                                                    <a className="dropdown-item" href="#!">Delete</a>
-                                                    </li>
-                                                </ul>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <div className="card-body w-75">
-                                            <h5 className="eyebrow text-muted">Where</h5>
-                                            <p className="card-text">1620 East Ayre Str
-                                            Suite M3115662
-                                            Wilmington, DE 19804
-                                            United States</p>
-                                            <h5 className="eyebrow text-muted">To</h5>
-                                            <p className="card-text">Michael Doe</p>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="card card-data">
-                                        <div className="card-header card-header-options">
-                                            <div className="row align-items-center">
-                                            <div className="col">
-                                                <h3 className="card-title">Address 2</h3>
-                                            </div>
-                                            <div className="col text-right">
-                                                <div className="dropdown">
-                                                <button id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button" className="btn btn-lg btn-secondary btn-ico"><i className="icon-more-vertical"></i></button>
-                                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                                    <li>
-                                                    <a className="dropdown-item" href="#!">Edit</a>
-                                                    </li>
-                                                    <li>
-                                                    <a className="dropdown-item" href="#!">Delete</a>
-                                                    </li>
-                                                </ul>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <div className="card-body w-75">
-                                            <h5 className="eyebrow text-muted">Where</h5>
-                                            <p className="card-text">1620 East Ayre Str
-                                            Suite M3115662
-                                            Wilmington, DE 19804
-                                            United States</p>
-                                            <h5 className="eyebrow text-muted">To</h5>
-                                            <p className="card-text">Michael Doe</p>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    <div className="row">
-                                    <div className="col">
-                                        <h3>New Address</h3>
-                                    </div>
-                                    </div>
-                                    <div className="row gutter-1">
-                                    <div className="col-12">
-                                        <div className="form-group">
-                                        <label htmlFor="city">City</label>
-                                        <input id="city" type="text" className="form-control" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                        <label htmlFor="cardNumber">Address</label>
-                                        <input id="cardNumber" type="text" className="form-control" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div className="col-6 col-md-3">
-                                        <div className="form-group">
-                                        <label htmlFor="cardNumber2">Nr</label>
-                                        <input id="cardNumber2" type="text" className="form-control" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div className="col-6 col-md-3">
-                                        <div className="form-group">
-                                        <label htmlFor="cardNumber3">Ap</label>
-                                        <input id="cardNumber3" type="text" className="form-control" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <a href="#!" className="btn btn-primary">Add</a>
-                                    </div>
-                                    </div>
-                                </div>
-
-                                {/* <!-- payments --> */}
-                                <div className="tab-pane fade" id="sidebar-1-4" role="tabpanel" aria-labelledby="sidebar-1-4" />
-                                    <div className="row">
-                                    <div className="col">
-                                        <h3 className="mb-0">Payments</h3>
-                                        <span className="eyebrow">1 Entry</span>
-                                    </div>
-                                    </div>
-                                    <div className="row gutter-2 mb-6">
-                                    <div className="col-md-6">
-                                        <div className="card card-data">
-                                        <div className="card-header card-header-options">
-                                            <div className="row align-items-center">
-                                            <div className="col">
-                                                <h3 className="card-title">Visa</h3>
-                                            </div>
-                                            <div className="col text-right">
-                                                <div className="dropdown">
-                                                <button id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button" className="btn btn-lg btn-secondary btn-ico"><i className="icon-more-vertical"></i></button>
-                                                <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                    <li>
-                                                    <a className="dropdown-item" href="#!">Edit</a>
-                                                    </li>
-                                                    <li>
-                                                    <a className="dropdown-item" href="#!">Delete</a>
-                                                    </li>
-                                                </ul>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <div className="card-body w-75">
-                                            <h5 className="eyebrow text-muted">Paymeny Method</h5>
-                                            <p className="card-text"><b>Visa</b> ends in 1537 Exp: 8/2022</p>
-                                            <h5 className="eyebrow text-muted">Last Payment</h5>
-                                            <p className="card-text"><b>$7.00</b> successful on 04/14/2019</p>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="card card-data">
-                                        <div className="card-header card-header-options">
-                                            <div className="row align-items-center">
-                                            <div className="col">
-                                                <h3 className="card-title">Paypal</h3>
-                                            </div>
-                                            <div className="col text-right">
-                                                <div className="dropdown">
-                                                <button id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button" className="btn btn-lg btn-secondary btn-ico"><i className="icon-more-vertical"></i></button>
-                                                <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                    <li>
-                                                    <a className="dropdown-item" href="#!">Edit</a>
-                                                    </li>
-                                                    <li>
-                                                    <a className="dropdown-item" href="#!">Delete</a>
-                                                    </li>
-                                                </ul>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <div className="card-body w-75">
-                                            <h5 className="eyebrow text-muted">Mail</h5>
-                                            <p className="card-text">payment@webuildthemes.com</p>
-                                            <h5 className="eyebrow text-muted">Last Payment</h5>
-                                            <p className="card-text"><b>$19.00</b> successful on 05/15/2019</p>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    <div className="row">
-                                        <div className="col">
-                                            <h3 className="mb-0">New Payment Method</h3>
-                                        </div>
-                                    </div>
-                                    <div className="row gutter-1">
-                                    <div className="col-12">
-                                        <div className="form-group">
-                                        <label htmlFor="cardNumber">Card Number</label>
-                                        <input type="text" className="form-control" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                        <label htmlFor="cardNumber">Name on Card</label>
-                                        <input type="text" className="form-control" placeholder="" />
-                                        </div>
-                                    </div>
-                                    <div className="col-6 col-md-3">
-                                        <div className="form-group">
-                                        <label htmlFor="cardNumber">Month</label>
-                                        <select className="custom-select">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                        </div>
-                                    </div>
-                                    <div className="col-6 col-md-3">
-                                        <div className="form-group">
-                                        <label htmlFor="cardNumber">Year</label>
-                                        <select className="custom-select">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                        </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <a href="#!" className="btn btn-primary">Add</a>
-                                    </div>
-                                    </div>
                                 </div>
 
                                 {/* <!-- wishlist --> */}

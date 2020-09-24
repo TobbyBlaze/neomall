@@ -18,6 +18,7 @@ export default class Profile extends Component{
             carts: [],
             cartsNum: '',
             delcart: '',
+            location: '',
             good: {
                 file : '',
                 name : '',
@@ -29,6 +30,10 @@ export default class Profile extends Component{
             loading: true
             
         }
+    }
+
+    changeHandler = e => {
+        this.setState({ [e.target.name]: e.target.value })
     }
 
     addCart = () => {
@@ -87,12 +92,67 @@ export default class Profile extends Component{
             })
     }
 
+    profileHandler = e => {
+        e.preventDefault()
+        console.log(this.state)
+        this.setState({ loading: true })
+
+        axios
+            // .post('localhost/yummypizza/public/api/auth/signup', this.state)
+            // .post('http://localhost/yummypizza/public/api/auth/signup', this.state
+            .post('https://neomallapi.herokuapp.com/api/auth/updateUser', this.state
+            , {
+                headers: {
+
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                // this.loginHandler();
+                console.log(response)
+                // window.location.href = "https://neomall.herokuapp.com/portal"
+            })
+            .catch(error => {
+                console.log(error)
+                this.setState({ loading: false })
+            })
+    }
+
+    passwordHandler = e => {
+        e.preventDefault()
+        console.log(this.state)
+        this.setState({ loading: true })
+
+        axios
+            // .post('localhost/yummypizza/public/api/auth/signup', this.state)
+            // .post('http://localhost/yummypizza/public/api/auth/signup', this.state
+            .post('https://neomallapi.herokuapp.com/api/auth/updateUserPassword', this.state
+            , {
+                headers: {
+
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                // this.loginHandler();
+                console.log(response)
+                // window.location.href = "https://neomall.herokuapp.com/portal"
+            })
+            .catch(error => {
+                console.log(error)
+                this.setState({ loading: false })
+            })
+    }
+
     componentDidMount(){
         var a=localStorage.getItem("authen");
         if(a){
             var one = "https://neomallapi.herokuapp.com/api/auth"
             var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
             var three = "https://neomallapi.herokuapp.com/api/auth/getuser"
+            var four = "https://neomallapi.herokuapp.com/api/location"
     
             axios.defaults.headers.get['Accept'] = 'application/json'
     
@@ -129,24 +189,30 @@ export default class Profile extends Component{
             function request3() {
                 return axios.get(three, options);
             }
+
+            function request4() {
+                return axios.get(four, options);
+            }
     
-            axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
+            axios.all([request1(), request2(), request3(), request4()]).then(axios.spread((...responses) => {
             const responseOne = responses[0]
             const responseTwo = responses[1]
             const responseThree = responses[2]
-            // console.log(responseOne.data.goods.data)
-            // this.setState({ goods: responseOne.data.goods.data })
-            // console.log(responseTwo.data.carts.data)
-            // this.setState({ carts: responseTwo.data.carts.data })
-            // console.log(responseTwo.data.cartsNum)
-            // this.setState({ cartsNum: responseTwo.data.cartsNum })
-            // console.log(responseThree.data)
-            // this.setState({ user: responseThree.data })
+            const responseFour = responses[4]
+            console.log(responseOne.data.newGoods.data)
+            this.setState({ goods: responseOne.data.newGoods.data })
+            console.log(responseTwo.data.carts.data)
+            this.setState({ carts: responseTwo.data.carts.data })
+            console.log(responseTwo.data.cartsNum)
+            this.setState({ cartsNum: responseTwo.data.cartsNum })
+            console.log(responseThree.data)
+            this.setState({ user: responseThree.data })
             this.setState({ loading: false })
             console.log("All responses")
             console.log(responseOne)
             console.log(responseTwo)
             console.log(responseThree)
+            console.log(responseFour)
             // use/access the results 
             })).catch(errors => {
                 console.log(errors)
@@ -159,19 +225,6 @@ export default class Profile extends Component{
 
     }
 
-    getOne(good){
-        this.setState({
-            goods:{
-            id : good.id,
-            file : good.file,
-            name : good.name,
-            description : good.description,
-            price : good.price,
-            category : good.category
-            }
-        })
-    }
-
     componentWillUnmount() {
         // fix Warning: Can't perform a React state update on an unmounted component
         this.setState = (state,callback)=>{
@@ -180,7 +233,7 @@ export default class Profile extends Component{
     }
 
     render(){
-        const { user, goods, carts, cartsNum, delcart, errorMsg, loading } = this.state;
+        const { user, location, goods, carts, cartsNum, delcart, errorMsg, loading } = this.state;
 
         var a=localStorage.getItem("authen");
         if(a == null){
@@ -372,52 +425,60 @@ export default class Profile extends Component{
                                         <h3>Personal Data</h3>
                                     </div>
                                     </div>
+                                    <form onSubmit={this.profileHandler}>
                                     <div className="row gutter-1">
                                     <div className="col-md-6">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput1">First Name</label>
-                                        <input id="exampleInput1" type="text" className="form-control" placeholder="First name" />
+                                        <input id="exampleInput1" type="text" className="form-control" placeholder="First name" name="name"  value={user.name} onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput2">Last Name</label>
-                                        <input id="exampleInput2" type="text" className="form-control" placeholder="Last name" />
+                                        <input id="exampleInput2" type="text" className="form-control" placeholder="Last name" name="last_name"  value={user.last_name} onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput3">City</label>
-                                        <input id="exampleInput3" type="text" className="form-control" placeholder="City" />
+                                        <input id="exampleInput3" type="text" className="form-control" placeholder="City" name="city"  value={location.cityName} onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-3">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput4">Street</label>
-                                        <input id="exampleInput4" type="text" className="form-control" placeholder="Street" />
+                                        <input id="exampleInput4" type="text" className="form-control" placeholder="Street" name="street"  value={user.street} onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-3">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput5">Zip</label>
-                                        <input id="exampleInput5" type="text" className="form-control" placeholder="Zip" />
+                                        <input id="exampleInput5" type="text" className="form-control" placeholder="Zip" name="zip"  value={user.zip} onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput6">Telephone</label>
-                                        <input id="exampleInput6" type="text" className="form-control" placeholder="Telephone" />
+                                        <input id="exampleInput6" type="text" className="form-control" placeholder="Telephone" name="phone" value={user.phone} onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput7">Email</label>
-                                        <input id="exampleInput7" type="text" className="form-control" placeholder="Email" />
+                                        <input id="exampleInput7" type="text" className="form-control" placeholder="Email" name="email"  value={user.email} onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     </div>
+                                    <div className="row">
+                                    <div className="col">
+                                        <button type="submit" className="btn btn-primary">Save Changes</button>
+                                    </div>
+                                    </div>
+                                    </form>
 
 
+                                    <form onSubmit={this.passwordHandler}>
                                     <div className="row mb-2 mt-6">
                                     <div className="col-12">
                                         <h3>Password</h3>
@@ -427,28 +488,29 @@ export default class Profile extends Component{
                                     <div className="col-12">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput8">Old Password</label>
-                                        <input id="exampleInput8" type="password" className="form-control" placeholder="Password" />
+                                        <input id="exampleInput8" type="password" className="form-control" placeholder="Old Password" name="old_password" onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput9">New Password</label>
-                                        <input id="exampleInput9" type="password" className="form-control" placeholder="Password" />
+                                        <input id="exampleInput9" type="password" className="form-control" placeholder="New Password" name="password" onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
                                         <label htmlFor="exampleInput10">Retype New Password</label>
-                                        <input id="exampleInput10" type="password" className="form-control" placeholder="Password" />
+                                        <input id="exampleInput10" type="password" className="form-control" placeholder="New Password" name="confirm_password" onChange={this.changeHandler} />
                                         </div>
                                     </div>
                                     </div>
 
                                     <div className="row">
                                     <div className="col">
-                                        <a href="#!" className="btn btn-primary">Save Changes</a>
+                                        <button type="submit" className="btn btn-primary">Change Password</button>
                                     </div>
                                     </div>
+                                    </form>
                                 </div>
 
                                 {/* <!-- orders --> */}

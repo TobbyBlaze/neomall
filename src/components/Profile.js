@@ -198,7 +198,7 @@ export default class Profile extends Component{
             const responseOne = responses[0]
             const responseTwo = responses[1]
             const responseThree = responses[2]
-            const responseFour = responses[4]
+            const responseFour = responses[3]
             console.log(responseOne.data.newGoods.data)
             this.setState({ goods: responseOne.data.newGoods.data })
             console.log(responseTwo.data.carts.data)

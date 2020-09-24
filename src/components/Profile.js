@@ -134,14 +134,14 @@ export default class Profile extends Component{
             const responseOne = responses[0]
             const responseTwo = responses[1]
             const responseThree = responses[2]
-            console.log(responseOne.data.goods.data)
-            this.setState({ goods: responseOne.data.goods.data })
-            console.log(responseTwo.data.carts.data)
-            this.setState({ carts: responseTwo.data.carts.data })
-            console.log(responseTwo.data.cartsNum)
-            this.setState({ cartsNum: responseTwo.data.cartsNum })
-            console.log(responseThree.data)
-            this.setState({ user: responseThree.data })
+            // console.log(responseOne.data.goods.data)
+            // this.setState({ goods: responseOne.data.goods.data })
+            // console.log(responseTwo.data.carts.data)
+            // this.setState({ carts: responseTwo.data.carts.data })
+            // console.log(responseTwo.data.cartsNum)
+            // this.setState({ cartsNum: responseTwo.data.cartsNum })
+            // console.log(responseThree.data)
+            // this.setState({ user: responseThree.data })
             this.setState({ loading: false })
             console.log("All responses")
             console.log(responseOne)

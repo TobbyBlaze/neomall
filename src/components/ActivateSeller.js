@@ -480,7 +480,7 @@ export default class ActivateSeller extends Component{
                         <div class="banner bg-purple px-2 py-3 px-md-4 py-md-5 text-white">
                         <div class="decoration decoration-top" style={{backgroundImage: 'url(assets/images/decoration-2.png)'}}></div>
                         <div class="row align-items-center gutter-1 gutter-md-4 text-center text-md-left">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                             <h3 class="text-uppercase mb-0"><b>Your account has been activated successfully</b></h3>
                             
                             </div>
@@ -492,7 +492,12 @@ export default class ActivateSeller extends Component{
                 </div>
                 </section>
 
-               
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
                 <div>
                     {/* <Footer /> */}
                 </div>

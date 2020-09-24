@@ -13,19 +13,18 @@ export default class Profile extends Component{
         super(props);
 
         this.state = {
-            user: {
-                name: '',
-                last_name: '',
-                email: '',
-                old_password: '',
-                password: '',
-                confirm_password: '',
-                city: '',
-                country: '',
-                street: '',
-                zip: '',
-                phone: ''
-            },
+            user: '',
+            name: '',
+            last_name: '',
+            email: '',
+            old_password: '',
+            password: '',
+            confirm_password: '',
+            city: '',
+            country: '',
+            street: '',
+            zip: '',
+            phone: '',
             goods: [],
             carts: [],
             cartsNum: '',
@@ -38,7 +37,7 @@ export default class Profile extends Component{
     }
 
     changeHandler = e => {
-        this.setState({ [e.target.user.name]: e.target.user.value })
+        this.setState({ [e.target.name]: e.target.value })
     }
 
     addCart = () => {
@@ -244,7 +243,7 @@ export default class Profile extends Component{
 
     render(){
         const { user, location, goods, carts, cartsNum, delcart, errorMsg, loading } = this.state;
-        const { name, last_name, email, old_password, password, confirm_password, city, country, street, zip, phone } = this.state.user;
+        // const { name, last_name, email, old_password, password, confirm_password, city, country, street, zip, phone } = this.state.user;
 
         var a=localStorage.getItem("authen");
         if(a == null){

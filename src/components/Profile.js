@@ -143,9 +143,13 @@ export default class Profile extends Component{
             console.log(responseThree.data)
             this.setState({ user: responseThree.data })
             this.setState({ loading: false })
+            console.log("All responses")
+            console.log(responseOne)
+            console.log(responseTwo)
+            console.log(responseThree)
             // use/access the results 
             })).catch(errors => {
-                // console.log(error)
+                console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
                 this.setState({ loading: false })
             })

@@ -34,7 +34,10 @@ export default class Product extends Component{
                 category : '',
                 quantity : '',
             },
+            rating: '',
+            body: '',
             errorMsg: '',
+            qty: '',
             loading: true
             
         }
@@ -56,7 +59,45 @@ export default class Product extends Component{
             .post('https://neomallapi.herokuapp.com/api/auth/storecart', this.state.good,
             {
                 params: {
-                    quantity: this.state.cart.quantity,
+                    qty: this.state.qty,
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+a,
+                }
+            })
+            .then(response => {
+                console.log("All responses from add cart")
+                console.log(response)
+                console.log("Cart data");
+                console.log(response.data);
+                this.setState({ cart: response.data })
+            })
+            .catch(error => {
+                console.log("Error from add cart")
+                console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
+            })
+        }else{
+            window.location.href = 'https://neomall.herokuapp.com/product/'+this.props.match.params.id
+        }
+    }
+
+    addReview = (e) => {
+        e.preventDefault()
+        const { match: { params } } = this.props;
+        var a=localStorage.getItem("authen");
+        this.setState({ loading: true })
+        console.log("All states");
+        console.log(this.state);
+        if(a){
+        axios
+            .post('https://neomallapi.herokuapp.com/api/auth/storereview/'+this.props.match.params.id,
+            {
+                params: {
+                    rating: this.state.rating,
+                    body: this.state.body,
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -252,7 +293,7 @@ export default class Product extends Component{
     }
 
     render(){
-        const { good, carts, cartsNum, errorMsg, loading } = this.state;
+        const { good, carts, cartsNum, errorMsg, loading, qty, rating, body } = this.state;
         // const { quantity } = this.state.good;
         const { quantity } = this.state.cart;
 
@@ -401,15 +442,15 @@ export default class Product extends Component{
 
 
                 {/* <!-- breadcrumbs --> */}
-                <section className="breadcrumbs">
-                <div className="container">
-                    <div className="row">
-                    <div className="col">
+                <section class="breadcrumbs bg-light">
+                <div class="container">
+                    <div class="row">
+                    <div class="col">
                         <nav aria-label="breadcrumb">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="index-2.html">Home</a></li>
-                            <li className="breadcrumb-item"><a href="listing-sidebar.html">Shop</a></li>
-                            <li className="breadcrumb-item active" aria-current="page">Product Masonry</li>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="listing-sidebar.html">Shop</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Product</li>
                         </ol>
                         </nav>
                     </div>
@@ -419,39 +460,58 @@ export default class Product extends Component{
 
 
                 {/* <!-- product --> */}
-                <section className="pt-5">
-                <div className="container">
-                    <div className="row gutter-3 justify-content-between">
+                <section class="pt-5">
+                <div class="container">
+                    <div class="row gutter-2 gutter-md-4 justify-content-between">
 
-                    <div className="col-lg-5 pl-md-6 order-2">
-                        <div className="sticky-top">
+                    <div class="col-lg-5 order-2">
+                        <div class="sticky-top">
 
-                        <div className="row">
-                            <div className="col-12">
-                            <span className="item-brand">Neutrale</span>
-                            <h1 className="item-title">{good.name}</h1>
-                            <span className="item-price">${good.price}</span>
+                        <div class="row">
+                            <div class="col-12">
+                            <span class="item-brand">Unrecorded</span>
+                            <h1 class="item-title">Red Organic Cotton Sweater</h1>
+                            <span class="item-price">$82</span>
                             </div>
                         </div>
 
-                        <div className="row">
-                            <div className="col-12">
-                            <p>{good.description}.</p>
+                        <div class="row mb-4">
+                            <div class="col-12">
+                            <div class="form-group">
+                                <label>Size</label>
+                                <div class="btn-group-toggle btn-group-square" data-toggle="buttons">
+                                <label class="btn active">
+                                    <input type="radio" name="options" id="option1" checked /> S
+                                </label>
+                                <label class="btn">
+                                    <input type="radio" name="options" id="option2" /> M
+                                </label>
+                                <label class="btn">
+                                    <input type="radio" name="options" id="option3" /> L
+                                </label>
+                                <label class="btn">
+                                    <input type="radio" name="options" id="option4" /> XL
+                                </label>
+                                <label class="btn">
+                                    <input type="radio" name="options" id="option5" /> XXL
+                                </label>
+                                <label class="btn">
+                                    <input type="radio" name="options" id="option5" /> 3XL
+                                </label>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="row mb-4">
-                            <div className="col-12">
-                            <div className="form-group">
+                            </div>
+                            <div class="col-12 mt-1">
+                            <div class="form-group">
                                 <label>Color</label>
-                                <div className="btn-group-toggle btn-group-square btn-group-colors" data-toggle="buttons">
-                                <label className="btn active text-red">
+                                <div class="btn-group-toggle btn-group-square btn-group-colors" data-toggle="buttons">
+                                <label class="btn active text-red">
                                     <input type="radio" name="options" id="option1-2" checked />
                                 </label>
-                                <label className="btn text-blue">
+                                <label class="btn text-blue">
                                     <input type="radio" name="options" id="option2-2" />
                                 </label>
-                                <label className="btn text-yellow">
+                                <label class="btn text-yellow">
                                     <input type="radio" name="options" id="option3-2" />
                                 </label>
                                 </div>
@@ -459,52 +519,41 @@ export default class Product extends Component{
                             </div>
                         </div>
 
-                        <div className="row">
-                            <div className="col">
-
-                            <form onSubmit={this.addCart} >
-                                        <div className="product__details__quantity">
-                                            <div className="quantity">
-                                                <div className="pro-qty">
-                                                <input type="number" name="quantity" value={quantity} placeholder="Qty" onChange={this.changeHandler} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    
-                                        
-                                        <button type="submit" className="btn btn-block btn-lg btn-primary">ADD TO CART</button>
-                                    </form>
-
-                            {/* <a href="#!" className="btn btn-block btn-lg btn-primary">Add to Cart</a> */}
-                            </div>
-                            <div className="col-12 mt-1">
-                            <p className="small">Free Shipping worldwide available for this item.</p>
+                        {auth?
+                        <div class="row">
+                            <div class="col-md-8">
+                                <form onSubmit={this.addCart} >
+                                    <input type="number" class="form-control" name="qty" value={qty} placeholder="Quantity" onChange={this.changeHandler} />
+                                    <button type="submit" class="btn btn-block btn-lg btn-primary">Add to Cart</button>
+                                </form>
                             </div>
                         </div>
+                        :
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <Link to="/portal">Login to add this item to cart</Link>
+                                </div>
+                            </div>
+                        }
 
                         </div>
                     </div>
 
-                    <div className="col-lg-7 order-1">
-                        <div className="row gutter-1">
-                        <div className="col-12">
-                            <figure className="equal zoom">
-                            <img className="zoom-img" src="https://neomall.herokuapp.com/assets/images/demo/product-35.jpg" alt="Product" />
+                    <div class="col-lg-6 order-1">
+                        <div class="row gutter-3">
+                        <div class="col-12">
+                            <figure class="equal zoom">
+                            <img class="zoom-img" src="https://neomall.herokuapp.com/assets/images/demo/product-34.jpg" alt="Product" />
                             </figure>
                         </div>
-                        <div className="col-6">
-                            <figure className="equal zoom">
-                            <img className="zoom-img" src="https://neomall.herokuapp.com/assets/images/demo/product-35-2.jpg" alt="Product" />
+                        <div class="col-12">
+                            <figure class="equal zoom">
+                            <img class="zoom-img" src="https://neomall.herokuapp.com/assets/images/demo/product-34-3.jpg" alt="Product" />
                             </figure>
                         </div>
-                        <div className="col-6">
-                            <figure className="equal zoom">
-                            <img className="zoom-img" src="https://neomall.herokuapp.com/assets/images/demo/product-35-3.jpg" alt="Product" />
-                            </figure>
-                        </div>
-                        <div className="col-12">
-                            <figure className="equal equal-50 zoom">
-                            <img className="zoom-img" src="https://neomall.herokuapp.com/assets/images/demo/product-35-4.jpg" alt="Product" />
+                        <div class="col-12">
+                            <figure class="equal zoom">
+                            <img class="zoom-img" src="https://neomall.herokuapp.com/assets/images/demo/product-34-2.jpg" alt="Product" />
                             </figure>
                         </div>
                         </div>
@@ -513,332 +562,101 @@ export default class Product extends Component{
                     </div>
                 </div>
                 </section>
-
 
                 {/* <!-- info --> */}
-                <section className="separator-top">
-                <div className="container">
-                    <div className="row gutter-4 justify-content-between">
-                    <div className="col-lg-9 order-2 order-lg-1">
-                        <div className="row gutter-2">
-                        <div className="col-md-4">
-                            <ul className="nav nav-tabs flex-md-column lavalamp" id="component-2" role="tablist">
-                            <li className="nav-item">
-                                <a className="nav-link active" data-toggle="tab" href="#component-2-1" role="tab" aria-controls="component-2-1" aria-selected="true">Description</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" data-toggle="tab" href="#component-2-2" role="tab" aria-controls="component-2-2" aria-selected="false">Information</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" data-toggle="tab" href="#component-2-3" role="tab" aria-controls="component-2-3" aria-selected="false">Delivery & Returns</a>
-                            </li>
-                            </ul>
-                        </div>
-                        <div className="col-md-8">
-                            <div className="tab-content" id="component-2-content">
-                            <div className="tab-pane fade show active" id="component-2-1" role="tabpanel" aria-labelledby="component-2-1">
-                                <p>{good.description}.</p>
-                            </div>
-                            <div className="tab-pane fade" id="component-2-2" role="tabpanel" aria-labelledby="component-2-2">
-                                <ul className="list-group list-group-line">
-                                <li className="list-group-item">100% organic cotton (GOTS Certified)</li>
-                                <li className="list-group-item">360 grams French terry knit fabric</li>
-                                <li className="list-group-item">Made in Braga, Portugal</li>
-                                </ul>
-                            </div>
-                            <div className="tab-pane fade" id="component-2-3" role="tabpanel" aria-labelledby="component-2-3">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe dignissimos illum quisquam repellendus, laboriosam perspiciatis aliquid, possimus hic sunt omnis iusto enim ratione quod natus doloribus optio, recusandae eius laudantium.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe reprehenderit ab fugiat, quia mollitia. Similique earum dolore dolores eveniet fuga velit, in architecto. Nam explicabo, praesentium dicta quam odio quia!</p>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 order-1 order-lg-2 text-lg-right">
-                        <div className="rate">
+                <section class="separator-bottom">
+                <div class="container">
+                    <div class="row gutter-2 gutter-lg-4">
+                    <div class="col-md-4 col-lg-2">
+                        <div class="rate">
                         <span>4.9</span>
-                        <a data-toggle="modal" data-target="#reviews" className="action eyebrow text-primary underline">View Reviews</a>
+                        <a data-toggle="modal" data-target="#reviews" class="action eyebrow text-primary underline">View Reviews</a>
                         </div>
                     </div>
+                    <div class="col-md-8 col-lg-6">
+                        <p>This minimalist backpack is suitable for any occasion. Whether on the road by bike, shopping or in the nightlife. The roll-top closes with velcro and allows a practical filling of the Hajo backpack.</p>
                     </div>
-                </div>
-                </section>
-
-                {/* <!-- related products --> */}
-                <section className="separator-top no-overflow">
-                <div className="container">
-                    <div className="row">
-                    <div className="col-12 mb-3">
-                        <ul className="nav nav-tabs lavalamp" id="myTab" role="tablist">
-                        <li className="nav-item">
-                            <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Related Products</a>
+                    <div class="col-lg-4">
+                        <ul class="list-group list-group-line">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            SKU
+                            <span class="text-dark">1421354</span>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bought With This</a>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Category
+                            <span class="text-dark"><a href="#" class="underline text-dark">Bags</a>, <a href="#" class="underline text-dark">Backpack</a></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Tags
+                            <span class="text-dark"><a href="#" class="underline text-dark">backpack</a>, <a href="#" class="underline text-dark">minimal</a></span>
                         </li>
                         </ul>
                     </div>
-                    <div className="col">
-                        <div className="tab-content" id="myTabContent">
-                        <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div className="owl-carousel owl-carousel-arrows visible" data-items="[4,4,2,1]" data-margin="10" data-loop="true" data-dots="true" data-nav="true">
-                            <div className="product">
-                                <figure className="product-image">
+                    </div>
+                </div>
+                </section>
+
+
+                {/* <!-- related products --> */}
+                <section class="no-overflow">
+                <div class="container">
+                    <div class="row">
+                    <div class="col-12 mb-3">
+                        <ul class="nav nav-tabs lavalamp" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Related Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bought With This</a>
+                        </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="owl-carousel owl-carousel-arrows visible" data-items="[4,4,2,1]" data-margin="10" data-loop="true" data-dots="true" data-nav="true">
+                            <div class="product">
+                                <figure class="product-image">
                                 <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-23.jpg" alt="Image" />
+                                    <img src="assets/images/demo/product-1.jpg" alt="Image" />
+                                    <img src="assets/images/demo/product-1-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Moss Green T-Four BT Earphones</a></h3>
-                                <div className="product-price">
-                                    <span>$50</span>
-                                    <span className="product-action">
+                                <div class="product-meta">
+                                <h3 class="product-title"><a href="#!">Fawn Wool / Natural Mammoth Chair </a></h3>
+                                <div class="product-price">
+                                    <span>$2,268</span>
+                                    <span class="product-action">
                                     <a href="#!">Add to cart</a>
                                     </span>
                                 </div>
-                                <a href="#!" className="product-like"></a>
+                                <a href="#!" class="product-like"></a>
                                 </div>
                             </div>
-                            <div className="product">
-                                <figure className="product-image">
-                                <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-24.jpg" alt="Image" />
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-24-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Black Closca Helmet</a></h3>
-                                <div className="product-price">
-                                    <span>$132</span>
-                                    <span className="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
-                                </div>
-                                <a href="#!" className="product-like"></a>
-                                </div>
-                            </div>
-                            <div className="product">
-                                <figure className="product-image">
-                                <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-25.jpg" alt="Image" />
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-25-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Gravel Black Sigg Water Bottle</a></h3>
-                                <div className="product-price">
-                                    <span>$23</span>
-                                    <span className="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
-                                </div>
-                                <a href="#!" className="product-like"></a>
-                                </div>
-                            </div>
-                            <div className="product">
-                                <figure className="product-image">
-                                <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-11.jpg" alt="Image" />
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-11-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Black Low Curve Iceman Trimix Sneakers</a></h3>
-                                <div className="product-price">
-                                    <span>$271</span>
-                                    <span className="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
-                                </div>
-                                <a href="#!" className="product-like"></a>
-                                </div>
-                            </div>
-                            <div className="product">
-                                <figure className="product-image">
-                                <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-26.jpg" alt="Image" />
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-26-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Black / Black V03D Watch</a></h3>
-                                <div className="product-price">
-                                    <span>$213</span>
-                                    <span className="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
-                                </div>
-                                <a href="#!" className="product-like"></a>
-                                </div>
-                            </div>
-                            <div className="product">
-                                <figure className="product-image">
-                                <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-27.jpg" alt="Image" />
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-27-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Dark Navy Stealth Till Bag</a></h3>
-                                <div className="product-price">
-                                    <span>$57</span>
-                                    <span className="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
-                                </div>
-                                <a href="#!" className="product-like"></a>
-                                </div>
-                            </div>
-                            <div className="product">
-                                <figure className="product-image">
-                                <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-9.jpg" alt="Image" />
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-9-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Black Denim Jacket</a></h3>
-                                <div className="product-price">
-                                    <span>$183</span>
-                                    <span className="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
-                                </div>
-                                <a href="#!" className="product-like"></a>
-                                </div>
-                            </div>
+                            
                             </div>
                         </div>
-                        <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div className="owl-carousel owl-carousel-arrows visible" data-items="[4,4,2,1]" data-margin="10" data-loop="true" data-dots="true" data-nav="true">
-                            <div className="product">
-                                <figure className="product-image">
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="owl-carousel visible" data-items="[4,4,2,1]" data-margin="10" data-loop="true" data-dots="true">
+                            <div class="product">
+                                <figure class="product-image">
                                 <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-9.jpg" alt="Image" />
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-9-2.jpg" alt="Image" />
+                                    <img src="assets/images/demo/product-6.jpg" alt="Image" />
+                                    <img src="assets/images/demo/product-6-2.jpg" alt="Image" />
                                 </a>
                                 </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Black Denim Jacket</a></h3>
-                                <div className="product-price">
-                                    <span>$183</span>
-                                    <span className="product-action">
+                                <div class="product-meta">
+                                <h3 class="product-title"><a href="#!">Grey Pendant Bell Lamp</a></h3>
+                                <div class="product-price">
+                                    <span>$258</span>
+                                    <span class="product-action">
                                     <a href="#!">Add to cart</a>
                                     </span>
                                 </div>
-                                <a href="#!" className="product-like"></a>
+                                <a href="#!" class="product-like"></a>
                                 </div>
                             </div>
-                            <div className="product">
-                                <figure className="product-image">
-                                <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-25.jpg" alt="Image" />
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-25-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Gravel Black Sigg Water Bottle</a></h3>
-                                <div className="product-price">
-                                    <span>$23</span>
-                                    <span className="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
-                                </div>
-                                <a href="#!" className="product-like"></a>
-                                </div>
-                            </div>
-                            <div className="product">
-                                <figure className="product-image">
-                                <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-24.jpg" alt="Image" />
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-24-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Black Closca Helmet</a></h3>
-                                <div className="product-price">
-                                    <span>$132</span>
-                                    <span className="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
-                                </div>
-                                <a href="#!" className="product-like"></a>
-                                </div>
-                            </div>
-                            <div className="product">
-                                <figure className="product-image">
-                                <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-27.jpg" alt="Image" />
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-27-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Dark Navy Stealth Till Bag</a></h3>
-                                <div className="product-price">
-                                    <span>$57</span>
-                                    <span className="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
-                                </div>
-                                <a href="#!" className="product-like"></a>
-                                </div>
-                            </div>
-                            <div className="product">
-                                <figure className="product-image">
-                                <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-11.jpg" alt="Image" />
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-11-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Black Low Curve Iceman Trimix Sneakers</a></h3>
-                                <div className="product-price">
-                                    <span>$271</span>
-                                    <span className="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
-                                </div>
-                                <a href="#!" className="product-like"></a>
-                                </div>
-                            </div>
-                            <div className="product">
-                                <figure className="product-image">
-                                <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-26.jpg" alt="Image" />
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-26-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Black / Black V03D Watch</a></h3>
-                                <div className="product-price">
-                                    <span>$213</span>
-                                    <span className="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
-                                </div>
-                                <a href="#!" className="product-like"></a>
-                                </div>
-                            </div>
-                            <div className="product">
-                                <figure className="product-image">
-                                <a href="#!">
-                                    <img src="https://neomall.herokuapp.com/assets/images/demo/product-23.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div className="product-meta">
-                                <h3 className="product-title"><a href="#!">Moss Green T-Four BT Earphones</a></h3>
-                                <div className="product-price">
-                                    <span>$50</span>
-                                    <span className="product-action">
-
-                                    
-
-                                    <a href="#!">Add to cart</a>
-                                    </span>
-                                </div>
-                                <a href="#!" className="product-like"></a>
-                                </div>
-                            </div>
+                            
                             </div>
                         </div>
                         </div>
@@ -847,25 +665,128 @@ export default class Product extends Component{
                 </div>
                 </section>
 
-                {/* <!-- new review --> */}
-                <div className="modal fade sidebar" id="writeReview" tabIndex="-1" role="dialog" aria-labelledby="writeReviewLabel" aria-hidden="true">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="writeReviewLabel">New Review</h5>
-                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                {/* <!-- reviews --> */}
+                <div class="modal fade sidebar" id="reviews" tabindex="-1" role="dialog" aria-labelledby="reviewsLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reviewsLabel">Reviews</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div className="modal-body">
-                        <form className="row gutter-2">
-                        <div className="form-group col-12">
-                            <label htmlFor="exampleFormControlInput1">Email address</label>
-                            <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                    <div class="modal-body">
+                        <div class="row gutter-3">
+                        <div class="col-12">
+                            <blockquote class="testimonial">
+                            <div class="testimonial-rate">
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <footer>Michael Doe on 5 July 2019</footer>
+                            </blockquote>
                         </div>
-                        <div className="form-group col-12">
-                            <label htmlFor="exampleFormControlSelect1">Rating</label>
-                            <select className="form-control custom-select" id="exampleFormControlSelect1">
+                        <div class="col-12">
+                            <blockquote class="testimonial">
+                            <div class="testimonial-rate">
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <footer>Michael Doe on 5 July 2019</footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-12">
+                            <blockquote class="testimonial">
+                            <div class="testimonial-rate">
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <footer>Michael Doe on 5 July 2019</footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-12">
+                            <blockquote class="testimonial">
+                            <div class="testimonial-rate">
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <footer>Michael Doe on 5 July 2019</footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-12">
+                            <blockquote class="testimonial">
+                            <div class="testimonial-rate">
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <footer>Michael Doe on 5 July 2019</footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-12">
+                            <blockquote class="testimonial">
+                            <div class="testimonial-rate">
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <footer>Michael Doe on 5 July 2019</footer>
+                            </blockquote>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="container-fluid">
+                        <div class="row gutter-0">
+                            <div class="col">
+                            <a href="#!" class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#writeReview" data-dismiss="modal">Write Review</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+
+                {/* <!-- new review --> */}
+                <div class="modal fade sidebar" id="writeReview" tabindex="-1" role="dialog" aria-labelledby="writeReviewLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="writeReviewLabel">New Review</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row gutter-2">
+                        <div class="form-group col-12">
+                            <label for="exampleFormControlInput1">Email address</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="exampleFormControlSelect1">Rating</label>
+                            <select class="form-control custom-select" id="exampleFormControlSelect1">
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -873,17 +794,17 @@ export default class Product extends Component{
                             <option>5</option>
                             </select>
                         </div>
-                        <div className="form-group col-12">
-                            <label htmlFor="exampleFormControlTextarea1">Example textarea</label>
-                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                        <div class="form-group col-12">
+                            <label for="exampleFormControlTextarea1">Review</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
                         </div>
                         </form>
                     </div>
-                    <div className="modal-footer">
-                        <div className="container-fluid">
-                        <div className="row gutter-0">
-                            <div className="col">
-                            <a href="#!" className="btn btn-lg btn-block btn-primary" data-dismiss="modal">Publish Review</a>
+                    <div class="modal-footer">
+                        <div class="container-fluid">
+                        <div class="row gutter-0">
+                            <div class="col">
+                            <a href="#!" class="btn btn-lg btn-block btn-primary" data-dismiss="modal">Publish Review</a>
                             </div>
                         </div>
                         </div>

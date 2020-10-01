@@ -393,7 +393,7 @@ export default class Profile extends Component{
                         <div className="row gutter-2 gutter-md-4 align-items-end">
                         <div className="col-md-6 text-center text-md-left">
                             <h1 className="mb-0">User {user.name} {user.last_name}</h1>
-                            <span className="text-muted">New York, USA</span>
+                            <span className="text-muted">{user.city || location.cityName}, {user.country || location.countryName}</span>
                         </div>
                         <div className="col-md-6 text-center text-md-right">
                             <Link className="btn btn-sm btn-outline-white" onClick={this.logoutHandler}>Sign out</Link>

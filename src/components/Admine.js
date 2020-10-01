@@ -13,7 +13,8 @@ export default class Admine extends Component {
             file: [],
             name: '',
             description: '',
-            price: '',
+            originalPrice: '',
+            discount: '',
             category: '',
             quantity: '',
             // goodPics: null,
@@ -114,7 +115,8 @@ export default class Admine extends Component {
         }
         formData.append('name', this.state.name);
         formData.append('description', this.state.description);
-        formData.append('price', this.state.price);
+        formData.append('originalPrice', this.state.originalPrice);
+        formData.append('discount', this.state.discount);
         formData.append('category', this.state.category);
         formData.append('quantity', this.state.quantity);
         // formData.append('file', this.state.file, this.state.file.name);
@@ -189,7 +191,7 @@ export default class Admine extends Component {
     }
 
     render() {
-        const { file, name, description, price, category, quantity, goodPics, loading } = this.state;
+        const { file, name, description, originalPrice, discount, category, quantity, goodPics, loading } = this.state;
 
         var a=localStorage.getItem("sauthen");
         if(a == null){
@@ -324,7 +326,11 @@ export default class Admine extends Component {
                                             <div className="form-group col-12 collapse" id="seller-business" aria-labelledby="seller-signup-2" data-parent="#accordionExample2">
                                                 <div className="form-group col-12">
                                                     <label htmlFor="price">Price</label>
-                                                    <input type="text" name="price" className="form-control" id="price"  value={price} onChange={this.changeHandler}  />
+                                                    <input type="text" name="originalPrice" className="form-control" id="price"  value={originalPrice} onChange={this.changeHandler}  />
+                                                </div>
+                                                <div className="form-group col-12">
+                                                    <label htmlFor="discount">Discount</label>
+                                                    <input type="number" name="discount" className="form-control" id="discount"  value={discount} onChange={this.changeHandler}  />
                                                 </div>
                                                 <div className="form-group col-12">
                                                     <label htmlFor="quantity">Quantity</label>

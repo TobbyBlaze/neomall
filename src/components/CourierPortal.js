@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { Lines } from 'react-preloaders'
 
-export default class SellerPortal extends Component {
+export default class CourierPortal extends Component {
 
     constructor(props) {
         super(props)
@@ -439,8 +439,4 @@ export default class SellerPortal extends Component {
             </div>
         );
     }
-}
-
-if (document.getElementById('seller-portal')) {
-    ReactDOM.render(<SellerPortal />, document.getElementById('portal'));
 }

@@ -13,7 +13,7 @@ export default class Products extends Component{
         super(props);
 
         this.state = {
-            goods: [],
+            storeGoods: [],
             goodsPage: null,
             carts: [],
             cartsNum: '',
@@ -139,7 +139,7 @@ export default class Products extends Component{
                 console.log(response)
                 console.log("All goods")
                 console.log(response.data.storeGoods.data)
-                this.setState({ goods: [...this.state.storeGoods, ...response.data.goods.data] })
+                this.setState({ storeGoods: [...this.state.storeGoods, ...response.data.storeGoods.data] })
                 this.setState({ goodsPage: response.data.storeGoods.current_page })
                 // console.log("All pop goods")
                 // console.log(response.data.popGoods.data)
@@ -288,7 +288,7 @@ export default class Products extends Component{
     }
 
     render(){
-        const { goods, carts, cartsNum, errorMsg, delcart, products, seller, loading } = this.state;
+        const { storeGoods, carts, cartsNum, errorMsg, delcart, products, seller, loading } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -449,41 +449,115 @@ export default class Products extends Component{
                 </div>
                 
                 
-                {/* <!-- slider --> */}
-                <div className="swiper-container swiper-container-alt">
-                <div className="swiper-wrapper">
-                    <div className="swiper-slide">
-                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-4.jpg)'}}></div>
-                    {/* <div className="image image-overlay image-zoom image-back" ></div> */}
-                    <div className="container">
-                        <div className="row align-items-center justify-content-center vh-80">
-                        <div className="col-lg-8 text-white text-center" data-swiper-parallax-y="-100%">
-                            <h1 className="display-2 mb-2">Welcome to {seller.name} store.</h1>
-                            <Link to="/shop" className="btn btn-white">Shop Now</Link>
-                        </div>
-                        </div>
+                {/* <!-- hero --> */}
+                <section class="hero hero-small bg-blue">
+                <div class="decoration decoration-top" style={{backgroundImage: 'url(assets/images/decoration-1.png)'}}></div>
+                <div class="container">
+                    <div class="row gutter-2 align-items-end">
+                    <div class="col-md-8 text-white">
+                        <h1 class="mb-0">{seller.name}</h1>
+                        <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Listing Modern</li>
+                        </ol>
+                        </nav>
                     </div>
-                    </div>
-                    <div className="swiper-slide">
-                    <div className="image image-overlay image-zoom" style={{backgroundImage:'url(https://neomall.herokuapp.com/assets/images/background-5.jpg)'}}></div>
-                    <div className="container">
-                        <div className="row align-items-center justify-content-center vh-80">
-                        <div className="col-lg-6 text-white text-center" data-swiper-parallax-y="-100%">
-                            <h1 className="display-2 mb-2">Transform your home with us.</h1>
-                            <Link to="/store" className="btn btn-outline-white">See stores</Link>
+                    <div class="col-md-4 text-md-right">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                        <div class="dropdown">
+                            <a class="btn btn-outline-white btn-sm dropdown-toggle" href="#!" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sort
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#!">What's New</a>
+                            <a class="dropdown-item" href="#!">Price high to low</a>
+                            <a class="dropdown-item" href="#!">Price low to high</a>
+                            </div>
                         </div>
+                        <button data-toggle="modal" data-target="#filter" type="button" class="btn btn-sm btn-outline-white">Filter</button>
                         </div>
                     </div>
                     </div>
                 </div>
-                <div className="swiper-button-prev"></div>
-                <div className="swiper-button-next"></div>
+                </section>
+                {/* <!-- / hero --> */}
+
+
+
+                {/* <!-- listing --> */}
+                <section class="pt-5">
+                <div class="container">
+
+
+                    <div class="row">
+                    <div class="col">
+                        <ul class="filters">
+                        <li><span>Size S,M <a href="#!" class="icon-x"></a></span></li>
+                        <li><span>$0 to $500 <a href="#!" class="icon-x"></a></span></li>
+                        </ul>
+                    </div>
+                    </div>
+
+
+                    <div class="row gutter-2 gutter-lg-3">
+
+                    {loading?
+                        <div>
+                            <Skeleton width={500} height={400} />
+                            
+                        </div>
+                    :
+                    storeGoods.map((product, i)=>
+                    <div class="col-6 col-lg-4">
+                        <div class="product">
+                        <figure class="product-image">
+                            <a href="#!">
+                            <img src="https://neomall.herokuapp.com/assets/images/demo/product-1.jpg" alt="Image" />
+                            <img src="https://neomall.herokuapp.com/assets/images/demo/product-1-2.jpg" alt="Image" />
+                            </a>
+                        </figure>
+                        <div class="product-meta">
+                            <h3 class="product-title"><a href="#!">Fawn Wool / Natural Mammoth Chair </a></h3>
+                            <div class="product-price">
+                            <span>$2,268</span>
+                            </div>
+                            <a href="#!" class="product-like"></a>
+                        </div>
+                        </div>
+                    </div>
+                    )
+                        
+                    }
+                    <div
+                    ref={loadingRef => (this.loadingRef = loadingRef)}
+                    style={loadingCSS}
+                    >
+                    <span style={loadingTextCSS}>Loading... <Skeleton width={300}/></span>
+                    </div>
+                    
+                    </div>
+                    {/* <div class="row">
+                    <div class="col">
+                        <nav class="d-inline-block">
+                        <ul class="pagination">
+                            <li class="page-item active"><a class="page-link" href="#!">1 <span class="sr-only">(current)</span></a></li>
+                            <li class="page-item" aria-current="page"><a class="page-link" href="#!">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">4</a></li>
+                        </ul>
+                        </nav>
+                    </div>
+                    </div> */}
                 </div>
+                </section>
+                {/* <!-- listing --> */}
 
 
                 
                 {/* <!-- latest products --> */}
-                <section className="pt-0">
+                {/* <section className="pt-0">
                 <div className="container">
                     <div className="row">
                     <div className="col text-center">
@@ -513,7 +587,7 @@ export default class Products extends Component{
                         </div>
                         </div>
                     </div>
-                    )}
+                    )} */}
                     
 
                     {/* <div className="col-6 col-lg-3">
@@ -538,7 +612,7 @@ export default class Products extends Component{
                         </div>
                     </div> */}
                     
-                    </div>
+                    {/* </div>
 
                     <div
                     ref={loadingRef => (this.loadingRef = loadingRef)}
@@ -548,12 +622,12 @@ export default class Products extends Component{
                     </div>
 
                     <div className="row">
-                    <div className="col text-center">
+                    <div className="col text-center"> */}
                         {/* <Link to="#!" className="btn btn-outline-secondary">Load More</Link> */}
-                    </div>
+                    {/* </div>
                     </div>
                 </div>
-                </section>
+                </section> */}
                 <div>
                     {/* <Footer /> */}
                 </div>

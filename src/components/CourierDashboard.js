@@ -7,7 +7,7 @@ import { Lines, Circle2 } from 'react-preloaders'
 import Header from './Header';
 import Footer from './Footer';
 
-export default class Profile extends Component{
+export default class CourierDashboard extends Component{
     // _isMounted = false;
     constructor(props){
         super(props);

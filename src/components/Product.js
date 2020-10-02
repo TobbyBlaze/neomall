@@ -38,6 +38,7 @@ export default class Product extends Component{
             body: '',
             errorMsg: '',
             qty: '',
+            good_id: '',
             loading: true
             
         }
@@ -60,6 +61,7 @@ export default class Product extends Component{
             {
                 params: {
                     qty: this.state.qty,
+                    good_id: this.state.good_id,
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -231,6 +233,7 @@ export default class Product extends Component{
             .then(response => {
                 console.log(response)
                 this.setState({ good: response.data.good })
+                this.setState({ good_id: response.data.good.id })
                 this.setState({ loading: false })
                 
             })
@@ -293,7 +296,7 @@ export default class Product extends Component{
     }
 
     render(){
-        const { good, carts, cartsNum, errorMsg, loading, qty, rating, body } = this.state;
+        const { good, carts, cartsNum, errorMsg, loading, qty, good_id, rating, body } = this.state;
         // const { quantity } = this.state.good;
         const { quantity } = this.state.cart;
 
@@ -523,6 +526,7 @@ export default class Product extends Component{
                         <div class="row">
                             <div class="col-md-8">
                                 <form onSubmit={this.addCart} >
+                                    {/* <input type="hidden" class="form-control" name="good_id" value={good_id} onChange={this.changeHandler} /> */}
                                     <input type="number" class="form-control" name="qty" value={qty} placeholder="Quantity" onChange={this.changeHandler} />
                                     <button type="submit" class="btn btn-block btn-lg btn-primary">Add to Cart</button>
                                 </form>

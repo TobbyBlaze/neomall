@@ -6,13 +6,13 @@ import Search from 'react-search'
 import OwlCarousel from 'react-owl-carousel2';
 // import 'react-owl-carousel2/style.css'; //Allows for server-side rendering.
 
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
 import { Link, useParams } from 'react-router-dom'
 // import { Lines, Circle2 } from 'react-preloaders'
 import Skeleton from 'react-loading-skeleton';
 
-import Header from './Header';
-import Footer from './Footer';
+// import Header from './Header';
+// import Footer from './Footer';
 
 export default class ActivateAdmin extends Component{
     constructor(props){
@@ -22,9 +22,6 @@ export default class ActivateAdmin extends Component{
             repos: [],
             goods: [],
             goodsPage: null,
-            sellers: [],
-            newGoods: [],
-            popGoods: [],
             carts: [],
             cartsNum: '',
             delcart: 0,
@@ -67,7 +64,7 @@ export default class ActivateAdmin extends Component{
       }
 
     deleteCart = () => {
-        var a=localStorage.getItem("authen");
+        var a=localStorage.getItem("aauthen");
         console.log("All states");
         console.log(this.state);
         if(a){
@@ -102,7 +99,7 @@ export default class ActivateAdmin extends Component{
         e.preventDefault()
         console.log("All states")
         console.log(this.state)
-        var a=localStorage.getItem("authen");
+        var a=localStorage.getItem("aauthen");
         // this.setState({ loading: true })
 
         axios
@@ -115,7 +112,7 @@ export default class ActivateAdmin extends Component{
             .then(response => {
                 console.log("All responses from logout")
                 console.log(response);
-                localStorage.clear("authen");
+                localStorage.clear("aauthen");
                 var a=null;
                 console.log(a);
                 window.location.href = "https://neomall.herokuapp.com"
@@ -128,7 +125,7 @@ export default class ActivateAdmin extends Component{
     }
 
     componentDidMount(){
-        var a=localStorage.getItem("authen");
+        var a=localStorage.getItem("aauthen");
         const { match: { params } } = this.props;
 
         this.setState({ searchLoading: false })
@@ -204,8 +201,8 @@ export default class ActivateAdmin extends Component{
     }
 
     render(){
-        const { goods, newGoods, sellers, popGoods, carts, cartsNum, errorMsg, delcart, loading, q, searchLoading } = this.state;
-        var a=localStorage.getItem("authen");
+        const { goods, carts, cartsNum, errorMsg, delcart, loading, q, searchLoading } = this.state;
+        var a=localStorage.getItem("aauthen");
         if(a == null){
             var auth = false;
         }else{

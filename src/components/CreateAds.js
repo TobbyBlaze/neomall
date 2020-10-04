@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'
 // import { Lines, Circle2 } from 'react-preloaders'
 
-export default class Ads extends Component {
+export default class CreateAds extends Component {
 
     constructor(props) {
         super(props)
@@ -22,103 +22,32 @@ export default class Ads extends Component {
             form: ''
         }
 
-        // this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleBodyChange = this.handleBodyChange.bind(this);
     }
 
     changeHandler = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    // goodHandler = (event) => {
-    //     this.setState({file: URL.createObjectURL(event.target.files[0])});
-    // }
-
     goodPicsHandler = (event) => {
         this.setState({file1: URL.createObjectURL(event.target.files[0])});
         this.setState({file2: URL.createObjectURL(event.target.files[1])});
 
-        // this.setState({file: [event.target.files[0].name, event.target.files[1].name]});
-        // this.setState({ file: [...this.state.file, ...event.target.files] })
-        // this.setState({ file: event.target.files[0] })
-
         this.setState({ file: [...this.state.file, ...event.target.files] })
-        // this.setState({ file: event.target.files[0] })
-
-        // for(let i = 0; i< e.target.files.length; i++) {
-        //     formData.append('file', e.target.files[i]);
-        // }
-
-        // this.setState({
-        //     file: event.target.files
-        // });
-
-        // const formData = new FormData();
-        // if (this.state.file) {
-        //     for (const sfile of this.state.file) {
-        //         formData.append("file", sfile);
-        //     }
-        //     console.log(this.state.file); 
-        //     console.log(formData)
-        // }
-        
-        // Details of the uploaded file 
-        // console.log(this.state.file); 
-        // console.log(formData)
-     
-
-        // const file = [...this.state.file];  Spread syntax creates a shallow copy
-        // file.push(...event.target.file);  Spread again to push each selected file individually
-        // this.setState({ file });
-
-
-
-        // this.fileObj.push(event.target.files)
-        // for (let i = 0; i < this.fileObj[0].length; i++) {
-        //     this.fileArray.push(URL.createObjectURL(this.fileObj[0][i]))
-        // }
-        // this.setState({ file: [this.state.file1, this.state.file2] })
-
     }
 
     submitHandler = e => {
-        var a=localStorage.getItem("sauthen");
+        var a=localStorage.getItem("authen");
         e.preventDefault()
         console.log(this.state)
-        // this.setState({ loading: true })
-
-        // Create an object of formData 
-        // const formData = new FormData(); 
-        
-        // for (let i = 0; i < 2; i++) {
-        // // Update the formData object 
-        // formData.append( 
-        //     "file", 
-        //     this.state.file[i]
-        // ); 
-        // }
-
-        // const formData = new FormData();
-        // if (this.state.file) {
-        //     for (const sfile of this.state.file) {
-        //         formData.append("file", sfile);
-        //     }
-        // }
-        
-        // // Details of the uploaded file 
-        // console.log(this.state.file); 
-        // console.log(formData)
-
+       
         const formData = new FormData();
         for(let i = 0; i< 2; i++) {
             formData.append('image[]', this.state.file[i]);
         }
         formData.append('name', this.state.name);
         formData.append('description', this.state.description);
-        formData.append('originalPrice', this.state.originalPrice);
-        formData.append('discount', this.state.discount);
+        formData.append('price', this.state.price);
         formData.append('category', this.state.category);
-        formData.append('quantity', this.state.quantity);
         // formData.append('file', this.state.file, this.state.file.name);
         console.log(this.state.file[0]); 
         console.log(this.state.file[1]); 
@@ -131,14 +60,11 @@ export default class Ads extends Component {
 
         axios
             // .post('http://localhost/yummypizza/public/api/auth/login', this.state)
-            .post('https://neomallapi.herokuapp.com/api/auth/storegood', formData, {
+            .post('https://neomallapi.herokuapp.com/api/auth/adsCreate', formData, {
                 // body: formData,
                 headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     // 'Content-Type': 'application/json',
                     'Content-Type': 'multipart/form-data',
-                    // "Accept": "application/json",
-                    // "type": "formData",
                     'Authorization': 'Bearer '+a,
                     // 'withCredentials': true
                 }
@@ -162,7 +88,7 @@ export default class Ads extends Component {
         e.preventDefault()
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
-        var a=localStorage.getItem("sauthen");
+        var a=localStorage.getItem("authen");
         // this.setState({ loading: true })
         
 
@@ -193,7 +119,7 @@ export default class Ads extends Component {
     render() {
         const { file, name, description, originalPrice, discount, category, quantity, goodPics, loading } = this.state;
 
-        var a=localStorage.getItem("sauthen");
+        var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
         }else{
@@ -289,7 +215,7 @@ export default class Ads extends Component {
                                             <div className="card-header" id="seller-signup-1">
                                                 <h2 className="mb-0">
                                                     <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#seller-acct" aria-expanded="false" aria-controls="seller-acct">
-                                                    ADD GOOD <span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} />
+                                                    CREATE AD <span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} />
                                                     </button>
                                                 </h2>
                                             </div>
@@ -319,25 +245,12 @@ export default class Ads extends Component {
                                             <div className="card-header" id="seller-signup-2">
                                                 <h2 className="mb-0">
                                                     <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#seller-business" aria-expanded="false" aria-controls="seller-business">
-                                                    ADD GOOD <span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} />
+                                                    CREATE AD <span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} /><span style={{ marginLeft: '.5rem' }} />
                                                     </button>
                                                 </h2>
                                             </div>
                                             <div className="form-group col-12 collapse" id="seller-business" aria-labelledby="seller-signup-2" data-parent="#accordionExample2">
-                                                <div className="form-group col-12">
-                                                    <label htmlFor="price">Price</label>
-                                                    <input type="text" name="originalPrice" className="form-control" id="price"  value={originalPrice} onChange={this.changeHandler}  />
-                                                </div>
-                                                <div className="form-group col-12">
-                                                    <label htmlFor="discount">Discount</label>
-                                                    <input type="number" name="discount" className="form-control" id="discount"  value={discount} onChange={this.changeHandler}  />
-                                                </div>
-                                                <div className="form-group col-12">
-                                                    <label htmlFor="quantity">Quantity</label>
-                                                    <input type="text" name="quantity" className="form-control" id="quantity"  value={quantity} onChange={this.changeHandler}  />
-                                                </div>
-
-                                                <div className="form-group col-12">
+                                            <div className="form-group col-12">
                                                     <label htmlFor="goodPics">Good pics</label>
                                                     <input type="file" name="file[]" className="form-control" id="goodPics" onChange={this.goodPicsHandler} multiple required />
                                                 </div>
@@ -346,6 +259,11 @@ export default class Ads extends Component {
                                                 <br />
                                                 <img class="img-responsive" src={this.state.file2} />
 
+                                                <div className="form-group col-12">
+                                                    <label htmlFor="price">Price</label>
+                                                    <input type="text" name="price" className="form-control" id="price"  value={price} onChange={this.changeHandler}  />
+                                                </div>
+                                                
                                                 <div className="col-12 mt-2">
                                                     <button type="submit" className="btn btn-block btn-primary">Add good</button>
                                                 </div>

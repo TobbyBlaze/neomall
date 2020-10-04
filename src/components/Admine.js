@@ -19,96 +19,29 @@ export default class Admine extends Component {
             quantity: '',
             // goodPics: null,
             loading: false,
-            form: ''
+            form: '',
+            msg: '',
         }
 
-        // this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleBodyChange = this.handleBodyChange.bind(this);
     }
 
     changeHandler = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    // goodHandler = (event) => {
-    //     this.setState({file: URL.createObjectURL(event.target.files[0])});
-    // }
-
     goodPicsHandler = (event) => {
         this.setState({file1: URL.createObjectURL(event.target.files[0])});
         this.setState({file2: URL.createObjectURL(event.target.files[1])});
 
-        // this.setState({file: [event.target.files[0].name, event.target.files[1].name]});
-        // this.setState({ file: [...this.state.file, ...event.target.files] })
-        // this.setState({ file: event.target.files[0] })
-
         this.setState({ file: [...this.state.file, ...event.target.files] })
-        // this.setState({ file: event.target.files[0] })
-
-        // for(let i = 0; i< e.target.files.length; i++) {
-        //     formData.append('file', e.target.files[i]);
-        // }
-
-        // this.setState({
-        //     file: event.target.files
-        // });
-
-        // const formData = new FormData();
-        // if (this.state.file) {
-        //     for (const sfile of this.state.file) {
-        //         formData.append("file", sfile);
-        //     }
-        //     console.log(this.state.file); 
-        //     console.log(formData)
-        // }
         
-        // Details of the uploaded file 
-        // console.log(this.state.file); 
-        // console.log(formData)
-     
-
-        // const file = [...this.state.file];  Spread syntax creates a shallow copy
-        // file.push(...event.target.file);  Spread again to push each selected file individually
-        // this.setState({ file });
-
-
-
-        // this.fileObj.push(event.target.files)
-        // for (let i = 0; i < this.fileObj[0].length; i++) {
-        //     this.fileArray.push(URL.createObjectURL(this.fileObj[0][i]))
-        // }
-        // this.setState({ file: [this.state.file1, this.state.file2] })
-
     }
 
     submitHandler = e => {
         var a=localStorage.getItem("sauthen");
         e.preventDefault()
         console.log(this.state)
-        // this.setState({ loading: true })
-
-        // Create an object of formData 
-        // const formData = new FormData(); 
         
-        // for (let i = 0; i < 2; i++) {
-        // // Update the formData object 
-        // formData.append( 
-        //     "file", 
-        //     this.state.file[i]
-        // ); 
-        // }
-
-        // const formData = new FormData();
-        // if (this.state.file) {
-        //     for (const sfile of this.state.file) {
-        //         formData.append("file", sfile);
-        //     }
-        // }
-        
-        // // Details of the uploaded file 
-        // console.log(this.state.file); 
-        // console.log(formData)
-
         const formData = new FormData();
         for(let i = 0; i< 2; i++) {
             formData.append('image[]', this.state.file[i]);
@@ -134,13 +67,11 @@ export default class Admine extends Component {
             .post('https://neomallapi.herokuapp.com/api/auth/storegood', formData, {
                 // body: formData,
                 headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     // 'Content-Type': 'application/json',
                     'Content-Type': 'multipart/form-data',
                     // "Accept": "application/json",
                     // "type": "formData",
                     'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
                 }
             })
             .then(response => {
@@ -149,32 +80,30 @@ export default class Admine extends Component {
                 // var sauthe = response.data.token;
                 // localStorage.setItem("sauthen",sauthe);
                 // console.log(authe);
-                window.location.href = "https://neomall.herokuapp.com"
+                this.setState({ loading: false })
+                this.setState({ msg: 'Good added successfully' })
+                // window.location.href = "https://neomall.herokuapp.com"
                 // var sub = true;
             })
             .catch(error => {
                 console.log(error)
                 this.setState({ loading: false })
+                this.setState({ 'msg': 'Unable to add good' })
             })
     }
 
     logoutHandler = e => {
         e.preventDefault()
         // console.log(this.state)
-        // console.log($('meta[name="csrf-token"]').attr('content'))
         var a=localStorage.getItem("sauthen");
         // this.setState({ loading: true })
         
 
         axios
-            // .get('http://localhost/yummypizza/public/api/auth/logout',{
             .get('https://neomallapi.herokuapp.com/api/auth/s-logout',{
                 headers: {
-
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
                 }
             })
             .then(response => {
@@ -182,16 +111,19 @@ export default class Admine extends Component {
                 localStorage.clear("sauthen");
                 var a=null;
                 console.log(a);
+                this.setState({ loading: false })
+                this.setState({ msg: 'Logout was successful' })
                 window.location.href = "https://neomall.herokuapp.com"
             })
             .catch(error => {
                 // console.log(error)
                 this.setState({ loading: false })
+                this.setState({ msg: 'Logout was not successful' })
             })
     }
 
     render() {
-        const { file, name, description, originalPrice, discount, category, quantity, goodPics, loading } = this.state;
+        const { file, name, description, originalPrice, discount, category, quantity, goodPics, loading, msg } = this.state;
 
         var a=localStorage.getItem("sauthen");
         if(a == null){
@@ -219,18 +151,13 @@ export default class Admine extends Component {
                             {/* <div className="" id="navbarMenu"> */}
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item">
-                                <Link className="nav-link" to="/">
-                                    Home
+                                <Link className="nav-link" to="/seller-dashboard">
+                                    Dashboard
                                 </Link>
                                 </li>
                                 <li className="nav-item">
-                                <Link className="nav-link" to="/store">
-                                    Stores
-                                </Link>
-                                </li>
-                                <li className="nav-item">
-                                <Link className="nav-link" to="/profile">
-                                    Profile
+                                <Link className="nav-link" to="/add-good">
+                                    Upload goods
                                 </Link>
                                 </li>
                             </ul>

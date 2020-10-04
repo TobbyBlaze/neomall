@@ -36,6 +36,7 @@ export default class adminForgotPassword extends Component {
                 console.log(response);
                 // this.setState({ msg: false })
                 this.setState({ loading: false })
+                this.setState({ msg: 'Pls, check your email for reset password link' })
                 // window.location.href = "https://neomall.herokuapp.com"
             })
             .catch(error => {
@@ -43,6 +44,7 @@ export default class adminForgotPassword extends Component {
                 console.log(error)
                 // this.setState({ msg: false })
                 this.setState({ loading: false })
+                this.setState({ msg: 'Pls, try again' })
             })
     }
 
@@ -102,57 +104,6 @@ export default class adminForgotPassword extends Component {
                     </div>
                 </div>
                 </section>
-
-                {/* <!-- footer --> */}
-                {/* <footer className="bg-dark text-white py-0">
-                <div className="container">
-                    <div className="row separated">
-                    <div className="col-lg-6 py-10">
-                        <div className="row">
-                        <div className="col-md-8">
-                            <p>Neomall</p>
-                        </div>
-                        </div>
-                        <div className="row">
-                        <div className="col-md-10">
-                            <h4 className="eyebrow mb-2">Quick Links</h4>
-                            <ul className="list-group list-group-columns">
-                            <li className="list-group-item"><Link to="about.html">About</Link></li>
-                            <li className="list-group-item"><Link to="contact.html">Contact Us</Link></li>
-                            <li className="list-group-item"><Link to="faq.html">FAQ</Link></li>
-                            <li className="list-group-item"><Link to="text.html">Terms of Use</Link></li>
-                            </ul>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 py-10">
-                        <div className="row justify-content-end">
-                        <div className="col-lg-10">
-                            <h4 className="eyebrow mb-2">Subscribe</h4>
-                            <div className="input-group">
-                            <input type="text" className="form-control form-control-lg" placeholder="Email" aria-label="Subscribe" aria-describedby="button-addon2" />
-                            <div className="input-group-append">
-                                <button className="btn btn-white" type="button" id="button-addon2">Subscribe</button>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div className="row justify-content-end">
-                        <div className="col-lg-10">
-                            <h4 className="eyebrow mb-2">Follow us</h4>
-                            <nav className="nav nav-icons">
-                            <a className="nav-link" href="#!"><i className="icon-facebook-o"></i></a>
-                            <a className="nav-link" href="#!"><i className="icon-twitter-o"></i></a>
-                            <a className="nav-link" href="#!"><i className="icon-youtube-o"></i></a>
-                            </nav>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </footer> */}
-                {/* <!-- / footer --> */}
-
 
             </div>
         );

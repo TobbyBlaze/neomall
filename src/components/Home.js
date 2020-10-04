@@ -98,7 +98,8 @@ export default class Home extends Component{
         //     })
       }
 
-    deleteCart = () => {
+    deleteCart = (e) => {
+        e.preventDefault()
         var a=localStorage.getItem("authen");
         console.log("All states");
         console.log(this.state);

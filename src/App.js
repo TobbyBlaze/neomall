@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import Cart from './components/Cart';
 import Product from './components/Product';
+import Ad from './components/Ad';
 import Products from './components/Products';
 import Checkout from './components/Checkout';
 import Portal from './components/Portal';
@@ -25,7 +26,7 @@ import C2C from './components/C2C';
 import Footer from './components/Footer';
 import Thanks from './components/Thanks';
 import Admine from './components/Admine';
-import Ads from './components/Ads';
+import CreateAds from './components/CreateAds';
 import Checks from './components/Checks';
 import CheckoutForm from './components/CheckoutForm';
 import ActivateUser from './components/ActivateUser';
@@ -53,14 +54,15 @@ export default class App extends Component{
                 
                 <Route exact path='/' component={Home} />
                 <Route exact path='/product/:id' component={Product} />
+                <Route exact path='/ad/:id' component={Ad} />
                 <Route exact path='/products/product/:id' component={Product} />
                 <Route exact path='/products/:id' component={Products} />
                 <Route exact path='/cat/:id' component={Category} />
                 <Route exact path='/cart' component={Cart} />
                 <Route exact path='/checkout' component={Checkout} />
                 <Route exact path='/thanks' component={Thanks} />
-                <Route exact path='/admine' component={Admine} />
-                <Route exact path='/ads' component={Ads} />
+                <Route exact path='/add-good' component={Admine} />
+                <Route exact path='/create-ads' component={CreateAds} />
                 <Route exact path='/portal' component={Portal} />
                 <Route exact path='/seller-portal' component={SellerPortal} />
                 <Route exact path='/admin-portal' component={AdminPortal} />

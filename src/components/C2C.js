@@ -21,11 +21,8 @@ export default class C2C extends Component{
 
         this.state = {
             repos: [],
-            goods: [],
-            goodsPage: null,
-            sellers: [],
-            newGoods: [],
-            popGoods: [],
+            ads: [],
+            adsPage: null,
             carts: [],
             cartsNum: '',
             delcart: 0,
@@ -49,16 +46,16 @@ export default class C2C extends Component{
       }
 
     getItemsAsync(searchValue, cb) {
-        let url = 'https://neomallapi.herokuapp.com/api/searchGoods?q='+searchValue
+        let url = 'https://neomallapi.herokuapp.com/api/searchAds?q='+searchValue
         fetch(url).then( (response) => {
           return response.json();
         }).then((response) => {
             console.log(response)
         //   if(results.items != undefined){
-            console.log(response.goods.data)
-            let items = response.goods.data.map( (res, i) => { return { id: i, value: res.name, name: res.name, price: res.price } })
+            console.log(response.ads.data)
+            let items = response.ads.data.map( (res, i) => { return { id: i, value: res.name, name: res.name, price: res.price } })
             this.setState({ repos: items })
-            this.setState({ goods: items })
+            this.setState({ ads: items })
             this.setState({ searchLoading: true })
             cb(searchValue)
         //   }
@@ -129,46 +126,13 @@ export default class C2C extends Component{
         }
     }
 
-    addWish = (e) => {
-        e.preventDefault()
-        var a=localStorage.getItem("authen");
-        this.setState({ loading: true })
-        console.log("All states");
-        console.log(this.state);
-        if(a){
-        axios
-            .post('https://neomallapi.herokuapp.com/api/auth/storewish', this.state.good,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                }
-            })
-            .then(response => {
-                console.log("All responses from add wish")
-                console.log(response)
-                console.log("Cart data");
-                console.log(response.data);
-                this.setState({ wish: response.data })
-            })
-            .catch(error => {
-                console.log("Error from add wish")
-                console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-                this.setState({ loading: false })
-            })
-        }else{
-            window.location.href = "https://neomall.herokuapp.com/portal"
-        }
-    }
-
     fetchData = (page) => {
         this.setState({ load: true });
         // this.setState({ loading: true })
         console.log("All states")
         console.log(this.state)
         axios
-            .get('https://neomallapi.herokuapp.com/api?page='+page, {
+            .get('https://neomallapi.herokuapp.com/api/ads?page='+page, {
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -177,11 +141,11 @@ export default class C2C extends Component{
                 console.log("All responses from fetch data")
                 console.log(response)
                 console.log("All new goods")
-                console.log(response.data.newGoods.data)
-                this.setState({ newGoods: [...this.state.newGoods, ...response.data.newGoods.data] })
-                console.log("All popular goods")
-                console.log(response.data.popGoods.data)
-                this.setState({ popGoods: [...this.state.popGoods, ...response.data.popGoods.data] })
+                console.log(response.data.ads.data)
+                this.setState({ ads: [...this.state.ads, ...response.data.ads.data] })
+                // console.log("All popular goods")
+                // console.log(response.data.popGoods.data)
+                // this.setState({ popGoods: [...this.state.popGoods, ...response.data.popGoods.data] })
                 // var goodsPics = this.state.goods.map((good, i)=> good.image);
                 // console.log(goodsPics)
                 // var goodsPicsJ = JQuery.parseJSON(goodsPics)
@@ -191,7 +155,7 @@ export default class C2C extends Component{
 
                 // var goodsPicsJS = goodsPics.split(",")
                 // console.log(goodsPicsJS)
-                this.setState({ goodsPage: response.data.newGoods.current_page })
+                this.setState({ adsPage: response.data.ads.current_page })
                 this.setState({ loading: false })
                 this.setState({ load: false });
             })
@@ -209,7 +173,7 @@ export default class C2C extends Component{
         console.log("All states")
         console.log(this.state)
         axios
-            .get('https://neomallapi.herokuapp.com/api/searchGoods', {
+            .get('https://neomallapi.herokuapp.com/api/searchAds', {
                 params: {
                     q: this.state.q,
                 },
@@ -222,9 +186,9 @@ export default class C2C extends Component{
             .then(response => {
                 console.log("All responses from search")
                 console.log(response);
-                console.log("All searched goods")
-                console.log(response.data.goods.data)
-                this.setState({ goods: response.data.goods.data })
+                console.log("All searched ads")
+                console.log(response.data.ads.data)
+                this.setState({ ads: response.data.ads.data })
                 this.setState({ searchLoading: true })
                 
             })
@@ -289,31 +253,11 @@ export default class C2C extends Component{
             threshold: 1.0
         };
             
-        // this.observer = new IntersectionObserver(
-        //     this.handleObserver.bind(this),
-        //     options
-        // );
-        // this.observer.observe(this.loadingRef);
-
-
-        axios
-            .get('https://neomallapi.herokuapp.com/api/stores', {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => {
-                console.log("All responses from stores data")
-                console.log(response)
-                console.log("All stores")
-                console.log(response.data.sellers.data)
-                this.setState({ sellers: response.data.sellers.data })
-            })
-            .catch(error => {
-                console.log("Error from stores data")
-                console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-            })
+        this.observer = new IntersectionObserver(
+            this.handleObserver.bind(this),
+            options
+        );
+        this.observer.observe(this.loadingRef);
 
         if(a){
             var shcart = "https://neomallapi.herokuapp.com/api/auth/shcart"
@@ -705,21 +649,21 @@ export default class C2C extends Component{
                     </div>
                     </div>
                 </div>
-                {popGoods.map((good, i)=>
-                    <div key={good.id} class="col-6 col-lg-3">
+                {ads.map((ad, i)=>
+                    <div key={ad.id} class="col-6 col-lg-3">
                     <div class="product">
                     <figure class="product-image">
-                        <Link to={"product/"+good.id}>
+                        <Link to={"ad/"+ad.id}>
                         <img src="assets/images/demo/product-6.jpg" alt="Image" />
                         <img src="assets/images/demo/product-6-2.jpg" alt="Image" />
-                        {/* <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[0]} alt="Image" />
-                        <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[1]} alt="Image" /> */}
+                        {/* <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(ad.image)[0]} alt="Image" />
+                        <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(ad.image)[1]} alt="Image" /> */}
                         </Link>
                     </figure>
                     <div class="product-meta">
-                        <p class="product-title"><Link to={"product/"+good.id}>{good.name}</Link></p>
+                        <p class="product-title"><Link to={"product/"+ad.id}>{ad.name}</Link></p>
                         <div class="product-price">
-                        <span>${good.price}</span>
+                        <span>${ad.price}</span>
                         </div>
                         <a href="#!" class="product-like"></a>
                     </div>
@@ -754,7 +698,3 @@ export default class C2C extends Component{
         )
     }
 }
-
-// if (document.getElementById('home')) {
-//     ReactDOM.render(<Home />, document.getElementById('home'));
-// }

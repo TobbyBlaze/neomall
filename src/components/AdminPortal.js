@@ -35,10 +35,10 @@ export default class AdminPortal extends Component {
             .post('https://neomallapi.herokuapp.com/api/auth/admin-login', this.state)
             .then(response => {
                 // console.log(response);
-                var authe = response.data.token;
-                localStorage.setItem("authen",authe);
+                var aauthe = response.data.token;
+                localStorage.setItem("aauthen",aauthe);
                 // console.log(authe);
-                window.location.href = "https://neomall.herokuapp.com"
+                window.location.href = "https://neomall.herokuapp.com/admin-dashboard"
                 // window.history.pushState({}, null, '/shop')
                 // var sub = true;
             })

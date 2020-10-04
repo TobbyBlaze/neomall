@@ -22,15 +22,8 @@ export default class AdminDashboard extends Component{
             confirm_password: '',
             city: '',
             country: '',
-            address1: '',
-            zip: '',
-            phone: '',
-            goods: [],
-            carts: [],
-            cartsNum: '',
-            delcart: '',
             location: '',
-            errorMsg: '',
+            msg: '',
             loading: true
             
         }
@@ -40,40 +33,17 @@ export default class AdminDashboard extends Component{
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    addCart = () => {
-        var a=localStorage.getItem("authen");
-
-        axios
-
-            // .post('http://localhost/yummypizza/public/api/auth/storecart', this.state.good, {
-            .post('https://neomallapi.com/api/auth/storecart', this.state.good, {
-                headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                    // 'withCredentials': true
-                }
-            })
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-            })
-    }
-
     logoutHandler = e => {
         e.preventDefault()
         // console.log(this.state)
         // console.log($('meta[name="csrf-token"]').attr('content'))
-        var a=localStorage.getItem("authen");
+        var a=localStorage.getItem("aauthen");
         this.setState({ loading: true })
         
 
         axios
             // .get('http://localhost/yummypizza/public/api/auth/logout',{
-            .get('https://neomallapi.herokuapp.com/api/auth/logout',{
+            .get('https://neomallapi.herokuapp.com/api/auth/a-logout',{
                 headers: {
 
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -84,28 +54,31 @@ export default class AdminDashboard extends Component{
             })
             .then(response => {
                 // console.log(response);
-                localStorage.clear("authen");
+                localStorage.clear("aauthen");
                 var a=null;
                 console.log(a);
+                this.setState({ loading: false })
+                this.setState({ msg: 'Logout successful' })
                 window.location.href = "https://neomall.herokuapp.com"
 
             })
             .catch(error => {
                 // console.log(error)
                 this.setState({ loading: false })
+                this.setState({ msg: 'Logout not successful' })
             })
     }
 
     profileHandler = e => {
         e.preventDefault()
-        var a=localStorage.getItem("authen");
+        var a=localStorage.getItem("aauthen");
         console.log(this.state)
         this.setState({ loading: true })
 
         axios
             // .post('localhost/yummypizza/public/api/auth/signup', this.state)
             // .post('http://localhost/yummypizza/public/api/auth/signup', this.state
-            .post('https://neomallapi.herokuapp.com/api/auth/updateUser', this.state
+            .post('https://neomallapi.herokuapp.com/api/auth/updateAdmin', this.state
             , {
                 headers: {
 
@@ -117,24 +90,27 @@ export default class AdminDashboard extends Component{
             .then(response => {
                 // this.loginHandler();
                 console.log(response)
+                this.setState({ loading: false })
+                this.setState({ msg: 'Account updated successfully' })
                 // window.location.href = "https://neomall.herokuapp.com/portal"
             })
             .catch(error => {
                 console.log(error)
                 this.setState({ loading: false })
+                this.setState({ msg: 'Account not updated' })
             })
     }
 
     passwordHandler = e => {
         e.preventDefault()
-        var a=localStorage.getItem("authen");
+        var a=localStorage.getItem("aauthen");
         console.log(this.state)
         this.setState({ loading: true })
 
         axios
             // .post('localhost/yummypizza/public/api/auth/signup', this.state)
             // .post('http://localhost/yummypizza/public/api/auth/signup', this.state
-            .post('https://neomallapi.herokuapp.com/api/auth/updateUserPassword', this.state
+            .post('https://neomallapi.herokuapp.com/api/auth/updateAdminPassword', this.state
             , {
                 headers: {
 
@@ -146,20 +122,23 @@ export default class AdminDashboard extends Component{
             .then(response => {
                 // this.loginHandler();
                 console.log(response)
+                this.setState({ loading: false })
+                this.setState({ msg: 'Password successfully changed' })
                 // window.location.href = "https://neomall.herokuapp.com/portal"
             })
             .catch(error => {
                 console.log(error)
                 this.setState({ loading: false })
+                this.setState({ msg: 'Password change not successful' })
             })
     }
 
     componentDidMount(){
-        var a=localStorage.getItem("authen");
+        var a=localStorage.getItem("aauthen");
         if(a){
             var one = "https://neomallapi.herokuapp.com/api/auth"
             var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
-            var three = "https://neomallapi.herokuapp.com/api/auth/getuser"
+            var three = "https://neomallapi.herokuapp.com/api/auth/getadmin"
             var four = "https://neomallapi.herokuapp.com/api/location"
     
             axios.defaults.headers.get['Accept'] = 'application/json'
@@ -168,24 +147,12 @@ export default class AdminDashboard extends Component{
             const options = {
                 // headers: {'X-Custom-Header': 'value'}
                 headers: {
-                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+a,
                     // 'withCredentials': true
                 }
             };
-            // }else{
-            //     const options = {
-            //         // headers: {'X-Custom-Header': 'value'}
-            //         headers: {
-            //             // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            //             'Content-Type': 'application/json',
-            //             // 'Authorization': 'Bearer '+a,
-            //             // 'withCredentials': true
-            //         }
-            //     };
-            // }
-    
+            
             function request1() {
                 return axios.get(one, options);
             }
@@ -229,7 +196,7 @@ export default class AdminDashboard extends Component{
                 this.setState({ loading: false })
             })
         }else{
-            window.location.href = "https://neomall.herokuapp.com/portal";
+            window.location.href = "https://neomall.herokuapp.com/admin-portal";
         }
 
     }
@@ -242,10 +209,10 @@ export default class AdminDashboard extends Component{
     }
 
     render(){
-        const { user, location, goods, carts, cartsNum, delcart, errorMsg, loading, old_password, password, confirm_password } = this.state;
+        const { user, location, goods, carts, cartsNum, delcart, msg, loading, old_password, password, confirm_password } = this.state;
         // const { name, last_name, email, old_password, password, confirm_password, city, country, street, zip, phone } = this.state.user;
 
-        var a=localStorage.getItem("authen");
+        var a=localStorage.getItem("aauthen");
         if(a == null){
             var auth = false;
         }else{
@@ -269,11 +236,6 @@ export default class AdminDashboard extends Component{
 
                             <div className="collapse navbar-collapse order-3 order-lg-1" id="navbarMenu">
                             <ul className="navbar-nav mr-auto">
-                                <li className="nav-item dropdown">
-                                <Link className="nav-link" to="/">
-                                    Home
-                                </Link>
-                                </li>
                                 <li className="nav-item dropdown">
                                 <Link className="nav-link" to="/store">
                                     Stores
@@ -312,77 +274,6 @@ export default class AdminDashboard extends Component{
                         </div>
                     </div>
                     </header>
-
-                    {/* <!-- cart --> */}
-                    <div className="modal fade sidebar" id="cart" tabIndex="-1" role="dialog" aria-labelledby="cartLabel" aria-hidden="true">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="cartLabel">Cart</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-
-                            <div className="row gutter-3">
-                            {carts.map((cart, i)=>
-                            <div key={cart.id} className="col-12">
-                                <div className="cart-item cart-item-sm">
-                                <div className="row align-items-center">
-                                    <div className="col-lg-9">
-                                    <div className="media media-product">
-                                        <Link to="#!"><img src="https://neomall.herokuapp.com/assets/images/demo/product-3.jpg" alt="Image" /></Link>
-                                        <div className="media-body">
-                                        <h5 className="media-title">{cart.name}</h5>
-                                        {/* <span className="media-subtitle">Black, Steel</span> */}
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div className="col-lg-3 text-center text-lg-right">
-                                    <span className="cart-item-price">${cart.price}</span>
-                                    </div>
-                                    <form onSubmit={this.deleteCart} >
-                                        <input type="hidden" name="delcart" value={cart.id} onChange={this.changeHandler} />
-                                        <button type="submit" className="cart-item-close"><i className="icon-x"></i></button>
-                                    </form>
-                                    {/* <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link> */}
-                                </div>
-                                </div>
-                            </div>
-                            )}
-                            </div>
-                        </div>
-
-                        <div className="modal-footer">
-                            <div className="container-fluid">
-                            <div className="row gutter-0">
-                                {/* <div className="col d-none d-md-block">
-                                <a href="cart.html" className="btn btn-lg btn-block btn-secondary">View Cart</a>
-                                </div> */}
-                                <div className="col">
-                                <a href="checkout" className="btn btn-lg btn-block btn-primary">Checkout</a>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-
-                    {/* <!-- search --> */}
-                    <div className="modal fade search" id="search" tabIndex="-1" role="dialog" aria-hidden="true">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                        <div className="modal-header">
-                            <input type="text" className="form-control" placeholder="Type your search here" aria-label="Type your search here" aria-describedby="button-addon2" />
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
 
                 </div>
                 

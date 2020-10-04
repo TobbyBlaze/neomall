@@ -54,7 +54,8 @@ export default class courierResetPassword extends Component {
             })
             .then(response => {
                 console.log(response);
-                // this.setState({ token: false })
+                this.setState({ email: response.data.email })
+                this.setState({ token: response.data.token })
                 // this.setState({ msg: false })
                 this.setState({ loading: false })
                 // window.location.href = "https://neomall.herokuapp.com"
@@ -103,10 +104,7 @@ export default class courierResetPassword extends Component {
                             <div className="card-body">
                                 <form onSubmit={this.resetHandler}>
                                 <div className="row mt-2">
-                                <div className="form-group col-12">
-                                    <label htmlFor="exampleInputEmail1">Email address</label>
-                                    <input type="email" name="email" className="form-control" id="exampleInputEmail1"  value={email} onChange={this.changeHandler}   />
-                                </div>
+                                
                                 <div className="form-group col-12 mt-1">
                                     <label htmlFor="exampleInputPassword1">Password</label>
                                     <input type="password" name="password" className="form-control" id="exampleInputPassword1"  value={password} onChange={this.changeHandler}  />
@@ -117,7 +115,7 @@ export default class courierResetPassword extends Component {
                                 </div>
                                 
                                 <div className="col-12 mt-2">
-                                    <button type="submit" className="btn btn-block btn-primary">Log In</button>
+                                    <button type="submit" className="btn btn-block btn-primary">Reset password</button>
                                 </div>
                                 </div>
                                 </form>

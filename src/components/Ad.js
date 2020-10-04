@@ -8,7 +8,7 @@ import Header from './Header';
 import Footer from './Footer';
 // import Circle2 from 'react-preloaders/lib/Circle2/Circle2'
 
-export default class Product extends Component{
+export default class Ad extends Component{
     constructor(props){
         super(props);
 
@@ -17,7 +17,6 @@ export default class Product extends Component{
             goods: [],
             carts: [],
             cartsNum: '',
-            delcart: '',
             sellers: [],
             good: {
                 file : '',
@@ -36,7 +35,6 @@ export default class Product extends Component{
                 quantity : '',
             },
             rating: '',
-            review: '',
             body: '',
             errorMsg: '',
             qty: '',
@@ -245,7 +243,7 @@ export default class Product extends Component{
                 this.setState({ loading: false })
             })
 
-        var one = "https://neomallapi.herokuapp.com/api/auth/shwish"
+        var one = "https://neomallapi.herokuapp.com/api"
         var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
         var three = "https://neomallapi.herokuapp.com/api"
 

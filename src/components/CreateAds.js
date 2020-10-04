@@ -13,7 +13,7 @@ export default class CreateAds extends Component {
             file: [],
             name: '',
             description: '',
-            originalPrice: '',
+            price: '',
             discount: '',
             category: '',
             quantity: '',
@@ -117,7 +117,7 @@ export default class CreateAds extends Component {
     }
 
     render() {
-        const { file, name, description, originalPrice, discount, category, quantity, goodPics, loading } = this.state;
+        const { file, name, description, price, discount, category, quantity, goodPics, loading } = this.state;
 
         var a=localStorage.getItem("authen");
         if(a == null){

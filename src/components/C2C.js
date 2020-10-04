@@ -311,7 +311,7 @@ export default class C2C extends Component{
     }
 
     render(){
-        const { goods, newGoods, sellers, popGoods, carts, cartsNum, errorMsg, delcart, loading, q, searchLoading } = this.state;
+        const { ads, newGoods, sellers, popGoods, carts, cartsNum, errorMsg, delcart, loading, q, searchLoading } = this.state;
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;

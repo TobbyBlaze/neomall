@@ -62,50 +62,19 @@ export default class Home extends Component{
             cb(searchValue)
         //   }
         });
-
-        // axios
-        //     .get('https://neomallapi.herokuapp.com/api/searchGoods', {
-        //         params: {
-        //             q: this.state.q,
-        //         },
-        //     },
-        //     {
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         }
-        //     })
-        //     .then(response => {
-        //         console.log("All responses from search")
-        //         console.log(response);
-        //         console.log("All searched goods")
-        //         console.log(response.data.goods.data)
-        //         console.log(this.state.goods)
-        //         // this.setState({ goods: [] })
-        //         this.setState({ goods: response.data.goods.data })
-        //         this.setState({ searchLoading: true })
-
-        //         let items = response.data.goods.data.map( (res, i) => { return { id: res.id, value: res.name } })
-        //         this.setState({ repos: items })
-        //         console.log(this.state.repos)
-        //         // cb(searchValue)
-        //         cb(q)
-                
-        //     })
-        //     .catch(error => {
-        //         console.log("Error from search")
-        //         console.log(error)
-        //         // this.setState({ loading: false })
-        //     })
-      }
+    }
 
     deleteCart = (e) => {
+        
+        this.setState({ [e.target.name]: e.target.value })
         e.preventDefault()
         var a=localStorage.getItem("authen");
         console.log("All states");
         console.log(this.state);
+        
         if(a){
         axios
-            .get('https://neomallapi.herokuapp.com/api/auth/deletecart/'+this.state.delcart, {
+            .post('https://neomallapi.herokuapp.com/api/auth/deletecart/'+this.state.delcart, {
                 
                 // params: {
                 //     delcart: this.state.delcart,
@@ -601,10 +570,10 @@ export default class Home extends Component{
                                     <div className="col-lg-3 text-center text-lg-right">
                                     <span className="cart-item-price">${cart.price}</span>
                                     </div>
-                                    <form onSubmit={this.deleteCart} >
-                                        <input type="hidden" name="delcart" value={cart.id} onChange={this.changeHandler} />
-                                        <button type="submit" className="cart-item-close"><i className="icon-x"></i></button>
-                                    </form>
+                                    {/* <form onSubmit={this.deleteCart} > */}
+                                        <input type="button" className="cart-item-close" name="delcart" value={cart.id} onClick={this.deleteCart} />
+                                        {/* <button type="submit" className="cart-item-close"><i className="icon-x"></i></button> */}
+                                    {/* </form> */}
                                     {/* <Link to="#!" className="cart-item-close"><i className="icon-x"></i></Link> */}
                                 </div>
                                 </div>
@@ -726,7 +695,7 @@ export default class Home extends Component{
                 <div class="container">
                     <div class="row">
                     <div class="col-md-10 col-lg-8">
-                        <h1 class="font-weight-light">Discover our brand new <b class="d-block font-weight-bold">summer collection.</b></h1>
+                        <h4 class="font-weight-light">Discover our brand new <b class="d-block font-weight-bold">summer collection.</b></h4>
                     </div>
                     </div>
                     <div class="row">
@@ -745,18 +714,23 @@ export default class Home extends Component{
                         
                         <div key={good.id} class="product">
                             <figure class="product-image">
-                            <a href="#!">
+                            <Link to={"product/"+good.id}>
+                                {good.discount?
+                                <span class="product-promo">-{good.discount}%</span>
+                                :
+                                <span></span>
+                                }
                                 <img src="assets/images/demo/product-8.jpg" alt="Image" />
                                 <img src="assets/images/demo/product-8-2.jpg" alt="Image" />
-                            </a>
+                            </Link>
                             </figure>
                             <div class="product-meta">
-                            <p class="product-title"><a href="#!">Hajo Backpack</a></p>
+                            <p class="product-title"><a href="#!">{good.name}</a></p>
                             <div class="product-price">
-                                <span>$113</span>
-                                <span class="product-action">
+                                <span>{good.price}</span>
+                                {/* <span class="product-action">
                                 <a href="#!">Add to cart</a>
-                                </span>
+                                </span> */}
                             </div>
                             <a href="#!" class="product-like"></a>
                             </div>
@@ -856,6 +830,11 @@ export default class Home extends Component{
                                 <div class="product">
                                 <figure class="product-image">
                                     <Link to={"product/"+good.id}>
+                                    {good.discount?
+                                    <span class="product-promo">-{good.discount}%</span>
+                                    :
+                                    <span></span>
+                                    }
                                     <img src="assets/images/demo/product-18.jpg" alt="Image" />
                                     <img src="assets/images/demo/product-18-2.jpg" alt="Image" />
                                     {/* <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[0]} alt="Image" />
@@ -891,6 +870,11 @@ export default class Home extends Component{
                                 <div class="product">
                                 <figure class="product-image">
                                     <Link to={"product/"+good.id}>
+                                    {good.discount?
+                                    <span class="product-promo">-{good.discount}%</span>
+                                    :
+                                    <span></span>
+                                    }
                                     <img src="assets/images/demo/product-6.jpg" alt="Image" />
                                     <img src="assets/images/demo/product-6-2.jpg" alt="Image" />
                                     {/* <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[0]} alt="Image" />
@@ -942,6 +926,11 @@ export default class Home extends Component{
                         <div class="product">
                         <figure class="product-image">
                             <Link to={"product/"+good.id}>
+                            {good.discount?
+                            <span class="product-promo">-{good.discount}%</span>
+                            :
+                            <span></span>
+                            }
                             <img src="assets/images/demo/product-18.jpg" alt="Image" />
                             <img src="assets/images/demo/product-18-2.jpg" alt="Image" />
                             {/* <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[0]} alt="Image" />

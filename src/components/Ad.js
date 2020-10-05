@@ -48,82 +48,6 @@ export default class Ad extends Component{
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    addCart = (e) => {
-        e.preventDefault()
-        const { match: { params } } = this.props;
-        var a=localStorage.getItem("authen");
-        this.setState({ loading: true })
-        console.log("All states");
-        console.log(this.state);
-        if(a){
-        axios
-            .post('https://neomallapi.herokuapp.com/api/auth/storecart', this.state.good,
-            {
-                params: {
-                    qty: this.state.qty,
-                    good_id: this.state.good_id,
-                },
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                }
-            })
-            .then(response => {
-                console.log("All responses from add cart")
-                console.log(response)
-                console.log("Cart data");
-                console.log(response.data);
-                this.setState({ cart: response.data })
-            })
-            .catch(error => {
-                console.log("Error from add cart")
-                console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-                this.setState({ loading: false })
-            })
-        }else{
-            window.location.href = 'https://neomall.herokuapp.com/product/'+this.props.match.params.id
-        }
-    }
-
-    addReview = (e) => {
-        e.preventDefault()
-        const { match: { params } } = this.props;
-        var a=localStorage.getItem("authen");
-        this.setState({ loading: true })
-        console.log("All states");
-        console.log(this.state);
-        if(a){
-        axios
-            .post('https://neomallapi.herokuapp.com/api/auth/storereview/'+this.props.match.params.id,
-            {
-                params: {
-                    rating: this.state.rating,
-                    body: this.state.body,
-                },
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                }
-            })
-            .then(response => {
-                console.log("All responses from add cart")
-                console.log(response)
-                console.log("Cart data");
-                console.log(response.data);
-                this.setState({ cart: response.data })
-            })
-            .catch(error => {
-                console.log("Error from add cart")
-                console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-                this.setState({ loading: false })
-            })
-        }else{
-            window.location.href = 'https://neomall.herokuapp.com/product/'+this.props.match.params.id
-        }
-    }
-
     deleteCart = () => {
         var a=localStorage.getItem("authen");
         const { match: { params } } = this.props;
@@ -149,40 +73,6 @@ export default class Ad extends Component{
                 console.log("Error from deletecart")
                 console.log(error)
                 this.setState({errorMsg: 'Error retrieving data'})
-            })
-        }else{
-            window.location.href = 'https://neomall.herokuapp.com'+this.props.match.params.id
-        }
-    }
-
-    addWish = (e) => {
-        e.preventDefault()
-        const { match: { params } } = this.props;
-        var a=localStorage.getItem("authen");
-        this.setState({ loading: true })
-        console.log("All states");
-        console.log(this.state);
-        if(a){
-        axios
-            .post('https://neomallapi.herokuapp.com/api/auth/storewish', this.state.good,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+a,
-                }
-            })
-            .then(response => {
-                console.log("All responses from add wish")
-                console.log(response)
-                console.log("Cart data");
-                console.log(response.data);
-                this.setState({ wish: response.data })
-            })
-            .catch(error => {
-                console.log("Error from add wish")
-                console.log(error)
-                this.setState({errorMsg: 'Error retrieving data'})
-                this.setState({ loading: false })
             })
         }else{
             window.location.href = 'https://neomall.herokuapp.com'+this.props.match.params.id
@@ -221,7 +111,7 @@ export default class Ad extends Component{
         // console.log(this.props.match.params.id)
 
         axios
-            .get('https://neomallapi.herokuapp.com/api/prdetails/'+this.props.match.params.id, {
+            .get('https://neomallapi.herokuapp.com/api/ads/'+this.props.match.params.id, {
                 
                 headers: {
                     // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -232,8 +122,8 @@ export default class Ad extends Component{
             })
             .then(response => {
                 console.log(response)
-                this.setState({ good: response.data.good })
-                this.setState({ good_id: response.data.good.id })
+                this.setState({ ad: response.data.ad })
+                this.setState({ ad_id: response.data.ad.id })
                 this.setState({ loading: false })
                 
             })
@@ -243,7 +133,7 @@ export default class Ad extends Component{
                 this.setState({ loading: false })
             })
 
-        var one = "https://neomallapi.herokuapp.com/api"
+        var one = "https://neomallapi.herokuapp.com/api/auth/shwish"
         var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
         var three = "https://neomallapi.herokuapp.com/api"
 
@@ -277,9 +167,9 @@ export default class Ad extends Component{
         const responseOne = responses[0]
         const responseTwo = responses[1]
         const responsesThree = responses[2]
-        console.log(responseOne.data.goods.data)
-        this.setState({ goods: responseOne.data.goods.data })
-        console.log(responseTwo.data.carts.data)
+        // console.log(responseOne.data.goods.data)
+        // this.setState({ goods: responseOne.data.goods.data })
+        // console.log(responseTwo.data.carts.data)
         this.setState({ carts: responseTwo.data.carts.data })
         console.log(responseTwo.data.cartsNum)
         this.setState({ cartsNum: responseTwo.data.cartsNum })
@@ -296,7 +186,7 @@ export default class Ad extends Component{
     }
 
     render(){
-        const { good, carts, cartsNum, errorMsg, loading, qty, good_id, rating, body } = this.state;
+        const { ad, carts, cartsNum, errorMsg, loading, qty, good_id, rating, body } = this.state;
         // const { quantity } = this.state.good;
         const { quantity } = this.state.cart;
 
@@ -823,8 +713,4 @@ export default class Ad extends Component{
             </div>
         )
     }
-}
-
-if (document.getElementById('Product')) {
-    ReactDOM.render(<Product />, document.getElementById('Product'));
 }

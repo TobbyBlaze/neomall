@@ -510,18 +510,23 @@ export default class Products extends Component{
                         </div>
                     :
                     storeGoods.map((product, i)=>
-                    <div class="col-6 col-lg-4">
+                    <div key={product.id} class="col-6 col-lg-4">
                         <div class="product">
                         <figure class="product-image">
-                            <a href="#!">
+                            <Link to={"product/"+product.id}>
+                            {product.discount?
+                            <span class="product-promo">-{product.discount}%</span>
+                            :
+                            <span></span>
+                            }
                             <img src="https://neomall.herokuapp.com/assets/images/demo/product-1.jpg" alt="Image" />
                             <img src="https://neomall.herokuapp.com/assets/images/demo/product-1-2.jpg" alt="Image" />
-                            </a>
+                            </Link>
                         </figure>
                         <div class="product-meta">
-                            <h3 class="product-title"><a href="#!">Fawn Wool / Natural Mammoth Chair </a></h3>
+                            <p class="product-title"><a href="#!">{product.name} </a></p>
                             <div class="product-price">
-                            <span>$2,268</span>
+                            <span>${product.price}</span>
                             </div>
                             <a href="#!" class="product-like"></a>
                         </div>

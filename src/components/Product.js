@@ -4,6 +4,11 @@ import ReactDOM from 'react-dom'
 import { Link, useParams } from 'react-router-dom'
 import { Lines, Circle2 } from 'react-preloaders'
 
+import OwlCarousel from 'react-owl-carousel2';
+import Skeleton from 'react-loading-skeleton';
+
+import Dictaphone from './Dictaphone';
+
 import Header from './Header';
 import Footer from './Footer';
 // import Circle2 from 'react-preloaders/lib/Circle2/Circle2'
@@ -14,7 +19,8 @@ export default class Product extends Component{
 
         this.state = {
             
-            goods: [],
+            relatedGoods: [],
+            recentViewedGoods: [],
             carts: [],
             cartsNum: '',
             delcart: '',
@@ -37,17 +43,29 @@ export default class Product extends Component{
             },
             rating: '',
             review: '',
+            reviews: [],
             body: '',
             errorMsg: '',
             qty: '',
+            size: '',
+            colorCode: '',
+            color: '',
+            hex: '',
             good_id: '',
             loading: true
             
         }
     }
 
+    // onValueChange(event) {
+    //     this.setState({
+    //       size: event.target.value
+    //     });
+    // }
+
     changeHandler = e => {
         this.setState({ [e.target.name]: e.target.value })
+        console.log(this.state)
     }
 
     addCart = (e) => {
@@ -55,14 +73,41 @@ export default class Product extends Component{
         const { match: { params } } = this.props;
         var a=localStorage.getItem("authen");
         this.setState({ loading: true })
+        console.log(this.state.hex)
         console.log("All states");
         console.log(this.state);
         if(a){
+            axios
+            .get('https://www.thecolorapi.com/id?hex='+this.state.hex.substring(1),
+            {
+                // params: {
+                //     hex: this.state.color,
+                // },
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 'Authorization': 'Bearer '+a,
+                }
+            })
+            .then(response => {
+                console.log("All responses from add cart")
+                console.log(response)
+                // console.log("Cart data");
+                console.log(response.data.name.value);
+                this.setState({ color: response.data.name.value })
+            })
+            .catch(error => {
+                console.log("Error from add cart")
+                console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
+            })
+
         axios
             .post('https://neomallapi.herokuapp.com/api/auth/storecart', this.state.good,
             {
                 params: {
                     qty: this.state.qty,
+                    color: this.state.color,
                     good_id: this.state.good_id,
                 },
                 headers: {
@@ -236,6 +281,31 @@ export default class Product extends Component{
                 console.log(response)
                 this.setState({ good: response.data.good })
                 this.setState({ good_id: response.data.good.id })
+                this.setState({ relatedGoods: response.data.relatedGoods.data })
+                this.setState({ recentViewedGoods: response.data.recentViewedGoods })
+                this.setState({ loading: false })
+                
+            })
+            .catch(error => {
+                console.log(error)
+                this.setState({errorMsg: 'Error retrieving data'})
+                this.setState({ loading: false })
+            })
+
+        axios
+            .get('https://neomallapi.herokuapp.com/api/review/'+this.props.match.params.id, {
+                
+                headers: {
+                    // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json',
+                    // 'Authorization': 'Bearer '+a,
+                    // 'withCredentials': true
+                }
+            })
+            .then(response => {
+                console.log(response)
+                console.log(response.data.reviews)
+                this.setState({ reviews: response.data.reviews })
                 this.setState({ loading: false })
                 
             })
@@ -247,7 +317,7 @@ export default class Product extends Component{
 
         var one = "https://neomallapi.herokuapp.com/api/auth/shwish"
         var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
-        var three = "https://neomallapi.herokuapp.com/api"
+        var three = "https://neomallapi.herokuapp.com/api/auth/review/"+this.props.match.params.id
 
         axios.defaults.headers.get['Accept'] = 'application/json'
 
@@ -285,8 +355,8 @@ export default class Product extends Component{
         this.setState({ carts: responseTwo.data.carts.data })
         console.log(responseTwo.data.cartsNum)
         this.setState({ cartsNum: responseTwo.data.cartsNum })
-        // console.log(responsesThree.data.good)
-        // this.setState({ good: responsesThree.data.good })
+        // console.log(responsesThree.data.reviews)
+        // this.setState({ reviews: responsesThree.data.reviews })
         // use/access the results 
         })).catch(errors => {
             // console.log(error)
@@ -297,8 +367,15 @@ export default class Product extends Component{
 
     }
 
+    componentWillUnmount() {
+        // fix Warning: Can't perform a React state update on an unmounted component
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
     render(){
-        const { good, carts, cartsNum, errorMsg, loading, qty, good_id, rating, body } = this.state;
+        const { good, carts, cartsNum, errorMsg, loading, qty, size, color, hex, good_id, rating, body, reviews, relatedGoods, recentViewedGoods } = this.state;
         // const { quantity } = this.state.good;
         const { quantity } = this.state.cart;
 
@@ -308,6 +385,24 @@ export default class Product extends Component{
         }else{
             var auth = true;
         }
+
+        const relatedGoodsCarousel = {
+            items: 3,
+            margin: 5,
+            // nav: true,
+            // navText:<p>Next</p>,
+            rewind: true,
+            autoplay: true
+        };
+
+        const recentViewedGoodsCarousel = {
+            items: 3,
+            margin: 5,
+            // nav: true,
+            // navText:<p>Next</p>,
+            rewind: true,
+            autoplay: true
+        };
         
         return(
             <div>
@@ -474,9 +569,12 @@ export default class Product extends Component{
 
                         <div class="row">
                             <div class="col-12">
-                            <span class="item-brand">Unrecorded</span>
-                            <h1 class="item-title">Red Organic Cotton Sweater</h1>
-                            <span class="item-price">$82</span>
+                            <span class="item-brand">{good.seller_name}</span>
+                            <h1 class="item-title">{good.name}</h1>
+                            <span class="item-price">
+                                <s class="text-muted">${good.originalPrice}</s>
+                                ${good.price}
+                            </span>
                             </div>
                         </div>
 
@@ -486,31 +584,32 @@ export default class Product extends Component{
                                 <label>Size</label>
                                 <div class="btn-group-toggle btn-group-square" data-toggle="buttons">
                                 <label class="btn active">
-                                    <input type="radio" name="options" id="option1" checked /> S
+                                    <input type="radio" name="size" id="option1" value="S" checked={size === "S"} onChange={this.changeHandler} /> S
                                 </label>
                                 <label class="btn">
-                                    <input type="radio" name="options" id="option2" /> M
+                                    <input type="radio" name="size" id="option2" value="M" checked={size === "M"} onChange={this.changeHandler} /> M
                                 </label>
                                 <label class="btn">
-                                    <input type="radio" name="options" id="option3" /> L
+                                    <input type="radio" name="size" id="option3" value="L" checked={size === "L"} onChange={this.changeHandler}/> L
                                 </label>
                                 <label class="btn">
-                                    <input type="radio" name="options" id="option4" /> XL
+                                    <input type="radio" name="size" id="option4" value="XL" checked={size === "XL"} onChange={this.changeHandler}/> XL
                                 </label>
                                 <label class="btn">
-                                    <input type="radio" name="options" id="option5" /> XXL
+                                    <input type="radio" name="size" id="option5" value="XXL" checked={size === "XXL"} onChange={this.changeHandler}/> XXL
                                 </label>
                                 <label class="btn">
-                                    <input type="radio" name="options" id="option5" /> 3XL
+                                    <input type="radio" name="size" id="option5" value="3XL" checked={size === "3XL"} onChange={this.changeHandler}/> 3XL
                                 </label>
                                 </div>
                             </div>
                             </div>
                             <div class="col-12 mt-1">
                             <div class="form-group">
-                                <label>Color</label>
-                                <div class="btn-group-toggle btn-group-square btn-group-colors" data-toggle="buttons">
-                                <label class="btn active text-red">
+                                
+                                {/* <input type="color" /> */}
+                                {/* <div class="btn-group-toggle btn-group-square btn-group-colors" data-toggle="buttons">
+                                <label class="">
                                     <input type="radio" name="options" id="option1-2" checked />
                                 </label>
                                 <label class="btn text-blue">
@@ -519,16 +618,21 @@ export default class Product extends Component{
                                 <label class="btn text-yellow">
                                     <input type="radio" name="options" id="option3-2" />
                                 </label>
-                                </div>
+                                </div> */}
                             </div>
                             </div>
                         </div>
+
+                        <Dictaphone />
 
                         {auth?
                         <div class="row">
                             <div class="col-md-8">
                                 <form onSubmit={this.addCart} >
                                     {/* <input type="hidden" class="form-control" name="good_id" value={good_id} onChange={this.changeHandler} /> */}
+                                    <label>Color</label>
+                                    <br />
+                                    <input type="color" class="form-control" name="hex" value={hex} onChange={this.changeHandler}/>
                                     <input type="number" class="form-control" name="qty" value={qty} placeholder="Quantity" onChange={this.changeHandler} />
                                     <button type="submit" class="btn btn-block btn-lg btn-primary">Add to Cart</button>
                                 </form>
@@ -580,22 +684,22 @@ export default class Product extends Component{
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-6">
-                        <p>This minimalist backpack is suitable for any occasion. Whether on the road by bike, shopping or in the nightlife. The roll-top closes with velcro and allows a practical filling of the Hajo backpack.</p>
+                        <p>{good.description}</p>
                     </div>
                     <div class="col-lg-4">
                         <ul class="list-group list-group-line">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {/* <li class="list-group-item d-flex justify-content-between align-items-center">
                             SKU
                             <span class="text-dark">1421354</span>
-                        </li>
+                        </li> */}
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             Category
-                            <span class="text-dark"><a href="#" class="underline text-dark">Bags</a>, <a href="#" class="underline text-dark">Backpack</a></span>
+                            <span class="text-dark">{good.category}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {/* <li class="list-group-item d-flex justify-content-between align-items-center">
                             Tags
                             <span class="text-dark"><a href="#" class="underline text-dark">backpack</a>, <a href="#" class="underline text-dark">minimal</a></span>
-                        </li>
+                        </li> */}
                         </ul>
                     </div>
                     </div>
@@ -613,57 +717,87 @@ export default class Product extends Component{
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Related Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bought With This</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Recently Viewed Products</a>
                         </li>
                         </ul>
                     </div>
                     <div class="col">
                         <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="owl-carousel owl-carousel-arrows visible" data-items="[4,4,2,1]" data-margin="10" data-loop="true" data-dots="true" data-nav="true">
-                            <div class="product">
-                                <figure class="product-image">
-                                <a href="#!">
-                                    <img src="assets/images/demo/product-1.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-1-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div class="product-meta">
-                                <h3 class="product-title"><a href="#!">Fawn Wool / Natural Mammoth Chair </a></h3>
-                                <div class="product-price">
-                                    <span>$2,268</span>
-                                    <span class="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
+                            <OwlCarousel ref="car" options={relatedGoodsCarousel} >
+                            {loading?
+                                <div>
+                                    <Skeleton width={500} height={400} />
+                                    
                                 </div>
-                                <a href="#!" class="product-like"></a>
-                                </div>
-                            </div>
+                            :
                             
-                            </div>
+                            relatedGoods.map((relGood, i)=>
+                                <div key={relGood.id} class="product">
+                                    <figure class="product-image">
+                                    <Link to={"../product/"+relGood.id}>
+                                        {relGood.discount?
+                                        <span class="product-promo">-{relGood.discount}%</span>
+                                        :
+                                        <span></span>
+                                        }
+                                        <img src="assets/images/demo/product-8.jpg" alt="Image" />
+                                        <img src="assets/images/demo/product-8-2.jpg" alt="Image" />
+                                    </Link>
+                                    </figure>
+                                    <div class="product-meta">
+                                    <p class="product-title"><a href="#!">{relGood.name}</a></p>
+                                    <div class="product-price">
+                                        <span>{relGood.price}</span>
+                                        {/* <span class="product-action">
+                                        <a href="#!">Add to cart</a>
+                                        </span> */}
+                                    </div>
+                                    <a href="#!" class="product-like"></a>
+                                    </div>
+                                </div>
+                                )
+                        
+                            }
+                            </OwlCarousel>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="owl-carousel visible" data-items="[4,4,2,1]" data-margin="10" data-loop="true" data-dots="true">
-                            <div class="product">
-                                <figure class="product-image">
-                                <a href="#!">
-                                    <img src="assets/images/demo/product-6.jpg" alt="Image" />
-                                    <img src="assets/images/demo/product-6-2.jpg" alt="Image" />
-                                </a>
-                                </figure>
-                                <div class="product-meta">
-                                <h3 class="product-title"><a href="#!">Grey Pendant Bell Lamp</a></h3>
-                                <div class="product-price">
-                                    <span>$258</span>
-                                    <span class="product-action">
-                                    <a href="#!">Add to cart</a>
-                                    </span>
+                            <OwlCarousel ref="car" options={recentViewedGoodsCarousel} >
+                            {loading?
+                                <div>
+                                    <Skeleton width={500} height={400} />
+                                    
                                 </div>
-                                <a href="#!" class="product-like"></a>
-                                </div>
-                            </div>
+                            :
                             
-                            </div>
+                            recentViewedGoods.map((recGood, i)=>
+                                <div key={recGood.goodId} class="product">
+                                    <figure class="product-image">
+                                    <Link to={"../product/"+recGood.goodId}>
+                                        {recGood.discount?
+                                        <span class="product-promo">-{recGood.discount}%</span>
+                                        :
+                                        <span></span>
+                                        }
+                                        <img src="assets/images/demo/product-8.jpg" alt="Image" />
+                                        <img src="assets/images/demo/product-8-2.jpg" alt="Image" />
+                                    </Link>
+                                    </figure>
+                                    <div class="product-meta">
+                                    <p class="product-title"><a href="#!">{recGood.goodName}</a></p>
+                                    <div class="product-price">
+                                        <span>{recGood.goodPrice}</span>
+                                        {/* <span class="product-action">
+                                        <a href="#!">Add to cart</a>
+                                        </span> */}
+                                    </div>
+                                    <a href="#!" class="product-like"></a>
+                                    </div>
+                                </div>
+                                )
+                        
+                            }
+                            </OwlCarousel>
                         </div>
                         </div>
                     </div>
@@ -675,6 +809,7 @@ export default class Product extends Component{
                 <div class="modal fade sidebar" id="reviews" tabindex="-1" role="dialog" aria-labelledby="reviewsLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
+                    
                     <div class="modal-header">
                         <h5 class="modal-title" id="reviewsLabel">Reviews</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -683,81 +818,24 @@ export default class Product extends Component{
                     </div>
                     <div class="modal-body">
                         <div class="row gutter-3">
-                        <div class="col-12">
+                        {reviews.map((rev, i)=>
+                        <div key={rev.id} class="col-12">
                             <blockquote class="testimonial">
                             <div class="testimonial-rate">
+                                {/* for(var i; i <= {rev.rating}; i++){
+                                    <span class="icon-ui-star"></span>
+                                } */}
                                 <span class="icon-ui-star"></span>
                                 <span class="icon-ui-star"></span>
                                 <span class="icon-ui-star"></span>
                                 <span class="icon-ui-star"></span>
                                 <span class="icon-ui-star"></span>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <footer>Michael Doe on 5 July 2019</footer>
+                            <p>{rev.body}</p>
+                            <footer>{rev.user_name} on {rev.created_at}</footer>
                             </blockquote>
                         </div>
-                        <div class="col-12">
-                            <blockquote class="testimonial">
-                            <div class="testimonial-rate">
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <footer>Michael Doe on 5 July 2019</footer>
-                            </blockquote>
-                        </div>
-                        <div class="col-12">
-                            <blockquote class="testimonial">
-                            <div class="testimonial-rate">
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <footer>Michael Doe on 5 July 2019</footer>
-                            </blockquote>
-                        </div>
-                        <div class="col-12">
-                            <blockquote class="testimonial">
-                            <div class="testimonial-rate">
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <footer>Michael Doe on 5 July 2019</footer>
-                            </blockquote>
-                        </div>
-                        <div class="col-12">
-                            <blockquote class="testimonial">
-                            <div class="testimonial-rate">
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <footer>Michael Doe on 5 July 2019</footer>
-                            </blockquote>
-                        </div>
-                        <div class="col-12">
-                            <blockquote class="testimonial">
-                            <div class="testimonial-rate">
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <footer>Michael Doe on 5 July 2019</footer>
-                            </blockquote>
-                        </div>
+                        )}
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -784,37 +862,35 @@ export default class Product extends Component{
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <form onSubmit={this.addReview}>
                     <div class="modal-body">
-                        <form class="row gutter-2">
-                        <div class="form-group col-12">
-                            <label for="exampleFormControlInput1">Email address</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                        <div class="row gutter-2">
+                            <div class="form-group col-12">
+                                <label for="exampleFormControlSelect1">Rating</label>
+                                <select name="rating" value={rating} class="form-control custom-select" id="exampleFormControlSelect1" onChange={this.changeHandler}>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="exampleFormControlTextarea1">Review</label>
+                                <textarea name="body" value={body} class="form-control" id="exampleFormControlTextarea1" rows="5" onChange={this.changeHandler}></textarea>
+                            </div>
                         </div>
-                        <div class="form-group col-12">
-                            <label for="exampleFormControlSelect1">Rating</label>
-                            <select class="form-control custom-select" id="exampleFormControlSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-12">
-                            <label for="exampleFormControlTextarea1">Review</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                        </div>
-                        </form>
                     </div>
                     <div class="modal-footer">
                         <div class="container-fluid">
                         <div class="row gutter-0">
                             <div class="col">
-                            <a href="#!" class="btn btn-lg btn-block btn-primary" data-dismiss="modal">Publish Review</a>
+                            <button type="submit" class="btn btn-lg btn-block btn-primary">Publish Review</button>
                             </div>
                         </div>
                         </div>
                     </div>
+                    </form>
                     </div>
                 </div>
                 </div>

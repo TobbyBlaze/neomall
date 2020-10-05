@@ -653,6 +653,11 @@ export default class Category extends Component{
                         <div class="product">
                         <figure class="product-image">
                             <Link to={"product/"+good.id}>
+                            {good.discount?
+                            <span class="product-promo">-{good.discount}%</span>
+                            :
+                            <span></span>
+                            }
                             <img src="assets/images/demo/product-18.jpg" alt="Image" />
                             <img src="assets/images/demo/product-18-2.jpg" alt="Image" />
                             {/* <img src={"https://neomallapi.herokuapp.com/file/"+JSON.parse(good.image)[0]} alt="Image" />

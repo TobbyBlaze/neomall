@@ -319,7 +319,7 @@ export default class Product extends Component{
 
         var one = "https://neomallapi.herokuapp.com/api"
         var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
-        var three = "https://neomallapi.herokuapp.com/api/auth/review/"+this.props.match.params.id
+        // var three = "https://neomallapi.herokuapp.com/api/auth/review/"+this.props.match.params.id
 
         axios.defaults.headers.get['Accept'] = 'application/json'
 
@@ -343,14 +343,9 @@ export default class Product extends Component{
             return axios.get(two, options);
         }
 
-        function request3() {
-            return axios.get(three, options);
-        }
-
-        axios.all([request1(), request2(), request3()]).then(axios.spread((...responses) => {
+        axios.all([request1(), request2()]).then(axios.spread((...responses) => {
         const responseOne = responses[0]
         const responseTwo = responses[1]
-        const responsesThree = responses[2]
         console.log(responseOne.data.goods.data)
         this.setState({ goods: responseOne.data.goods.data })
         console.log(responseTwo.data.carts.data)

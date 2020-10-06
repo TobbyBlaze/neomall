@@ -41,7 +41,7 @@ export default class Product extends Component{
                 category : '',
                 quantity : '',
             },
-            rating: '',
+            rating: null,
             review: '',
             reviews: [],
             body: '',
@@ -142,7 +142,7 @@ export default class Product extends Component{
         console.log(this.state);
         if(a){
         axios
-            .post('https://neomallapi.herokuapp.com/api/auth/storereview',
+            .post('https://neomallapi.herokuapp.com/api/auth/storereview', this.state.good,
             {
                 params: {
                     good_id: this.state.good_id,

@@ -7,6 +7,8 @@ import { Lines, Circle2 } from 'react-preloaders'
 import OwlCarousel from 'react-owl-carousel2';
 import Skeleton from 'react-loading-skeleton';
 
+import moment from "moment"
+
 import Dictaphone from './Dictaphone';
 
 import Header from './Header';
@@ -306,8 +308,8 @@ export default class Product extends Component{
             })
             .then(response => {
                 console.log(response)
-                console.log(response.data.reviews)
-                this.setState({ reviews: response.data.reviews })
+                console.log(response.data.reviews.data)
+                this.setState({ reviews: response.data.reviews.data })
                 this.setState({ loading: false })
                 
             })
@@ -822,7 +824,7 @@ export default class Product extends Component{
                                 {/* for(var i; i <= {rev.rating}; i++){
                                     <span class="icon-ui-star"></span>
                                 } */}
-                                {[...Array(rev.rating)].map((e, i) => <span class="icon-ui-star" key={i}></span>)}
+                                {[...Array(parseInt(rev.rating))].map((e, i) => <span class="icon-ui-star" key={i}></span>)}
                                 {/* <span class="icon-ui-star"></span>
                                 <span class="icon-ui-star"></span>
                                 <span class="icon-ui-star"></span>
@@ -830,7 +832,7 @@ export default class Product extends Component{
                                 <span class="icon-ui-star"></span> */}
                             </div>
                             <p>{rev.body}</p>
-                            <footer>{rev.user_name} on {rev.created_at}</footer>
+                            <footer>{rev.user_name}, {moment(rev.updated_at).fromNow()}</footer>
                             </blockquote>
                         </div>
                         )}
@@ -894,7 +896,7 @@ export default class Product extends Component{
                 </div>
 
                 {/* <!-- edit review --> */}
-                <div class="modal fade sidebar" id="editReview" tabindex="-1" role="dialog" aria-labelledby="editReviewLabel" aria-hidden="true">
+                {/* <div class="modal fade sidebar" id="editReview" tabindex="-1" role="dialog" aria-labelledby="editReviewLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
@@ -934,7 +936,7 @@ export default class Product extends Component{
                     </form>
                     </div>
                 </div>
-                </div>
+                </div> */}
 
 
 

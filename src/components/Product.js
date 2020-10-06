@@ -316,7 +316,7 @@ export default class Product extends Component{
                 this.setState({ loading: false })
             })
 
-        var one = "https://neomallapi.herokuapp.com/api/auth/shwish"
+        var one = "https://neomallapi.herokuapp.com/api"
         var two = "https://neomallapi.herokuapp.com/api/auth/shcart"
         var three = "https://neomallapi.herokuapp.com/api/auth/review/"+this.props.match.params.id
 

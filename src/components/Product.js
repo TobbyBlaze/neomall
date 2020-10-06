@@ -160,7 +160,7 @@ export default class Product extends Component{
                 console.log("Cart data");
                 console.log(response.data);
                 // this.setState({ review: response.data })
-                this.setState({ reviews: [...this.state.reviews, ...response.data] })
+                this.setState({ reviews: [...this.state.reviews, response.data] })
             })
             .catch(error => {
                 console.log("Error from add cart")
@@ -866,6 +866,49 @@ export default class Product extends Component{
                         </button>
                     </div>
                     <form onSubmit={this.addReview}>
+                    <div class="modal-body">
+                        <div class="row gutter-2">
+                            <div class="form-group col-12">
+                                <label for="exampleFormControlSelect1">Rating</label>
+                                <select name="rating" value={rating} class="form-control custom-select" id="exampleFormControlSelect1" onChange={this.changeHandler}>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="exampleFormControlTextarea1">Review</label>
+                                <textarea name="body" value={body} class="form-control" id="exampleFormControlTextarea1" rows="5" onChange={this.changeHandler}></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="container-fluid">
+                        <div class="row gutter-0">
+                            <div class="col">
+                            <button type="submit" class="btn btn-lg btn-block btn-primary">Publish Review</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+
+                {/* <!-- edit review --> */}
+                <div class="modal fade sidebar" id="editReview" tabindex="-1" role="dialog" aria-labelledby="editReviewLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="writeReviewLabel">New Review</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form onSubmit={this.editReview}>
                     <div class="modal-body">
                         <div class="row gutter-2">
                             <div class="form-group col-12">

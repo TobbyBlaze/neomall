@@ -142,9 +142,10 @@ export default class Product extends Component{
         console.log(this.state);
         if(a){
         axios
-            .post('https://neomallapi.herokuapp.com/api/auth/storereview/'+this.props.match.params.id,
+            .post('https://neomallapi.herokuapp.com/api/auth/storereview',
             {
                 params: {
+                    good_id: this.state.good_id,
                     rating: this.state.rating,
                     body: this.state.body,
                 },

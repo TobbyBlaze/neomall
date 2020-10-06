@@ -159,7 +159,8 @@ export default class Product extends Component{
                 console.log(response)
                 console.log("Cart data");
                 console.log(response.data);
-                this.setState({ cart: response.data })
+                // this.setState({ review: response.data })
+                this.setState({ reviews: [...this.state.reviews, ...response.data] })
             })
             .catch(error => {
                 console.log("Error from add cart")
@@ -199,7 +200,7 @@ export default class Product extends Component{
                 this.setState({errorMsg: 'Error retrieving data'})
             })
         }else{
-            window.location.href = 'https://neomall.herokuapp.com'+this.props.match.params.id
+            window.location.href = 'https://neomall.herokuapp.com/product/'+this.props.match.params.id
         }
     }
 
@@ -826,11 +827,12 @@ export default class Product extends Component{
                                 {/* for(var i; i <= {rev.rating}; i++){
                                     <span class="icon-ui-star"></span>
                                 } */}
+                                {[...Array(rev.rating)].map((e, i) => <span class="icon-ui-star" key={i}></span>)}
+                                {/* <span class="icon-ui-star"></span>
                                 <span class="icon-ui-star"></span>
                                 <span class="icon-ui-star"></span>
                                 <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
-                                <span class="icon-ui-star"></span>
+                                <span class="icon-ui-star"></span> */}
                             </div>
                             <p>{rev.body}</p>
                             <footer>{rev.user_name} on {rev.created_at}</footer>

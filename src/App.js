@@ -43,9 +43,17 @@ import sellerForgotPassword from './components/sellerForgotPassword';
 import sellerResetPassword from './components/sellerResetPassword';
 import Error from './components/Error';
 import Category from './components/Category';
+import Dictaphone from './components/Dictaphone';
 
 export default class App extends Component{
   render(){
+    const eventhandler = data => console.log(data)
+
+    
+    const callbackFunction = (childData) => {
+      this.setState({message: childData})
+    }
+
     return (
       <BrowserRouter>
         <div>
@@ -89,6 +97,7 @@ export default class App extends Component{
                 <Route component={Error} />
                 {/* <Route exact path='/checkout' component={Checks} /> */}
             </Switch>
+            <Dictaphone onChange={eventhandler}/>
             <Footer />
         </div>
     </BrowserRouter>

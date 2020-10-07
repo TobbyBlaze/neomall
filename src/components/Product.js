@@ -1,19 +1,29 @@
-import React, { Component } from 'react'
+import React, { PropTypes, Component } from 'react'
 import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Link, useParams } from 'react-router-dom'
 import { Lines, Circle2 } from 'react-preloaders'
+
+// import SpeechRecognition from 'react-speech-recognition'
 
 import OwlCarousel from 'react-owl-carousel2';
 import Skeleton from 'react-loading-skeleton';
 
 import moment from "moment"
 
-import Dictaphone from './Dictaphone';
+// import Dictaphone from './Dictaphone';
 
 import Header from './Header';
 import Footer from './Footer';
 // import Circle2 from 'react-preloaders/lib/Circle2/Circle2'
+
+const propTypes = {
+    // Props injected by SpeechRecognition
+    // transcript: PropTypes.string,
+    // resetTranscript: PropTypes.func,
+    // browserSupportsSpeechRecognition: PropTypes.bool
+}
+  
 
 export default class Product extends Component{
     constructor(props){
@@ -54,6 +64,7 @@ export default class Product extends Component{
             color: '',
             hex: '',
             good_id: '',
+            message: '',
             loading: true
             
         }
@@ -62,6 +73,12 @@ export default class Product extends Component{
     // onValueChange(event) {
     //     this.setState({
     //       size: event.target.value
+    //     });
+    // }
+
+    // trans(event) {
+    //     this.setState({
+    //       transcript: event.target.value
     //     });
     // }
 
@@ -378,6 +395,9 @@ export default class Product extends Component{
         // const { quantity } = this.state.good;
         const { quantity } = this.state.cart;
 
+        // const { transcript, resetTranscript, browserSupportsSpeechRecognition } = this.props;
+        // const { transcript, resetTranscript } = useSpeechRecognition();
+
         var a=localStorage.getItem("authen");
         if(a == null){
             var auth = false;
@@ -622,7 +642,7 @@ export default class Product extends Component{
                             </div>
                         </div>
 
-                        <Dictaphone />
+                        {/* <Dictaphone /> */}
 
                         {auth?
                         <div class="row">
@@ -838,6 +858,7 @@ export default class Product extends Component{
                         )}
                         </div>
                     </div>
+                    {auth?
                     <div class="modal-footer">
                         <div class="container-fluid">
                         <div class="row gutter-0">
@@ -847,6 +868,9 @@ export default class Product extends Component{
                         </div>
                         </div>
                     </div>
+                    :
+                    <div></div>
+                    }
                     </div>
                 </div>
                 </div>
@@ -937,8 +961,6 @@ export default class Product extends Component{
                     </div>
                 </div>
                 </div> */}
-
-
 
                 {/* <Footer /> */}
             </div>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+// import { Link, useParams } from 'react-router-dom'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 
 const Dictaphone = () => {
 
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('');
+    const [link, setLink] = useState('')
 
     // useEffect(() => {
     //     console.log("Effect")
@@ -19,36 +20,36 @@ const Dictaphone = () => {
         //Store
         {
             command: '* store *',
-            callback: () => setMessage(`store`)
+            callback: () => setLink(`store`)
         },
         {
             command: 'store *',
-            callback: () => setMessage(`store`)
+            callback: () => setLink(`store`)
         },
         {
             command: 'store *',
-            callback: () => setMessage(`store`)
+            callback: () => setLink(`store`)
         },
         {
             command: 'store',
-            callback: () => setMessage(`store`)
+            callback: () => setLink(`store`)
         },
         //Account
         {
             command: '* account *',
-            callback: () => setMessage(`profile`)
+            callback: () => setLink(`profile`)
         },
         {
             command: '* account',
-            callback: () => setMessage(`profile`)
+            callback: () => setLink(`profile`)
         },
         {
             command: 'account *',
-            callback: () => setMessage(`profile`)
+            callback: () => setLink(`profile`)
         },
         {
             command: 'account',
-            callback: () => setMessage(`profile`)
+            callback: () => setLink(`profile`)
         },
         {
         command: 'The weather is :condition today',
@@ -93,14 +94,14 @@ const Dictaphone = () => {
 
   return (
     <div class="float">
-      <button class="btn btn-success btn-circle btn-sm" onClick={SpeechRecognition.startListening}>Start</button>
-      <button class="btn btn-danger btn-circle btn-sm" onClick={SpeechRecognition.stopListening}>Stop</button>
-      <button class="btn btn-primary btn-circle btn-sm" onClick={resetTranscript}>Reset</button>
-      <p>{transcript}</p>
-      <p>{message}</p>
+      <button class="float" onClick={SpeechRecognition.startListening}>Record</button>
+      {/* <button class="btn btn-danger btn-circle btn-sm" onClick={SpeechRecognition.stopListening}>Stop</button>
+      <button class="btn btn-primary btn-circle btn-sm" onClick={resetTranscript}>Reset</button> */}
+      {/* <p class="float">{transcript}</p> */}
+      {/* <p>{message}</p> */}
       {/* <Link to={transcript}>{transcript}</Link> */}
-      {message?
-      window.location.href = "http://localhost:3000/"+message
+    {link?
+      window.location.href = "https://neomall.herokuapp.com/"+link
     :
     <div></div>
     }
